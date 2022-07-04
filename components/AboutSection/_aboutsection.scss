@@ -1,0 +1,44 @@
+@use "../../styles/variables" as var;
+
+.about-section {
+  color: var.$primary-color;
+  padding: 2rem;
+  max-width: 460px;
+
+  & h2 {
+    padding: 2rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  & ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+  & li {
+    background: var.$icon no-repeat;
+    line-height: 32px;
+    vertical-align: middle;
+    font-weight: 500;
+    padding: 1rem 0 1rem 3rem;
+    margin: 0.5rem;
+  }
+  & p {
+    font-weight: 500;
+  }
+  & h3 {
+    padding-top: 2rem;
+    text-align: center;
+  }
+}
+.more {
+  display: none;
+}
+@media only screen and (max-width: 800px) {
+  .about-section {
+    padding: 0.2rem;
+  }
+  .flex-container {
+    padding: 0.2rem;
+  }
+}

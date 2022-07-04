@@ -1,0 +1,25 @@
+@use "../containers/body/body";
+@use "../containers/navbar/navbar";
+@use "../containers/header/header";
+@use "../containers/footer/footer";
+@use "../components/PhotoCard/photocard";
+@use "../components/Section/section";
+@use "../components/PhotosGrid.js/photosgrid";
+@use "../components/AboutSection/aboutsection";
+@use "../components/Advantage/advantage";
+@use "../components/Accessories/accessories";
+@use "../components/Decorations/decorations";
+@use "../components/Inspired/inspired";
+@use "../components/Customizer/customizer";
+@use "../components/Carousel/carousel";
+@import "./variables";
+* {
+  font-family: $font !important;
+  margin: 0;
+}
+.main {
+  background: black;
+}
+html {
+  scroll-behavior: smooth;
+}

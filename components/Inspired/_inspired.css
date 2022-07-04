@@ -1,0 +1,8 @@
+.inspired img {
+  border-radius: 35px !important;
+  object-fit: cover !important;
+}
+
+.inspired img:hover {
+  cursor: pointer;
+}

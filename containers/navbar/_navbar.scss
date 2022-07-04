@@ -1,0 +1,57 @@
+@use "../../styles/variables" as var;
+.navbar {
+  a:hover {
+    color: var.$secondary-color !important;
+  }
+  & nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &-logo {
+    width: 250px;
+  }
+  &-links {
+    padding: 2rem 0;
+    font-weight: 550;
+
+    & li {
+      display: inline-block;
+      margin: 0 1rem;
+    }
+  }
+}
+.dropdown-menu {
+  background-color: var.$shark !important;
+  border-radius: 15px !important;
+
+  min-width: 1rem !important;
+}
+.dropdown-item {
+  background-color: var.$shark !important;
+  padding: 0.5rem 2rem 0.5rem 2rem !important;
+}
+.dropdown-item:hover {
+  color: var.$secondary-color !important;
+}
+.under {
+  & a {
+    color: var.$primary-color;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    position: relative;
+    &::after {
+      content: "";
+      background: var.$secondary-color;
+      width: 0;
+      height: 2px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: width 0.5s;
+    }
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}

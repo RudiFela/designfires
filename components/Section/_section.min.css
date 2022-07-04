@@ -1,0 +1,1 @@
+.flex-container{display:flex;justify-content:space-around;align-content:flex-start;align-items:center;flex-wrap:wrap-reverse;padding:2rem;height:100%;gap:5px}.flex-container>div{border-radius:35px;background-color:#211f1f}.item1{flex-grow:0;order:-1}.item2{flex-grow:0}

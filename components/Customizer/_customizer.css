@@ -1,0 +1,16 @@
+.customizer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+  background-color: #222233;
+}
+
+.customizer-item {
+  flex: 1;
+}
+
+.tab-content {
+  max-height: 400px;
+  min-height: 400px;
+  overflow-y: scroll;
+}

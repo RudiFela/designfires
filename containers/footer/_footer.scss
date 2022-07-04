@@ -1,0 +1,11 @@
+@import "../../styles/variables";
+.footer-wrap {
+  flex-wrap: wrap-reverse !important;
+  & a {
+    color: white !important;
+    text-decoration: none !important;
+  }
+  & a:hover {
+    color: $secondary-color !important;
+  }
+}

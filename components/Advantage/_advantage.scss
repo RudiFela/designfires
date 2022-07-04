@@ -1,0 +1,53 @@
+@use "../../styles/variables" as var;
+
+.advantage {
+  color: var.$primary-color;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  & img {
+    overflow: hidden;
+  }
+  & h2 {
+    font-size: 2rem;
+    text-align: center;
+    padding: 2rem;
+    font-weight: 600;
+  }
+  &-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+  &-right {
+    text-align: right;
+
+    flex: 1;
+  }
+  &-left {
+    flex: 1;
+  }
+  & ul {
+    list-style-type: none;
+  }
+  & li {
+    padding: 1rem;
+    font-size: clamp(1rem, 5vw, 1.5rem);
+    font-weight: 600;
+  }
+}
+.shortName {
+  color: var.$secondary-color;
+}
+.darker {
+  background: rgba(0, 0, 0, 0.35);
+}
+@media only screen and (max-width: 800px) {
+  .advantage {
+    & ul {
+      padding-left: 0.5rem;
+    }
+  }
+  .photocard-container-1 {
+    margin-left: 0.2rem;
+  }
+}

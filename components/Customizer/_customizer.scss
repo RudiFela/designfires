@@ -1,0 +1,73 @@
+@import "../../styles/variables";
+.customizer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.bolder {
+  font-weight: 600 !important;
+}
+.tab-content {
+  max-height: 24rem;
+
+  overflow-y: scroll;
+  background-color: $light-shark !important;
+}
+.custom-color {
+  background-color: $light-shark !important;
+}
+.list-group {
+  background-color: $light-shark !important;
+  &-item {
+    background-color: $light-shark !important;
+  }
+}
+.card-header {
+  background-color: $light-shark !important;
+}
+.btn-custom {
+  color: black !important;
+  border: #fff !important;
+  font-weight: 500 !important;
+}
+.nav-link {
+  color: black !important;
+}
+.figure-round {
+  border-radius: 10px !important;
+}
+.card-deco {
+  border-radius: 35px !important;
+  border: none !important;
+  padding: 1rem !important;
+  background-color: $light-shark !important;
+  height: 30rem;
+}
+.list-group-item {
+  padding: 0 !important;
+}
+.card-img-bottom {
+  max-height: 30vh !important;
+  width: 100% !important;
+}
+.item-name {
+  max-width: 200px;
+  text-align: center;
+}
+.carder {
+  width: 32rem;
+}
+@media only screen and (max-width: 550px) {
+  .carder {
+    width: auto;
+    margin: 1rem !important;
+  }
+  .card-header {
+    padding: 0 !important;
+  }
+}
+.form-check-input:checked {
+  background-color: $secondary-color !important;
+  border-color: $secondary-color !important;
+}

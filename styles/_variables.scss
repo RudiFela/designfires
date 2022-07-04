@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
+
+$theme-colors: (
+  "info": #800000,
+  "danger": rgb(59, 59, 59),
+  "primary": #252525,
+);
+
+/* import bootstrap to set changes */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+$primary-color: #fff;
+$secondary-color: #800000;
+$text_primary-color: #000;
+$text_secondary-color: #fff;
+$shark: #252525;
+$light-shark: #6a6868;
+$font: "Montserrat", sans-serif;
+$font-weight-bold: 600;
+$font-weights: (
+  "regular": 400,
+  "medium": 500,
+  "bold": 600,
+);
+$icon: url("http://designfires.pl/wp-content/uploads/2022/06/iconred40.png");
+$header-image: url("./assets/headerimage.jpg");
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin paddingContent {
+  margin: 2rem;
+  padding: 3rem;
+}
+@mixin h2Element {
+  color: $primary-color;
+  text-align: center;
+  background-color: $secondary-color;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+@mixin for-phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
