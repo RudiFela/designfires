@@ -321,11 +321,11 @@ const Customizer = (props) => {
   };
   return (
     <>
-      <h1 className="text-center text-white p-5 ">
+      <h1 id="customize" className="text-center text-white p-5 ">
         Check possibilities on Your own!
       </h1>
 
-      <div className="customizer  bg-primary pt-4 pb-4">
+      <div className="customizer  bg-primary pt-4 pb-2">
         <div className="customizer-item ">
           <Container>
             <CustomizerFirePlaces
@@ -453,7 +453,6 @@ const Customizer = (props) => {
           <div>
             <Button className="my-2 ms-auto bolder" variant="info" disabled>
               {cart.cartPrice}€
-              <span className="visually-hidden">unread messages</span>
             </Button>
           </div>
           <div>
@@ -465,14 +464,14 @@ const Customizer = (props) => {
               Clear Cart
             </Button>
           </div>{" "}
-          <div>
-            <Button variant="info" onClick={() => onShowCart()}>
-              Check Cart
-            </Button>
-          </div>
         </Stack>
       </div>
     </>
   );
 };
 export default Customizer;
+/*<div>
+            <Button variant="info" onClick={() => onShowCart()}>
+              Check Cart
+            </Button>
+          </div>*/

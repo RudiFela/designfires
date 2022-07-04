@@ -43,8 +43,20 @@ const Navibar = () => {
               <Nav.Link className="text-white" href="#steamfire">
                 Mystic SteamFire
               </Nav.Link>
-              <Nav.Link className="text-white" href="#projects">
-                Our Projects
+              <Nav.Link
+                className="text-white"
+                href="https://designfires.com/gas-fireplace/"
+              >
+                Gas
+              </Nav.Link>
+              <Nav.Link
+                className="text-white"
+                href="https://designfires.com/traepejse/"
+              >
+                Wooden
+              </Nav.Link>
+              <Nav.Link className="text-white" href="#customize">
+                Customize
               </Nav.Link>
               <Nav.Link className="text-white" href="#contact">
                 Contact

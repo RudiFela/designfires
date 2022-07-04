@@ -40,10 +40,7 @@ const AboutSection = (props) => {
       </ul>
 
       <p>{props.paragraph}</p>
-      <h3>
-        Prices on all models <br />
-        from: {props.price}€
-      </h3>
+      <h3>from: {props.price}€</h3>
       <h3></h3>
     </div>
   );

@@ -20,7 +20,7 @@ const Accesories = (props) => {
               <BsPlus color="white" />
             </div>
             <div className="info--image">
-              <Image src={accessoriesImage} alt="info image" layout="fill" />
+              <img src={accessoriesImage} alt="info image" layout="fill" />
             </div>
           </div>
           <div className="cards--info info--3">
@@ -29,7 +29,7 @@ const Accesories = (props) => {
               <BsPlus color="white" />
             </div>
             <div className="info--image">
-              <Image src={accessoriesImage} alt="info image" layout="fill" />
+              <img src={accessoriesImage} alt="info image" layout="fill" />
             </div>
           </div>
           <div className="cards--info info--4">
@@ -47,7 +47,7 @@ const Accesories = (props) => {
               <BsPlus color="white" />
             </div>
             <div className="info--image">
-              <Image src={accessoriesImage} alt="info image" layout="fill" />
+              <img src={accessoriesImage} alt="info image" layout="fill" />
             </div>
           </div>
           <div className="cards--info info--2">
@@ -56,7 +56,7 @@ const Accesories = (props) => {
               <BsPlus color="white" />
             </div>
             <div className="info--image">
-              <Image src={accessoriesImage} alt="info image" layout="fill" />
+              <img src={accessoriesImage} alt="info image" layout="fill" />
             </div>
           </div>
         </div>
