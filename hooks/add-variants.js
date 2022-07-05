@@ -43,6 +43,8 @@ export const useGetProducts = () => {
                     power: item.meta_data[0].value,
                     liters: item.meta_data[1].value,
                     burningtime: item.meta_data[2].value,
+                    DKK_price: item.meta_data[3],
+                    SEK_price: item.meta_data[5],
                   };
                   if (product === 192) {
                     file = { ...file, filling: fillingInfo };

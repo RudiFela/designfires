@@ -43271,16 +43271,32 @@ textarea.form-control-lg {
   text-align: right;
   flex: 1;
 }
+.advantage-right ul {
+  list-style-type: none;
+}
+.advantage-right li {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  background: url("http://designfires.pl/wp-content/uploads/2022/06/iconred40.png") no-repeat right;
+  line-height: 32px;
+  vertical-align: middle;
+  font-weight: 400;
+  padding: 1rem 3rem 1rem 1rem;
+  margin: 0.5rem;
+}
 .advantage-left {
   flex: 1;
 }
-.advantage ul {
+.advantage-left ul {
   list-style-type: none;
 }
-.advantage li {
-  padding: 1rem;
-  font-size: clamp(1rem, 5vw, 1.5rem);
-  font-weight: 600;
+.advantage-left li {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  background: url("http://designfires.pl/wp-content/uploads/2022/06/iconred40.png") no-repeat;
+  line-height: 32px;
+  vertical-align: middle;
+  font-weight: 400;
+  padding: 1rem 0 1rem 3rem;
+  margin: 0.5rem;
 }
 
 .shortName {

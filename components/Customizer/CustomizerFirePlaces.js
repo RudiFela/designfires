@@ -1,6 +1,8 @@
 import { Dropdown, Badge, Row, Col } from "react-bootstrap";
 import CustomizerWrapper from "./CustomizerWrapper";
+import { useChangePrice } from "../../hooks/change-price";
 const CustomizerFirePlaces = (props) => {
+  const { switchCurrency } = useChangePrice();
   const {
     fireplaces,
     variant,
@@ -113,7 +115,9 @@ const CustomizerFirePlaces = (props) => {
               item.liters,
               item.power,
               item.burningtime,
-              item.dimensions
+              item.dimensions,
+              item.DKK_price.value,
+              item.SEK_price.value
             );
           }}
           eventKey={item}

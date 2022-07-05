@@ -10,13 +10,17 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useChangePrice } from "../../hooks/change-price";
+import { LanguageContext } from "../context/language-context";
 import CustomizerItemList from "./CustomizerItemList";
 import CustomizerCasings from "./CustomizerCasings";
 import CustomizerFirePlaces from "./CustomizerFirePlaces";
 
 const Customizer = (props) => {
+  const lang = useContext(LanguageContext);
   const { decorations, accessories, casings, fireplace } = props;
+  const { switchCurrency } = useChangePrice();
   const [key, setKey] = useState("home");
   const [showCart, setShowCart] = useState(false);
   const [cart, setCart] = useState({
@@ -48,7 +52,18 @@ const Customizer = (props) => {
   });
   const [enableShs, setEnableShs] = useState(false);
   const [stainlessTop, setStainlessTop] = useState(false);
+  const currencySymbol = () => {
+    switch (lang.language) {
+      case "swedish":
+        return "SEK";
+      case "english":
+        return "€";
 
+      case "danish":
+        return "kr";
+    }
+  };
+  const currency = currencySymbol();
   const [casingItem, setCasingItem] = useState({
     name: ["Select Case"],
     length: ["Length"],
@@ -142,6 +157,7 @@ const Customizer = (props) => {
     arr = undefined;
   };
   const addAccessoriesToCart = (price, name, id) => {
+    console.log(price);
     let accessoryArray;
     accessoryArray = cart.addedAccessories;
     let findedItem = false;
@@ -210,10 +226,27 @@ const Customizer = (props) => {
       selected: true,
     });
   };
-  const addCasingToCart = (pickedLength, variantPrice, variantImage) => {
+  const addCasingToCart = (
+    pickedLength,
+    variantPrice,
+    variantImage,
+    DKK_price,
+    SEK_price
+  ) => {
+    const currencyPrice = () => {
+      switch (lang.language) {
+        case "swedish":
+          return SEK_price;
+        case "english":
+          return variantPrice;
+
+        case "danish":
+          return DKK_price;
+      }
+    };
     setCasingItem((prevCasingItem) => ({
       ...prevCasingItem,
-      price: variantPrice,
+      price: currencyPrice(),
       length: pickedLength,
       photo: variantImage,
     }));
@@ -223,7 +256,7 @@ const Customizer = (props) => {
       addedCasing: {
         name: casingItem.name,
         length: pickedLength,
-        price: variantPrice,
+        price: currencyPrice(),
       },
     }));
   };
@@ -236,11 +269,25 @@ const Customizer = (props) => {
     liters,
     power,
     burningtime,
-    dimensions
+    dimensions,
+    DKK_price,
+    SEK_price
   ) => {
+    const currencyPrice = () => {
+      switch (lang.language) {
+        case "swedish":
+          return SEK_price;
+        case "english":
+          return variantPrice;
+
+        case "danish":
+          return DKK_price;
+      }
+    };
+
     setFirePlaceItem((prevCasingItem) => ({
       ...prevCasingItem,
-      price: variantPrice,
+      price: currencyPrice(),
       length: pickedLength,
       photo: image,
       variant_details: {
@@ -259,7 +306,7 @@ const Customizer = (props) => {
       addedFireplace: {
         name: fireplaceItem.name,
         length: pickedLength,
-        price: variantPrice,
+        price: currencyPrice(),
       },
     }));
   };
@@ -286,12 +333,22 @@ const Customizer = (props) => {
       ///
     } else {
       setEnableShs(true);
+      const currencyPrice = () => {
+        switch (lang.language) {
+          case "swedish":
+            return "3995";
+          case "english":
+            return "400";
 
+          case "danish":
+            return "2995";
+        }
+      };
       setCart((prevCart) => ({
         ...prevCart,
         addedShs: {
           name: "Smart Home System",
-          price: "400",
+          price: currencyPrice(),
         },
       }));
     }
@@ -309,12 +366,22 @@ const Customizer = (props) => {
       ///
     } else {
       setStainlessTop(true);
+      const currencyPrice = () => {
+        switch (lang.language) {
+          case "swedish":
+            return "2995";
+          case "english":
+            return "300";
 
+          case "danish":
+            return "1995";
+        }
+      };
       setCart((prevCart) => ({
         ...prevCart,
         addedTop: {
           name: "Stainless Top",
-          price: "300",
+          price: currencyPrice(),
         },
       }));
     }
@@ -382,7 +449,7 @@ const Customizer = (props) => {
                     Filling Type: {cart.addedFilling.name}
                   </Col>
                   <Col md={{ span: 3, offset: 4 }}>
-                    {cart.addedFilling.price}€
+                    {cart.addedFilling.price}
                   </Col>
                 </Row>
               )}
@@ -452,7 +519,8 @@ const Customizer = (props) => {
         <Stack className="mx-auto " direction="horizontal" gap={4}>
           <div>
             <Button className="my-2 ms-auto bolder" variant="info" disabled>
-              {cart.cartPrice}€
+              {cart.cartPrice}
+              {currency}
             </Button>
           </div>
           <div>

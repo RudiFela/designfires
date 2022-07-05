@@ -6,7 +6,7 @@ const Header = () => {
         autoPlay
         loop
         muted
-        src="http://designfires.pl/wp-content/uploads/2022/07/DesignFIresFINALE.mp4"
+        src="http://designfires.pl/wp-content/uploads/2022/07/DesignFIres-2.mp4"
         allowFullScreen
       ></video>
     </div>

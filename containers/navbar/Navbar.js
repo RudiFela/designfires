@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-
+import { LanguageContext } from "../../components/context/language-context";
 const english =
   "http://designfires.pl/wp-content/uploads/2022/07/greatbritain.png";
 const denmark = "http://designfires.pl/wp-content/uploads/2022/07/denmark.png";
 const sweden = "http://designfires.pl/wp-content/uploads/2022/07/sweden.png";
 const Navibar = () => {
-  const [language, setLanguage] = useState(
+  const language = useContext(LanguageContext);
+  const [lang, setLang] = useState(
     <img src={english} height="30" alt="USA flag" />
   );
-  const onLanguageChange = (lang) => {
-    setLanguage(<img src={lang} height="30" alt="USA flag" />);
+  const onLanguageChange = (lang, langName) => {
+    setLang(<img src={lang} height="30" alt="Country Flag" />);
+    //props.setLanguage(langName);
+    language.setLanguage(langName);
   };
   return (
     <>
@@ -20,6 +23,7 @@ const Navibar = () => {
         bg="dark"
         variant="dark"
         className="py-0"
+        fixed="top"
       >
         <Container className="py-0">
           <Navbar.Brand href="#home">
@@ -34,42 +38,43 @@ const Navibar = () => {
             className="justify-content-end"
           >
             <Nav className="navbar-links">
-              <Nav.Link className="text-white " href="#home">
-                Home
+              <Nav.Link className="text-white text-center" href="#bio">
+                Digital Bio-Ehtanol Fireplace
               </Nav.Link>
-              <Nav.Link className="text-white" href="#bio">
-                Bio-Ehtanol
-              </Nav.Link>
-              <Nav.Link className="text-white" href="#steamfire">
-                Mystic SteamFire
+              <Nav.Link className="text-white text-center" href="#steamfire">
+                Mystic SteamFire Fireplace
               </Nav.Link>
               <Nav.Link
-                className="text-white"
+                className="text-white text-center"
                 href="https://designfires.com/gas-fireplace/"
               >
-                Gas
+                Gas Fireplace
               </Nav.Link>
               <Nav.Link
-                className="text-white"
+                className="text-white text-center"
                 href="https://designfires.com/traepejse/"
               >
-                Wooden
+                Wood Fireplace
               </Nav.Link>
-              <Nav.Link className="text-white" href="#customize">
+              <Nav.Link
+                className="text-white text-center"
+                href="https://designfires.com/outdoorgarden/"
+              >
+                Outdoor
+              </Nav.Link>
+              <Nav.Link className="text-white text-center" href="#customize">
                 Customize
               </Nav.Link>
-              <Nav.Link className="text-white" href="#contact">
-                Contact
-              </Nav.Link>
+
               <NavDropdown
                 align="end"
                 flip="true"
-                title={language}
+                title={lang}
                 id="collasible-nav-dropdown"
               >
                 <NavDropdown.Item
                   onClick={() => {
-                    onLanguageChange(english);
+                    onLanguageChange(english, "english");
                   }}
                   href="#action/3.1"
                   className="text-white fs-5 text fw-normal"
@@ -78,7 +83,7 @@ const Navibar = () => {
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   onClick={() => {
-                    onLanguageChange(denmark);
+                    onLanguageChange(denmark, "danish");
                   }}
                   href="#action/3.2"
                   className="text-white fs-5 text fw-normal"
@@ -87,7 +92,7 @@ const Navibar = () => {
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   onClick={() => {
-                    onLanguageChange(sweden);
+                    onLanguageChange(sweden, "swedish");
                   }}
                   href="#action/3.3"
                   className="text-white fs-5 text fw-normal"

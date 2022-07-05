@@ -71,7 +71,13 @@ const CustomizerCasings = (props) => {
           className="text-white bolder"
           key={item.id}
           onClick={() => {
-            props.onPickLength(item.length, item.price, item.img);
+            props.onPickLength(
+              item.length,
+              item.price,
+              item.img,
+              item.DKK_price.value,
+              item.SEK_price.value
+            );
           }}
           eventKey={item}
         >

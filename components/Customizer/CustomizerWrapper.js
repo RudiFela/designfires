@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   DropdownButton,
   Card,
@@ -7,8 +8,42 @@ import {
   OverlayTrigger,
   Form,
 } from "react-bootstrap";
-
+import { LanguageContext } from "../context/language-context";
 const CustomizerWrapper = (props) => {
+  const lang = useContext(LanguageContext);
+  const currencySymbol = () => {
+    switch (lang.language) {
+      case "swedish":
+        return "SEK";
+      case "english":
+        return "€";
+
+      case "danish":
+        return "kr";
+    }
+  };
+  const currencyPriceT = () => {
+    switch (lang.language) {
+      case "swedish":
+        return "995";
+      case "english":
+        return "100";
+
+      case "danish":
+        return "755";
+    }
+  };
+  const currencyPricePW = () => {
+    switch (lang.language) {
+      case "swedish":
+        return "9995";
+      case "english":
+        return "995";
+
+      case "danish":
+        return "7555";
+    }
+  };
   const {
     itemPhoto,
     itemName,
@@ -39,7 +74,11 @@ const CustomizerWrapper = (props) => {
   const popoverT = (
     <Popover id="popover-basic">
       <Popover.Body>
-        <h6>Top filling = Top refueling.</h6> <p>Extra 100€ for this option</p>
+        <h6>Top filling = Top refueling.</h6>{" "}
+        <p>
+          Extra {currencyPriceT()}
+          {currencySymbol()} for this option
+        </p>
       </Popover.Body>
     </Popover>
   );
@@ -48,7 +87,10 @@ const CustomizerWrapper = (props) => {
       <Popover.Body>
         <h6> Side filling with the presssure water</h6>{" "}
         <p>Ready for connection to water pipe </p>
-        <p>Extra 995€ for this option.</p>
+        <p>
+          Extra {currencyPricePW()}
+          {currencySymbol()} for this option.
+        </p>
       </Popover.Body>
     </Popover>
   );
@@ -77,7 +119,7 @@ const CustomizerWrapper = (props) => {
         name="group1"
         type="radio"
         id={`inline--1T`}
-        onChange={() => onFillingChange("T", 100)}
+        onChange={() => onFillingChange("T", currencyPriceT())}
       />
       <Form.Check
         inline
@@ -89,7 +131,7 @@ const CustomizerWrapper = (props) => {
         name="group1"
         type="radio"
         id={`inline--1PW`}
-        onChange={() => onFillingChange("PW", 995)}
+        onChange={() => onFillingChange("PW", currencyPricePW())}
       />
     </>
   );
@@ -124,7 +166,7 @@ const CustomizerWrapper = (props) => {
             {lengthDropDown}
           </DropdownButton>
           <Button className="bolder" variant="primary" disabled>
-            {selectedPrice} €
+            {selectedPrice} {currencySymbol()}
           </Button>
         </Stack>
         <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>

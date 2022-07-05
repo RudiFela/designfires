@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState, lazy, Suspense, useContext } from "react";
 import Accessories from "../../components/Accessories/Accessories";
 import Decorations from "../../components/Decorations/Decorations";
 import Inspired from "../../components/Inspired/Inspired";
@@ -7,6 +7,7 @@ import axios from "axios";
 import Ethanol from "../../components/Ethanol/Ethanol";
 import Mystic from "../../components/Mystic/Mystic";
 import { useGetProducts } from "../../hooks/add-variants";
+import { LanguageContext } from "../../components/context/language-context";
 const Customizer = lazy(() => import("../../components/Customizer/Customizer"));
 const Body = (props) => {
   const [decorationsProducts, setDecorationsProducts] = useState([]);
@@ -14,11 +15,14 @@ const Body = (props) => {
   const [casingsProducts, setCasingsProducts] = useState([]);
   const [fireplaceProducts, setFireplaceProducts] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const { setIsLoading } = useContext(LanguageContext);
   const { addVariants } = useGetProducts();
   useEffect(() => {
     getData();
   }, []);
+
+  const handleLoading = () => setIsLoading(true);
+
   const crud = {
     auth: {
       username: "ck_b143b31c7842e4a628279fe7b097980c311f08d5",
@@ -50,13 +54,15 @@ const Body = (props) => {
           setAccessoriesProducts(addVariants(responses[2].data));
           setFireplaceProducts(addVariants(responses[3].data));
           setCasingsProducts(addVariants(responses[1].data));
-
+          console.log(addVariants(responses[1].data));
+          console.log(responses[0].data);
+          setIsLoading(false);
           setIsLoading(false);
         })
       )
       .catch((error) => {
         console.log("An error!!!!", error);
-        setIsLoading(false);
+        handleLoading();
       });
   }; //SetEnv HTTPS on
 
