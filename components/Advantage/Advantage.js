@@ -1,10 +1,10 @@
 import { Stack } from "react-bootstrap";
 const Advantage = (props) => {
   const itemsLeft = props.itemsLeft.map((item) => {
-    return <li>{item}</li>;
+    return <li key={Math.random()}>{item}</li>;
   });
   const itemsRight = props.itemsRight.map((item) => {
-    return <li>{item}</li>;
+    return <li key={Math.random()}>{item}</li>;
   });
   return (
     <>

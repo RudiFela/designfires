@@ -1,9 +1,9 @@
 const AboutSection = (props) => {
   const list = props.listItem.map((item) => {
-    return <li>{item}</li>;
+    return <li key={Math.random()}>{item}</li>;
   });
   const paragraphs = props.paragraph.map((item) => {
-    return <p>{item}</p>;
+    return <p key={Math.random()}>{item}</p>;
   });
   return (
     <div className="about-section">
