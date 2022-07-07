@@ -527,7 +527,7 @@ const Customizer = (props) => {
 
             {cart.addedDecorations.map((item) => {
               return (
-                <Row className="text-center">
+                <Row key={item.id} className="text-center">
                   <Col xs={3}>
                     <Figure>
                       <Figure.Image
@@ -558,7 +558,7 @@ const Customizer = (props) => {
             <Col>
               {cart.addedAccessories.map((item) => {
                 return (
-                  <Row className="text-center">
+                  <Row key={item.id} className="text-center">
                     <Col xs={3}>
                       <Figure>
                         <Figure.Image

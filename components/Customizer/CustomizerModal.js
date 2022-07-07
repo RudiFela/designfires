@@ -1,4 +1,4 @@
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Row, Col } from "react-bootstrap";
 const CustomizerModal = (props) => {
   const { cart } = props;
   <Modal centered show={true} onHide={props.onHide}>

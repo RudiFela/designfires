@@ -305,42 +305,55 @@ const CustomizerFirePlaces = (props) => {
         popoverInfo={popoverInfo}
         selected={selected}
       >
-        {selected && fireplaceName !== "DFM" ? (
-          <Form>
-            <Form.Check
-              className="text-white mt-2"
-              type="switch"
-              id="custom-switch"
-              variant="secondary"
-              onChange={shsSwitcher}
-              label="Smart Home System"
-            />
-            <Form.Check
-              className="text-white mt-2 mb-2"
-              type="switch"
-              id="custom-switch"
-              variant="secondary"
-              onChange={topSwitcher}
-              label="Stainless Top"
-            />
-          </Form>
-        ) : null}
-
-        {selected && fireplaceName === "DFM" ? (
-          <Form>
-            <Form.Check
-              className="text-white mt-2"
-              type="switch"
-              id="custom-switch"
-              variant="secondary"
-              label="Smart Home System(Standard)"
-              defaultChecked
-              disabled
-            />
-          </Form>
-        ) : null}
-
-        {fireplaceName === "DFM" && selected ? filing : null}
+        <>
+          {selected && fireplaceName !== "DFM" ? (
+            <Row>
+              <Col>
+                <Form>
+                  <Form.Check
+                    className="text-white mt-2"
+                    type="switch"
+                    id="custom-switch"
+                    variant="secondary"
+                    onChange={shsSwitcher}
+                    label="Smart Home System"
+                  />
+                  <Form.Check
+                    className="text-white mt-2 mb-2"
+                    type="switch"
+                    id="custom-switch"
+                    variant="secondary"
+                    onChange={topSwitcher}
+                    label="Stainless Top"
+                  />
+                </Form>
+              </Col>
+              <Col>
+                {" "}
+                <div>In Standard:</div>
+                <ul>
+                  <li>Smart Home System</li>
+                  <li>Remote Control</li>
+                  <li>Longest burningtime on the market</li>
+                </ul>
+              </Col>
+            </Row>
+          ) : null}
+          {selected && fireplaceName === "DFM" ? (
+            <Form>
+              <Form.Check
+                className="text-white mt-2"
+                type="switch"
+                id="custom-switch"
+                variant="secondary"
+                label="Smart Home System"
+                defaultChecked
+                disabled
+              />
+            </Form>
+          ) : null}
+          {fireplaceName === "DFM" && selected ? filing : null}
+        </>
       </CustomizerWrapper>
     </>
   );
