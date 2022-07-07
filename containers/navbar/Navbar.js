@@ -23,14 +23,14 @@ const Navibar = () => {
         bg="dark"
         variant="dark"
         className="py-0"
-        fixed="top"
+        sticky="top"
       >
-        <Container className="py-0">
+        <Container className="py-0 ">
           <Navbar.Brand href="#home">
             <img
-              src="http://designfires.pl/wp-content/uploads/2022/06/logo.svg"
+              src="http://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
               className="navbar-logo"
-            ></img>
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse
@@ -60,7 +60,7 @@ const Navibar = () => {
                 className="text-white text-center"
                 href="https://designfires.com/outdoorgarden/"
               >
-                Outdoor
+                Outdoor Fireplace
               </Nav.Link>
               <Nav.Link className="text-white text-center" href="#customize">
                 Customize

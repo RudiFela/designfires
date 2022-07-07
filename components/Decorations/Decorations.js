@@ -1,33 +1,21 @@
 import PhotoCard from "../PhotoCard/PhotoCard";
-import { useState } from "react";
-import { Row, Col, Container, Modal } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Row, Col, Container, Modal, Spinner } from "react-bootstrap";
+import Image from "next/image";
+import { FiHelpCircle } from "react-icons/fi";
 
-const MyVerticallyCenteredModal = (props) => {
-  return (
-    <Modal
-      {...props}
-      variant="dark"
-      size="xl"
-      aria-labelledby="contained-modal-title-vcenter"
-    >
-      <Modal.Header
-        className="bg-primary"
-        closeButton
-        closeVariant="white"
-      ></Modal.Header>
-      <Modal.Body className="bg-primary">
-        <img className="mw-100" src={props.image} />
-      </Modal.Body>
-    </Modal>
-  );
-};
+import MyVerticallyCenteredModal from "./Modal";
 
 const Decorations = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalPhoto, setModalPhoto] = useState();
+
   const showModalHandler = (image) => {
     setModalPhoto(image);
     setShowModal(true);
+  };
+  const closeModal = () => {
+    setShowModal(false);
   };
   let a = props.decorations;
   let arrays = [],
@@ -66,7 +54,7 @@ const Decorations = (props) => {
       <MyVerticallyCenteredModal
         image={modalPhoto}
         show={showModal}
-        onHide={() => setShowModal(false)}
+        closeModal={() => closeModal()}
       />
     </Container>
   );

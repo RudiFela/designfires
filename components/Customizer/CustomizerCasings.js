@@ -1,4 +1,11 @@
-import { Dropdown, Row, Col, Badge } from "react-bootstrap";
+import {
+  Dropdown,
+  Row,
+  Col,
+  Badge,
+  Button,
+  DropdownButton,
+} from "react-bootstrap";
 import CustomizerWrapper from "./CustomizerWrapper";
 const CustomizerCasings = (props) => {
   const {
@@ -15,15 +22,10 @@ const CustomizerCasings = (props) => {
     <>
       <Row>
         <Col>
-          <h6>Dimensions(mm):</h6>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
           <h6>
             Length:
             <Badge className="float-end" bg="secondary">
-              {casingLength}
+              {casingLength}mm
             </Badge>
           </h6>
         </Col>
@@ -33,7 +35,7 @@ const CustomizerCasings = (props) => {
           <h6>
             Width:
             <Badge className="float-end " bg="secondary">
-              350
+              350mm
             </Badge>
           </h6>
         </Col>
@@ -43,29 +45,55 @@ const CustomizerCasings = (props) => {
           <h6>
             Heigth:
             <Badge className="float-end" bg="secondary">
-              500
+              500mm
+            </Badge>
+          </h6>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h6>
+            Thickness:
+            <Badge className="float-end" bg="secondary">
+              5mm
             </Badge>
           </h6>
         </Col>
       </Row>
     </>
   ) : (
-    <p>Select Length to see technical params.</p>
+    <p>Select Casing to see technical params.</p>
   );
 
-  const casingDropDown = casings.map((item) => (
+  const casingDropDownItems = casings.map((item) => (
     <Dropdown.Item
       className="text-white bolder"
       key={item.id}
       onClick={() => {
-        props.onSelect(item.images[0].src, item.name, item.variant);
+        props.onSelect(
+          item.images[0].src,
+          item.name,
+          item.variant,
+          item.variant.find((item) => item.length === casingLength)
+        );
       }}
       eventKey={item}
     >
       {item.name}
     </Dropdown.Item>
   ));
-  const casingLengthDropDown = variant
+  const casingDropDown = (
+    <DropdownButton
+      id="dropdown-basic-button"
+      variant="primary"
+      className="fw-bold"
+      title={casingName}
+      disabled={!props.enable}
+    >
+      {casingDropDownItems}
+    </DropdownButton>
+  );
+  /* const casingLengthDropDown = variant
     ? variant.map((item) => (
         <Dropdown.Item
           className="text-white bolder"
@@ -84,7 +112,12 @@ const CustomizerCasings = (props) => {
           {item.length}mm
         </Dropdown.Item>
       ))
-    : null;
+    : null;*/
+  const casingLengthDropDown = (
+    <Button className="bolder" variant="primary" disabled>
+      {casingLength}mm
+    </Button>
+  );
 
   return (
     <CustomizerWrapper

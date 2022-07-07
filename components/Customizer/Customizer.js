@@ -9,6 +9,7 @@ import {
   Modal,
   Row,
   Col,
+  Figure,
 } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
 import { useChangePrice } from "../../hooks/change-price";
@@ -16,11 +17,11 @@ import { LanguageContext } from "../context/language-context";
 import CustomizerItemList from "./CustomizerItemList";
 import CustomizerCasings from "./CustomizerCasings";
 import CustomizerFirePlaces from "./CustomizerFirePlaces";
+import CustomizerModal from "./CustomizerModal";
 
 const Customizer = (props) => {
   const lang = useContext(LanguageContext);
   const { decorations, accessories, casings, fireplace } = props;
-  const { switchCurrency } = useChangePrice();
   const [key, setKey] = useState("home");
   const [showCart, setShowCart] = useState(false);
   const [cart, setCart] = useState({
@@ -63,13 +64,24 @@ const Customizer = (props) => {
         return "kr";
     }
   };
+  const currencyPrice = (engPrice, swePrice, danPrice) => {
+    switch (lang.language) {
+      case "english":
+        return engPrice;
+      case "swedish":
+        return swePrice;
+      case "danish":
+        return danPrice;
+    }
+  };
   const currency = currencySymbol();
   const [casingItem, setCasingItem] = useState({
     name: ["Select Case"],
-    length: ["Length"],
+    length: [""],
     photo: "http://designfires.pl/wp-content/uploads/2022/06/loaderImage.png",
     price: 0,
     variant: [],
+    enable: false,
     selected: false,
   });
   const [fireplaceItem, setFirePlaceItem] = useState({
@@ -120,17 +132,25 @@ const Customizer = (props) => {
     }));
   };
 
-  const onFillingChange = (name, price) => {
+  const onFillingChange = (name, Fillprice) => {
+    const { price } = fireplaceItem;
+    const { addedFilling } = cart;
+    console.log(Fillprice);
+    price = Number(price) - Number(addedFilling.price);
+    setFirePlaceItem((prevCasingItem) => ({
+      ...prevCasingItem,
+      price: Number(price) + Number(Fillprice),
+    }));
     setCart((prevCart) => ({
       ...prevCart,
       addedFilling: {
         name,
-        price,
+        price: Number(Fillprice),
       },
     }));
   };
 
-  const addDecorationsToCart = (price, name, id) => {
+  const addDecorationsToCart = (price, name, id, image) => {
     let decoArray;
     decoArray = cart.addedDecorations;
     let findedItem = false;
@@ -147,7 +167,7 @@ const Customizer = (props) => {
         addedDecorations: decoArray,
       }));
     } else {
-      decoArray.push({ id, name, price, count: 1 });
+      decoArray.push({ id, name, price, count: 1, image });
 
       setCart((prevCart) => ({
         ...prevCart,
@@ -156,7 +176,7 @@ const Customizer = (props) => {
     }
     arr = undefined;
   };
-  const addAccessoriesToCart = (price, name, id) => {
+  const addAccessoriesToCart = (price, name, id, image) => {
     console.log(price);
     let accessoryArray;
     accessoryArray = cart.addedAccessories;
@@ -174,7 +194,7 @@ const Customizer = (props) => {
         addedAccesories: accessoryArray,
       }));
     } else {
-      accessoryArray.push({ id, name, price, count: 1 });
+      accessoryArray.push({ id, name, price, count: 1, image });
 
       setCart((prevCart) => ({
         ...prevCart,
@@ -217,49 +237,37 @@ const Customizer = (props) => {
     });
   };
   ////Casings
-  const showCasingPrice = (photo, name, variant) => {
-    setCasingItem({
+  const showCasingPrice = (photo, name, variant, item) => {
+    console.log(item);
+
+    setCasingItem((prevCasing) => ({
+      ...prevCasing,
       name,
       photo,
-      length: ["Length"],
+      //length: ["Length"],
       variant: variant,
       selected: true,
-    });
-  };
-  const addCasingToCart = (
-    pickedLength,
-    variantPrice,
-    variantImage,
-    DKK_price,
-    SEK_price
-  ) => {
-    const currencyPrice = () => {
-      switch (lang.language) {
-        case "swedish":
-          return SEK_price;
-        case "english":
-          return variantPrice;
-
-        case "danish":
-          return DKK_price;
-      }
-    };
-    setCasingItem((prevCasingItem) => ({
-      ...prevCasingItem,
-      price: currencyPrice(),
-      length: pickedLength,
-      photo: variantImage,
+      price: currencyPrice(
+        item.price,
+        item.SEK_price.value,
+        item.DKK_price.value
+      ),
     }));
 
     setCart((prevCart) => ({
       ...prevCart,
       addedCasing: {
         name: casingItem.name,
-        length: pickedLength,
-        price: currencyPrice(),
+        length,
+        price: currencyPrice(
+          item.price,
+          item.SEK_price.value,
+          item.DKK_price.value
+        ),
       },
     }));
   };
+
   ////Fireplaces
   const addFireplaceToCart = (
     pickedLength,
@@ -273,21 +281,9 @@ const Customizer = (props) => {
     DKK_price,
     SEK_price
   ) => {
-    const currencyPrice = () => {
-      switch (lang.language) {
-        case "swedish":
-          return SEK_price;
-        case "english":
-          return variantPrice;
-
-        case "danish":
-          return DKK_price;
-      }
-    };
-
-    setFirePlaceItem((prevCasingItem) => ({
-      ...prevCasingItem,
-      price: currencyPrice(),
+    setFirePlaceItem((prevItem) => ({
+      ...prevItem,
+      price: currencyPrice(variantPrice, SEK_price, DKK_price),
       length: pickedLength,
       photo: image,
       variant_details: {
@@ -300,13 +296,60 @@ const Customizer = (props) => {
         heigth: dimensions.heigth,
       },
     }));
+    let leng = (Number(pickedLength) + 60).toString();
+    if (!casingItem.selected) {
+      setCasingItem((prevCasingItem) => ({
+        ...prevCasingItem,
+        length: leng,
+        enable: true,
+      }));
+    } else {
+      const findCaseNamePicked = casings.find(
+        (casings) => casings.name === casingItem.name
+      );
+      console.log(findCaseNamePicked);
+      const findCaseVariantPicked = findCaseNamePicked.variant.find(
+        (findCaseNamePicked) => findCaseNamePicked.length === leng
+      );
+      console.log(findCaseVariantPicked);
+      console.log(findCaseVariantPicked.price);
 
+      setCasingItem({
+        length: leng,
+        enable: true,
+        name: findCaseNamePicked.name,
+        length: leng,
+        photo: findCaseVariantPicked.img,
+        price: currencyPrice(
+          findCaseVariantPicked.price,
+          findCaseVariantPicked.SEK_price.value,
+          findCaseVariantPicked.DKK_price.value
+        ),
+        variant: findCaseVariantPicked.variant,
+        enable: true,
+        selected: true,
+      });
+      setCart((prevCart) => ({
+        ...prevCart,
+        addedCasing: {
+          name: findCaseNamePicked.name,
+          length: leng,
+          price: currencyPrice(
+            findCaseVariantPicked.price,
+            findCaseVariantPicked.SEK_price.value,
+            findCaseVariantPicked.DKK_price.value
+          ),
+        },
+      }));
+    }
+
+    // console.log(Number(pickedLength) + 60).toString();
     setCart((prevCart) => ({
       ...prevCart,
       addedFireplace: {
         name: fireplaceItem.name,
         length: pickedLength,
-        price: currencyPrice(),
+        price: currencyPrice(variantPrice, SEK_price, DKK_price),
       },
     }));
   };
@@ -321,6 +364,8 @@ const Customizer = (props) => {
   };
   /////////
   const toggleShsHandler = () => {
+    const { price } = fireplaceItem;
+
     if (enableShs) {
       setEnableShs(false);
       setCart((prevCart) => ({
@@ -330,30 +375,29 @@ const Customizer = (props) => {
           price: "0",
         },
       }));
+      setFirePlaceItem((prevCasingItem) => ({
+        ...prevCasingItem,
+        price: Number(price) - Number(currencyPrice("400", "3995", "2995")),
+      }));
       ///
     } else {
       setEnableShs(true);
-      const currencyPrice = () => {
-        switch (lang.language) {
-          case "swedish":
-            return "3995";
-          case "english":
-            return "400";
-
-          case "danish":
-            return "2995";
-        }
-      };
+      setFirePlaceItem((prevCasingItem) => ({
+        ...prevCasingItem,
+        price: Number(price) + Number(currencyPrice("400", "3995", "2995")),
+      }));
       setCart((prevCart) => ({
         ...prevCart,
         addedShs: {
           name: "Smart Home System",
-          price: currencyPrice(),
+          price: currencyPrice("400", "3995", "2995"),
         },
       }));
     }
   };
   const toggleStainlessTopHandler = () => {
+    const { price } = fireplaceItem;
+
     if (stainlessTop) {
       setStainlessTop(false);
       setCart((prevCart) => ({
@@ -363,25 +407,22 @@ const Customizer = (props) => {
           price: "0",
         },
       }));
-      ///
+      setFirePlaceItem((prevCasingItem) => ({
+        ...prevCasingItem,
+        price: Number(price) - Number(currencyPrice("300", "2995", "1995")),
+      }));
     } else {
       setStainlessTop(true);
-      const currencyPrice = () => {
-        switch (lang.language) {
-          case "swedish":
-            return "2995";
-          case "english":
-            return "300";
 
-          case "danish":
-            return "1995";
-        }
-      };
+      setFirePlaceItem((prevCasingItem) => ({
+        ...prevCasingItem,
+        price: Number(price) + Number(currencyPrice("300", "2995", "1995")),
+      }));
       setCart((prevCart) => ({
         ...prevCart,
         addedTop: {
           name: "Stainless Top",
-          price: currencyPrice(),
+          price: currencyPrice("300", "2995", "1995"),
         },
       }));
     }
@@ -419,56 +460,134 @@ const Customizer = (props) => {
               className="ml-5"
               casings={casings}
               onSelect={showCasingPrice}
-              onPickLength={addCasingToCart}
+              onPickLength={showCasingPrice}
               variant={casingItem.variant}
               casingName={casingItem.name}
               casingLength={casingItem.length}
               selectedCasingPrice={casingItem.price}
               casingPhoto={casingItem.photo}
               pickedCaseItem={casingItem}
+              enable={casingItem.enable}
             />
           </Container>
         </div>
-        <Modal centered show={showCart} onHide={() => setShowCart(false)}>
+        <Modal
+          size="xl"
+          centered
+          show={showCart}
+          onHide={() => setShowCart(false)}
+        >
           <Modal.Header closeButton>
             <Modal.Title>Your Choise</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h3>
-              {cart.addedCasing.name}
-              {cart.addedCasing.length}
-              {cart.addedCasing.price}
-            </h3>
-            <h3>
-              {cart.addedFireplace.name}
-              {cart.addedFireplace.length}
-              {cart.addedFireplace.price}
-              {cart.addedFilling.name && (
+            <Row>
+              <Col>
+                <h2>FirePlace</h2>
                 <Row>
-                  <Col md={{ span: 3, offset: 4 }}>
-                    Filling Type: {cart.addedFilling.name}
+                  <Col>
+                    Name:{cart.addedFireplace.name}
+                    {cart.addedFilling.name && (
+                      <Row>
+                        <Col md={{ span: 3, offset: 4 }}>
+                          Filling Type: {cart.addedFilling.name}
+                        </Col>
+                        <Col md={{ span: 3, offset: 4 }}>
+                          Price:{cart.addedFilling.price}
+                        </Col>
+                      </Row>
+                    )}
+                    {cart.addedShs.name && (
+                      <div>
+                        {cart.addedShs.name}
+                        {cart.addedShs.price}
+                      </div>
+                    )}
+                    {cart.addedTop.name && (
+                      <div>
+                        {" "}
+                        {cart.addedTop.name}
+                        {cart.addedTop.price}
+                      </div>
+                    )}
                   </Col>
-                  <Col md={{ span: 3, offset: 4 }}>
-                    {cart.addedFilling.price}
+                  <Col>Length:{cart.addedFireplace.length}</Col>
+                  <Col>Price:{cart.addedFireplace.price}</Col>
+                </Row>
+              </Col>
+              <Col>
+                <h2>Casing</h2>
+                <Row>
+                  <Col>{cart.addedCasing.name}</Col>
+                  <Col>Length:{cart.addedCasing.length}</Col>
+                  <Col>Price:{cart.addedCasing.price}</Col>
+                </Row>
+              </Col>
+            </Row>
+
+            {cart.addedDecorations.map((item) => {
+              return (
+                <Row className="text-center">
+                  <Col xs={3}>
+                    <Figure>
+                      <Figure.Image
+                        className="figure-round mt-3"
+                        min-width={50}
+                        min-height={50}
+                        width={100}
+                        height={100}
+                        alt="Fireplace decoration"
+                        src={item.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
+                      />
+                    </Figure>
+                  </Col>
+                  <Col xs={5}>
+                    <p className="pt-5">{item.name}</p>
+                  </Col>
+
+                  <Col md="auto">
+                    <p className="pt-5">x{item.count}</p>
+                  </Col>
+                  <Col md="auto">
+                    <p className="pt-5">Price:{item.price}</p>
                   </Col>
                 </Row>
-              )}
+              );
+            })}
 
-              {cart.addedShs.name}
-              {cart.addedShs.price}
-              {cart.addedTop.name}
-              {cart.addedTop.price}
-            </h3>
-            <h3>
-              {cart.addedCasing.name}
-              {cart.addedCasing.length}
-              {cart.addedCasing.price}
-            </h3>
-            <ul>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
+            <Col>
+              {cart.addedAccessories.map((item) => {
+                return (
+                  <Row className="text-center">
+                    <Col xs={3}>
+                      <Figure>
+                        <Figure.Image
+                          className="figure-round mt-3"
+                          min-width={50}
+                          min-height={50}
+                          width={100}
+                          height={100}
+                          alt="Fireplace decoration"
+                          src={item.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
+                        />
+                      </Figure>
+                    </Col>
+                    <Col xs={5}>
+                      <p className="pt-5">{item.name}</p>
+                    </Col>
+
+                    <Col md="auto">
+                      <p className="pt-5">x{item.count}</p>
+                    </Col>
+                    <Col md="auto">
+                      <p className="pt-5">Price:{item.price}</p>
+                    </Col>
+                  </Row>
+                );
+              })}
+            </Col>
+
+            <h1>Total Price:{cart.cartPrice}</h1>
           </Modal.Body>
           <Modal.Footer>
             <Button
@@ -477,6 +596,7 @@ const Customizer = (props) => {
             >
               Clear Cart
             </Button>
+            <Button>Send This To Us</Button>
             <Button variant="primary" onClick={() => setShowCart(false)}>
               Close
             </Button>
@@ -532,14 +652,14 @@ const Customizer = (props) => {
               Clear Cart
             </Button>
           </div>{" "}
+          <div>
+            <Button variant="info" onClick={() => onShowCart()}>
+              Check Cart
+            </Button>
+          </div>
         </Stack>
       </div>
     </>
   );
 };
 export default Customizer;
-/*<div>
-            <Button variant="info" onClick={() => onShowCart()}>
-              Check Cart
-            </Button>
-          </div>*/

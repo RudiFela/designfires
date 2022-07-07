@@ -61,7 +61,12 @@ const CustomizerItemList = (props) => {
           <Button
             className="w-100 btn-custom"
             onClick={() => {
-              props.onAdd(switchCurrency(item, lang), item.name, item.id);
+              props.onAdd(
+                switchCurrency(item, lang),
+                item.name,
+                item.id,
+                item.images[0].woocommerce_gallery_thumbnail
+              );
             }}
             variant="outline-danger"
           >

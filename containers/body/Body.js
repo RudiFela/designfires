@@ -15,10 +15,11 @@ const Body = (props) => {
   const [casingsProducts, setCasingsProducts] = useState([]);
   const [fireplaceProducts, setFireplaceProducts] = useState([]);
 
-  const { setIsLoading } = useContext(LanguageContext);
-  const { addVariants } = useGetProducts();
+  const { setIsLoading, isLoading, lang } = useContext(LanguageContext);
+  const { addVariants, minimalFireplacePrice } = useGetProducts();
   useEffect(() => {
     getData();
+    takePrice();
   }, []);
 
   const handleLoading = () => setIsLoading(true);
@@ -54,8 +55,9 @@ const Body = (props) => {
           setAccessoriesProducts(addVariants(responses[2].data));
           setFireplaceProducts(addVariants(responses[3].data));
           setCasingsProducts(addVariants(responses[1].data));
-          console.log(addVariants(responses[1].data));
-          console.log(responses[0].data);
+          console.log(addVariants(responses[3].data));
+          console.log(responses[1].data);
+
           setIsLoading(false);
           setIsLoading(false);
         })
@@ -65,11 +67,29 @@ const Body = (props) => {
         handleLoading();
       });
   }; //SetEnv HTTPS on
+  const currencyPrice = () => {
+    switch (lang.language) {
+      case "swedish":
+        return SEK_price;
+      case "english":
+        return variantPrice;
 
+      case "danish":
+        return DKK_price;
+    }
+  };
+  const takePrice = () => {
+    console
+      .log
+      /// currencyPrice(
+      //fireplaceProducts[0].variant.find((item) => item.length === "500")
+      // )
+      ();
+  };
   return (
     <div>
-      <Ethanol />
-      <Mystic />
+      <Ethanol price={!isLoading && fireplaceProducts[1].price} />
+      <Mystic price={!isLoading && fireplaceProducts[0].price} />
       <Accessories />
       <Decorations decorations={decorationsProducts} />
       <Inspired />

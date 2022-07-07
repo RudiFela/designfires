@@ -10793,11 +10793,12 @@ textarea.form-control-lg {
   justify-content: space-between;
 }
 .navbar-logo {
-  width: 250px;
+  width: 200px;
 }
 .navbar-links {
   padding: 2rem 0;
-  font-weight: 550;
+  font-weight: 500;
+  font-size: medium;
 }
 .navbar-links li {
   display: inline-block;

@@ -1,6 +1,17 @@
-import { Dropdown, Badge, Row, Col } from "react-bootstrap";
+import { useContext, useState } from "react";
+import {
+  Dropdown,
+  Badge,
+  Row,
+  Col,
+  Popover,
+  Form,
+  OverlayTrigger,
+  DropdownButton,
+} from "react-bootstrap";
 import CustomizerWrapper from "./CustomizerWrapper";
 import { useChangePrice } from "../../hooks/change-price";
+import { LanguageContext } from "../context/language-context";
 const CustomizerFirePlaces = (props) => {
   const { switchCurrency } = useChangePrice();
   const {
@@ -16,7 +27,35 @@ const CustomizerFirePlaces = (props) => {
     selected,
     onFillingChange,
   } = props;
+  const lang = useContext(LanguageContext);
+  const currencySymbol = () => {
+    switch (lang.language) {
+      case "swedish":
+        return "SEK";
+      case "english":
+        return "€";
 
+      case "danish":
+        return "kr";
+    }
+  };
+  const currencyPrice = (eng, swe, dkk) => {
+    switch (lang.language) {
+      case "swedish":
+        return swe;
+      case "english":
+        return eng;
+
+      case "danish":
+        return dkk;
+    }
+  };
+  const currencyPriceT = () => {
+    return currencyPrice("100", "995", "755");
+  };
+  const currencyPricePW = () => {
+    return currencyPrice("995", "9995", "7555");
+  };
   const popoverInfo = technicalInfo ? (
     <>
       <Row>
@@ -49,17 +88,13 @@ const CustomizerFirePlaces = (props) => {
           </h6>
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <h6>Dimensions(mm):</h6>
-        </Col>
-      </Row>
+
       <Row>
         <Col>
           <h6>
             Length:
             <Badge className="float-end" bg="secondary">
-              {technicalInfo.length}
+              {technicalInfo.length}mm
             </Badge>
           </h6>
         </Col>
@@ -69,7 +104,7 @@ const CustomizerFirePlaces = (props) => {
           <h6>
             Width:
             <Badge className="float-end " bg="secondary">
-              {technicalInfo.width}
+              {technicalInfo.width}mm
             </Badge>
           </h6>
         </Col>
@@ -79,7 +114,37 @@ const CustomizerFirePlaces = (props) => {
           <h6>
             Heigth:
             <Badge className="float-end" bg="secondary">
-              {technicalInfo.heigth}
+              {technicalInfo.heigth}mm
+            </Badge>
+          </h6>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h6>
+            Top Plate Thickess:
+            <Badge className="float-end" bg="secondary">
+              3mm
+            </Badge>
+          </h6>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h6>
+            Bottom Size:
+            <Badge className="float-end" bg="secondary">
+              450x215 mm
+            </Badge>
+          </h6>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h6>
+            Hole Size:
+            <Badge className="float-end" bg="secondary">
+              470x230 mm
             </Badge>
           </h6>
         </Col>
@@ -89,7 +154,86 @@ const CustomizerFirePlaces = (props) => {
     <p>Select Length to see technical params.</p>
   );
 
-  const fireplacesDropDown = fireplaces.map((item) => (
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Body>{popoverInfo}</Popover.Body>
+    </Popover>
+  );
+  const popoverEW = (
+    <Popover id="popover-basic">
+      <Popover.Body>
+        <h6>Side filling without pressure water </h6>{" "}
+        <p>Refueling from external water tank.</p> <p>Standard.</p>
+      </Popover.Body>
+    </Popover>
+  );
+  const popoverT = (
+    <Popover id="popover-basic">
+      <Popover.Body>
+        <h6>Top filling = Top refueling.</h6>{" "}
+        <p>
+          Extra {currencyPriceT()}
+          {currencySymbol()} for this option
+        </p>
+      </Popover.Body>
+    </Popover>
+  );
+  const popoverPW = (
+    <Popover id="popover-basic">
+      <Popover.Body>
+        <h6> Side filling with the presssure water</h6>{" "}
+        <p>Ready for connection to water pipe </p>
+        <p>
+          Extra {currencyPricePW()}
+          {currencySymbol()} for this option.
+        </p>
+      </Popover.Body>
+    </Popover>
+  );
+
+  const filing = (
+    <>
+      <Form.Check
+        inline
+        label={
+          <OverlayTrigger placement="bottom" overlay={popoverEW}>
+            <p>EW</p>
+          </OverlayTrigger>
+        }
+        name="group1"
+        type="radio"
+        defaultChecked={true}
+        id={`inline--1EW`}
+        onChange={() => onFillingChange("EW", 0)}
+      />
+      <Form.Check
+        inline
+        label={
+          <OverlayTrigger placement="bottom" overlay={popoverT}>
+            <p>T</p>
+          </OverlayTrigger>
+        }
+        name="group1"
+        type="radio"
+        id={`inline--1T`}
+        onChange={() => onFillingChange("T", currencyPriceT())}
+      />
+      <Form.Check
+        inline
+        label={
+          <OverlayTrigger placement="bottom" overlay={popoverPW}>
+            <p>PW</p>
+          </OverlayTrigger>
+        }
+        name="group1"
+        type="radio"
+        id={`inline--1PW`}
+        onChange={() => onFillingChange("PW", currencyPricePW())}
+      />
+    </>
+  );
+
+  const fireplacesDropDownItems = fireplaces.map((item) => (
     <Dropdown.Item
       className="text-white bolder"
       key={item.id}
@@ -101,7 +245,17 @@ const CustomizerFirePlaces = (props) => {
       {item.name}
     </Dropdown.Item>
   ));
-  const fireplacesLengthDropDown = variant
+  const fireplacesDropDown = (
+    <DropdownButton
+      id="dropdown-basic-button"
+      variant="primary"
+      className="fw-bold"
+      title={fireplaceName}
+    >
+      {fireplacesDropDownItems}
+    </DropdownButton>
+  );
+  const fireplaceLengths = variant
     ? variant.map((item) => (
         <Dropdown.Item
           className="text-white bolder"
@@ -127,6 +281,18 @@ const CustomizerFirePlaces = (props) => {
       ))
     : null;
 
+  const fireplacesLengthDropDown = (
+    <DropdownButton
+      className="bolder"
+      id="dropdown-basic-button"
+      variant="primary"
+      disabled={!selected}
+      title={fireplaceLength}
+    >
+      {fireplaceLengths}
+    </DropdownButton>
+  );
+
   return (
     <>
       <CustomizerWrapper
@@ -137,12 +303,45 @@ const CustomizerFirePlaces = (props) => {
         lengthDropDown={fireplacesLengthDropDown}
         selectedPrice={selectedFireplacePrice}
         popoverInfo={popoverInfo}
-        extraOptions={selected}
-        shsSwitcher={shsSwitcher}
-        topSwitcher={topSwitcher}
         selected={selected}
-        onFillingChange={onFillingChange}
-      />
+      >
+        {selected && fireplaceName !== "DFM" ? (
+          <Form>
+            <Form.Check
+              className="text-white mt-2"
+              type="switch"
+              id="custom-switch"
+              variant="secondary"
+              onChange={shsSwitcher}
+              label="Smart Home System"
+            />
+            <Form.Check
+              className="text-white mt-2 mb-2"
+              type="switch"
+              id="custom-switch"
+              variant="secondary"
+              onChange={topSwitcher}
+              label="Stainless Top"
+            />
+          </Form>
+        ) : null}
+
+        {selected && fireplaceName === "DFM" ? (
+          <Form>
+            <Form.Check
+              className="text-white mt-2"
+              type="switch"
+              id="custom-switch"
+              variant="secondary"
+              label="Smart Home System(Standard)"
+              defaultChecked
+              disabled
+            />
+          </Form>
+        ) : null}
+
+        {fireplaceName === "DFM" && selected ? filing : null}
+      </CustomizerWrapper>
     </>
   );
 };

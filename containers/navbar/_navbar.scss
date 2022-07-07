@@ -9,11 +9,12 @@
     justify-content: space-between;
   }
   &-logo {
-    width: 250px;
+    width: 200px;
   }
   &-links {
     padding: 2rem 0;
-    font-weight: 550;
+    font-weight: 500;
+    font-size: medium;
 
     & li {
       display: inline-block;

@@ -2,7 +2,7 @@ import PhotosGrid from "../PhotosGrid.js/PhotosGrid";
 import AboutSection from "../AboutSection/AboutSection";
 import Advantage from "../Advantage/Advantage";
 
-const Mystic = () => {
+const Mystic = (props) => {
   const title = "Mystic SteamFire Pro (DFM)";
   const listItems = [
     "The best illusion of fire from all angles on the market",
@@ -39,6 +39,8 @@ const Mystic = () => {
     "Best customer support on the market, We help you all the way, even after warranty has expired",
     "Sounds with info about example water filling or faults to be made example sensor cleaning",
     "Fireplace sound",
+    ,
+    "All our fireplaces are tested and packed to the highest standard, so we know they work and come to you without, you having to spend time on problems.Read the manual and then it plug and play",
   ];
   return (
     <div id="steamfire">
@@ -63,7 +65,7 @@ const Mystic = () => {
             listItem5={listItems[4]}
             listItem={listItems}
             paragraph={paragraphs}
-            price={price}
+            price={props.price}
           />
         </div>
       </div>

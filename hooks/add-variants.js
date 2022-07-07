@@ -7,6 +7,12 @@ const crud = {
   },
 };
 export const useGetProducts = () => {
+  const minimalFireplacePrice = (item) => {
+    item.variant ? console.log(item.variant) : null;
+    console.log(item.variant);
+    const x = item.variant.find((element) => element.length === "500");
+    return console.log(x);
+  };
   const addVariants = (ProductsArray) => {
     let Products = [];
     let fillingInfo = [];
@@ -40,11 +46,23 @@ export const useGetProducts = () => {
                       width: item.dimensions.width,
                       heigth: item.dimensions.height,
                     },
-                    power: item.meta_data[0].value,
-                    liters: item.meta_data[1].value,
-                    burningtime: item.meta_data[2].value,
-                    DKK_price: item.meta_data[3],
-                    SEK_price: item.meta_data[5],
+                    power: item.meta_data.find((item) => item.key === "power")
+                      .value,
+                    liters: item.meta_data.find((item) => item.key === "liters")
+                      .value,
+                    burningtime: item.meta_data.find(
+                      (item) => item.key === "burning"
+                    ).value,
+                    DKK_price: item.meta_data.find(
+                      (item) =>
+                        item.key ===
+                        "_alg_currency_switcher_per_product_regular_price_DKK"
+                    ),
+                    SEK_price: item.meta_data.find(
+                      (item) =>
+                        item.key ===
+                        "_alg_currency_switcher_per_product_regular_price_SEK"
+                    ),
                   };
                   if (product === 192) {
                     file = { ...file, filling: fillingInfo };
@@ -68,5 +86,5 @@ export const useGetProducts = () => {
     return ProductsArray;
   };
 
-  return { addVariants };
+  return { addVariants, minimalFireplacePrice };
 };

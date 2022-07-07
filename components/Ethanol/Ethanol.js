@@ -2,7 +2,7 @@ import PhotosGrid from "../PhotosGrid.js/PhotosGrid";
 import AboutSection from "../AboutSection/AboutSection";
 import Advantage from "../Advantage/Advantage";
 
-const Ethanol = () => {
+const Ethanol = (props) => {
   const title = "Digital Bio-Ethanol Fireplace (DFE)";
   const listItems = [
     "Most beautiful flame pictures on the market",
@@ -61,7 +61,7 @@ const Ethanol = () => {
             listItem5={listItems[4]}
             listItem={listItems}
             paragraph={paragraphs}
-            price={price}
+            price={props.price}
           />
         </div>
       </div>
