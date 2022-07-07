@@ -8,6 +8,8 @@ import {
   Form,
   OverlayTrigger,
   DropdownButton,
+  Button,
+  Link,
 } from "react-bootstrap";
 import CustomizerWrapper from "./CustomizerWrapper";
 import { useChangePrice } from "../../hooks/change-price";
@@ -329,30 +331,80 @@ const CustomizerFirePlaces = (props) => {
                 </Form>
               </Col>
               <Col>
-                {" "}
-                <div>In Standard:</div>
-                <ul>
-                  <li>Smart Home System</li>
-                  <li>Remote Control</li>
-                  <li>Longest burningtime on the market</li>
-                </ul>
+                <Col>
+                  {" "}
+                  <Button
+                    disabled
+                    size="sm"
+                    className="text-center"
+                    variant="info"
+                  >
+                    Standard:
+                  </Button>
+                  <ul>
+                    <li>
+                      <Badge>Remote Control</Badge>
+                    </li>{" "}
+                    <li>
+                      <Badge>Longest burning time on the market 20 hours</Badge>
+                    </li>
+                    <li>
+                      <Badge>Black Top</Badge>
+                    </li>
+                    <li>
+                      <Badge>Our support even after varanty expires!</Badge>
+                    </li>
+                  </ul>
+                </Col>
               </Col>
             </Row>
           ) : null}
           {selected && fireplaceName === "DFM" ? (
-            <Form>
-              <Form.Check
-                className="text-white mt-2"
-                type="switch"
-                id="custom-switch"
-                variant="secondary"
-                label="Smart Home System"
-                defaultChecked
-                disabled
-              />
-            </Form>
+            <Row>
+              <Col>
+                <Form>
+                  <Form.Check
+                    className="text-white mt-2"
+                    type="switch"
+                    id="custom-switch"
+                    variant="secondary"
+                    label="Smart Home System"
+                    defaultChecked
+                    disabled
+                  />
+                </Form>
+                {fireplaceName === "DFM" && selected ? filing : null}
+              </Col>
+              <Col>
+                {" "}
+                <Button
+                  disabled
+                  size="sm"
+                  className="text-center"
+                  variant="info"
+                >
+                  Standard:
+                </Button>
+                <ul>
+                  <li>
+                    <Badge>Smart Home System</Badge>
+                  </li>
+                  <li>
+                    <Badge>Remote Control</Badge>
+                  </li>{" "}
+                  <li>
+                    <Badge>3 level on the flame</Badge>
+                  </li>
+                  <li>
+                    <Badge>Longest burning time on the market</Badge>
+                  </li>
+                  <li>
+                    <Badge>Our support even after varanty expires!</Badge>
+                  </li>
+                </ul>
+              </Col>
+            </Row>
           ) : null}
-          {fireplaceName === "DFM" && selected ? filing : null}
         </>
       </CustomizerWrapper>
     </>

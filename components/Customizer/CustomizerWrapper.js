@@ -63,7 +63,7 @@ const CustomizerWrapper = (props) => {
   return (
     <Card
       className="card-deco mt-3"
-      style={{ maxwidth: "30rem", height: "30rem" }}
+      style={{ maxwidth: "25rem", height: "30rem" }}
     >
       <Card.Img
         style={{ maxheigth: "50vh", borderRadius: 35 }}
@@ -72,7 +72,7 @@ const CustomizerWrapper = (props) => {
         src={itemPhoto}
       />
       <Card.Body>
-        <Stack className="flex-wrap mb-3" direction="horizontal" gap={3}>
+        <Stack className="flex-wrap mb-2" direction="horizontal" gap={3}>
           {itemDropDown}
 
           {lengthDropDown}
@@ -80,10 +80,11 @@ const CustomizerWrapper = (props) => {
           <Button className="bolder" variant="primary" disabled>
             {selectedPrice} {currencySymbol()}
           </Button>
+          <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+            <Button size="sm">Technical Info</Button>
+          </OverlayTrigger>
         </Stack>
-        <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-          <Button size="sm">Technical Info</Button>
-        </OverlayTrigger>
+
         {props.children}
       </Card.Body>{" "}
     </Card>
