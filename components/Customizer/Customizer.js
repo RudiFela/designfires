@@ -615,10 +615,10 @@ const Customizer = (props) => {
                 )}
               </Row>
 
-              {cart.addedDecorations.map((item) => {
+              {cart.addedDecorations.map((items) => {
                 return (
                   <Row
-                    key={item.id}
+                    key={items.id}
                     className="justify-content-md-start border"
                   >
                     <Col xs lg="3">
@@ -628,20 +628,20 @@ const Customizer = (props) => {
                           width={100}
                           height={100}
                           alt="Fireplace decoration"
-                          src={item.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
+                          src={items.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
                         />
                       </Figure>
                     </Col>
                     <Col xs={5} xs lg="4">
-                      <p className="pt-5">{item.name}</p>
+                      <p className="pt-5">{items.name}</p>
                     </Col>
 
                     <Col xs lg="1">
-                      <p className="pt-5">x{item.count}</p>
+                      <p className="pt-5">x{items.count}</p>
                     </Col>
                     <Col xs lg="1">
                       <p className="pt-5">
-                        Price:{item.price}
+                        Price:{items.price}
                         {currencySymbol()}
                       </p>
                     </Col>
