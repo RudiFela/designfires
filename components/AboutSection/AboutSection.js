@@ -10,7 +10,7 @@ const AboutSection = (props) => {
     <div className="about-section">
       <h2>{props.title}</h2>
       <ul>{list}</ul>
-      {props.aboutParagraph}
+      <p>{props.aboutParagraph}</p>
       <Accordion color="success" className="mt-3">
         <Accordion.Item className="bg-primary text-white" eventKey="0">
           <Accordion.Header className="bg-primary text-white text-center p-0 ">

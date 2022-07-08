@@ -8,16 +8,16 @@ const Mystic = (props) => {
     "The best illusion of fire from all angles on the market",
     "Longest Fire / Widest Fire length on the market in one device",
     "Longest operating time, can run 24/7 up to 1 year, before service",
-    "Very operationally safe and simple to service, Best on the market",
+    "Very operationally safe and simple to service, best on the market",
     "Can be built in anywhere and is safe and easy to use",
     "Can be naked fire or with ceramic wood on the same device",
-    "The best choice and most for your money, If you want coziness and warmth, without it getting hot in your apartment or house",
+    "The best choice and most for your money, if you want coziness and warmth, without it getting hot in your apartment or house",
     "SHS and Remote Control is standard",
   ];
   const aboutParagraph =
     "DesignFires is the market leader in building professional water vapor fireplaces SteamFire. Mystic SteamFire is an illusion of fire, made with cold water steam and LED light + a little warm and a small fan. You can design and get the style and look you want, as standard we make your fireplace, according to your tastes and dreams.";
   const paragraphs = [
-    "Can be made in length from 500mm, 700mm, 1000mm,1200mm, 1500mm up to 3500mm, We can build around it for you in hand made Steel Casing With openings on all sides or only 1 side or 2 or 3 sides open or in concrete, 100% according to your needs. You decide for yourself the decoration from the large selection of luxury hand made Accessories.",
+    "Can be made in length from 500mm, 700mm, 1000mm,1200mm, 1500mm up to 3500mm, we can build around it for you in hand made Steel Casing With openings on all sides or only 1 side or 2 or 3 sides open or in concrete, 100% according to your needs. You decide for yourself the decoration from the large selection of luxury hand made Accessories.",
     "Mystic SteamFire can even self tank water from a can, or a water pipe, so you can spend your time on other things than getting water on your fireplace.",
     "Since water does not cost as much money as Wood and Gas or Ethanol and is used to put out fires, it is completely safe and very economical and environmentally friendly. It is even good for the indoor climate with water vapors, which in modern houses is too dry in Scandinavia.",
     "All it needs is water and 220V electricity, no extra supply air or chimney is needed. Mystic SteamFire can provide coziness in a fire place that often looks very boring in public environments or in private houses.",
@@ -39,7 +39,7 @@ const Mystic = (props) => {
     "Display with control",
     "SHS (smart home system) works on all control systems such as example KNX",
     "3 level on the flame",
-    "Best customer support on the market, We help you all the way, even after warranty has expired",
+    "Best customer support on the market, we help you all the way, even after warranty has expired",
     "Sounds with info about example water filling or faults to be made example sensor cleaning",
     "Fireplace sound",
     ,

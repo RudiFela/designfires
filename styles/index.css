@@ -43650,11 +43650,11 @@ textarea.form-control-lg {
 
 @media only screen and (max-width: 800px) {
   .about-section {
-    padding: 0.2rem;
+    padding: 0.8rem;
   }
 
   .flex-container {
-    padding: 0.2rem;
+    padding: 0.8rem;
   }
 }
 .accordion-button:not(.collapsed) {
@@ -43698,6 +43698,7 @@ textarea.form-control-lg {
 }
 .advantage-right {
   text-align: right;
+  padding-right: 2rem;
   flex: 1;
 }
 .advantage-right ul {
@@ -43710,7 +43711,7 @@ textarea.form-control-lg {
   line-height: clamp(1rem, 2vw, 1.5rem);
   vertical-align: middle;
   font-weight: 400;
-  padding: 1rem 3rem 1rem 1rem;
+  padding: 1rem 3rem 1.5rem 1rem;
   margin: 0.5rem;
 }
 .advantage-left {
@@ -43725,7 +43726,7 @@ textarea.form-control-lg {
   line-height: clamp(1rem, 2vw, 1.5rem);
   vertical-align: middle;
   font-weight: 400;
-  padding: 1rem 0 1rem 3rem;
+  padding: 1rem 0 1.5rem 3rem;
   margin: 0.5rem;
 }
 
@@ -43741,6 +43742,9 @@ textarea.form-control-lg {
   .advantage ul {
     padding-left: 0.5rem;
   }
+  .advantage-rightli {
+    padding: 21rem 0 2rem 21rem;
+  }
 
   .photocard-container-1 {
     margin-left: 0.2rem;
@@ -43752,12 +43756,15 @@ textarea.form-control-lg {
   }
   .advantage-left li {
     background-size: 13%;
-    padding: 0.5rem 0 0.5rem 2rem;
+    padding: 0.8rem 0 0.8rem 2rem;
     margin: 0;
+  }
+  .advantage-right {
+    padding: 0.7rem;
   }
   .advantage-right li {
     background-size: 13%;
-    padding: 0.5rem 2rem 0.5rem 0rem;
+    padding: 0.8rem 2rem 0.8rem 0rem;
     margin: 0;
   }
 

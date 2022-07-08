@@ -10,9 +10,9 @@ const Ethanol = (props) => {
     "20 hours burning time (largest standard Ethanol Fuel tank on the market)",
     "Starts fastest of all automatic ethanol fireplaces on the market, starting as soon as you press the start button",
     "Remote Control is standard",
-    "Is very operationally safe and simple to service, Best on the market",
+    "Is very operationally safe and simple to service, best on the market",
     "It can be built in anywhere and is safe and easy to use",
-    "The best choice and most for your money If you want real fire and cosiness in your apartment or house",
+    "The best choice and most for your money if you want real fire and cosiness in your apartment or house",
   ];
   const aboutParagraph =
     "DFE provides cosiness & warmth in a old open fireplace that often looks very boring in private houses or in public environments.You can design and get the style and look you want, as standard. We make your fireplace, according to your tastes and dreams";
@@ -31,7 +31,7 @@ const Ethanol = (props) => {
     "DFE burns clean and gives a real sound of flames while the Bio-Ethanol is burning, as we have the market's best quality Bio-Ethanol Fuel on the market. and we will gladly send it to you",
   ];
   const advantageItemsRight = [
-    "Voice info from the Fireplace with info about when to refuel., Or message about what the fireplace does or need from you",
+    "Voice info from the Fireplace with info about when to refuel, or message about what the fireplace does or need from you",
     "Child safety. with children lock",
     "Cheap to install. Can be built in anywhere, you want a fireplace indoors. requires only 220V",
     "You do not have to spend money on a chimney. or gas system as bottles, pipes, and cabinet. It will save you more than DFE costs you in purchasing",
