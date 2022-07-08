@@ -18,6 +18,7 @@ import CustomizerItemList from "./CustomizerItemList";
 import CustomizerCasings from "./CustomizerCasings";
 import CustomizerFirePlaces from "./CustomizerFirePlaces";
 import CustomizerModal from "./CustomizerModal";
+import { FiInfo } from "react-icons/fi";
 
 const Customizer = (props) => {
   const lang = useContext(LanguageContext);
@@ -78,7 +79,8 @@ const Customizer = (props) => {
   const [casingItem, setCasingItem] = useState({
     name: ["Select Case"],
     length: [""],
-    photo: "http://designfires.pl/wp-content/uploads/2022/06/loaderImage.png",
+    photo:
+      "http://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires.png",
     price: 0,
     variant: [],
     enable: false,
@@ -87,7 +89,7 @@ const Customizer = (props) => {
   const [fireplaceItem, setFirePlaceItem] = useState({
     name: ["Select FirePlace"],
     length: ["Length"],
-    photo: "http://designfires.pl/wp-content/uploads/2022/06/loaderImage.png",
+    photo: "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES.png",
     price: 0,
     variant: [],
     variant_details: undefined,
@@ -235,14 +237,35 @@ const Customizer = (props) => {
       addedAccessories: [],
       cartPrice: 0,
     });
+    setFirePlaceItem({
+      name: ["Select FirePlace"],
+      length: ["Length"],
+      photo: "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES.png",
+      price: 0,
+      variant: [],
+      variant_details: undefined,
+      filling: [],
+      selected: false,
+    });
+    setCasingItem({
+      name: ["Select Case"],
+      length: [""],
+      photo:
+        "http://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires.png",
+      price: 0,
+      variant: [],
+      enable: false,
+      selected: false,
+    });
   };
   ////Casings
-  const showCasingPrice = (photo, name, variant, item) => {
-    console.log(item);
+  const showCasingPrice = (photo, name, variant, item, mainItem) => {
+    // console.log(item);
+    // console.log(mainItem);
 
     setCasingItem((prevCasing) => ({
       ...prevCasing,
-      name,
+      name: mainItem.name,
       photo,
       //length: ["Length"],
       variant: variant,
@@ -252,18 +275,23 @@ const Customizer = (props) => {
         item.SEK_price.value,
         item.DKK_price.value
       ),
+      fullName: mainItem.meta_data.find((item) => item.key === "fullname")
+        .value,
     }));
 
     setCart((prevCart) => ({
       ...prevCart,
       addedCasing: {
-        name: casingItem.name,
-        length,
+        name: mainItem.name,
+        length: item.length,
         price: currencyPrice(
           item.price,
           item.SEK_price.value,
           item.DKK_price.value
         ),
+        photo,
+        fullName: mainItem.meta_data.find((item) => item.key === "fullname")
+          .value,
       },
     }));
   };
@@ -339,6 +367,10 @@ const Customizer = (props) => {
             findCaseVariantPicked.SEK_price.value,
             findCaseVariantPicked.DKK_price.value
           ),
+          photo: findCaseVariantPicked.img,
+          fullName: findCaseNamePicked.meta_data.find(
+            (item) => item.key === "fullname"
+          ).value,
         },
       }));
     }
@@ -350,6 +382,7 @@ const Customizer = (props) => {
         name: fireplaceItem.name,
         length: pickedLength,
         price: currencyPrice(variantPrice, SEK_price, DKK_price),
+        photo: image,
       },
     }));
   };
@@ -480,91 +513,119 @@ const Customizer = (props) => {
           <Modal.Header closeButton>
             <Modal.Title>Your Choise</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <Row>
-              <Col>
-                <h2>FirePlace</h2>
-                <Row>
-                  <Col>
-                    Name:{cart.addedFireplace.name}
-                    {cart.addedFilling.name && (
-                      <Row>
-                        <Col md={{ span: 3, offset: 4 }}>
-                          Filling Type: {cart.addedFilling.name}
-                        </Col>
-                        <Col md={{ span: 3, offset: 4 }}>
-                          Price:{cart.addedFilling.price}
-                        </Col>
-                      </Row>
-                    )}
-                    {cart.addedShs.name && (
-                      <div>
-                        {cart.addedShs.name}
-                        {cart.addedShs.price}
-                      </div>
-                    )}
-                    {cart.addedTop.name && (
-                      <div>
-                        {" "}
-                        {cart.addedTop.name}
-                        {cart.addedTop.price}
-                      </div>
-                    )}
-                  </Col>
-                  <Col>Length:{cart.addedFireplace.length}</Col>
-                  <Col>Price:{cart.addedFireplace.price}</Col>
-                </Row>
-              </Col>
-              <Col>
-                <h2>Casing</h2>
-                <Row>
-                  <Col>{cart.addedCasing.name}</Col>
-                  <Col>Length:{cart.addedCasing.length}</Col>
-                  <Col>Price:{cart.addedCasing.price}</Col>
-                </Row>
-              </Col>
-            </Row>
-
-            {cart.addedDecorations.map((item) => {
-              return (
-                <Row key={item.id} className="text-center">
-                  <Col xs={3}>
-                    <Figure>
-                      <Figure.Image
-                        className="figure-round mt-3"
-                        min-width={50}
-                        min-height={50}
-                        width={100}
-                        height={100}
-                        alt="Fireplace decoration"
-                        src={item.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
-                      />
-                    </Figure>
-                  </Col>
-                  <Col xs={5}>
-                    <p className="pt-5">{item.name}</p>
-                  </Col>
-
-                  <Col md="auto">
-                    <p className="pt-5">x{item.count}</p>
-                  </Col>
-                  <Col md="auto">
-                    <p className="pt-5">Price:{item.price}</p>
-                  </Col>
-                </Row>
-              );
-            })}
-
-            <Col>
-              {cart.addedAccessories.map((item) => {
-                return (
-                  <Row key={item.id} className="text-center">
-                    <Col xs={3}>
+          <Modal.Body className="modallo fw-bold">
+            <div>
+              <Row xs={2} md={2}>
+                {cart.addedFireplace.length && (
+                  <Col className="border">
+                    <h2>FirePlace</h2>
+                    <Row>
+                      {" "}
                       <Figure>
                         <Figure.Image
                           className="figure-round mt-3"
-                          min-width={50}
-                          min-height={50}
+                          width={300}
+                          height={200}
+                          alt="Fireplace image"
+                          src={cart.addedFireplace.photo} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
+                        />
+                      </Figure>
+                      <Row>
+                        <Col lg={true}>
+                          <p>{cart.addedFireplace.name}</p>
+                        </Col>
+                        <Col lg={true}>
+                          <p>Length:{cart.addedFireplace.length}mm</p>
+                        </Col>
+
+                        <Col lg={true}>
+                          <p>
+                            Price:{cart.addedFireplace.price}
+                            {currencySymbol()}
+                          </p>
+                        </Col>
+                      </Row>
+                      <Row>
+                        {cart.addedFilling.name && (
+                          <Col lg={true}>
+                            <p>
+                              Filling Type: {cart.addedFilling.name}(
+                              {cart.addedFilling.price}
+                              {currencySymbol()})
+                            </p>
+                          </Col>
+                        )}
+
+                        {cart.addedShs.name && (
+                          <Col>
+                            <p>
+                              {cart.addedShs.name}
+                              {cart.addedShs.price}
+                              {currencySymbol()}
+                            </p>
+                          </Col>
+                        )}
+                        {cart.addedTop.name && (
+                          <Col>
+                            <p>
+                              {" "}
+                              {cart.addedTop.name}
+                              {cart.addedTop.price}
+                              {currencySymbol()}
+                            </p>
+                          </Col>
+                        )}
+                      </Row>
+                    </Row>
+                  </Col>
+                )}
+                {cart.addedCasing.length && (
+                  <Col className="border">
+                    <h2>Casing</h2>
+                    <Row>
+                      <Figure>
+                        <Figure.Image
+                          className="figure-round mt-3"
+                          width={250}
+                          height={200}
+                          alt="Casing image"
+                          src={cart.addedCasing.photo}
+                        />
+                      </Figure>
+                      <Row>
+                        <Col lg={true}>
+                          <p>{cart.addedCasing.fullName}</p>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col lg={true}>
+                          <p>{cart.addedCasing.name}</p>
+                        </Col>
+                        <Col lg={true}>
+                          <p>Length:{cart.addedCasing.length}mm</p>
+                        </Col>
+                        <Col lg={true}>
+                          <p>
+                            Price:{cart.addedCasing.price}
+                            {currencySymbol()}
+                          </p>
+                        </Col>
+                      </Row>
+                    </Row>
+                  </Col>
+                )}
+              </Row>
+
+              {cart.addedDecorations.map((item) => {
+                return (
+                  <Row
+                    key={item.id}
+                    className="justify-content-md-start border"
+                  >
+                    <Col xs lg="3">
+                      <Figure>
+                        <Figure.Image
+                          className="figure-round mt-3"
                           width={100}
                           height={100}
                           alt="Fireplace decoration"
@@ -572,22 +633,75 @@ const Customizer = (props) => {
                         />
                       </Figure>
                     </Col>
-                    <Col xs={5}>
+                    <Col xs={5} xs lg="4">
                       <p className="pt-5">{item.name}</p>
                     </Col>
 
-                    <Col md="auto">
+                    <Col xs lg="1">
                       <p className="pt-5">x{item.count}</p>
                     </Col>
-                    <Col md="auto">
-                      <p className="pt-5">Price:{item.price}</p>
+                    <Col xs lg="1">
+                      <p className="pt-5">
+                        Price:{item.price}
+                        {currencySymbol()}
+                      </p>
                     </Col>
                   </Row>
                 );
               })}
-            </Col>
 
-            <h1>Total Price:{cart.cartPrice}</h1>
+              <Col>
+                {cart.addedAccessories.map((item) => {
+                  return (
+                    <Row
+                      key={item.id}
+                      className="justify-content-md-start border"
+                    >
+                      <Col xs lg="3">
+                        <Figure>
+                          <Figure.Image
+                            className="figure-round mt-3"
+                            min-width={50}
+                            min-height={50}
+                            width={100}
+                            height={100}
+                            alt="Fireplace decoration"
+                            src={item.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
+                          />
+                        </Figure>
+                      </Col>
+                      <Col xs={5} xs lg="4">
+                        <p className="pt-5">{item.name}</p>
+                      </Col>
+
+                      <Col xs lg="1">
+                        <p className="pt-5">x{item.count}</p>
+                      </Col>
+                      <Col xs lg="1">
+                        <p className="pt-5">
+                          Price:{item.price}
+                          {currencySymbol()}
+                        </p>
+                      </Col>
+                    </Row>
+                  );
+                })}
+              </Col>
+              {cart.addedCasing.length.length === 0 &&
+              cart.addedFireplace.length.length === 0 &&
+              cart.addedAccessories.length === 0 &&
+              cart.addedDecorations.length === 0 ? (
+                <h1>
+                  Nothing added. Maybe You sholud add some of our beautiful
+                  fireplace?
+                </h1>
+              ) : (
+                <h1 className="mt-4">
+                  Total Price:{cart.cartPrice}
+                  {currencySymbol()}
+                </h1>
+              )}
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button

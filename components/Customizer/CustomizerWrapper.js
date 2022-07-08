@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   DropdownButton,
   Card,
@@ -7,9 +7,13 @@ import {
   Popover,
   OverlayTrigger,
   Form,
+  Spinner,
+  Fade,
 } from "react-bootstrap";
+import { CSSTransition } from "react-transition-group";
 import { LanguageContext } from "../context/language-context";
 const CustomizerWrapper = (props) => {
+  const [loaded, setLoaded] = useState(false);
   const lang = useContext(LanguageContext);
   const currencySymbol = () => {
     switch (lang.language) {
@@ -22,28 +26,7 @@ const CustomizerWrapper = (props) => {
         return "kr";
     }
   };
-  const currencyPriceT = () => {
-    switch (lang.language) {
-      case "swedish":
-        return "995";
-      case "english":
-        return "100";
 
-      case "danish":
-        return "755";
-    }
-  };
-  const currencyPricePW = () => {
-    switch (lang.language) {
-      case "swedish":
-        return "9995";
-      case "english":
-        return "995";
-
-      case "danish":
-        return "7555";
-    }
-  };
   const {
     itemPhoto,
     itemName,
@@ -61,16 +44,14 @@ const CustomizerWrapper = (props) => {
   );
 
   return (
-    <Card
-      className="card-deco mt-3"
-      style={{ maxwidth: "25rem", height: "30rem" }}
-    >
+    <Card className={props.cssClass}>
+      {" "}
       <Card.Img
         style={{ maxheigth: "50vh", borderRadius: 35 }}
         variant="bottom"
         alt="fireplace casing photo"
         src={itemPhoto}
-      />
+      />{" "}
       <Card.Body>
         <Stack className="flex-wrap mb-2" direction="horizontal" gap={3}>
           {itemDropDown}

@@ -4,6 +4,8 @@
   color: var.$primary-color;
   padding: 2rem;
   max-width: 460px;
+  background-color: var.$shark;
+  border-radius: 35px;
 
   & h2 {
     padding: 2rem;
@@ -20,7 +22,7 @@
     line-height: 32px;
     vertical-align: middle;
     font-weight: 500;
-    padding: 1rem 0 1rem 3rem;
+    padding: 0.5rem 0 1rem 3rem;
     margin: 0.5rem;
   }
   & p {
@@ -41,4 +43,23 @@
   .flex-container {
     padding: 0.2rem;
   }
+}
+.accordion-button:not(.collapsed) {
+  color: var.$primary-color !important;
+
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
+}
+.accordion-button:focus {
+  z-index: 3;
+  color: var.$primary-color !important;
+  border-color: var.$secondary-color;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(104, 3, 3, 0.25) !important;
+}
+.accordion-button {
+  background-color: var.$secondary-color !important;
+  color: var.$primary-color !important;
+}
+.accordion-item {
+  border: none !important;
 }

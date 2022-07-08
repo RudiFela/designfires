@@ -74,7 +74,8 @@ const CustomizerCasings = (props) => {
           item.images[0].src,
           item.name,
           item.variant,
-          item.variant.find((item) => item.length === casingLength)
+          item.variant.find((item) => item.length === casingLength),
+          item
         );
       }}
       eventKey={item}
@@ -129,7 +130,10 @@ const CustomizerCasings = (props) => {
       selectedPrice={selectedCasingPrice}
       popoverInfo={popoverInfo}
       selected={pickedCaseItem.selected}
-    />
+      cssClass="card-deco mt-3 casings-customizer"
+    >
+      <p className="text-white fw-bold mt-4">{pickedCaseItem.fullName}</p>
+    </CustomizerWrapper>
   );
 };
 export default CustomizerCasings;

@@ -28,7 +28,8 @@
     & li {
       font-size: clamp(1rem, 2vw, 1.5rem);
       background: var.$icon no-repeat right;
-      line-height: 32px;
+      background-position: 100% 0%;
+      line-height: clamp(1rem, 2vw, 1.5rem);
       vertical-align: middle;
       font-weight: 400;
       padding: 1rem 3rem 1rem 1rem;
@@ -43,7 +44,8 @@
     & li {
       font-size: clamp(1rem, 2vw, 1.5rem);
       background: var.$icon no-repeat;
-      line-height: 32px;
+
+      line-height: clamp(1rem, 2vw, 1.5rem);
       vertical-align: middle;
       font-weight: 400;
       padding: 1rem 0 1rem 3rem;
@@ -61,6 +63,30 @@
   .advantage {
     & ul {
       padding-left: 0.5rem;
+    }
+  }
+  .photocard-container-1 {
+    margin-left: 0.2rem;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .advantage {
+    & ul {
+      padding-left: 0.5rem;
+    }
+    &-left {
+      & li {
+        background-size: 13%;
+        padding: 0.5rem 0 0.5rem 2rem;
+        margin: 0;
+      }
+    }
+    &-right {
+      & li {
+        background-size: 13%;
+        padding: 0.5rem 2rem 0.5rem 0rem;
+        margin: 0;
+      }
     }
   }
   .photocard-container-1 {

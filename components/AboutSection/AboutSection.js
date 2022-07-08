@@ -1,3 +1,4 @@
+import { Accordion } from "react-bootstrap";
 const AboutSection = (props) => {
   const list = props.listItem.map((item) => {
     return <li key={Math.random()}>{item}</li>;
@@ -9,8 +10,16 @@ const AboutSection = (props) => {
     <div className="about-section">
       <h2>{props.title}</h2>
       <ul>{list}</ul>
+      {props.aboutParagraph}
+      <Accordion color="success" className="mt-3">
+        <Accordion.Item className="bg-primary text-white" eventKey="0">
+          <Accordion.Header className="bg-primary text-white text-center p-0 ">
+            Read More
+          </Accordion.Header>
+          <Accordion.Body>{paragraphs}</Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
 
-      {paragraphs}
       <h3>from: {props.price}€</h3>
       <h3></h3>
     </div>

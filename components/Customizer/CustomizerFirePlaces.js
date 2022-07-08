@@ -298,6 +298,7 @@ const CustomizerFirePlaces = (props) => {
   return (
     <>
       <CustomizerWrapper
+        cssClass="card-deco mt-3 fireplace-customizer"
         itemPhoto={fireplacePhoto}
         itemName={fireplaceName}
         itemLength={fireplaceLength}
@@ -333,14 +334,7 @@ const CustomizerFirePlaces = (props) => {
               <Col>
                 <Col>
                   {" "}
-                  <Button
-                    disabled
-                    size="sm"
-                    className="text-center"
-                    variant="info"
-                  >
-                    Standard:
-                  </Button>
+                  <Badge bg="info">Standard:</Badge>
                   <ul>
                     <li>
                       <Badge>Remote Control</Badge>
@@ -352,7 +346,7 @@ const CustomizerFirePlaces = (props) => {
                       <Badge>Black Top</Badge>
                     </li>
                     <li>
-                      <Badge>Our support even after varanty expires!</Badge>
+                      <Badge>Support even after varanty expires!</Badge>
                     </li>
                   </ul>
                 </Col>
@@ -361,7 +355,7 @@ const CustomizerFirePlaces = (props) => {
           ) : null}
           {selected && fireplaceName === "DFM" ? (
             <Row>
-              <Col>
+              <Col className="pe-0">
                 <Form>
                   <Form.Check
                     className="text-white mt-2"
@@ -375,16 +369,9 @@ const CustomizerFirePlaces = (props) => {
                 </Form>
                 {fireplaceName === "DFM" && selected ? filing : null}
               </Col>
-              <Col>
+              <Col className="pe-0">
                 {" "}
-                <Button
-                  disabled
-                  size="sm"
-                  className="text-center"
-                  variant="info"
-                >
-                  Standard:
-                </Button>
+                <Badge bg="info">Standard:</Badge>
                 <ul>
                   <li>
                     <Badge>Smart Home System</Badge>
@@ -399,7 +386,7 @@ const CustomizerFirePlaces = (props) => {
                     <Badge>Longest burning time on the market</Badge>
                   </li>
                   <li>
-                    <Badge>Our support even after varanty expires!</Badge>
+                    <Badge>Support even after varanty expires!</Badge>
                   </li>
                 </ul>
               </Col>

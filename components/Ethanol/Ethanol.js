@@ -14,13 +14,14 @@ const Ethanol = (props) => {
     "It can be built in anywhere and is safe and easy to use",
     "The best choice and most for your money If you want real fire and cosiness in your apartment or house",
   ];
+  const aboutParagraph =
+    "DFE provides cosiness & warmth in a old open fireplace that often looks very boring in private houses or in public environments.You can design and get the style and look you want, as standard. We make your fireplace, according to your tastes and dreams";
   const paragraphs = [
-    "DFE provides cosiness & warmth in a old open fireplace that often looks very boring in private houses or in public environments.You can design and get the style and look you want, as standard. We make your fireplace, according to your tastes and dreams",
     "It can be made in length from DFE500mm, DFE700mm, DFE1000mm, DFE1200mm and not standart up to DFE2400mm",
     " We can build around it for you in hand made Steel Casing from Long: 560mm 760mm 1060mm 1260mm High: 500mm Deep: 350mm only. With openings on all sides or only 1 side or 2 or 3 sides open or in concrete, 100% according to your needs",
     "You decide for yourself the decoration from the large selection of luxury hand made Accessories",
   ];
-  const price = 2000;
+
   const advantageItemsLeft = [
     "High safety, Thanks to a Digital Fireplace with many safety sensor and electronic refueling. (Many accidents happen when refueling the Ethanol fireplaces).",
     "Automatic Ethanol Fuel pump built-in, which stops automatic when the Ethanol tank is full, it makes it 100% safe to refuel, and very easy to refuel, as there is only a silicone hose in between the DFE and the Ethanol can",
@@ -62,6 +63,7 @@ const Ethanol = (props) => {
             listItem={listItems}
             paragraph={paragraphs}
             price={props.price}
+            aboutParagraph={aboutParagraph}
           />
         </div>
       </div>

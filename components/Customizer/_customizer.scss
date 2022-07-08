@@ -4,6 +4,12 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around;
+  & ul {
+    padding: 0;
+  }
+  & li {
+    list-style: none;
+  }
 }
 .bolder {
   font-weight: 600 !important;
@@ -63,11 +69,52 @@
     width: auto;
     margin: 1rem !important;
   }
+  .card-deco {
+    height: auto !important;
+  }
   .card-header {
     padding: 0 !important;
+  }
+  .fireplace-customizer {
+    width: auto !important;
+  }
+  .casings-customizer {
+    width: auto !important;
   }
 }
 .form-check-input:checked {
   background-color: $secondary-color !important;
   border-color: $secondary-color !important;
+}
+.modallo {
+  background-image: url("http://designfires.pl/wp-content/uploads/2022/07/DesignFiresWatermark2.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  & p {
+    font-size: clamp(0.7rem, 2vw, 1.2rem);
+  }
+}
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+.fireplace-customizer {
+  width: 32rem;
+}
+.casings-customizer {
+  width: 22rem;
 }
