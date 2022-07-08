@@ -632,7 +632,7 @@ const Customizer = (props) => {
                         />
                       </Figure>
                     </Col>
-                    <Col xs={5} xs lg="4">
+                    <Col xs lg="4">
                       <p className="pt-5">{items.name}</p>
                     </Col>
 
@@ -669,7 +669,7 @@ const Customizer = (props) => {
                           />
                         </Figure>
                       </Col>
-                      <Col xs={5} xs lg="4">
+                      <Col xs lg="4">
                         <p className="pt-5">{item.name}</p>
                       </Col>
 
