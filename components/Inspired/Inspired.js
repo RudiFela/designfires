@@ -13,6 +13,7 @@ const MyVerticallyCenteredModal = (props) => {
       {...props}
       variant="dark"
       size="xl"
+      centered
       aria-labelledby="contained-modal-title-vcenter"
     >
       <Modal.Header
