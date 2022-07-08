@@ -493,7 +493,6 @@ const Customizer = (props) => {
               className="ml-5"
               casings={casings}
               onSelect={showCasingPrice}
-              onPickLength={showCasingPrice}
               variant={casingItem.variant}
               casingName={casingItem.name}
               casingLength={casingItem.length}
