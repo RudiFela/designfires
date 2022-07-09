@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Button, Spinner } from "react-bootstrap";
+import { Modal, Spinner } from "react-bootstrap";
 const MyVerticallyCenteredModal = (props) => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -8,8 +8,8 @@ const MyVerticallyCenteredModal = (props) => {
     setIsLoading(false);
   };
   const onHide = () => {
-    setIsLoading(true);
     props.closeModal();
+    setIsLoading(true);
   };
   return (
     <Modal
@@ -38,6 +38,11 @@ const MyVerticallyCenteredModal = (props) => {
           src={props.image}
         />
       </Modal.Body>
+      {props.Footer ? (
+        <Modal.Footer className="bg-primary text-white">
+          {props.Footer}
+        </Modal.Footer>
+      ) : null}
     </Modal>
   );
 };

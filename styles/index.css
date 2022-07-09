@@ -32706,7 +32706,7 @@ textarea.form-control-lg {
 }
 @media only screen and (max-width: 400px) {
   .photo {
-    border-radius: 5px;
+    border-radius: 10px;
   }
 }
 .flex-container {
@@ -54874,11 +54874,17 @@ textarea.form-control-lg {
   border-radius: 35px !important;
   -o-object-fit: cover !important;
      object-fit: cover !important;
+  height: 100%;
 }
 .inspired img:hover {
   cursor: pointer;
 }
 
+@media only screen and (max-width: 550px) {
+  .inspired img {
+    border-radius: 10px !important;
+  }
+}
 /* import bootstrap to set changes */
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)

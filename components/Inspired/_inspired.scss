@@ -2,8 +2,16 @@
   & img {
     border-radius: 35px !important;
     object-fit: cover !important;
+    height: 100%;
   }
   & img:hover {
     cursor: pointer;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .inspired {
+    & img {
+      border-radius: 10px !important;
+    }
   }
 }

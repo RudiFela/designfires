@@ -39,10 +39,10 @@ const Navibar = () => {
           >
             <Nav className="navbar-links">
               <Nav.Link className="text-white text-center" href="#bio">
-                Digital Bio-Ehtanol Fireplace
+                Digital DFE Bio-Ehtanol Fireplace PRO
               </Nav.Link>
               <Nav.Link className="text-white text-center" href="#steamfire">
-                Mystic SteamFire Fireplace
+                Mystic SteamFire DFM PRO Fireplace
               </Nav.Link>
               <Nav.Link
                 className="text-white text-center"

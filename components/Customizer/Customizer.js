@@ -77,7 +77,7 @@ const Customizer = (props) => {
   };
   const currency = currencySymbol();
   const [casingItem, setCasingItem] = useState({
-    name: ["Select Case"],
+    name: ["Select Type"],
     length: [""],
     photo:
       "http://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires.png",
@@ -89,7 +89,7 @@ const Customizer = (props) => {
   const [fireplaceItem, setFirePlaceItem] = useState({
     name: ["Select FirePlace"],
     length: ["Length"],
-    photo: "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES.png",
+    photo: "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES-1.png",
     price: 0,
     variant: [],
     variant_details: undefined,
@@ -240,7 +240,8 @@ const Customizer = (props) => {
     setFirePlaceItem({
       name: ["Select FirePlace"],
       length: ["Length"],
-      photo: "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES.png",
+      photo:
+        "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES-1.png",
       price: 0,
       variant: [],
       variant_details: undefined,
@@ -248,7 +249,7 @@ const Customizer = (props) => {
       selected: false,
     });
     setCasingItem({
-      name: ["Select Case"],
+      name: ["Select Type"],
       length: [""],
       photo:
         "http://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires.png",
