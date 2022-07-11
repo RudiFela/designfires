@@ -65835,10 +65835,9 @@ textarea.form-control-lg {
 }
 
 .modallo {
-  background-image: url("http://designfires.pl/wp-content/uploads/2022/07/DesignFiresWatermark2.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 100% 100%;
+  background-image: url("http://designfires.pl/wp-content/uploads/2022/07/DesignFiresBlackLogo.png");
+  background-size: 20px 31px;
+  background-repeat: repeat;
 }
 .modallo p {
   font-size: clamp(0.7rem, 2vw, 1.2rem);

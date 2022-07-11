@@ -53,6 +53,12 @@ export const useGetProducts = () => {
                     burningtime: item.meta_data.find(
                       (item) => item.key === "burning"
                     ).value,
+                    holesize: item.meta_data.find(
+                      (item) => item.key === "holesize"
+                    ),
+                    bottomsize: item.meta_data.find(
+                      (item) => item.key === "bottomsize"
+                    ),
                     DKK_price: item.meta_data.find(
                       (item) =>
                         item.key ===

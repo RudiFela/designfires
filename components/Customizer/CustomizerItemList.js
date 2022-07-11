@@ -20,37 +20,55 @@ const CustomizerItemList = (props) => {
   };
   const switchCurrency = (item) => {
     let x;
-    // console.log(item);
     switch (lang.language) {
       case "swedish":
         x = item.meta_data.find(
           (key) =>
             key.key === "_alg_currency_switcher_per_product_regular_price_SEK"
         );
-        //console.log(x);
+
         if (x === undefined) {
-          return "21"; //item.variant[0].SEK_price;
+          let tut = item.variant.find((x) => x.length === FireplaceLength);
+
+          if (tut) {
+            return tut.SEK_price.value;
+          } else {
+            return item.variant[10].SEK_price.value;
+          }
         } else {
-          if (x.value === "") {
-            return "20";
-          } else return x.value;
+          return x.value;
         }
 
       case "english":
-        return item.price;
+        let tut;
+        if (item.variations.length > 1) {
+          if (item.variant) {
+            tut = item.variant.find((x) => x.length === FireplaceLength);
+          }
+
+          if (tut) {
+            return tut.price;
+          } else {
+            return "65"; //item.variant[10].price;
+          }
+        } else {
+          return item.price;
+        }
 
       case "danish":
         x = item.meta_data.find(
           (key) =>
             key.key === "_alg_currency_switcher_per_product_regular_price_DKK"
         );
-        // console.log(x);
         if (x === undefined) {
-          return "21"; //item.variant[0].SEK_price;
+          let tut = item.variant.find((x) => x.length === FireplaceLength);
+          if (tut) {
+            return tut.DKK_price.value;
+          } else {
+            return item.variant[10].DKK_price.value;
+          } //item.variant[0].SEK_price;
         } else {
-          if (x.value === "") {
-            return "20";
-          } else return x.value;
+          return x.value;
         }
     }
   };

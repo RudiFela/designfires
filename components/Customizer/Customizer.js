@@ -19,12 +19,14 @@ import CustomizerCasings from "./CustomizerCasings";
 import CustomizerFirePlaces from "./CustomizerFirePlaces";
 import CustomizerModal from "./CustomizerModal";
 import { FiInfo } from "react-icons/fi";
+import ContactForm from "../../containers/footer/ContactForm";
 
 const Customizer = (props) => {
   const lang = useContext(LanguageContext);
   const { decorations, accessories, casings, fireplace } = props;
   const [key, setKey] = useState("home");
   const [showCart, setShowCart] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
   const [cart, setCart] = useState({
     addedCasing: {
       name: "",
@@ -137,7 +139,7 @@ const Customizer = (props) => {
   const onFillingChange = (name, Fillprice) => {
     const { price } = fireplaceItem;
     const { addedFilling } = cart;
-    console.log(Fillprice);
+    //console.log(Fillprice);
     price = Number(price) - Number(addedFilling.price);
     setFirePlaceItem((prevCasingItem) => ({
       ...prevCasingItem,
@@ -179,7 +181,7 @@ const Customizer = (props) => {
     arr = undefined;
   };
   const addAccessoriesToCart = (price, name, id, image) => {
-    console.log(price);
+    //console.log(price);
     let accessoryArray;
     accessoryArray = cart.addedAccessories;
     let findedItem = false;
@@ -206,7 +208,7 @@ const Customizer = (props) => {
     arr = undefined;
   };
   const onShowCart = () => {
-    console.log(cart);
+    // console.log(cart);
     setShowCart(true);
   };
   const clearCart = () => {
@@ -308,7 +310,9 @@ const Customizer = (props) => {
     burningtime,
     dimensions,
     DKK_price,
-    SEK_price
+    SEK_price,
+    holesize,
+    bottomsize
   ) => {
     setFirePlaceItem((prevItem) => ({
       ...prevItem,
@@ -323,6 +327,8 @@ const Customizer = (props) => {
         length: dimensions.length,
         width: dimensions.width,
         heigth: dimensions.heigth,
+        holesize,
+        bottomsize,
       },
     }));
     let leng = (Number(pickedLength) + 60).toString();
@@ -336,12 +342,12 @@ const Customizer = (props) => {
       const findCaseNamePicked = casings.find(
         (casings) => casings.name === casingItem.name
       );
-      console.log(findCaseNamePicked);
+      //console.log(findCaseNamePicked);
       const findCaseVariantPicked = findCaseNamePicked.variant.find(
         (findCaseNamePicked) => findCaseNamePicked.length === leng
       );
-      console.log(findCaseVariantPicked);
-      console.log(findCaseVariantPicked.price);
+      //console.log(findCaseVariantPicked);
+      //console.log(findCaseVariantPicked.price);
 
       setCasingItem({
         length: leng,
@@ -460,6 +466,15 @@ const Customizer = (props) => {
         },
       }));
     }
+  };
+  const clearModalCart = () => {
+    clearCart();
+    setShowContactForm(false);
+    setShowCart(false);
+  };
+  const closeModalCart = () => {
+    setShowCart(false);
+    setShowContactForm(false);
   };
   return (
     <>
@@ -701,17 +716,22 @@ const Customizer = (props) => {
                   {currencySymbol()}
                 </h1>
               )}
+              {showContactForm && (
+                <ContactForm className="text-white" cartHandler={cart} />
+              )}
             </div>
           </Modal.Body>
           <Modal.Footer>
             <Button
               variant="outline-secondary"
-              onClick={(() => clearCart(), () => setShowCart())}
+              onClick={() => clearModalCart()}
             >
               Clear Cart
             </Button>
-            <Button>Send This To Us</Button>
-            <Button variant="primary" onClick={() => setShowCart(false)}>
+            <Button onClick={() => setShowContactForm(true)}>
+              Send This To Us
+            </Button>
+            <Button variant="primary" onClick={() => closeModalCart()}>
               Close
             </Button>
           </Modal.Footer>
@@ -731,7 +751,6 @@ const Customizer = (props) => {
                       <CustomizerItemList
                         ItemToList={decorations}
                         onAdd={addDecorationsToCart}
-                        FireplaceLength={cart.addedFireplace.length}
                       />
                     </ListGroup>
                   </Tab>
@@ -740,6 +759,7 @@ const Customizer = (props) => {
                       <CustomizerItemList
                         ItemToList={accessories}
                         onAdd={addAccessoriesToCart}
+                        FireplaceLength={cart.addedFireplace.length}
                       />
                     </ListGroup>
                   </Tab>

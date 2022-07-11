@@ -8,21 +8,30 @@ import Ethanol from "../../components/Ethanol/Ethanol";
 import Mystic from "../../components/Mystic/Mystic";
 import { useGetProducts } from "../../hooks/add-variants";
 import { LanguageContext } from "../../components/context/language-context";
-const Customizer = lazy(() => import("../../components/Customizer/Customizer"));
+import Customizer from "../../components/Customizer/Customizer";
+//const Customizer = lazy(() => import("../../components/Customizer/Customizer"));
 const Body = (props) => {
   const [decorationsProducts, setDecorationsProducts] = useState([]);
   const [accessoriesProducts, setAccessoriesProducts] = useState([]);
   const [casingsProducts, setCasingsProducts] = useState([]);
   const [fireplaceProducts, setFireplaceProducts] = useState([]);
-
-  const { setIsLoading, isLoading, lang } = useContext(LanguageContext);
+  const [lowestPriceDFM, setLowestPriceDFM] = useState("3066");
+  const [lowestPriceDFE, setLowestPriceDFE] = useState("2000");
+  const [variantAdded, setVariantAdded] = useState(false);
+  const { setIsLoading, isLoading, lang, language } =
+    useContext(LanguageContext);
   const { addVariants, minimalFireplacePrice } = useGetProducts();
   useEffect(() => {
     getData();
-    takePrice();
+    setVariantAdded(true);
+    //takePrice();
   }, []);
-
-  const handleLoading = () => setIsLoading(true);
+  useEffect(() => {
+    if (variantAdded) {
+      takePrice();
+    }
+  }, [language, variantAdded]);
+  //const handleLoading = () => setIsLoading(true);
 
   const crud = {
     auth: {
@@ -39,7 +48,7 @@ const Body = (props) => {
   const fireplaces =
     "https://designfires.pl/wp-json/wc/v3/products?category=26?per_page=20";
 
-  const getData = () => {
+  const getData = async () => {
     // ck ck_b143b31c7842e4a628279fe7b097980c311f08d5
     // cs cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e
     axios
@@ -49,62 +58,79 @@ const Body = (props) => {
         axios.get(accessories, crud),
         axios.get(fireplaces, crud),
       ])
+
       .then(
         axios.spread((...responses) => {
           setDecorationsProducts(responses[0].data);
           setAccessoriesProducts(addVariants(responses[2].data));
           setFireplaceProducts(addVariants(responses[3].data));
           setCasingsProducts(addVariants(responses[1].data));
+
+          console.log(addVariants(responses[2].data));
           console.log(addVariants(responses[3].data));
-          console.log(responses[1].data);
+          console.log(addVariants(responses[1].data));
+
+          //console.log(fireplaceProducts);
+          //firstTakePrice(addVariants(responses[3].data));
 
           setIsLoading(false);
-          setIsLoading(false);
+          //setVariantAdded(true);
         })
       )
       .catch((error) => {
         console.log("An error!!!!", error);
-        handleLoading();
+        setIsLoading(false);
       });
   }; //SetEnv HTTPS on
-  const currencyPrice = () => {
-    switch (lang.language) {
+  const currencyPrice = (item) => {
+    switch (language) {
       case "swedish":
-        return SEK_price;
+        return item.SEK_price.value;
       case "english":
-        return variantPrice;
+        return item.price;
 
       case "danish":
-        return DKK_price;
+        return item.DKK_price.value;
     }
   };
+
   const takePrice = () => {
-    console
-      .log
-      /// currencyPrice(
-      //fireplaceProducts[0].variant.find((item) => item.length === "500")
-      // )
-      ();
+    !isLoading
+      ? setLowestPriceDFM(
+          currencyPrice(
+            fireplaceProducts[0].variant.find((item) => item.length === "500")
+          )
+        )
+      : null;
+
+    !isLoading
+      ? setLowestPriceDFE(
+          currencyPrice(
+            fireplaceProducts[1].variant.find((item) => item.length === "500")
+          )
+        )
+      : null;
+    /*  return currencyPrice(
+      fireplaceProducts[0].variant.find((item) => item.length === "500")
+    );*/
   };
   return (
     <div>
-      <Ethanol price={!isLoading && fireplaceProducts[1].price} />
-      <Mystic price={!isLoading && fireplaceProducts[0].price} />
+      <Ethanol price={!isLoading && lowestPriceDFE} />
+      <Mystic price={!isLoading && lowestPriceDFM} />
       <Accessories />
       <Decorations decorations={decorationsProducts} />
       <Inspired />
 
-      <Suspense fallback={<h1>Still Loading</h1>}>
-        <div>
-          <Customizer
-            decorations={decorationsProducts}
-            accessories={accessoriesProducts}
-            casings={casingsProducts}
-            fireplace={fireplaceProducts}
-            cartHandler={props.cartHandler}
-          />
-        </div>
-      </Suspense>
+      <div>
+        <Customizer
+          decorations={decorationsProducts}
+          accessories={accessoriesProducts}
+          casings={casingsProducts}
+          fireplace={fireplaceProducts}
+          cartHandler={props.cartHandler}
+        />
+      </div>
     </div>
   );
 };

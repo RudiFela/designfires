@@ -136,7 +136,7 @@ const CustomizerFirePlaces = (props) => {
           <h6>
             Bottom Size:
             <Badge className="float-end" bg="secondary">
-              450x215 mm
+              {technicalInfo.bottomsize} mm
             </Badge>
           </h6>
         </Col>
@@ -146,7 +146,7 @@ const CustomizerFirePlaces = (props) => {
           <h6>
             Hole Size:
             <Badge className="float-end" bg="secondary">
-              470x230 mm
+              {technicalInfo.holesize} mm
             </Badge>
           </h6>
         </Col>
@@ -273,7 +273,9 @@ const CustomizerFirePlaces = (props) => {
               item.burningtime,
               item.dimensions,
               item.DKK_price.value,
-              item.SEK_price.value
+              item.SEK_price.value,
+              item.holesize.value,
+              item.bottomsize.value
             );
           }}
           eventKey={item}

@@ -76,7 +76,7 @@ const Navibar = () => {
                   onClick={() => {
                     onLanguageChange(english, "english");
                   }}
-                  href="#action/3.1"
+                  //  href="#action/3.1"
                   className="text-white fs-5 text fw-normal"
                 >
                   ENG <img src={english} height="35" alt="USA flag" />
@@ -85,7 +85,7 @@ const Navibar = () => {
                   onClick={() => {
                     onLanguageChange(denmark, "danish");
                   }}
-                  href="#action/3.2"
+                  //  href="#action/3.2"
                   className="text-white fs-5 text fw-normal"
                 >
                   DEN <img src={denmark} height="35" alt="USA flag" />
@@ -94,7 +94,7 @@ const Navibar = () => {
                   onClick={() => {
                     onLanguageChange(sweden, "swedish");
                   }}
-                  href="#action/3.3"
+                  // href="#action/3.3"
                   className="text-white fs-5 text fw-normal"
                 >
                   SWE <img src={sweden} height="35" alt="USA flag" />

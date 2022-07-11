@@ -1,5 +1,19 @@
+import { useContext } from "react";
 import { Accordion } from "react-bootstrap";
+import { LanguageContext } from "../context/language-context";
 const AboutSection = (props) => {
+  const lang = useContext(LanguageContext);
+  const currencySymbol = () => {
+    switch (lang.language) {
+      case "swedish":
+        return "SEK";
+      case "english":
+        return "€";
+
+      case "danish":
+        return "kr";
+    }
+  };
   const list = props.listItem.map((item) => {
     return <li key={Math.random()}>{item}</li>;
   });
@@ -20,7 +34,10 @@ const AboutSection = (props) => {
         </Accordion.Item>
       </Accordion>
 
-      <h3>from: {props.price}€</h3>
+      <h3>
+        from: {props.price}
+        {currencySymbol()}
+      </h3>
       <h3></h3>
     </div>
   );
