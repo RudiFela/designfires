@@ -4,23 +4,36 @@
   position: relative;
   overflow: hidden;
   max-height: 160px;
-
+  // height: 160px;
+  // width: 291px;
   margin-top: 2rem;
   object-fit: cover;
 
   max-width: 291px;
+  //width: 291px;
+  //height: 160px;
   border-radius: 25px;
   border: 1px solid #000000;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   .photo-image {
+    //object-fit: cover;
+    //width: 100% !important;
+    //position: relative !important;
+    // height: 100%;
+  }
+  /* &-wrapper {
+    overflow: hidden;
+    max-height: 200px;
+  }
+ 
+   .photo-image {
     overflow: hidden;
     object-fit: cover;
     object-position: 23%73%;
     max-width: 300px;
     max-height: 200px;
     width: 100%;
-    max-width: 300px;
-    height: auto;
+    // height: auto;
     transition: 0.5s all ease-in-out;
     & img {
       overflow: hidden;
@@ -33,16 +46,16 @@
       height: auto;
       transition: 0.5s all ease-in-out;
     }
-  }
+  }*/
   & img {
-    overflow: hidden;
-    object-fit: cover;
-    object-position: 23%73%;
-    max-width: 300px;
-    max-height: 200px;
-    width: 100%;
-    max-width: 300px;
-    height: auto;
+    //overflow: hidden;
+    //  object-fit: cover;
+    //object-position: 23%73%;
+    //  max-width: 300px;
+    //  max-height: 200px;
+    //  width: 100%;
+    //  max-width: 300px;
+    // height: auto;
     transition: 0.5s all ease-in-out;
   }
 }

@@ -50,12 +50,12 @@ const Mystic = (props) => {
       <div className="flex-container">
         <div className="item1">
           <PhotosGrid
-            image1="http://designfires.pl/wp-content/uploads/2022/06/mystic1.jpg"
-            image2="http://designfires.pl/wp-content/uploads/2022/06/mystic2.jpg"
-            image3="http://designfires.pl/wp-content/uploads/2022/06/mystic3.jpg"
-            image4="http://designfires.pl/wp-content/uploads/2022/06/mystic4.jpg"
-            image5="http://designfires.pl/wp-content/uploads/2022/06/mystic5.jpg"
-            image6="http://designfires.pl/wp-content/uploads/2022/06/mystic6.jpg"
+            image1="https://designfires.pl/wp-content/uploads/2022/06/mystic1.jpg"
+            image2="https://designfires.pl/wp-content/uploads/2022/06/mystic2.jpg"
+            image3="https://designfires.pl/wp-content/uploads/2022/06/mystic3.jpg"
+            image4="https://designfires.pl/wp-content/uploads/2022/06/mystic4.jpg"
+            image5="https://designfires.pl/wp-content/uploads/2022/06/mystic5.jpg"
+            image6="https://designfires.pl/wp-content/uploads/2022/06/mystic6.jpg"
           />
         </div>
         <div className="item2">
@@ -75,7 +75,7 @@ const Mystic = (props) => {
       </div>
       <div className="item3">
         <Advantage
-          image="http://designfires.pl/wp-content/uploads/2022/06/mysticadvantage.jpg"
+          image="https://designfires.pl/wp-content/uploads/2022/06/mysticadvantage.jpg"
           shortName="DFM"
           itemsLeft={advantageItemsLeft}
           itemsRight={advantageItemsRight}

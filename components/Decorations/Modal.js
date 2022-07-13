@@ -4,11 +4,11 @@ const MyVerticallyCenteredModal = (props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const onComplete = () => {
-    isLoading ? console.log("true") : console.log("false");
+    //isLoading ? console.log("true") : console.log("false");
     setIsLoading(false);
   };
   const onHide = () => {
-    props.closeModal();
+    props.closemodal();
     setIsLoading(true);
   };
   return (
@@ -31,9 +31,10 @@ const MyVerticallyCenteredModal = (props) => {
             <Spinner animation="border" variant="secondary" />
           </div>
         )}
+
         <img
           style={{ display: !isLoading ? "block" : "none" }}
-          className="mw-100"
+          className="mx-auto"
           onLoad={onComplete}
           src={props.image}
         />

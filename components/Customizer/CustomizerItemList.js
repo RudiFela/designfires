@@ -5,59 +5,23 @@ const CustomizerItemList = (props) => {
   const lang = useContext(LanguageContext);
   const list = props.ItemToList;
   const { FireplaceLength } = props;
-  //const { switchCurrency } = useChangePrice();
 
   const switchCurrency = (item) => {
-    let x;
-
     switch (lang.language) {
       case "swedish":
         const priceSEK = item.meta_data.find(
           (key) =>
             key.key === "_alg_currency_switcher_per_product_regular_price_SEK"
         );
-
-        /*   if (x === undefined) {
-          let tut = item.variant.find((x) => x.length === FireplaceLength);
-
-          if (tut) {
-            return tut.SEK_price.value;
-          } else {
-            return item.variant[10].SEK_price.value;
-          }
-        } else {*/
         return priceSEK.value;
-      // }
-
       case "english":
-        let tut;
-        /* if (item.variations.length > 1) {
-          if (item.variant) {
-            tut = item.variant.find((x) => x.length === FireplaceLength);
-          }
-
-          if (tut) {
-            return tut.price;
-          } else {
-            return "65"; //item.variant[10].price;
-          }
-        } else {*/
         return item.price;
-      // }
 
       case "danish":
         const priceDKK = item.meta_data.find(
           (key) =>
             key.key === "_alg_currency_switcher_per_product_regular_price_DKK"
         );
-        /* if (x === undefined) {
-          //let tut = item.variant.find((x) => x.length === FireplaceLength);
-          if (tut) {
-            return tut.DKK_price.value;
-          } else {
-            return item.variant[10].DKK_price.value;
-          } //item.variant[0].SEK_price;
-        } else {*/
         return priceDKK.value;
     }
   };

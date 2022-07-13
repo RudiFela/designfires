@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import {
   Dropdown,
   Badge,
@@ -8,7 +8,10 @@ import {
   Form,
   OverlayTrigger,
   DropdownButton,
+  Button,
 } from "react-bootstrap";
+import { MdOutlineLocalSee } from "react-icons/md";
+import MyVerticallyCenteredModal from "../Decorations/Modal";
 import CustomizerWrapper from "./CustomizerWrapper";
 import { LanguageContext } from "../context/language-context";
 const CustomizerFirePlaces = (props) => {
@@ -27,6 +30,16 @@ const CustomizerFirePlaces = (props) => {
   };
   const currencyPricePW = () => {
     return lang.currencyPrice("995", "9995", "7555");
+  };
+  const [showModal, setShowModal] = useState(false);
+  const [modalPhoto, setModalPhoto] = useState();
+  //return <div className="photo-card">{props.children}</div>;
+  const showModalHandler = (image) => {
+    setModalPhoto(image);
+    setShowModal(true);
+  };
+  const closeModal = () => {
+    setShowModal(false);
   };
   const popoverInfo = technicalInfo ? (
     <>
@@ -120,6 +133,16 @@ const CustomizerFirePlaces = (props) => {
             </Badge>
           </h6>
         </Col>
+      </Row>
+      <Row>
+        <Button
+          className="p-0"
+          size="sm"
+          onClick={() => showModalHandler(technicalInfo.technical_image[0].src)}
+        >
+          Technical Drawing
+          <MdOutlineLocalSee className="ms-2" />
+        </Button>
       </Row>
     </>
   ) : (
@@ -246,7 +269,8 @@ const CustomizerFirePlaces = (props) => {
               item.DKK_price.value,
               item.SEK_price.value,
               item.holesize.value,
-              item.bottomsize.value
+              item.bottomsize.value,
+              item.technical_image
             );
           }}
           eventKey={item}
@@ -270,6 +294,12 @@ const CustomizerFirePlaces = (props) => {
 
   return (
     <>
+      {" "}
+      <MyVerticallyCenteredModal
+        image={modalPhoto}
+        show={showModal}
+        closemodal={() => closeModal()}
+      />
       <CustomizerWrapper
         cssClass="card-deco mt-3 fireplace-customizer"
         selectedItem={selectedFireplace}
@@ -305,6 +335,9 @@ const CustomizerFirePlaces = (props) => {
                     label="Stainless Top"
                   />
                 </Form>
+                <p className="text-white fw-bold">
+                  Remember to pick Bio-Ethanol fuel!
+                </p>
               </Col>
               <Col>
                 <Col>

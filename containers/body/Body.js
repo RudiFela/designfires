@@ -61,7 +61,7 @@ const Body = (props) => {
 
       .then(
         axios.spread((...responses) => {
-          setDecorationsProducts(responses[0].data);
+          setDecorationsProducts(responses[0].data.reverse());
           setAccessoriesProducts(addVariants(responses[2].data));
           setFireplaceProducts(addVariants(responses[3].data));
           setCasingsProducts(addVariants(responses[1].data));

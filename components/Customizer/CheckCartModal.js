@@ -28,35 +28,28 @@ const CheckCartModal = (props) => {
                 <h2>FirePlace</h2>
                 <Row>
                   {" "}
-                  <Figure className="m-0">
-                    <Figure.Image
-                      className="figure-round"
-                      width={300}
-                      height={200}
-                      alt="Fireplace image"
-                      src={cart.addedFireplace.photo} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
-                    />
-                  </Figure>
-                  <Row>
-                    <Col lg={true}>
+                  <Col>
+                    <Figure className="m-0">
+                      <Figure.Image
+                        className="figure-round"
+                        width={300}
+                        height={200}
+                        alt="Fireplace image"
+                        src={cart.addedFireplace.photo} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
+                      />
+                    </Figure>
+                  </Col>
+                  <Col>
+                    <Row>
                       <p>{cart.addedFireplace.name}</p>
-                    </Col>
-                    <Col lg={true}>
-                      <p>Length:{cart.addedFireplace.length}mm</p>
-                    </Col>
-
-                    <Col lg={true}>
+                    </Row>
+                    <Row>
                       <p>
-                        Price:
-                        {lang.currencyPrice(
-                          cart.addedFireplace.priceEUR,
-                          cart.addedFireplace.priceSEK,
-                          cart.addedFireplace.priceDKK
-                        )}
-                        {props.currency()}
+                        {cart.addedFireplace.length}mm/
+                        {cart.addedFireplace.info}/3mm
                       </p>
-                    </Col>
-                  </Row>
+                    </Row>{" "}
+                  </Col>
                   <Row>
                     {cart.addedFilling.name && (
                       <Col lg={true}>
@@ -89,7 +82,7 @@ const CheckCartModal = (props) => {
                       <Col>
                         <p>
                           {" "}
-                          {cart.addedTop.name}
+                          {cart.addedTop.name}{" "}
                           {lang.currencyPrice(
                             cart.addedTop.priceEUR,
                             cart.addedTop.priceSEK,
@@ -101,33 +94,48 @@ const CheckCartModal = (props) => {
                     )}
                   </Row>
                 </Row>
+                <Row>
+                  <p>
+                    Total:
+                    {lang.currencyPrice(
+                      cart.addedFireplace.priceEUR,
+                      cart.addedFireplace.priceSEK,
+                      cart.addedFireplace.priceDKK
+                    )}
+                    {props.currency()}
+                  </p>
+                </Row>
               </Col>
             )}
             {cart.addedCasing.length && (
               <Col className="border">
                 <h2>Casing</h2>
                 <Row>
-                  <Figure className="m-0">
-                    <Figure.Image
-                      className="figure-round"
-                      width={250}
-                      height={200}
-                      alt="Casing image"
-                      src={cart.addedCasing.photo}
-                    />
-                  </Figure>
+                  <Col>
+                    <Figure className="m-0">
+                      <Figure.Image
+                        className="figure-round"
+                        width={250}
+                        height={200}
+                        alt="Casing image"
+                        src={cart.addedCasing.photo}
+                      />
+                    </Figure>
+                  </Col>
+                  <Col lg={true}>
+                    <Row>
+                      <p>Name:{cart.addedCasing.name}</p>
+                    </Row>
+                    <Row>
+                      <p>{cart.addedCasing.length}mm/350mm/500mm/5mm</p>
+                    </Row>
+                  </Col>
                   <Row>
                     <Col lg={true}>
                       <p>{cart.addedCasing.fullName}</p>
                     </Col>
                   </Row>
                   <Row>
-                    <Col lg={true}>
-                      <p>{cart.addedCasing.name}</p>
-                    </Col>
-                    <Col lg={true}>
-                      <p>Length:{cart.addedCasing.length}mm</p>
-                    </Col>
                     <Col lg={true}>
                       <p>
                         Price:
@@ -147,8 +155,11 @@ const CheckCartModal = (props) => {
 
           {cart.addedDecorations.map((items) => {
             return (
-              <Row key={items.id} className="justify-content-md-start border">
-                <Col xs lg="3">
+              <Row
+                key={items.id}
+                className="justify-content-md-start align-items-center border"
+              >
+                <Col xs lg="2">
                   <Figure className="m-0">
                     <Figure.Image
                       className="figure-round "
@@ -159,15 +170,15 @@ const CheckCartModal = (props) => {
                     />
                   </Figure>
                 </Col>
-                <Col xs lg="4">
-                  <p className="pt-5">{items.name}</p>
+                <Col xs lg="3">
+                  <p className="m-0">{items.name}</p>
                 </Col>
 
                 <Col xs lg="1">
-                  <p className="pt-5">x{items.count}</p>
+                  <p className="m-0">x{items.count}</p>
                 </Col>
-                <Col xs lg="1">
-                  <p className="pt-5">
+                <Col xs lg="2">
+                  <p className="m-0">
                     Price:
                     {lang.currencyPrice(
                       items.priceEUR,
@@ -177,23 +188,45 @@ const CheckCartModal = (props) => {
                     {props.currency()}
                   </p>
                 </Col>
+                <Col xs lg="3">
+                  <p className=" m-0 ps-3">
+                    Total:
+                    {lang.currencyPrice(
+                      items.priceEUR,
+                      items.priceSEK,
+                      items.priceDKK
+                    ) * items.count}
+                    {props.currency()}
+                  </p>
+                </Col>
               </Row>
             );
           })}
           {Number(cart.addedAccessories.glass.pcs) > 0 && (
-            <Row className="justify-content-md-start border">
-              <Col xs lg="4">
-                <p className="pt-5">
-                  Glass 6 mm Length:{cart.addedAccessories.glass.length}mm{" "}
-                  {cart.addedAccessories.glass.color}
+            <Row className="justify-content-md-start align-items-center border">
+              <Col xs lg="2">
+                <Figure className="m-0">
+                  <Figure.Image
+                    className="figure-round "
+                    width={100}
+                    height={100}
+                    alt="Glass picture"
+                    src={cart.addedAccessories.glass.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
+                  />
+                </Figure>
+              </Col>
+              <Col xs lg="3">
+                <p className="m-0">
+                  Glass({cart.addedAccessories.glass.color}):
                 </p>
+                <p>{cart.addedAccessories.glass.length}mm/200mm/6mm</p>
               </Col>
 
               <Col xs lg="1">
-                <p className="pt-5">x{cart.addedAccessories.glass.pcs}</p>
+                <p className="m-0">x{cart.addedAccessories.glass.pcs}</p>
               </Col>
-              <Col xs lg="1">
-                <p className="pt-5">
+              <Col xs lg="2">
+                <p className="m-0">
                   Price:
                   {lang.currencyPrice(
                     cart.addedAccessories.glass.priceEUR,
@@ -203,11 +236,74 @@ const CheckCartModal = (props) => {
                   {props.currency()}
                 </p>
               </Col>
+              <Col xs lg="3">
+                <p className="m-0 ps-2">
+                  Total:
+                  {lang.currencyPrice(
+                    cart.addedAccessories.glass.priceEUR,
+                    cart.addedAccessories.glass.priceSEK,
+                    cart.addedAccessories.glass.priceDKK
+                  ) * cart.addedAccessories.glass.pcs}
+                  {props.currency()}
+                </p>
+              </Col>
+            </Row>
+          )}
+          {Number(cart.addedAccessories.glass.short.short_pcs) > 0 && (
+            <Row className="justify-content-md-start align-items-center border">
+              <Col xs lg="2">
+                <Figure className="m-0">
+                  <Figure.Image
+                    className="figure-round "
+                    width={100}
+                    height={100}
+                    alt="Glass picture"
+                    src={cart.addedAccessories.glass.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
+                  />
+                </Figure>
+              </Col>
+              <Col xs lg="3">
+                <p className="m-0">
+                  Glass({cart.addedAccessories.glass.color}):
+                </p>
+                <p>
+                  {" "}
+                  {cart.addedAccessories.glass.short.short_length}mm/200mm/6mm
+                </p>
+              </Col>
+
+              <Col xs lg="1">
+                <p className="m-0">
+                  x{cart.addedAccessories.glass.short.short_pcs}
+                </p>
+              </Col>
+              <Col xs lg="2">
+                <p className="m-0">
+                  Price:
+                  {lang.currencyPrice(
+                    cart.addedAccessories.glass.short.priceEUR,
+                    cart.addedAccessories.glass.short.priceSEK,
+                    cart.addedAccessories.glass.short.priceDKK
+                  )}
+                  {props.currency()}
+                </p>
+              </Col>
+              <Col xs lg="3">
+                <p className="m-0 ps-2">
+                  Total:
+                  {lang.currencyPrice(
+                    cart.addedAccessories.glass.short.priceEUR,
+                    cart.addedAccessories.glass.short.priceSEK,
+                    cart.addedAccessories.glass.short.priceDKK
+                  ) * cart.addedAccessories.glass.short.short_pcs}
+                  {props.currency()}
+                </p>
+              </Col>
             </Row>
           )}
           {Number(cart.addedAccessories.holders.pcs) > 0 && (
-            <Row className="justify-content-md-start border">
-              <Col xs lg="3">
+            <Row className="justify-content-md-start align-items-center border">
+              <Col xs lg="2">
                 <Figure className="m-0">
                   <Figure.Image
                     className="figure-round "
@@ -218,15 +314,15 @@ const CheckCartModal = (props) => {
                   />
                 </Figure>
               </Col>
-              <Col xs lg="4">
-                <p className="pt-5">Glass Holders x2 pcs </p>
+              <Col xs lg="3">
+                <p className="m-0">Glass Holders x2 pcs </p>
               </Col>
 
               <Col xs lg="1">
-                <p className="pt-5">x{cart.addedAccessories.holders.pcs}</p>
+                <p className="m-0">x{cart.addedAccessories.holders.pcs}</p>
               </Col>
-              <Col xs lg="1">
-                <p className="pt-5">
+              <Col xs lg="2">
+                <p className="m-0">
                   Price:
                   {lang.currencyPrice(
                     cart.addedAccessories.holders.priceEUR,
@@ -236,9 +332,20 @@ const CheckCartModal = (props) => {
                   {props.currency()}
                 </p>
               </Col>
+              <Col xs lg="3">
+                <p className="m-0 ps-2">
+                  Total:
+                  {lang.currencyPrice(
+                    cart.addedAccessories.holders.priceEUR,
+                    cart.addedAccessories.holders.priceSEK,
+                    cart.addedAccessories.holders.priceDKK
+                  ) * cart.addedAccessories.holders.pcs}
+                  {props.currency()}
+                </p>
+              </Col>
             </Row>
           )}
-          <Col></Col>
+
           {cart.addedCasing.length.length === 0 &&
           cart.addedFireplace.length.length === 0 &&
           cart.addedDecorations.length === 0 ? (
@@ -247,10 +354,13 @@ const CheckCartModal = (props) => {
               fireplace?
             </h1>
           ) : (
-            <h1 className="mt-4">
-              Total Price:{cart.cartPrice}
-              {props.currency()}
-            </h1>
+            <Col>
+              <h1 className="mt-4">
+                Total Price:{cart.cartPrice}
+                {props.currency()}
+              </h1>
+              <p>All prices includes 20% VAT</p>
+            </Col>
           )}
           {showContactForm && (
             <ContactForm className="text-white" cartHandler={cart} />

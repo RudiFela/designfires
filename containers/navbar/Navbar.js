@@ -2,9 +2,9 @@ import { useContext, useState } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { LanguageContext } from "../../components/context/language-context";
 const english =
-  "http://designfires.pl/wp-content/uploads/2022/07/greatbritain.png";
-const denmark = "http://designfires.pl/wp-content/uploads/2022/07/denmark.png";
-const sweden = "http://designfires.pl/wp-content/uploads/2022/07/sweden.png";
+  "https://designfires.pl/wp-content/uploads/2022/07/greatbritain.png";
+const denmark = "https://designfires.pl/wp-content/uploads/2022/07/denmark.png";
+const sweden = "https://designfires.pl/wp-content/uploads/2022/07/sweden.png";
 const Navibar = () => {
   const language = useContext(LanguageContext);
   const [lang, setLang] = useState(
@@ -28,7 +28,7 @@ const Navibar = () => {
         <Container className="py-0 ">
           <Navbar.Brand href="#home">
             <img
-              src="http://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
+              src="https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
               className="navbar-logo"
             />
           </Navbar.Brand>

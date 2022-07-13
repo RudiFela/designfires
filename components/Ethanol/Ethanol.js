@@ -44,12 +44,12 @@ const Ethanol = (props) => {
       <div className="flex-container">
         <div className="item1">
           <PhotosGrid
-            image1="http://designfires.pl/wp-content/uploads/2022/06/etanol1.jpg"
-            image2="http://designfires.pl/wp-content/uploads/2022/06/etanol2.jpg"
-            image3="http://designfires.pl/wp-content/uploads/2022/06/etanol3.jpg"
-            image4="http://designfires.pl/wp-content/uploads/2022/06/etanol4.jpg"
-            image5="http://designfires.pl/wp-content/uploads/2022/06/etanol5.jpeg"
-            image6="http://designfires.pl/wp-content/uploads/2022/06/etanol6.jpg"
+            image1="https://designfires.pl/wp-content/uploads/2022/06/etanol1.jpg"
+            image2="https://designfires.pl/wp-content/uploads/2022/06/etanol2.jpg"
+            image3="https://designfires.pl/wp-content/uploads/2022/06/etanol3.jpg"
+            image4="https://designfires.pl/wp-content/uploads/2022/06/etanol4.jpg"
+            image5="https://designfires.pl/wp-content/uploads/2022/06/etanol5.jpeg"
+            image6="https://designfires.pl/wp-content/uploads/2022/06/etanol6.jpg"
           />
         </div>
         <div className="item2">
@@ -69,7 +69,7 @@ const Ethanol = (props) => {
       </div>
       <div className="item3">
         <Advantage
-          image="http://designfires.pl/wp-content/uploads/2022/06/Rectangle4.png"
+          image="https://designfires.pl/wp-content/uploads/2022/06/Rectangle4.png"
           shortName={"DFE"}
           itemsLeft={advantageItemsLeft}
           itemsRight={advantageItemsRight}

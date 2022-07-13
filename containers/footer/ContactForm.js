@@ -17,7 +17,8 @@ const ContactForm = (props) => {
   const { cartHandler } = props;
   const arrayToString = (array, lines) => {
     let str = "";
-
+    //const test = Object.fromEntries(cartHandler.addedDecorations);
+    //console.log(test);
     array.forEach((obj) => {
       Object.values(obj).forEach((val, key) => {
         str += val;
@@ -63,21 +64,34 @@ const ContactForm = (props) => {
           cartHandler.addedCasing.priceSEK,
           cartHandler.addedCasing.priceDKK
         ) + lang.currencySymbol(),
+      user_casing_pcs:
+        cartHandler.addedCasing.pcs === 1 ? cartHandler.addedCasing.pcs : "-",
       //user_fireplace: <p>{cartHandler.addedFireplace.name}Some JSX</p>, //JSON.stringify(cartHandler.addedFireplace, null, "<br/>"),
       user_fireplace_name: cartHandler.addedFireplace.name,
-      user_fireplace_length: cartHandler.addedFireplace.length,
+      user_fireplace_length: `${
+        cartHandler.addedFireplace.pcs === 1
+          ? `${cartHandler.addedFireplace.length}mm/${cartHandler.addedFireplace.info}mm`
+          : "-"
+      }`,
       user_fireplace_price:
         lang.currencyPrice(
           cartHandler.addedFireplace.priceEUR,
           cartHandler.addedFireplace.priceSEK,
           cartHandler.addedFireplace.priceDKK
         ) + lang.currencySymbol(),
+      user_fireplace_pcs: `${
+        cartHandler.addedFireplace.pcs === 1
+          ? cartHandler.addedFireplace.pcs
+          : "-"
+      }`,
       user_shs_price:
         lang.currencyPrice(
           cartHandler.addedShs.priceEUR,
           cartHandler.addedShs.priceSEK,
           cartHandler.addedShs.priceDKK
         ) + lang.currencySymbol(),
+      user_shs_pcs:
+        cartHandler.addedShs.pcs === 1 ? cartHandler.addedShs.pcs : "-",
       // user_shs: JSON.stringify(cartHandler.addedShs, null, "<br/>"),
       user_top_name: cartHandler.addedTop.name,
       user_top_price:
@@ -86,6 +100,8 @@ const ContactForm = (props) => {
           cartHandler.addedTop.priceSEK,
           cartHandler.addedTop.priceDKK
         ) + lang.currencySymbol(),
+      user_top_pcs:
+        cartHandler.addedTop.pcs === 1 ? cartHandler.addedTop.pcs : "-",
       //user_top: JSON.stringify(cartHandler.addedTop, null, "<br/>"),
       user_filling_name: cartHandler.addedFilling.name,
       user_filling_price:
@@ -94,16 +110,30 @@ const ContactForm = (props) => {
           cartHandler.addedFilling.priceSEK,
           cartHandler.addedFilling.priceDKK
         ) + lang.currencySymbol(),
+      user_filling_pcs:
+        cartHandler.addedFilling.pcs === 1 ? cartHandler.addedFilling.pcs : "-",
       //user_filling: JSON.stringify(cartHandler.addedFilling, null, "<br/>"),
       user_decorations: splitDecorationsArray(),
-      user_glass_color: cartHandler.addedAccessories.glass.color,
-      user_glass_length: cartHandler.addedAccessories.glass.length,
+      user_glass_color:
+        cartHandler.addedAccessories.glass.pcs > 0
+          ? cartHandler.addedAccessories.glass.color
+          : "-",
+      user_glass_length: `${cartHandler.addedAccessories.glass.length}mm/200mm/6mm`,
       user_glass_pcs: cartHandler.addedAccessories.glass.pcs,
       user_glass_price:
         lang.currencyPrice(
           cartHandler.addedAccessories.glass.priceEUR,
           cartHandler.addedAccessories.glass.priceSEK,
           cartHandler.addedAccessories.glass.priceDKK
+        ) + lang.currencySymbol(),
+
+      user_short_glass_length: `${cartHandler.addedAccessories.glass.short.short_length}mm/200mm/6mm`,
+      user_short_glass_pcs: cartHandler.addedAccessories.glass.short.short_pcs,
+      user_short_glass_price:
+        lang.currencyPrice(
+          cartHandler.addedAccessories.glass.short.priceEUR,
+          cartHandler.addedAccessories.glass.short.priceSEK,
+          cartHandler.addedAccessories.glass.short.priceDKK
         ) + lang.currencySymbol(),
       //user_glass: `Glass:${cartHandler.addedAccessories.glass.color} Length:${cartHandler.addedAccessories.glass.length} x:${cartHandler.addedAccessories.glass.pcs}`,
       //user_holders: `Holders x2 x:${cartHandler.addedAccessories.holders.pcs}`,
@@ -117,7 +147,7 @@ const ContactForm = (props) => {
       user_totalprice: cartHandler.cartPrice + lang.currencySymbol(),
     };
 
-    emailjs
+    /* emailjs
       .send(
         "service_vzn306h",
         "template_ikf1gyk",
@@ -135,7 +165,7 @@ const ContactForm = (props) => {
           setEmailResponse(false);
           setSending(false);
         }
-      );
+      );*/
     //console.log(emailData);
   };
   const handleClick = () => setSending(true);

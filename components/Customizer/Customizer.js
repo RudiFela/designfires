@@ -19,6 +19,7 @@ const Customizer = (props) => {
       priceEUR: "0",
       priceSEK: "0",
       priceDKK: "0",
+      pcs: 0,
     },
     addedFireplace: {
       name: "",
@@ -26,6 +27,7 @@ const Customizer = (props) => {
       priceEUR: "0",
       priceSEK: "0",
       priceDKK: "0",
+      pcs: 0,
     },
     addedShs: {
       name: "",
@@ -33,6 +35,7 @@ const Customizer = (props) => {
       priceEUR: "0",
       priceSEK: "0",
       priceDKK: "0",
+      pcs: 0,
     },
     addedTop: {
       name: "",
@@ -40,6 +43,7 @@ const Customizer = (props) => {
       priceEUR: "0",
       priceSEK: "0",
       priceDKK: "0",
+      pcs: 0,
     },
     addedFilling: {
       name: "",
@@ -47,10 +51,18 @@ const Customizer = (props) => {
       priceEUR: "0",
       priceSEK: "0",
       priceDKK: "0",
+      pcs: 0,
     },
     addedDecorations: [],
     addedAccessories: {
       glass: {
+        short: {
+          short_length: "300",
+          short_pcs: 0,
+          priceEUR: "0",
+          priceSEK: "0",
+          priceDKK: "0",
+        },
         length: "",
         pcs: 0,
         priceEUR: "0",
@@ -139,6 +151,7 @@ const Customizer = (props) => {
     };
   };
   const caseCart = () => {
+    //console.log(cart.addedAccessories.glass.short.priceEUR);
     switch (lang.language) {
       case "english":
         return (
@@ -151,7 +164,9 @@ const Customizer = (props) => {
           Number(cart.addedAccessories.glass.priceEUR) *
             cart.addedAccessories.glass.pcs +
           Number(cart.addedAccessories.holders.priceEUR) *
-            cart.addedAccessories.holders.pcs
+            cart.addedAccessories.holders.pcs +
+          Number(cart.addedAccessories.glass.short.priceEUR) *
+            cart.addedAccessories.glass.short.short_pcs
         );
       case "swedish":
         return (
@@ -164,7 +179,9 @@ const Customizer = (props) => {
           Number(cart.addedAccessories.glass.priceSEK) *
             cart.addedAccessories.glass.pcs +
           Number(cart.addedAccessories.holders.priceSEK) *
-            cart.addedAccessories.holders.pcs
+            cart.addedAccessories.holders.pcs +
+          Number(cart.addedAccessories.glass.short.priceSEK) *
+            cart.addedAccessories.glass.short.short_pcs
         );
 
       case "danish":
@@ -178,7 +195,9 @@ const Customizer = (props) => {
           Number(cart.addedAccessories.glass.priceDKK) *
             cart.addedAccessories.glass.pcs +
           Number(cart.addedAccessories.holders.priceDKK) *
-            cart.addedAccessories.holders.pcs
+            cart.addedAccessories.holders.pcs +
+          Number(cart.addedAccessories.glass.short.priceDKK) *
+            cart.addedAccessories.glass.short.short_pcs
         );
     }
   };
@@ -214,6 +233,7 @@ const Customizer = (props) => {
         priceEUR: Number(priceFillingEUR),
         priceSEK: Number(priceFillingSEK),
         priceDKK: Number(priceFillingDKK),
+        pcs: 1,
       },
     }));
   };
@@ -261,7 +281,7 @@ const Customizer = (props) => {
     arr = undefined;
   };
   const onShowCart = () => {
-    console.log(cart);
+    // console.log(cart);
     setShowCart(true);
   };
   const clearCart = () => {
@@ -304,6 +324,13 @@ const Customizer = (props) => {
       addedDecorations: [],
       addedAccessories: {
         glass: {
+          short: {
+            short_length: "300",
+            short_pcs: 0,
+            priceEUR: "0",
+            priceSEK: "0",
+            priceDKK: "0",
+          },
           length: "",
           pcs: 0,
           priceEUR: "0",
@@ -372,9 +399,19 @@ const Customizer = (props) => {
     const glass = accessories[0].variant.find(
       (x) => x.length === fireplaceItem.length
     );
+
     const glassHolders = accessories[1];
-    console.log(glass);
-    console.log(glassHolders);
+    const shortglass = accessories[0].variant.find((x) => x.length === "300");
+    //console.log(shortglass);
+    const openingLongSides = mainItem.meta_data.find(
+      (item) => item.key === "long_opening_sides"
+    ).value;
+    const openingShortSides = mainItem.meta_data.find(
+      (item) => item.key === "short_opening_sides"
+    ).value;
+    //console.log(openingShortSides);
+    // console.log(glass);
+    //console.log(glassHolders);
     //console.log(accessories[0].variant);
     setCart((prevCart) => ({
       ...prevCart,
@@ -387,18 +424,27 @@ const Customizer = (props) => {
         photo,
         fullName: mainItem.meta_data.find((item) => item.key === "fullname")
           .value,
+        pcs: 1,
       },
       addedAccessories: {
         glass: {
+          short: {
+            short_length: "300",
+            short_pcs: openingShortSides,
+            priceEUR: shortglass.price,
+            priceSEK: shortglass.SEK_price.value,
+            priceDKK: shortglass.DKK_price.value,
+          },
           length: glass.length,
-          pcs: openingSides,
+          pcs: openingLongSides,
           priceEUR: glass.price,
           priceSEK: glass.SEK_price.value,
           priceDKK: glass.DKK_price.value,
           color: glassColor,
+          image: accessories[0].images[0].shop_catalog,
         },
         holders: {
-          pcs: openingSides,
+          pcs: Number(openingLongSides) + Number(openingShortSides),
           priceEUR: glassHolders.price,
           priceSEK: glassHolders.meta_data.find(
             (key) =>
@@ -427,7 +473,8 @@ const Customizer = (props) => {
     DKK_price,
     SEK_price,
     holesize,
-    bottomsize
+    bottomsize,
+    technical_image
   ) => {
     //console.log(casingItem);
     setFirePlaceItem((prevItem) => ({
@@ -447,6 +494,7 @@ const Customizer = (props) => {
         heigth: dimensions.heigth,
         holesize,
         bottomsize,
+        technical_image,
       },
     }));
     let leng = (Number(pickedLength) + 60).toString();
@@ -470,15 +518,25 @@ const Customizer = (props) => {
           priceSEK: SEK_price,
           priceDKK: DKK_price,
           photo: image,
+          info: `${dimensions.width}mm/${dimensions.heigth}mm`,
+          pcs: 1,
         },
         addedAccessories: {
           glass: {
+            short: {
+              short_length: "300",
+              short_pcs: 0,
+              priceEUR: "0",
+              priceSEK: "0",
+              priceDKK: "0",
+            },
             length: glass.length,
             pcs: glassPcs,
             priceEUR: glass.price,
             priceSEK: glass.SEK_price.value,
             priceDKK: glass.DKK_price.value,
             color: glassColor,
+            image: accessories[0].images[0].shop_catalog,
           },
           holders: {
             pcs: glassPcs,
@@ -543,6 +601,7 @@ const Customizer = (props) => {
           fullName: findCaseNamePicked.meta_data.find(
             (item) => item.key === "fullname"
           ).value,
+          pcs: 1,
         },
         addedFireplace: {
           name: fireplaceItem.name,
@@ -551,6 +610,8 @@ const Customizer = (props) => {
           priceSEK: SEK_price,
           priceDKK: DKK_price,
           photo: image,
+          info: `${dimensions.width}mm/${dimensions.heigth}mm`,
+          pcs: 1,
         },
       }));
     }
@@ -590,6 +651,7 @@ const Customizer = (props) => {
           priceEUR: "0",
           priceSEK: "0",
           priceDKK: "0",
+          pcs: 0,
         },
       }));
       setFirePlaceItem((prevItem) => ({
@@ -614,6 +676,7 @@ const Customizer = (props) => {
           priceEUR: "400",
           priceSEK: "3995",
           priceDKK: "2995",
+          pcs: 1,
         },
       }));
     }
@@ -630,6 +693,7 @@ const Customizer = (props) => {
           priceEUR: "0",
           priceSEK: "0",
           priceDKK: "0",
+          pcs: 0,
         },
       }));
       setFirePlaceItem((prevCasingItem) => ({
@@ -655,6 +719,7 @@ const Customizer = (props) => {
           priceSEK: "2995",
           priceDKK: "1995",
         },
+        pcs: 1,
       }));
     }
   };
@@ -675,7 +740,7 @@ const Customizer = (props) => {
       },
     }));
     setGlassPcs(value);
-    console.log(glassPcs);
+    //console.log(glassPcs);
   };
   const changeGlassColor = (color) => {
     const { glass, holders } = cart.addedAccessories;
@@ -740,32 +805,25 @@ const Customizer = (props) => {
                   onAdd={addDecorationsToCart}
                 />
               </Card.Header>
+              <h5 className="text-white m-0 mx-auto pt-1 float-end">
+                All prices includes 20% VAT
+              </h5>
             </Card>{" "}
           </div>
         </div>{" "}
       </div>
       <div className="bg-primary d-flex flex-row-reverse bd-highlight">
         <Stack className="mx-auto " direction="horizontal" gap={4}>
-          <div>
-            <Button className="my-2 ms-auto bolder" variant="info" disabled>
-              {cart.cartPrice}
-              {lang.currencySymbol()}
-            </Button>
-          </div>
-          <div>
-            <Button
-              className="bolder"
-              variant="info"
-              onClick={() => clearCart()}
-            >
-              Clear Cart
-            </Button>
-          </div>{" "}
-          <div>
-            <Button variant="info" onClick={() => onShowCart()}>
-              Check Cart
-            </Button>
-          </div>
+          <Button className="my-2 ms-auto bolder" variant="info" disabled>
+            {cart.cartPrice}
+            {lang.currencySymbol()}
+          </Button>
+          <Button className="bolder" variant="info" onClick={() => clearCart()}>
+            Clear Cart
+          </Button>
+          <Button variant="info" onClick={() => onShowCart()}>
+            Check Cart
+          </Button>{" "}
         </Stack>
       </div>
     </>
