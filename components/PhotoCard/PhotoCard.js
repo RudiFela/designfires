@@ -4,7 +4,6 @@ const PhotoCard = (props) => {
 
   return (
     <div className="photo">
-      <img src={props.image} />
       <Image
         className="photo-image"
         alt="photocard-picture"
@@ -16,3 +15,4 @@ const PhotoCard = (props) => {
   );
 };
 export default PhotoCard;
+// <img src={props.image} />
