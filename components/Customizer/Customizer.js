@@ -1,89 +1,86 @@
-import {
-  Button,
-  Card,
-  ListGroup,
-  Tabs,
-  Tab,
-  Stack,
-  Container,
-  Modal,
-  Row,
-  Col,
-  Figure,
-} from "react-bootstrap";
+import { Button, Card, Stack, Container } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
-import { useChangePrice } from "../../hooks/change-price";
 import { LanguageContext } from "../context/language-context";
 import CustomizerItemList from "./CustomizerItemList";
 import CustomizerCasings from "./CustomizerCasings";
 import CustomizerFirePlaces from "./CustomizerFirePlaces";
-import CustomizerModal from "./CustomizerModal";
-import { FiInfo } from "react-icons/fi";
-import ContactForm from "../../containers/footer/ContactForm";
+import CheckCartModal from "./CheckCartModal";
 
 const Customizer = (props) => {
   const lang = useContext(LanguageContext);
   const { decorations, accessories, casings, fireplace } = props;
-  const [key, setKey] = useState("home");
+  const [glassPcs, setGlassPcs] = useState(4);
+  const [glassColor, setGlassColor] = useState("Clear");
   const [showCart, setShowCart] = useState(false);
-  const [showContactForm, setShowContactForm] = useState(false);
   const [cart, setCart] = useState({
     addedCasing: {
       name: "",
       length: "",
-      price: "",
+      priceEUR: "0",
+      priceSEK: "0",
+      priceDKK: "0",
     },
     addedFireplace: {
       name: "",
       length: "",
-      price: "",
+      priceEUR: "0",
+      priceSEK: "0",
+      priceDKK: "0",
     },
     addedShs: {
-      name: "Smart Home System",
-      price: "",
+      name: "",
+      price: "0",
+      priceEUR: "0",
+      priceSEK: "0",
+      priceDKK: "0",
     },
     addedTop: {
       name: "",
-      price: "",
+      price: "0",
+      priceEUR: "0",
+      priceSEK: "0",
+      priceDKK: "0",
     },
     addedFilling: {
       name: "",
-      price: "",
+      price: "0",
+      priceEUR: "0",
+      priceSEK: "0",
+      priceDKK: "0",
     },
     addedDecorations: [],
-    addedAccessories: [],
+    addedAccessories: {
+      glass: {
+        length: "",
+        pcs: 0,
+        priceEUR: "0",
+        priceSEK: "0",
+        priceDKK: "0",
+        color: glassColor,
+      },
+      holders: {
+        pcs: 0,
+        priceEUR: "0",
+        priceSEK: "0",
+        priceDKK: "0",
+        image: "",
+      },
+    },
     cartPrice: 0,
   });
+
   const [enableShs, setEnableShs] = useState(false);
   const [stainlessTop, setStainlessTop] = useState(false);
-  const currencySymbol = () => {
-    switch (lang.language) {
-      case "swedish":
-        return "SEK";
-      case "english":
-        return "€";
-
-      case "danish":
-        return "kr";
-    }
-  };
-  const currencyPrice = (engPrice, swePrice, danPrice) => {
-    switch (lang.language) {
-      case "english":
-        return engPrice;
-      case "swedish":
-        return swePrice;
-      case "danish":
-        return danPrice;
-    }
-  };
-  const currency = currencySymbol();
   const [casingItem, setCasingItem] = useState({
     name: ["Select Type"],
     length: [""],
     photo:
       "http://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires.png",
-    price: 0,
+    price: "0",
+    priceEUR: "",
+    priceSEK: "",
+    priceDKK: "",
+    fullName: "",
     variant: [],
     enable: false,
     selected: false,
@@ -92,69 +89,136 @@ const Customizer = (props) => {
     name: ["Select FirePlace"],
     length: ["Length"],
     photo: "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES-1.png",
-    price: 0,
+    price: "0",
     variant: [],
     variant_details: undefined,
     filling: [],
     selected: false,
   });
   useEffect(() => {
+    //console.log(casingItem);
+    // if (fireplaceItem.selected) {
     countCart();
     props.cartHandler(cart);
+    //}
   }, [
-    cart.addedCasing.price,
-    cart.addedFireplace.price,
-    cart.addedShs.price,
-    cart.addedFilling.price,
-    cart.addedTop.price,
+    cart.addedCasing.priceEUR,
+    cart.addedFireplace.priceEUR,
+    cart.addedShs.priceEUR,
+    cart.addedFilling.priceEUR,
+    cart.addedTop.priceEUR,
     JSON.stringify(cart.addedDecorations),
     JSON.stringify(cart.addedAccessories),
+    lang.language,
+    glassPcs,
   ]);
+
   const countPriceOfArrayItems = (products) => {
     const countPrice = products.map((item) => {
-      return Number(item.price) * item.count;
+      return {
+        EUR: Number(item.priceEUR) * item.count,
+        SEK: Number(item.priceSEK) * item.count,
+        DKK: Number(item.priceDKK) * item.count,
+      };
     });
-    const countedPrices = countPrice.reduce(
-      (partialSum, i) => partialSum + i,
-      0
-    );
-    return countedPrices;
+
+    let EUR, SEK, DKK;
+    if (countPrice[0]) {
+      EUR = countPrice.reduce((partialSum, i) => partialSum + i.EUR, 0);
+      SEK = countPrice.reduce((partialSum, i) => partialSum + i.SEK, 0);
+      DKK = countPrice.reduce((partialSum, i) => partialSum + i.DKK, 0);
+    } else {
+      EUR = null;
+      SEK = null;
+      DKK = null;
+    }
+    return {
+      EUR: EUR, //countPrice.EUR.reduce((partialSum, i) => partialSum.EUR + i, 0),
+      SEK: SEK, //.reduce((partialSum, i) => partialSum + i, 0),
+      DKK: DKK,
+    };
+  };
+  const caseCart = () => {
+    switch (lang.language) {
+      case "english":
+        return (
+          Number(cart.addedCasing.priceEUR) +
+          Number(cart.addedFireplace.priceEUR) +
+          Number(cart.addedFilling.priceEUR) +
+          Number(cart.addedShs.priceEUR) +
+          Number(cart.addedTop.priceEUR) +
+          countPriceOfArrayItems(cart.addedDecorations).EUR +
+          Number(cart.addedAccessories.glass.priceEUR) *
+            cart.addedAccessories.glass.pcs +
+          Number(cart.addedAccessories.holders.priceEUR) *
+            cart.addedAccessories.holders.pcs
+        );
+      case "swedish":
+        return (
+          Number(cart.addedCasing.priceSEK) +
+          Number(cart.addedFireplace.priceSEK) +
+          Number(cart.addedFilling.priceSEK) +
+          Number(cart.addedShs.priceSEK) +
+          Number(cart.addedTop.priceSEK) +
+          countPriceOfArrayItems(cart.addedDecorations).SEK +
+          Number(cart.addedAccessories.glass.priceSEK) *
+            cart.addedAccessories.glass.pcs +
+          Number(cart.addedAccessories.holders.priceSEK) *
+            cart.addedAccessories.holders.pcs
+        );
+
+      case "danish":
+        return (
+          Number(cart.addedCasing.priceDKK) +
+          Number(cart.addedFireplace.priceDKK) +
+          Number(cart.addedFilling.priceDKK) +
+          Number(cart.addedShs.priceDKK) +
+          Number(cart.addedTop.priceDKK) +
+          countPriceOfArrayItems(cart.addedDecorations).DKK +
+          Number(cart.addedAccessories.glass.priceDKK) *
+            cart.addedAccessories.glass.pcs +
+          Number(cart.addedAccessories.holders.priceDKK) *
+            cart.addedAccessories.holders.pcs
+        );
+    }
   };
   const countCart = () => {
-    const PRICE =
-      Number(cart.addedCasing.price) +
-      Number(cart.addedFireplace.price) +
-      Number(cart.addedShs.price) +
-      Number(cart.addedFilling.price) +
-      Number(cart.addedTop.price) +
-      countPriceOfArrayItems(cart.addedDecorations) +
-      countPriceOfArrayItems(cart.addedAccessories);
-
+    // countPriceOfArrayItems(cart.addedAccessories));
     setCart((prevCart) => ({
       ...prevCart,
-      cartPrice: PRICE,
+      cartPrice: caseCart(),
     }));
   };
 
-  const onFillingChange = (name, Fillprice) => {
-    const { price } = fireplaceItem;
+  const onFillingChange = (
+    name,
+    priceFillingEUR,
+    priceFillingSEK,
+    priceFillingDKK
+  ) => {
+    const { priceEUR, priceSEK, priceDKK } = fireplaceItem;
     const { addedFilling } = cart;
-    //console.log(Fillprice);
-    price = Number(price) - Number(addedFilling.price);
+    priceEUR = Number(priceEUR) - Number(addedFilling.priceEUR);
+    priceSEK = Number(priceSEK) - Number(addedFilling.priceSEK);
+    priceDKK = Number(priceDKK) - Number(addedFilling.priceDKK);
     setFirePlaceItem((prevCasingItem) => ({
       ...prevCasingItem,
-      price: Number(price) + Number(Fillprice),
+      priceEUR: Number(priceEUR) + Number(priceFillingEUR),
+      priceSEK: Number(priceSEK) + Number(priceFillingSEK),
+      priceDKK: Number(priceDKK) + Number(priceFillingDKK),
     }));
     setCart((prevCart) => ({
       ...prevCart,
       addedFilling: {
         name,
-        price: Number(Fillprice),
+        priceEUR: Number(priceFillingEUR),
+        priceSEK: Number(priceFillingSEK),
+        priceDKK: Number(priceFillingDKK),
       },
     }));
   };
 
-  const addDecorationsToCart = (price, name, id, image) => {
+  const addDecorationsToCart = (item, name, id, image) => {
     let decoArray;
     decoArray = cart.addedDecorations;
     let findedItem = false;
@@ -171,7 +235,23 @@ const Customizer = (props) => {
         addedDecorations: decoArray,
       }));
     } else {
-      decoArray.push({ id, name, price, count: 1, image });
+      const priceSEK = item.meta_data.find(
+        (key) =>
+          key.key === "_alg_currency_switcher_per_product_regular_price_SEK"
+      );
+      const priceDKK = item.meta_data.find(
+        (key) =>
+          key.key === "_alg_currency_switcher_per_product_regular_price_DKK"
+      );
+      decoArray.push({
+        id,
+        name,
+        priceEUR: item.price,
+        priceSEK: priceSEK.value,
+        priceDKK: priceDKK.value,
+        count: 1,
+        image,
+      });
 
       setCart((prevCart) => ({
         ...prevCart,
@@ -180,35 +260,8 @@ const Customizer = (props) => {
     }
     arr = undefined;
   };
-  const addAccessoriesToCart = (price, name, id, image) => {
-    //console.log(price);
-    let accessoryArray;
-    accessoryArray = cart.addedAccessories;
-    let findedItem = false;
-    let arr = accessoryArray.map((object) => {
-      if (object.id === id) {
-        findedItem = true;
-        return { ...object, count: object.count++ };
-      }
-      return [];
-    });
-    if (findedItem) {
-      setCart((prevCart) => ({
-        ...prevCart,
-        addedAccesories: accessoryArray,
-      }));
-    } else {
-      accessoryArray.push({ id, name, price, count: 1, image });
-
-      setCart((prevCart) => ({
-        ...prevCart,
-        addedAccessories: accessoryArray,
-      }));
-    }
-    arr = undefined;
-  };
   const onShowCart = () => {
-    // console.log(cart);
+    console.log(cart);
     setShowCart(true);
   };
   const clearCart = () => {
@@ -217,11 +270,17 @@ const Customizer = (props) => {
         name: "",
         length: "",
         price: "",
+        priceEUR: "",
+        priceSEK: "",
+        priceDKK: "",
       },
       addedFireplace: {
         name: "",
         length: "",
         price: "",
+        priceEUR: "",
+        priceSEK: "",
+        priceDKK: "",
       },
       addedShs: {
         name: "",
@@ -273,28 +332,57 @@ const Customizer = (props) => {
       //length: ["Length"],
       variant: variant,
       selected: true,
-      price: currencyPrice(
-        item.price,
-        item.SEK_price.value,
-        item.DKK_price.value
-      ),
+      priceEUR: item.price,
+      priceSEK: item.SEK_price.value,
+      priceDKK: item.DKK_price.value,
       fullName: mainItem.meta_data.find((item) => item.key === "fullname")
         .value,
     }));
 
+    const openingSides = mainItem.meta_data.find(
+      (item) => item.key === "openingsides"
+    ).value;
+    const glass = accessories[0].variant.find(
+      (x) => x.length === fireplaceItem.length
+    );
+    const glassHolders = accessories[1];
+    console.log(glass);
+    console.log(glassHolders);
+    //console.log(accessories[0].variant);
     setCart((prevCart) => ({
       ...prevCart,
       addedCasing: {
         name: mainItem.name,
         length: item.length,
-        price: currencyPrice(
-          item.price,
-          item.SEK_price.value,
-          item.DKK_price.value
-        ),
+        priceEUR: item.price,
+        priceSEK: item.SEK_price.value,
+        priceDKK: item.DKK_price.value,
         photo,
         fullName: mainItem.meta_data.find((item) => item.key === "fullname")
           .value,
+      },
+      addedAccessories: {
+        glass: {
+          length: glass.length,
+          pcs: openingSides,
+          priceEUR: glass.price,
+          priceSEK: glass.SEK_price.value,
+          priceDKK: glass.DKK_price.value,
+          color: glassColor,
+        },
+        holders: {
+          pcs: openingSides,
+          priceEUR: glassHolders.price,
+          priceSEK: glassHolders.meta_data.find(
+            (key) =>
+              key.key === "_alg_currency_switcher_per_product_regular_price_SEK"
+          ).value,
+          priceDKK: glassHolders.meta_data.find(
+            (key) =>
+              key.key === "_alg_currency_switcher_per_product_regular_price_DKK"
+          ).value,
+          image: glassHolders.images[0].woocommerce_gallery_thumbnail,
+        },
       },
     }));
   };
@@ -314,9 +402,12 @@ const Customizer = (props) => {
     holesize,
     bottomsize
   ) => {
+    //console.log(casingItem);
     setFirePlaceItem((prevItem) => ({
       ...prevItem,
-      price: currencyPrice(variantPrice, SEK_price, DKK_price),
+      priceEUR: variantPrice, //currencyPrice(variantPrice, SEK_price, DKK_price),
+      priceSEK: SEK_price,
+      priceDKK: DKK_price,
       length: pickedLength,
       photo: image,
       variant_details: {
@@ -338,6 +429,47 @@ const Customizer = (props) => {
         length: leng,
         enable: true,
       }));
+      const glass = accessories[0].variant.find(
+        (x) => x.length === pickedLength
+      );
+      const glassHolders = accessories[1];
+
+      setCart((prevCart) => ({
+        ...prevCart,
+        addedFireplace: {
+          name: fireplaceItem.name,
+          length: pickedLength,
+          priceEUR: variantPrice,
+          priceSEK: SEK_price,
+          priceDKK: DKK_price,
+          photo: image,
+        },
+        addedAccessories: {
+          glass: {
+            length: glass.length,
+            pcs: glassPcs,
+            priceEUR: glass.price,
+            priceSEK: glass.SEK_price.value,
+            priceDKK: glass.DKK_price.value,
+            color: glassColor,
+          },
+          holders: {
+            pcs: glassPcs,
+            priceEUR: glassHolders.price,
+            priceSEK: glassHolders.meta_data.find(
+              (key) =>
+                key.key ===
+                "_alg_currency_switcher_per_product_regular_price_SEK"
+            ).value,
+            priceDKK: glassHolders.meta_data.find(
+              (key) =>
+                key.key ===
+                "_alg_currency_switcher_per_product_regular_price_DKK"
+            ).value,
+            image: glassHolders.images[0].woocommerce_gallery_thumbnail,
+          },
+        },
+      }));
     } else {
       const findCaseNamePicked = casings.find(
         (casings) => casings.name === casingItem.name
@@ -348,50 +480,66 @@ const Customizer = (props) => {
       );
       //console.log(findCaseVariantPicked);
       //console.log(findCaseVariantPicked.price);
-
-      setCasingItem({
+      // console.log("dkk");
+      // console.log(findCaseVariantPicked);
+      //console.log(findCaseNamePicked);
+      setCasingItem((prevCasingItem) => ({
+        ...prevCasingItem,
         length: leng,
         enable: true,
-        name: findCaseNamePicked.name,
+        priceEUR: findCaseVariantPicked.price,
+        priceSEK: findCaseVariantPicked.SEK_price.value,
+        priceDKK: findCaseVariantPicked.DKK_price.value,
+      }));
+      /* setCasingItem({
         length: leng,
+        name: findCaseNamePicked.name,
+        fullName: findCaseNamePicked.acf.fullname,
         photo: findCaseVariantPicked.img,
-        price: currencyPrice(
-          findCaseVariantPicked.price,
-          findCaseVariantPicked.SEK_price.value,
-          findCaseVariantPicked.DKK_price.value
-        ),
-        variant: findCaseVariantPicked.variant,
+        priceEUR: findCaseVariantPicked.price,
+        priceSEK: findCaseVariantPicked.SEK_price.value,
+        priceDKK: findCaseVariantPicked.DKK_price.value,
+        variant: findCaseNamePicked.variant,
         enable: true,
         selected: true,
-      });
+      });*/
+
       setCart((prevCart) => ({
         ...prevCart,
         addedCasing: {
           name: findCaseNamePicked.name,
           length: leng,
-          price: currencyPrice(
-            findCaseVariantPicked.price,
-            findCaseVariantPicked.SEK_price.value,
-            findCaseVariantPicked.DKK_price.value
-          ),
+          priceEUR: findCaseVariantPicked.price,
+          priceSEK: findCaseVariantPicked.SEK_price.value,
+          priceDKK: findCaseVariantPicked.DKK_price.value,
           photo: findCaseVariantPicked.img,
           fullName: findCaseNamePicked.meta_data.find(
             (item) => item.key === "fullname"
           ).value,
         },
+        addedFireplace: {
+          name: fireplaceItem.name,
+          length: pickedLength,
+          priceEUR: variantPrice,
+          priceSEK: SEK_price,
+          priceDKK: DKK_price,
+          photo: image,
+        },
       }));
     }
 
     // console.log(Number(pickedLength) + 60).toString();
-    setCart((prevCart) => ({
+    /*  setCart((prevCart) => ({
       ...prevCart,
       addedFireplace: {
         name: fireplaceItem.name,
         length: pickedLength,
-        price: currencyPrice(variantPrice, SEK_price, DKK_price),
+        priceEUR: variantPrice,
+        priceSEK: SEK_price,
+        priceDKK: DKK_price,
         photo: image,
       },
-    }));
+    }));*/
   };
   const showFirePlacePrice = (photo, name, variant) => {
     setFirePlaceItem({
@@ -404,7 +552,7 @@ const Customizer = (props) => {
   };
   /////////
   const toggleShsHandler = () => {
-    const { price } = fireplaceItem;
+    const { priceEUR, priceSEK, priceDKK } = fireplaceItem;
 
     if (enableShs) {
       setEnableShs(false);
@@ -412,31 +560,39 @@ const Customizer = (props) => {
         ...prevCart,
         addedShs: {
           name: "None",
-          price: "0",
+          priceEUR: "0",
+          priceSEK: "0",
+          priceDKK: "0",
         },
       }));
-      setFirePlaceItem((prevCasingItem) => ({
-        ...prevCasingItem,
-        price: Number(price) - Number(currencyPrice("400", "3995", "2995")),
+      setFirePlaceItem((prevItem) => ({
+        ...prevItem,
+        priceEUR: Number(priceEUR) - 400,
+        priceSEK: Number(priceSEK) - 3995,
+        priceDKK: Number(priceDKK) - 2995,
       }));
       ///
     } else {
       setEnableShs(true);
-      setFirePlaceItem((prevCasingItem) => ({
-        ...prevCasingItem,
-        price: Number(price) + Number(currencyPrice("400", "3995", "2995")),
+      setFirePlaceItem((prevItem) => ({
+        ...prevItem,
+        priceEUR: Number(priceEUR) + 400,
+        priceSEK: Number(priceSEK) + 3995,
+        priceDKK: Number(priceDKK) + 2995,
       }));
       setCart((prevCart) => ({
         ...prevCart,
         addedShs: {
           name: "Smart Home System",
-          price: currencyPrice("400", "3995", "2995"),
+          priceEUR: "400",
+          priceSEK: "3995",
+          priceDKK: "2995",
         },
       }));
     }
   };
   const toggleStainlessTopHandler = () => {
-    const { price } = fireplaceItem;
+    const { priceEUR, priceSEK, priceDKK } = fireplaceItem;
 
     if (stainlessTop) {
       setStainlessTop(false);
@@ -444,37 +600,66 @@ const Customizer = (props) => {
         ...prevCart,
         addedTop: {
           name: "Black Top",
-          price: "0",
+          priceEUR: "0",
+          priceSEK: "0",
+          priceDKK: "0",
         },
       }));
       setFirePlaceItem((prevCasingItem) => ({
         ...prevCasingItem,
-        price: Number(price) - Number(currencyPrice("300", "2995", "1995")),
+        priceEUR: Number(priceEUR) - 300,
+        priceSEK: Number(priceSEK) - 2995,
+        priceDKK: Number(priceDKK) - 1995,
       }));
     } else {
       setStainlessTop(true);
 
       setFirePlaceItem((prevCasingItem) => ({
         ...prevCasingItem,
-        price: Number(price) + Number(currencyPrice("300", "2995", "1995")),
+        priceEUR: Number(priceEUR) + 300,
+        priceSEK: Number(priceSEK) + 2995,
+        priceDKK: Number(priceDKK) + 1995,
       }));
       setCart((prevCart) => ({
         ...prevCart,
         addedTop: {
           name: "Stainless Top",
-          price: currencyPrice("300", "2995", "1995"),
+          priceEUR: "300",
+          priceSEK: "2995",
+          priceDKK: "1995",
         },
       }));
     }
   };
   const clearModalCart = () => {
     clearCart();
-    setShowContactForm(false);
     setShowCart(false);
   };
   const closeModalCart = () => {
     setShowCart(false);
-    setShowContactForm(false);
+  };
+  const glassPiecesChange = (value) => {
+    const { glass, holders } = cart.addedAccessories;
+    setCart((prevCart) => ({
+      ...prevCart,
+      addedAccessories: {
+        holders: { ...holders, pcs: value }, //{ ...holders },
+        glass: { ...glass, pcs: value },
+      },
+    }));
+    setGlassPcs(value);
+    console.log(glassPcs);
+  };
+  const changeGlassColor = (color) => {
+    const { glass, holders } = cart.addedAccessories;
+    setCart((prevCart) => ({
+      ...prevCart,
+      addedAccessories: {
+        holders: holders, //{ ...holders },
+        glass: { ...glass, color },
+      },
+    }));
+    setGlassColor(color);
   };
   return (
     <>
@@ -490,11 +675,7 @@ const Customizer = (props) => {
               onSelect={showFirePlacePrice}
               onPickLength={addFireplaceToCart}
               fireplaces={fireplace}
-              variant={fireplaceItem.variant}
-              fireplaceName={fireplaceItem.name}
-              fireplaceLength={fireplaceItem.length}
-              selectedFireplacePrice={fireplaceItem.price}
-              fireplacePhoto={fireplaceItem.photo}
+              selectedFireplace={fireplaceItem}
               technicalInfo={fireplaceItem.variant_details}
               shsSwitcher={toggleShsHandler}
               selected={fireplaceItem.selected}
@@ -509,261 +690,28 @@ const Customizer = (props) => {
               className="ml-5"
               casings={casings}
               onSelect={showCasingPrice}
-              variant={casingItem.variant}
-              casingName={casingItem.name}
-              casingLength={casingItem.length}
-              selectedCasingPrice={casingItem.price}
-              casingPhoto={casingItem.photo}
               pickedCaseItem={casingItem}
               enable={casingItem.enable}
+              changeGlassColor={changeGlassColor}
+              glassPiecesChange={glassPiecesChange}
             />
           </Container>
         </div>
-        <Modal
-          size="xl"
-          centered
-          show={showCart}
-          onHide={() => setShowCart(false)}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Your Choise</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="modallo fw-bold">
-            <div>
-              <Row xs={2} md={2}>
-                {cart.addedFireplace.length && (
-                  <Col className="border">
-                    <h2>FirePlace</h2>
-                    <Row>
-                      {" "}
-                      <Figure>
-                        <Figure.Image
-                          className="figure-round mt-3"
-                          width={300}
-                          height={200}
-                          alt="Fireplace image"
-                          src={cart.addedFireplace.photo} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
-                        />
-                      </Figure>
-                      <Row>
-                        <Col lg={true}>
-                          <p>{cart.addedFireplace.name}</p>
-                        </Col>
-                        <Col lg={true}>
-                          <p>Length:{cart.addedFireplace.length}mm</p>
-                        </Col>
-
-                        <Col lg={true}>
-                          <p>
-                            Price:{cart.addedFireplace.price}
-                            {currencySymbol()}
-                          </p>
-                        </Col>
-                      </Row>
-                      <Row>
-                        {cart.addedFilling.name && (
-                          <Col lg={true}>
-                            <p>
-                              Filling Type: {cart.addedFilling.name}(
-                              {cart.addedFilling.price}
-                              {currencySymbol()})
-                            </p>
-                          </Col>
-                        )}
-
-                        {cart.addedShs.name && (
-                          <Col>
-                            <p>
-                              {cart.addedShs.name}
-                              {cart.addedShs.price}
-                              {currencySymbol()}
-                            </p>
-                          </Col>
-                        )}
-                        {cart.addedTop.name && (
-                          <Col>
-                            <p>
-                              {" "}
-                              {cart.addedTop.name}
-                              {cart.addedTop.price}
-                              {currencySymbol()}
-                            </p>
-                          </Col>
-                        )}
-                      </Row>
-                    </Row>
-                  </Col>
-                )}
-                {cart.addedCasing.length && (
-                  <Col className="border">
-                    <h2>Casing</h2>
-                    <Row>
-                      <Figure>
-                        <Figure.Image
-                          className="figure-round mt-3"
-                          width={250}
-                          height={200}
-                          alt="Casing image"
-                          src={cart.addedCasing.photo}
-                        />
-                      </Figure>
-                      <Row>
-                        <Col lg={true}>
-                          <p>{cart.addedCasing.fullName}</p>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col lg={true}>
-                          <p>{cart.addedCasing.name}</p>
-                        </Col>
-                        <Col lg={true}>
-                          <p>Length:{cart.addedCasing.length}mm</p>
-                        </Col>
-                        <Col lg={true}>
-                          <p>
-                            Price:{cart.addedCasing.price}
-                            {currencySymbol()}
-                          </p>
-                        </Col>
-                      </Row>
-                    </Row>
-                  </Col>
-                )}
-              </Row>
-
-              {cart.addedDecorations.map((items) => {
-                return (
-                  <Row
-                    key={items.id}
-                    className="justify-content-md-start border"
-                  >
-                    <Col xs lg="3">
-                      <Figure>
-                        <Figure.Image
-                          className="figure-round mt-3"
-                          width={100}
-                          height={100}
-                          alt="Fireplace decoration"
-                          src={items.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
-                        />
-                      </Figure>
-                    </Col>
-                    <Col xs lg="4">
-                      <p className="pt-5">{items.name}</p>
-                    </Col>
-
-                    <Col xs lg="1">
-                      <p className="pt-5">x{items.count}</p>
-                    </Col>
-                    <Col xs lg="1">
-                      <p className="pt-5">
-                        Price:{items.price}
-                        {currencySymbol()}
-                      </p>
-                    </Col>
-                  </Row>
-                );
-              })}
-
-              <Col>
-                {cart.addedAccessories.map((item) => {
-                  return (
-                    <Row
-                      key={item.id}
-                      className="justify-content-md-start border"
-                    >
-                      <Col xs lg="3">
-                        <Figure>
-                          <Figure.Image
-                            className="figure-round mt-3"
-                            min-width={50}
-                            min-height={50}
-                            width={100}
-                            height={100}
-                            alt="Fireplace decoration"
-                            src={item.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
-                          />
-                        </Figure>
-                      </Col>
-                      <Col xs lg="4">
-                        <p className="pt-5">{item.name}</p>
-                      </Col>
-
-                      <Col xs lg="1">
-                        <p className="pt-5">x{item.count}</p>
-                      </Col>
-                      <Col xs lg="1">
-                        <p className="pt-5">
-                          Price:{item.price}
-                          {currencySymbol()}
-                        </p>
-                      </Col>
-                    </Row>
-                  );
-                })}
-              </Col>
-              {cart.addedCasing.length.length === 0 &&
-              cart.addedFireplace.length.length === 0 &&
-              cart.addedAccessories.length === 0 &&
-              cart.addedDecorations.length === 0 ? (
-                <h1>
-                  Nothing added. Maybe You sholud add some of our beautiful
-                  fireplace?
-                </h1>
-              ) : (
-                <h1 className="mt-4">
-                  Total Price:{cart.cartPrice}
-                  {currencySymbol()}
-                </h1>
-              )}
-              {showContactForm && (
-                <ContactForm className="text-white" cartHandler={cart} />
-              )}
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="outline-secondary"
-              onClick={() => clearModalCart()}
-            >
-              Clear Cart
-            </Button>
-            <Button onClick={() => setShowContactForm(true)}>
-              Send This To Us
-            </Button>
-            <Button variant="primary" onClick={() => closeModalCart()}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <CheckCartModal
+          cart={cart}
+          showCart={showCart}
+          onClose={() => closeModalCart()}
+          onClear={() => clearModalCart()}
+          currency={() => lang.currencySymbol()}
+        />
         <div className="customizer-item mt-3 ">
           <div>
             <Card className="card-deco carder">
-              <Card.Header>
-                <Tabs
-                  id="controlled-tab"
-                  activeKey={key}
-                  onSelect={(k) => setKey(k)}
-                  className="mb-1"
-                >
-                  <Tab eventKey="home" title="Decorations">
-                    <ListGroup variant="flush">
-                      <CustomizerItemList
-                        ItemToList={decorations}
-                        onAdd={addDecorationsToCart}
-                      />
-                    </ListGroup>
-                  </Tab>
-                  <Tab eventKey="profile" title="Accessories">
-                    <ListGroup variant="flush">
-                      <CustomizerItemList
-                        ItemToList={accessories}
-                        onAdd={addAccessoriesToCart}
-                        FireplaceLength={cart.addedFireplace.length}
-                      />
-                    </ListGroup>
-                  </Tab>
-                </Tabs>
+              <Card.Header className="tab-content">
+                <CustomizerItemList
+                  ItemToList={decorations}
+                  onAdd={addDecorationsToCart}
+                />
               </Card.Header>
             </Card>{" "}
           </div>
@@ -774,7 +722,7 @@ const Customizer = (props) => {
           <div>
             <Button className="my-2 ms-auto bolder" variant="info" disabled>
               {cart.cartPrice}
-              {currency}
+              {lang.currencySymbol()}
             </Button>
           </div>
           <div>

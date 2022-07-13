@@ -1,19 +1,7 @@
-import { useContext, useState } from "react";
-import {
-  DropdownButton,
-  Card,
-  Button,
-  Stack,
-  Popover,
-  OverlayTrigger,
-  Form,
-  Spinner,
-  Fade,
-} from "react-bootstrap";
-import { CSSTransition } from "react-transition-group";
+import { useContext } from "react";
+import { Card, Button, Stack, Popover, OverlayTrigger } from "react-bootstrap";
 import { LanguageContext } from "../context/language-context";
 const CustomizerWrapper = (props) => {
-  const [loaded, setLoaded] = useState(false);
   const lang = useContext(LanguageContext);
   const currencySymbol = () => {
     switch (lang.language) {
@@ -28,14 +16,11 @@ const CustomizerWrapper = (props) => {
   };
 
   const {
-    itemPhoto,
-    itemName,
-    itemLength,
     itemDropDown,
     lengthDropDown,
     selectedPrice,
     popoverInfo,
-    selected,
+    selectedItem,
   } = props;
   const popover = (
     <Popover id="popover-basic">
@@ -50,7 +35,7 @@ const CustomizerWrapper = (props) => {
         style={{ maxheigth: "50vh", borderRadius: 35 }}
         variant="bottom"
         alt="fireplace casing photo"
-        src={itemPhoto}
+        src={selectedItem.photo}
       />{" "}
       <Card.Body>
         <Stack className="flex-wrap mb-2" direction="horizontal" gap={3}>

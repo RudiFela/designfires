@@ -1,11 +1,13 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { AiOutlineCheck } from "react-icons/ai";
 import { VscError } from "react-icons/vsc";
 import { Form, Row, Col, FloatingLabel, Button } from "react-bootstrap";
+import { LanguageContext } from "../../components/context/language-context";
 const ContactForm = (props) => {
   const [sending, setSending] = useState(false);
   const [emailResponse, setEmailResponse] = useState();
+  const lang = useContext(LanguageContext);
   const nameInputRef = useRef();
   const emailInputRef = useRef();
   const phoneInputRef = useRef();
@@ -24,24 +26,95 @@ const ContactForm = (props) => {
     });
     return str;
   };
+  const splitDecorationsArray = () => {
+    const preparedDeco = cartHandler.addedDecorations.map((item) => ({
+      name: item.name,
+      pcs: "x" + item.count,
+      price:
+        lang.currencyPrice(item.priceEUR, item.priceSEK, item.priceDKK) +
+        lang.currencySymbol(),
+    }));
+    return arrayToString(preparedDeco, 3);
+  };
+  const prepareDataToSend = () => {
+    let fireplace = `Name: ${cartHandler.addedFireplace.name}"Length:"${cartHandler.addedFireplace.length}"mm"`;
+    let casing = `Name: ${cartHandler.addedCasing.name}"Length:"${cartHandler.addedCasing.length}"mm"`;
+    let filling = `Fill: ${cartHandler.addedFilling.name}`;
+    let shs = `SHS:${cartHandler.addedShs.name}`;
+    let top = `TOP:${cartHandler.addedTop.name}`;
+    let glass = `Glass:${cartHandler.addedAccessories.glass.color}" Length:${cartHandler.addedAccessories.glass} x:${cartHandler.addedAccessories.glass.pcs}`;
+    let holders = `Holders x2 x:${cartHandler.addedAccessories.holder.pcs}`;
+  };
   const submitHandler = (event) => {
     event.preventDefault();
     setSending(true);
+    let dec = splitDecorationsArray();
     const emailData = {
       user_name: nameInputRef.current.value,
       user_email: emailInputRef.current.value,
       user_phone: phoneInputRef.current.value,
       user_subject: subjectInputRef.current.value,
       user_textarea: textAreaInputRef.current.value,
-
-      user_casing: JSON.stringify(cartHandler.addedCasing, null, "<br/>"),
-      user_fireplace: JSON.stringify(cartHandler.addedFireplace, null, "<br/>"),
-      user_shs: JSON.stringify(cartHandler.addedShs, null, "<br/>"),
-      user_top: JSON.stringify(cartHandler.addedTop, null, "<br/>"),
-      user_filling: JSON.stringify(cartHandler.addedFilling, null, "<br/>"),
-      user_decorations: arrayToString(cartHandler.addedDecorations, 4),
-      user_accessories: arrayToString(cartHandler.addedAccessories, 4),
-      user_totalprice: JSON.stringify(cartHandler.cartPrice, null, 0),
+      user_casing_name: cartHandler.addedCasing.name,
+      user_casing_length: cartHandler.addedCasing.length,
+      user_casing_price:
+        lang.currencyPrice(
+          cartHandler.addedCasing.priceEUR,
+          cartHandler.addedCasing.priceSEK,
+          cartHandler.addedCasing.priceDKK
+        ) + lang.currencySymbol(),
+      //user_fireplace: <p>{cartHandler.addedFireplace.name}Some JSX</p>, //JSON.stringify(cartHandler.addedFireplace, null, "<br/>"),
+      user_fireplace_name: cartHandler.addedFireplace.name,
+      user_fireplace_length: cartHandler.addedFireplace.length,
+      user_fireplace_price:
+        lang.currencyPrice(
+          cartHandler.addedFireplace.priceEUR,
+          cartHandler.addedFireplace.priceSEK,
+          cartHandler.addedFireplace.priceDKK
+        ) + lang.currencySymbol(),
+      user_shs_price:
+        lang.currencyPrice(
+          cartHandler.addedShs.priceEUR,
+          cartHandler.addedShs.priceSEK,
+          cartHandler.addedShs.priceDKK
+        ) + lang.currencySymbol(),
+      // user_shs: JSON.stringify(cartHandler.addedShs, null, "<br/>"),
+      user_top_name: cartHandler.addedTop.name,
+      user_top_price:
+        lang.currencyPrice(
+          cartHandler.addedTop.priceEUR,
+          cartHandler.addedTop.priceSEK,
+          cartHandler.addedTop.priceDKK
+        ) + lang.currencySymbol(),
+      //user_top: JSON.stringify(cartHandler.addedTop, null, "<br/>"),
+      user_filling_name: cartHandler.addedFilling.name,
+      user_filling_price:
+        lang.currencyPrice(
+          cartHandler.addedFilling.priceEUR,
+          cartHandler.addedFilling.priceSEK,
+          cartHandler.addedFilling.priceDKK
+        ) + lang.currencySymbol(),
+      //user_filling: JSON.stringify(cartHandler.addedFilling, null, "<br/>"),
+      user_decorations: splitDecorationsArray(),
+      user_glass_color: cartHandler.addedAccessories.glass.color,
+      user_glass_length: cartHandler.addedAccessories.glass.length,
+      user_glass_pcs: cartHandler.addedAccessories.glass.pcs,
+      user_glass_price:
+        lang.currencyPrice(
+          cartHandler.addedAccessories.glass.priceEUR,
+          cartHandler.addedAccessories.glass.priceSEK,
+          cartHandler.addedAccessories.glass.priceDKK
+        ) + lang.currencySymbol(),
+      //user_glass: `Glass:${cartHandler.addedAccessories.glass.color} Length:${cartHandler.addedAccessories.glass.length} x:${cartHandler.addedAccessories.glass.pcs}`,
+      //user_holders: `Holders x2 x:${cartHandler.addedAccessories.holders.pcs}`,
+      user_holders_pcs: cartHandler.addedAccessories.holders.pcs,
+      user_holders_price:
+        lang.currencyPrice(
+          cartHandler.addedAccessories.holders.priceEUR,
+          cartHandler.addedAccessories.holders.priceSEK,
+          cartHandler.addedAccessories.holders.priceDKK
+        ) + lang.currencySymbol(),
+      user_totalprice: cartHandler.cartPrice + lang.currencySymbol(),
     };
 
     emailjs

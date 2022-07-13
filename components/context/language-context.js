@@ -4,4 +4,6 @@ export const LanguageContext = createContext({
   setLanguage: (lang) => {},
   isLoading: true,
   setIsLoading: (isLoading) => {},
+  currencyPrice: () => {},
+  currencySymbol: () => {},
 });

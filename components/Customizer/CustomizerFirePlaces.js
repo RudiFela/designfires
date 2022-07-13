@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import {
   Dropdown,
   Badge,
@@ -8,55 +8,25 @@ import {
   Form,
   OverlayTrigger,
   DropdownButton,
-  Button,
-  Link,
 } from "react-bootstrap";
 import CustomizerWrapper from "./CustomizerWrapper";
-import { useChangePrice } from "../../hooks/change-price";
 import { LanguageContext } from "../context/language-context";
 const CustomizerFirePlaces = (props) => {
-  const { switchCurrency } = useChangePrice();
   const {
     fireplaces,
-    variant,
-    fireplaceName,
-    fireplaceLength,
-    selectedFireplacePrice,
-    fireplacePhoto,
     technicalInfo,
     shsSwitcher,
     topSwitcher,
     selected,
     onFillingChange,
+    selectedFireplace,
   } = props;
   const lang = useContext(LanguageContext);
-  const currencySymbol = () => {
-    switch (lang.language) {
-      case "swedish":
-        return "SEK";
-      case "english":
-        return "€";
-
-      case "danish":
-        return "kr";
-    }
-  };
-  const currencyPrice = (eng, swe, dkk) => {
-    switch (lang.language) {
-      case "swedish":
-        return swe;
-      case "english":
-        return eng;
-
-      case "danish":
-        return dkk;
-    }
-  };
   const currencyPriceT = () => {
-    return currencyPrice("100", "995", "755");
+    return lang.currencyPrice("100", "995", "755");
   };
   const currencyPricePW = () => {
-    return currencyPrice("995", "9995", "7555");
+    return lang.currencyPrice("995", "9995", "7555");
   };
   const popoverInfo = technicalInfo ? (
     <>
@@ -175,7 +145,7 @@ const CustomizerFirePlaces = (props) => {
         <h6>Top filling = Top refueling.</h6>{" "}
         <p>
           Extra {currencyPriceT()}
-          {currencySymbol()} for this option
+          {lang.currencySymbol()} for this option
         </p>
       </Popover.Body>
     </Popover>
@@ -187,7 +157,7 @@ const CustomizerFirePlaces = (props) => {
         <p>Ready for connection to water pipe </p>
         <p>
           Extra {currencyPricePW()}
-          {currencySymbol()} for this option.
+          {lang.currencySymbol()} for this option.
         </p>
       </Popover.Body>
     </Popover>
@@ -196,6 +166,7 @@ const CustomizerFirePlaces = (props) => {
   const filing = (
     <>
       <Form.Check
+        className="mt-3"
         inline
         label={
           <OverlayTrigger placement="bottom" overlay={popoverEW}>
@@ -206,7 +177,7 @@ const CustomizerFirePlaces = (props) => {
         type="radio"
         defaultChecked={true}
         id={`inline--1EW`}
-        onChange={() => onFillingChange("EW", 0)}
+        onChange={() => onFillingChange("EW", "0", "0", "0")}
       />
       <Form.Check
         inline
@@ -218,7 +189,7 @@ const CustomizerFirePlaces = (props) => {
         name="group1"
         type="radio"
         id={`inline--1T`}
-        onChange={() => onFillingChange("T", currencyPriceT())}
+        onChange={() => onFillingChange("T", "100", "995", "755")}
       />
       <Form.Check
         inline
@@ -230,7 +201,7 @@ const CustomizerFirePlaces = (props) => {
         name="group1"
         type="radio"
         id={`inline--1PW`}
-        onChange={() => onFillingChange("PW", currencyPricePW())}
+        onChange={() => onFillingChange("PW", "995", "9995", "7555")}
       />
     </>
   );
@@ -252,13 +223,13 @@ const CustomizerFirePlaces = (props) => {
       id="dropdown-basic-button"
       variant="primary"
       className="fw-bold"
-      title={fireplaceName}
+      title={selectedFireplace.name}
     >
       {fireplacesDropDownItems}
     </DropdownButton>
   );
-  const fireplaceLengths = variant
-    ? variant.map((item) => (
+  const fireplaceLengths = selectedFireplace.variant
+    ? selectedFireplace.variant.map((item) => (
         <Dropdown.Item
           className="text-white bolder"
           key={item.id}
@@ -291,7 +262,7 @@ const CustomizerFirePlaces = (props) => {
       id="dropdown-basic-button"
       variant="primary"
       disabled={!selected}
-      title={fireplaceLength}
+      title={selectedFireplace.length}
     >
       {fireplaceLengths}
     </DropdownButton>
@@ -301,17 +272,19 @@ const CustomizerFirePlaces = (props) => {
     <>
       <CustomizerWrapper
         cssClass="card-deco mt-3 fireplace-customizer"
-        itemPhoto={fireplacePhoto}
-        itemName={fireplaceName}
-        itemLength={fireplaceLength}
+        selectedItem={selectedFireplace}
         itemDropDown={fireplacesDropDown}
         lengthDropDown={fireplacesLengthDropDown}
-        selectedPrice={selectedFireplacePrice}
+        selectedPrice={lang.currencyPrice(
+          selectedFireplace.priceEUR,
+          selectedFireplace.priceSEK,
+          selectedFireplace.priceDKK
+        )}
         popoverInfo={popoverInfo}
         selected={selected}
       >
         <>
-          {selected && fireplaceName !== "DFM" ? (
+          {selected && selectedFireplace.name !== "DFM" ? (
             <Row>
               <Col>
                 <Form>
@@ -336,13 +309,17 @@ const CustomizerFirePlaces = (props) => {
               <Col>
                 <Col>
                   {" "}
-                  <Badge bg="info">Standard:</Badge>
+                  <Badge className="text-wrap" bg="info">
+                    Standard:
+                  </Badge>
                   <ul>
                     <li>
-                      <Badge>Remote Control</Badge>
+                      <Badge className="text-wrap">Remote Control</Badge>
                     </li>{" "}
                     <li>
-                      <Badge>Longest burning time on the market 20 hours</Badge>
+                      <Badge className="text-wrap">
+                        Longest burning time on the market 20 hours
+                      </Badge>
                     </li>
                     <li>
                       <Badge>Black Top</Badge>
@@ -355,9 +332,9 @@ const CustomizerFirePlaces = (props) => {
               </Col>
             </Row>
           ) : null}
-          {selected && fireplaceName === "DFM" ? (
+          {selected && selectedFireplace.name === "DFM" ? (
             <Row>
-              <Col className="pe-0">
+              <Col className="pe-0 mt-4">
                 <Form>
                   <Form.Check
                     className="text-white mt-2"
@@ -369,9 +346,9 @@ const CustomizerFirePlaces = (props) => {
                     disabled
                   />
                 </Form>
-                {fireplaceName === "DFM" && selected ? filing : null}
+                {selectedFireplace.name === "DFM" && selected ? filing : null}
               </Col>
-              <Col className="pe-0">
+              <Col className="pe-0 mt-4">
                 {" "}
                 <Badge bg="info">Standard:</Badge>
                 <ul>
@@ -388,7 +365,9 @@ const CustomizerFirePlaces = (props) => {
                     <Badge>Longest burning time on the market</Badge>
                   </li>
                   <li>
-                    <Badge>Support even after varanty expires!</Badge>
+                    <Badge className="text-wrap">
+                      Support even after varanty expires!
+                    </Badge>
                   </li>
                 </ul>
               </Col>

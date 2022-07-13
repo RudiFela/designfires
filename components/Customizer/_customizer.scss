@@ -15,7 +15,7 @@
   font-weight: 600 !important;
 }
 .tab-content {
-  max-height: 24rem;
+  max-height: 32rem;
 
   overflow-y: scroll;
   background-color: $light-shark !important;
@@ -48,7 +48,7 @@
   border: none !important;
   padding: 1rem !important;
   background-color: $light-shark !important;
-  height: 30rem;
+  height: 35rem;
 }
 .list-group-item {
   padding: 0 !important;
@@ -87,9 +87,10 @@
   border-color: $secondary-color !important;
 }
 .modallo {
-  background-image: url("http://designfires.pl/wp-content/uploads/2022/07/DesignFiresBlackLogo.png");
-  background-size: 20px 31px;
-  background-repeat: repeat;
+  background-image: url("http://designfires.pl/wp-content/uploads/2022/07/CartBackground.png");
+  background-size: cover;
+  // background-size: 20px 31px;
+  // background-repeat: repeat;
   & p {
     font-size: clamp(0.7rem, 2vw, 1.2rem);
   }

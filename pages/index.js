@@ -13,9 +13,38 @@ export default function Home() {
   const cartHandler = (cart) => {
     setCart(cart);
   };
+  const currencySymbol = () => {
+    switch (language) {
+      case "swedish":
+        return "SEK";
+      case "english":
+        return "€";
+
+      case "danish":
+        return "kr";
+    }
+  };
+  const currencyPrice = (eng, swe, dkk) => {
+    switch (language) {
+      case "swedish":
+        return swe;
+      case "english":
+        return eng;
+
+      case "danish":
+        return dkk;
+    }
+  };
   return (
     <LanguageContext.Provider
-      value={{ language, setLanguage, isLoading, setIsLoading }}
+      value={{
+        language,
+        setLanguage,
+        isLoading,
+        setIsLoading,
+        currencyPrice,
+        currencySymbol,
+      }}
     >
       <div className="main">
         <Navibar language={setLanguage} />
