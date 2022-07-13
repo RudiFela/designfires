@@ -66,10 +66,10 @@ const Body = (props) => {
           setFireplaceProducts(addVariants(responses[3].data));
           setCasingsProducts(addVariants(responses[1].data));
 
-          console.log(addVariants(responses[2].data));
-          console.log(addVariants(responses[3].data));
-          console.log(addVariants(responses[1].data));
-          console.log(responses[0].data);
+          //console.log(addVariants(responses[2].data));
+          //console.log(addVariants(responses[3].data));
+          //console.log(addVariants(responses[1].data));
+          //console.log(responses[0].data);
 
           //console.log(fireplaceProducts);
           //firstTakePrice(addVariants(responses[3].data));
