@@ -16,7 +16,7 @@ const MyVerticallyCenteredModal = (props) => {
       {...props}
       onHide={onHide}
       variant="dark"
-      size="xl"
+      size="lg"
       centered
       aria-labelledby="contained-modal-title-vcenter"
     >
@@ -33,8 +33,12 @@ const MyVerticallyCenteredModal = (props) => {
         )}
 
         <img
-          style={{ display: !isLoading ? "block" : "none" }}
-          className="mx-auto"
+          style={{
+            display: !isLoading ? "block" : "none",
+            overflow: "hidden",
+            width: "100%",
+          }}
+          className=""
           onLoad={onComplete}
           src={props.image}
         />

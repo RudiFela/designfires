@@ -51,7 +51,7 @@ const Inspired = () => {
         show={showModal}
         pickedPost={pickedPost}
         onHide={() => setShowModal(false)}
-        closeModal={() => setShowModal(false)}
+        closemodal={() => setShowModal(false)}
         Footer={Footer}
       />
     </div>

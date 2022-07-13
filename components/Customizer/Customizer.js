@@ -434,6 +434,7 @@ const Customizer = (props) => {
             priceEUR: shortglass.price,
             priceSEK: shortglass.SEK_price.value,
             priceDKK: shortglass.DKK_price.value,
+            //image:shortglass
           },
           length: glass.length,
           pcs: openingLongSides,
