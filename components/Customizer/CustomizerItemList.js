@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import Image from "next/image";
 import { LanguageContext } from "../context/language-context";
 import { Button, ListGroup, Figure, Stack } from "react-bootstrap";
 const CustomizerItemList = (props) => {
@@ -45,14 +46,12 @@ const CustomizerItemList = (props) => {
           >
             <Stack direction="horizontal" gap={4}>
               <Figure className="m-0">
-                <Figure.Image
-                  className="figure-round mt-3"
-                  min-width={50}
-                  min-height={50}
+                <Image
+                  className="figure-round figure-img img-fluid"
                   width={100}
                   height={100}
-                  alt="Fireplace decoration/accesories"
                   src={item.images[0].woocommerce_gallery_thumbnail}
+                  alt="decorations image"
                 />
               </Figure>
 

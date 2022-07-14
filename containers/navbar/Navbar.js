@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import Image from "next/image";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { LanguageContext } from "../../components/context/language-context";
 const english =
@@ -27,8 +28,10 @@ const Navibar = () => {
       >
         <Container className="py-0 ">
           <Navbar.Brand href="#home">
-            <img
+            <Image
               src="https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
+              width={250}
+              height={156}
               className="navbar-logo"
             />
           </Navbar.Brand>

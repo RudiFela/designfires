@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
+import { Row, Col } from "react-bootstrap";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
 const PhotoCard = (props) => {
   const [showModal, setShowModal] = useState(false);
@@ -21,9 +22,12 @@ const PhotoCard = (props) => {
         src={props.image}
         //objectFit="cover"
         //layout="responsive"
-        height={160}
-        width={291}
-      />
+        height={300}
+        width={400}
+        layout="responsive"
+        //sizes="(min-width:767px)33vw,100vw"
+        //objectFit="contain"
+      />{" "}
       <MyVerticallyCenteredModal
         image={modalPhoto}
         show={showModal}

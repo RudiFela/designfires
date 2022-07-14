@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import { Modal, Spinner } from "react-bootstrap";
 const MyVerticallyCenteredModal = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,14 +33,11 @@ const MyVerticallyCenteredModal = (props) => {
           </div>
         )}
 
-        <img
-          style={{
-            display: !isLoading ? "block" : "none",
-            overflow: "hidden",
-            width: "100%",
-          }}
-          className=""
-          onLoad={onComplete}
+        <Image
+          className="figure-round figure-img img-fluid"
+          width={1024}
+          height={576}
+          onLoadingComplete={onComplete}
           src={props.image}
         />
       </Modal.Body>
@@ -52,3 +50,11 @@ const MyVerticallyCenteredModal = (props) => {
   );
 };
 export default MyVerticallyCenteredModal;
+/*<Image
+          className="figure-round figure-img img-fluid"
+          width={400}
+          height={300}
+          onLoad={onComplete}
+          src={props.image}
+          alt="Fireplace Image"
+        />*/

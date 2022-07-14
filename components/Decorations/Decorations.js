@@ -51,7 +51,7 @@ const Decorations = (props) => {
       <h1 className="text-center text-white">
         And add some individual style with decorations!
       </h1>
-      <Row xs={2} md={3} lg={4}>
+      <Row xs={2} md={3} lg={3} xl={4}>
         {showdeco}
       </Row>{" "}
     </Container>

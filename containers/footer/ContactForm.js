@@ -147,7 +147,7 @@ const ContactForm = (props) => {
       user_totalprice: cartHandler.cartPrice + lang.currencySymbol(),
     };
 
-    /* emailjs
+    emailjs
       .send(
         "service_vzn306h",
         "template_ikf1gyk",
@@ -165,7 +165,7 @@ const ContactForm = (props) => {
           setEmailResponse(false);
           setSending(false);
         }
-      );*/
+      );
     //console.log(emailData);
   };
   const handleClick = () => setSending(true);

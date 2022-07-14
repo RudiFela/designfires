@@ -1,4 +1,5 @@
 import PhotosGrid from "../PhotosGrid.js/PhotosGrid";
+import { Row, Col } from "react-bootstrap";
 import AboutSection from "../AboutSection/AboutSection";
 import Advantage from "../Advantage/Advantage";
 
@@ -41,6 +42,48 @@ const Ethanol = (props) => {
   ];
   return (
     <div id="bio">
+      <Row
+        className=" about-wrapper justify-content-around flex-wrap-reverse"
+        xs="auto"
+      >
+        <Col className="align-self-center mt-3">
+          <PhotosGrid
+            image1="https://designfires.pl/wp-content/uploads/2022/06/etanol1.jpg"
+            image2="https://designfires.pl/wp-content/uploads/2022/06/etanol2.jpg"
+            image3="https://designfires.pl/wp-content/uploads/2022/06/etanol3.jpg"
+            image4="https://designfires.pl/wp-content/uploads/2022/06/etanol4.jpg"
+            image5="https://designfires.pl/wp-content/uploads/2022/06/etanol5.jpeg"
+            image6="https://designfires.pl/wp-content/uploads/2022/06/etanol6.jpg"
+          />
+        </Col>
+        <Col>
+          <AboutSection
+            title={title}
+            listItem1={listItems[0]}
+            listItem2={listItems[1]}
+            listItem3={listItems[2]}
+            listItem4={listItems[3]}
+            listItem5={listItems[4]}
+            listItem={listItems}
+            paragraph={paragraphs}
+            price={props.price}
+            aboutParagraph={aboutParagraph}
+          />
+        </Col>
+      </Row>
+      <div className="item3 mt-4">
+        <Advantage
+          image="https://designfires.pl/wp-content/uploads/2022/06/Rectangle4.png"
+          shortName={"DFE"}
+          itemsLeft={advantageItemsLeft}
+          itemsRight={advantageItemsRight}
+        />
+      </div>
+    </div>
+  );
+};
+export default Ethanol;
+/*<div id="bio">
       <div className="flex-container">
         <div className="item1">
           <PhotosGrid
@@ -75,7 +118,4 @@ const Ethanol = (props) => {
           itemsRight={advantageItemsRight}
         />
       </div>
-    </div>
-  );
-};
-export default Ethanol;
+    </div>*/

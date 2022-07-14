@@ -109,6 +109,7 @@ const CustomizerCasings = (props) => {
       popoverInfo={popoverInfo}
       selected={pickedCaseItem.selected}
       cssClass="card-deco mt-3 casings-customizer"
+      pictureheigth={400}
     >
       <h6 className="text-white mt-2">Glass Color:</h6>
       <Form.Check

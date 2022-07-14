@@ -1,5 +1,6 @@
 import PhotosGrid from "../PhotosGrid.js/PhotosGrid";
 import AboutSection from "../AboutSection/AboutSection";
+import { Row, Col } from "react-bootstrap";
 import Advantage from "../Advantage/Advantage";
 
 const Mystic = (props) => {
@@ -47,8 +48,11 @@ const Mystic = (props) => {
   ];
   return (
     <div id="steamfire">
-      <div className="flex-container">
-        <div className="item1">
+      <Row
+        className=" about-wrapper justify-content-around flex-wrap-reverse mb-5"
+        xs="auto"
+      >
+        <Col className="align-self-center mt-3">
           <PhotosGrid
             image1="https://designfires.pl/wp-content/uploads/2022/06/mystic1.jpg"
             image2="https://designfires.pl/wp-content/uploads/2022/06/mystic2.jpg"
@@ -57,8 +61,8 @@ const Mystic = (props) => {
             image5="https://designfires.pl/wp-content/uploads/2022/06/mystic5.jpg"
             image6="https://designfires.pl/wp-content/uploads/2022/06/mystic6.jpg"
           />
-        </div>
-        <div className="item2">
+        </Col>
+        <Col>
           <AboutSection
             title={title}
             listItem1={listItems[0]}
@@ -71,9 +75,9 @@ const Mystic = (props) => {
             price={props.price}
             aboutParagraph={aboutParagraph}
           />
-        </div>
-      </div>
-      <div className="item3">
+        </Col>
+      </Row>
+      <div className="item3 mt-4">
         <Advantage
           image="https://designfires.pl/wp-content/uploads/2022/06/mysticadvantage.jpg"
           shortName="DFM"

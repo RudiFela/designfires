@@ -1,15 +1,5 @@
-import { useRef } from "react";
-
-import emailjs from "@emailjs/browser";
-import {
-  Form,
-  Col,
-  Row,
-  Button,
-  Stack,
-  Figure,
-  FloatingLabel,
-} from "react-bootstrap";
+import Image from "next/image";
+import { Col, Row, Stack, Figure } from "react-bootstrap";
 import { BsTelephone } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
 import ContactForm from "./ContactForm";
@@ -24,11 +14,12 @@ const Footer = (props) => {
             <Stack className="fs-4 text fw-bolder">
               <div className="">
                 <Figure>
-                  <Figure.Image
+                  <Image
+                    className="figure-round figure-img img-fluid"
                     width={314}
                     height={131}
-                    alt="DesignFires Logo"
                     src="http://designfires.pl/wp-content/uploads/2022/06/logo.svg"
+                    alt="Design Fires Logo"
                   />
                 </Figure>
               </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import Image from "next/image";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
 import "react-awesome-slider/dist/styles.css";
 import axios from "axios";
@@ -29,10 +30,13 @@ const Inspired = () => {
   const ins = inspiredContent.map((item) => {
     return (
       <Col className="p-2" sm={6} key={item.id}>
-        <img
+        <Image
           src={item.acf.image.sizes.medium_large}
           className="mw-100"
           onClick={() => showModalHandler(item)}
+          height={410}
+          width={550}
+          alt="inspiration picture of fireplaces"
         />
       </Col>
     );

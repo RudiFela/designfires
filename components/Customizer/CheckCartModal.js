@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { LanguageContext } from "../context/language-context";
 import { Modal, Row, Col, Button, Figure } from "react-bootstrap";
+import Image from "next/image";
 import ContactForm from "../../containers/footer/ContactForm";
 const CheckCartModal = (props) => {
   const lang = useContext(LanguageContext);
@@ -30,12 +31,12 @@ const CheckCartModal = (props) => {
                   {" "}
                   <Col>
                     <Figure className="m-0">
-                      <Figure.Image
-                        className="figure-round"
-                        width={300}
-                        height={200}
-                        alt="Fireplace image"
-                        src={cart.addedFireplace.photo} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
+                      <Image
+                        className="figure-round figure-img img-fluid"
+                        width={400}
+                        height={300}
+                        src={cart.addedFireplace.photo}
+                        alt="Fireplace Image"
                       />
                     </Figure>
                   </Col>
@@ -113,12 +114,12 @@ const CheckCartModal = (props) => {
                 <Row>
                   <Col>
                     <Figure className="m-0">
-                      <Figure.Image
-                        className="figure-round"
+                      <Image
+                        className="figure-round figure-img img-fluid"
                         width={250}
                         height={200}
-                        alt="Casing image"
                         src={cart.addedCasing.photo}
+                        alt="Casing Image"
                       />
                     </Figure>
                   </Col>
@@ -161,12 +162,12 @@ const CheckCartModal = (props) => {
               >
                 <Col xs lg="2">
                   <Figure className="m-0">
-                    <Figure.Image
-                      className="figure-round "
+                    <Image
+                      className="figure-round figure-img img-fluid"
                       width={100}
                       height={100}
-                      alt="Fireplace decoration"
-                      src={items.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
+                      src={items.image}
+                      alt="Decoration Image"
                     />
                   </Figure>
                 </Col>
@@ -206,12 +207,12 @@ const CheckCartModal = (props) => {
             <Row className="justify-content-md-start align-items-center border">
               <Col xs lg="2">
                 <Figure className="m-0">
-                  <Figure.Image
-                    className="figure-round "
+                  <Image
+                    className="figure-round figure-img img-fluid"
                     width={100}
                     height={100}
+                    src={cart.addedAccessories.glass.image}
                     alt="Glass picture"
-                    src={cart.addedAccessories.glass.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
                   />
                 </Figure>
               </Col>
@@ -253,12 +254,12 @@ const CheckCartModal = (props) => {
             <Row className="justify-content-md-start align-items-center border">
               <Col xs lg="2">
                 <Figure className="m-0">
-                  <Figure.Image
-                    className="figure-round "
+                  <Image
+                    className="figure-round figure-img img-fluid"
                     width={100}
                     height={100}
+                    src={cart.addedAccessories.glass.image}
                     alt="Glass picture"
-                    src={cart.addedAccessories.glass.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
                   />
                 </Figure>
               </Col>
@@ -305,12 +306,12 @@ const CheckCartModal = (props) => {
             <Row className="justify-content-md-start align-items-center border">
               <Col xs lg="2">
                 <Figure className="m-0">
-                  <Figure.Image
-                    className="figure-round "
+                  <Image
+                    className="figure-round figure-img img-fluid"
                     width={100}
                     height={100}
+                    src={cart.addedAccessories.holders.image}
                     alt="Fireplace decoration"
-                    src={cart.addedAccessories.holders.image} //"https://designfires.pl/wp-content/uploads/2022/06/transparentglass-100x100.jpeg" //{item.image}
                   />
                 </Figure>
               </Col>
@@ -359,7 +360,7 @@ const CheckCartModal = (props) => {
                 Total Price:{cart.cartPrice}
                 {props.currency()}
               </h1>
-              <p>All prices includes 20% VAT</p>
+              <p>All prices includes 25% VAT</p>
             </Col>
           )}
           {showContactForm && (

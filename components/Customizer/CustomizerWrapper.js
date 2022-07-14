@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import Image from "next/image";
 import { Card, Button, Stack, Popover, OverlayTrigger } from "react-bootstrap";
 import { LanguageContext } from "../context/language-context";
 const CustomizerWrapper = (props) => {
@@ -31,12 +32,14 @@ const CustomizerWrapper = (props) => {
   return (
     <Card className={props.cssClass}>
       {" "}
-      <Card.Img
+      <Image
+        className="card-image-bottom"
         style={{ maxheigth: "50vh", borderRadius: 35 }}
-        variant="bottom"
-        alt="fireplace casing photo"
+        alt="photocard-picture"
         src={selectedItem.photo}
-      />{" "}
+        height={props.pictureheigth}
+        width={480}
+      />
       <Card.Body>
         <Stack className="flex-wrap mb-2" direction="horizontal" gap={3}>
           {itemDropDown}
@@ -57,3 +60,9 @@ const CustomizerWrapper = (props) => {
   );
 };
 export default CustomizerWrapper;
+/*<Card.Img
+        style={{ maxheigth: "50vh", borderRadius: 35 }}
+        variant="bottom"
+        alt="fireplace casing photo"
+        src={selectedItem.photo}
+      />*/

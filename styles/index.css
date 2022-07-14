@@ -32661,13 +32661,11 @@ textarea.form-control-lg {
   }
 }
 .photo {
-  position: relative;
   overflow: hidden;
-  max-height: 160px;
   margin-top: 2rem;
   -o-object-fit: cover;
      object-fit: cover;
-  max-width: 291px;
+  display: block;
   border-radius: 25px;
   border: 1px solid #000000;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -32698,6 +32696,11 @@ textarea.form-control-lg {
     }
   }*/
 }
+.photo .photo-image {
+  position: relative;
+  width: 360px;
+  height: 240px;
+}
 .photo img {
   transition: 0.5s all ease-in-out;
 }
@@ -32721,7 +32724,7 @@ textarea.form-control-lg {
 }
 @media only screen and (max-width: 400px) {
   .photo {
-    border-radius: 10px;
+    border-radius: 15px;
   }
 }
 .flex-container {
@@ -43617,6 +43620,13 @@ textarea.form-control-lg {
   margin-left: 3rem;
 }
 
+.photo-grid {
+  background-color: #252525;
+  border-radius: 35px;
+  padding: 2rem;
+  min-width: 700px;
+}
+
 @media only screen and (max-width: 800px) {
   .cardbox {
     padding: 0.5rem 0.5rem 2.5rem 0.5rem;
@@ -43624,6 +43634,11 @@ textarea.form-control-lg {
 
   .photocard-container-1 {
     margin-left: 0.2rem;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .photo-grid {
+    min-width: 90vw;
   }
 }
 .about-section {
@@ -43663,15 +43678,6 @@ textarea.form-control-lg {
   display: none;
 }
 
-@media only screen and (max-width: 800px) {
-  .about-section {
-    padding: 0.8rem;
-  }
-
-  .flex-container {
-    padding: 0.8rem;
-  }
-}
 .accordion-button:not(.collapsed) {
   color: #fff !important;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
@@ -43694,6 +43700,20 @@ textarea.form-control-lg {
   border: none !important;
 }
 
+@media only screen and (max-width: 800px) {
+  .about-section {
+    padding: 0.8rem;
+  }
+
+  .flex-container {
+    padding: 0.8rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .about-wrapper {
+    margin: 0.5rem !important;
+  }
+}
 .advantage {
   color: #fff;
   background: rgba(0, 0, 0, 0.5);

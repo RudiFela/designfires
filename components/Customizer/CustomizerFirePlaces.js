@@ -312,6 +312,7 @@ const CustomizerFirePlaces = (props) => {
         )}
         popoverInfo={popoverInfo}
         selected={selected}
+        pictureheigth={280}
       >
         <>
           {selected && selectedFireplace.name !== "DFM" ? (

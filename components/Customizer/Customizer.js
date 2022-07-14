@@ -807,7 +807,7 @@ const Customizer = (props) => {
                 />
               </Card.Header>
               <h5 className="text-white m-0 mx-auto pt-1 float-end">
-                All prices includes 20% VAT
+                All prices includes 25% VAT
               </h5>
             </Card>{" "}
           </div>
