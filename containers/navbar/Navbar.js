@@ -2,10 +2,9 @@ import { useContext, useState } from "react";
 import Image from "next/image";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { LanguageContext } from "../../components/context/language-context";
-const english =
-  "https://designfires.pl/wp-content/uploads/2022/07/greatbritain.png";
-const denmark = "https://designfires.pl/wp-content/uploads/2022/07/denmark.png";
-const sweden = "https://designfires.pl/wp-content/uploads/2022/07/sweden.png";
+const english = "/static/images/greatbritain.png";
+const denmark = "/static/images/denmark.png";
+const sweden = "/static/images/sweden.png";
 const Navibar = () => {
   const language = useContext(LanguageContext);
   const [lang, setLang] = useState(
@@ -34,7 +33,6 @@ const Navibar = () => {
               alt="DesignFires.com LOGO"
               height={156}
               className="navbar-logo"
-              priority
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -89,7 +87,6 @@ const Navibar = () => {
                     height={45}
                     width={45}
                     alt="English flag"
-                    priority
                   />
                 </NavDropdown.Item>
                 <NavDropdown.Item
@@ -99,13 +96,7 @@ const Navibar = () => {
                   //  href="#action/3.2"
                   className="text-white text-center fs-5 text fw-normal p-1 "
                 >
-                  <Image
-                    src={denmark}
-                    height={45}
-                    width={45}
-                    alt="DEN flag"
-                    priority
-                  />
+                  <Image src={denmark} height={45} width={45} alt="DEN flag" />
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   onClick={() => {
@@ -114,13 +105,7 @@ const Navibar = () => {
                   // href="#action/3.3"
                   className="text-white fs-5 p-1"
                 >
-                  <Image
-                    src={sweden}
-                    height={45}
-                    width={45}
-                    alt="SWE flag"
-                    priority
-                  />
+                  <Image src={sweden} height={45} width={45} alt="SWE flag" />
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
