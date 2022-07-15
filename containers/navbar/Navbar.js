@@ -9,10 +9,10 @@ const sweden = "https://designfires.pl/wp-content/uploads/2022/07/sweden.png";
 const Navibar = () => {
   const language = useContext(LanguageContext);
   const [lang, setLang] = useState(
-    <img src={english} height="30" alt="USA flag" />
+    <Image src={english} height={40} width={40} alt="USA flag" priority />
   );
   const onLanguageChange = (lang, langName) => {
-    setLang(<img src={lang} height="30" alt="Country Flag" />);
+    setLang(<Image src={lang} height={40} width={40} alt="Country Flag" />);
     //props.setLanguage(langName);
     language.setLanguage(langName);
   };
@@ -31,6 +31,7 @@ const Navibar = () => {
             <Image
               src="https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
               width={250}
+              alt="DesignFires.com LOGO"
               height={156}
               className="navbar-logo"
               priority
@@ -81,27 +82,45 @@ const Navibar = () => {
                     onLanguageChange(english, "english");
                   }}
                   //  href="#action/3.1"
-                  className="text-white fs-5 text fw-normal"
+                  className="text-white text-center fs-5 text fw-normal p-1"
                 >
-                  ENG <img src={english} height="35" alt="USA flag" />
+                  <Image
+                    src={english}
+                    height={45}
+                    width={45}
+                    alt="English flag"
+                    priority
+                  />
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   onClick={() => {
                     onLanguageChange(denmark, "danish");
                   }}
                   //  href="#action/3.2"
-                  className="text-white fs-5 text fw-normal"
+                  className="text-white text-center fs-5 text fw-normal p-1 "
                 >
-                  DEN <img src={denmark} height="35" alt="USA flag" />
+                  <Image
+                    src={denmark}
+                    height={45}
+                    width={45}
+                    alt="DEN flag"
+                    priority
+                  />
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   onClick={() => {
                     onLanguageChange(sweden, "swedish");
                   }}
                   // href="#action/3.3"
-                  className="text-white fs-5 text fw-normal"
+                  className="text-white fs-5 p-1"
                 >
-                  SWE <img src={sweden} height="35" alt="USA flag" />
+                  <Image
+                    src={sweden}
+                    height={45}
+                    width={45}
+                    alt="SWE flag"
+                    priority
+                  />
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
