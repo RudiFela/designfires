@@ -22,8 +22,8 @@ const PhotoCard = (props) => {
         src={props.image}
         //objectFit="cover"
         //layout="responsive"
-        height={300}
-        width={400}
+        height={props.imageheight}
+        width={props.imagewidth}
         layout="responsive"
         //sizes="(min-width:767px)33vw,100vw"
         //objectFit="contain"
@@ -32,6 +32,8 @@ const PhotoCard = (props) => {
         image={modalPhoto}
         show={showModal}
         closemodal={() => closeModal()}
+        imagewidth={props.imagewidth}
+        imageheight={props.imageheight}
       />
     </div>
   );

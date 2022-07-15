@@ -18,7 +18,7 @@ const Footer = (props) => {
                     className="figure-round figure-img img-fluid"
                     width={314}
                     height={131}
-                    src="http://designfires.pl/wp-content/uploads/2022/06/logo.svg"
+                    src="https://designfires.pl/wp-content/uploads/2022/06/logo.svg"
                     alt="Design Fires Logo"
                   />
                 </Figure>

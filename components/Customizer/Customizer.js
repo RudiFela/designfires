@@ -281,7 +281,7 @@ const Customizer = (props) => {
     arr = undefined;
   };
   const onShowCart = () => {
-    // console.log(cart);
+    console.log(cart);
     setShowCart(true);
   };
   const clearCart = () => {
@@ -505,9 +505,10 @@ const Customizer = (props) => {
         length: leng,
         enable: true,
       }));
-      const glass = accessories[0].variant.find(
-        (x) => x.length === pickedLength
-      );
+      const colorGlass = accessories.find((accessories) => {
+        return accessories.name === `${glassColor} Glass 6mm`;
+      });
+      const glass = colorGlass.variant.find((x) => x.length === pickedLength);
       const glassHolders = accessories[1];
 
       setCart((prevCart) => ({
@@ -537,7 +538,7 @@ const Customizer = (props) => {
             priceSEK: glass.SEK_price.value,
             priceDKK: glass.DKK_price.value,
             color: glassColor,
-            image: accessories[0].images[0].shop_catalog,
+            image: colorGlass.images[0].shop_catalog,
           },
           holders: {
             pcs: glassPcs,
@@ -744,12 +745,16 @@ const Customizer = (props) => {
     //console.log(glassPcs);
   };
   const changeGlassColor = (color) => {
+    const colorGlass = accessories.find((accessories) => {
+      return accessories.name === `${color} Glass 6mm`;
+    });
+
     const { glass, holders } = cart.addedAccessories;
     setCart((prevCart) => ({
       ...prevCart,
       addedAccessories: {
         holders: holders, //{ ...holders },
-        glass: { ...glass, color },
+        glass: { ...glass, color, image: colorGlass.images[0].shop_thumbnail },
       },
     }));
     setGlassColor(color);

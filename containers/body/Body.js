@@ -33,22 +33,14 @@ const Body = (props) => {
   }, [language, variantAdded]);
   //const handleLoading = () => setIsLoading(true);
 
-  const crud = {
-    auth: {
-      username: "ck_b143b31c7842e4a628279fe7b097980c311f08d5",
-      password: "cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e",
-    },
-  };
-  const deco =
-    "https://designfires.pl/wp-json/wc/v3/products?category=20&per_page=20";
-  const casing =
-    "https://designfires.pl/wp-json/wc/v3/products?category=23?per_page=20";
-  const accessories =
-    "https://designfires.pl/wp-json/wc/v3/products?category=21?per_page=20";
-  const fireplaces =
-    "https://designfires.pl/wp-json/wc/v3/products?category=26?per_page=20";
-
   const getData = async () => {
+    setDecorationsProducts(props.decorations.reverse());
+    setAccessoriesProducts(addVariants(props.accessories));
+    setFireplaceProducts(addVariants(props.fireplaces));
+    setCasingsProducts(addVariants(props.casings));
+    setIsLoading(false);
+  };
+  /* const getData = async () => {
     // ck ck_b143b31c7842e4a628279fe7b097980c311f08d5
     // cs cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e
     axios
@@ -66,10 +58,10 @@ const Body = (props) => {
           setFireplaceProducts(addVariants(responses[3].data));
           setCasingsProducts(addVariants(responses[1].data));
 
-          //console.log(addVariants(responses[2].data));
+          console.log(addVariants(responses[3].data));
           //console.log(addVariants(responses[3].data));
           //console.log(addVariants(responses[1].data));
-          //console.log(responses[0].data);
+          console.log(responses[0].data);
 
           //console.log(fireplaceProducts);
           //firstTakePrice(addVariants(responses[3].data));
@@ -82,7 +74,7 @@ const Body = (props) => {
         console.log("An error!!!!", error);
         setIsLoading(false);
       });
-  }; //SetEnv HTTPS on
+  }; //SetEnv HTTPS on*/
   const currencyPrice = (item) => {
     switch (language) {
       case "swedish":
@@ -107,6 +99,7 @@ const Body = (props) => {
     !isLoading
       ? setLowestPriceDFE(
           currencyPrice(
+            // fireplaceProducts[1].variant.find((item) => item.length === "500")
             fireplaceProducts[1].variant.find((item) => item.length === "500")
           )
         )
@@ -120,15 +113,15 @@ const Body = (props) => {
       <Ethanol price={!isLoading && lowestPriceDFE} />
       <Mystic price={!isLoading && lowestPriceDFM} />
       <Accessories />
-      <Decorations decorations={decorationsProducts} />
-      <Inspired />
+      <Decorations decorations={props.decorations} />
 
+      <Inspired />
       <div>
         <Customizer
-          decorations={decorationsProducts}
-          accessories={accessoriesProducts}
-          casings={casingsProducts}
-          fireplace={fireplaceProducts}
+          decorations={decorationsProducts} //{props.decorations} //{decorationsProducts} />
+          accessories={accessoriesProducts} //{props.accessories} //
+          casings={casingsProducts} //{props.casings} //
+          fireplace={fireplaceProducts} //{props.fireplaces} //
           cartHandler={props.cartHandler}
         />
       </div>

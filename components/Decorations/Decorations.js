@@ -32,8 +32,10 @@ const Decorations = (props) => {
         <div className="deco">
           <div className="rel">
             <PhotoCard
-              image={item.images[0].shop_catalog}
+              image={item.images[0].woocommerce_single}
               imagebig={item.images[0].src}
+              imagewidth={600}
+              imageheight={400}
               // click={() => showModalHandler(item.images[0].src)}
             />
             <div className="overlay text-white">{item.name}</div>

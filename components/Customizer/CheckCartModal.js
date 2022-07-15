@@ -258,7 +258,7 @@ const CheckCartModal = (props) => {
                     className="figure-round figure-img img-fluid"
                     width={100}
                     height={100}
-                    src={cart.addedAccessories.glass.image}
+                    src={cart.addedAccessories.glass.image[0].shop_thumbnail}
                     alt="Glass picture"
                   />
                 </Figure>

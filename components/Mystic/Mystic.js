@@ -60,6 +60,8 @@ const Mystic = (props) => {
             image4="https://designfires.pl/wp-content/uploads/2022/06/mystic4.jpg"
             image5="https://designfires.pl/wp-content/uploads/2022/06/mystic5.jpg"
             image6="https://designfires.pl/wp-content/uploads/2022/06/mystic6.jpg"
+            image7="https://designfires.pl/wp-content/uploads/2022/07/IMG_4689-scaled.jpg"
+            image8="https://designfires.pl/wp-content/uploads/2022/07/IMG_5628-1-scaled.jpg"
           />
         </Col>
         <Col>

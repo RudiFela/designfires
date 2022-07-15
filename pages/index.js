@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
-
+import { addVariants } from "../lib/add-variants";
 import Header from "../containers/header/Header";
 import Footer from "../containers/footer/Footer";
+import { useGetProducts } from "../hooks/add-variants";
 import Body from "../containers/body/Body";
 import Navibar from "../containers/navbar/Navbar";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
 import { LanguageContext } from "../components/context/language-context";
-export default function Home() {
+export default function Home(props) {
+  const { addVariants, minimalFireplacePrice } = useGetProducts();
   useEffect(() => {
     axios
       .get("https://api.hostip.info/country.php")
@@ -26,6 +28,8 @@ export default function Home() {
         console.log(err);
         setLanguage("english");
       });
+
+    console.log(props);
   }, []);
   const [cart, setCart] = useState();
   const [language, setLanguage] = useState();
@@ -80,9 +84,62 @@ export default function Home() {
       <div className="main">
         <Navibar language={setLanguage} />
         <Header />
-        <Body cartHandler={cartHandler} />
+        <Body
+          cartHandler={cartHandler}
+          decorations={props.decorations}
+          accessories={props.accessories}
+          casings={props.casings}
+          fireplaces={props.fireplaces}
+        />
         <Footer cartHandler={cart} />
       </div>
     </LanguageContext.Provider>
   );
+}
+export async function getStaticProps(context) {
+  const crud = {
+    auth: {
+      username: "ck_b143b31c7842e4a628279fe7b097980c311f08d5",
+      password: "cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e",
+    },
+  };
+  const decoURL =
+    "https://designfires.pl/wp-json/wc/v3/products?category=20&per_page=20";
+  const casingsURL =
+    "https://designfires.pl/wp-json/wc/v3/products?category=23";
+  const accessoriesURL =
+    "https://designfires.pl/wp-json/wc/v3/products?category=21";
+  const fireplacesURL =
+    "https://designfires.pl/wp-json/wc/v3/products?category=26";
+
+  // ck ck_b143b31c7842e4a628279fe7b097980c311f08d5
+  // cs cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e
+  const casingFetch = await axios.get(casingsURL, crud);
+  const fireplaceFetch = await axios.get(fireplacesURL, crud);
+  const accessoriesFetch = await axios.get(accessoriesURL, crud);
+  const decorations = await axios.get(decoURL, crud);
+
+  // console.log(fireplacess);
+  const [deco, cases, access, fire] = await Promise.all([
+    decorations.data,
+    casingFetch.data,
+    accessoriesFetch.data,
+    fireplaceFetch.data,
+  ]);
+  //let d;
+  //addVariants(cases, crud).then((res) => console.log(res));
+  // console.log(d);
+
+  // const casings = await addVariants(casingFetch.data, crud);
+  // const accessories = await addVariants(accessoriesFetch.data, crud);
+  //const fireplacess = await addVariants(fireplaceFetch.data, crud);
+
+  return {
+    props: {
+      decorations: deco,
+      casings: cases,
+      accessories: access,
+      fireplaces: fire,
+    },
+  };
 }

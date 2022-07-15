@@ -119,7 +119,7 @@ const CustomizerCasings = (props) => {
         type="radio"
         defaultChecked={true}
         id={`inline-glassclear`}
-        onChange={() => props.changeGlassColor("Clear")}
+        onChange={() => props.changeGlassColor("Clear", 127)}
       />
       <Form.Check
         inline
@@ -127,7 +127,7 @@ const CustomizerCasings = (props) => {
         name="glass"
         type="radio"
         id={`inline-glassbronze`}
-        onChange={() => props.changeGlassColor("Bronze")}
+        onChange={() => props.changeGlassColor("Bronze", 386)}
       />
       {pickedCaseItem.selected && (
         <p className="text-white fw-bold mt-4">{pickedCaseItem.fullName}</p>

@@ -35,8 +35,8 @@ const MyVerticallyCenteredModal = (props) => {
 
         <Image
           className="figure-round figure-img img-fluid"
-          width={1024}
-          height={576}
+          width={2400}
+          height={1600}
           onLoadingComplete={onComplete}
           src={props.image}
         />

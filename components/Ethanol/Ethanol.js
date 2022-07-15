@@ -48,12 +48,15 @@ const Ethanol = (props) => {
       >
         <Col className="align-self-center mt-3">
           <PhotosGrid
-            image1="https://designfires.pl/wp-content/uploads/2022/06/etanol1.jpg"
+            //image1="https://designfires.pl/wp-content/uploads/2022/06/etanol1.jpg"
+            image1="https://designfires.pl/wp-content/uploads/2022/07/ufonofvA-scaled.jpeg"
             image2="https://designfires.pl/wp-content/uploads/2022/06/etanol2.jpg"
             image3="https://designfires.pl/wp-content/uploads/2022/06/etanol3.jpg"
-            image4="https://designfires.pl/wp-content/uploads/2022/06/etanol4.jpg"
+            image8="https://designfires.pl/wp-content/uploads/2022/06/etanol4.jpg"
             image5="https://designfires.pl/wp-content/uploads/2022/06/etanol5.jpeg"
             image6="https://designfires.pl/wp-content/uploads/2022/06/etanol6.jpg"
+            image7="https://designfires.pl/wp-content/uploads/2022/07/a0852542-a3d1-49d4-accf-2d5429e931a9.jpg"
+            image4="https://designfires.pl/wp-content/uploads/2022/07/IMG_5569-scaled.jpg"
           />
         </Col>
         <Col>

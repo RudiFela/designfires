@@ -57,6 +57,8 @@ const Inspired = () => {
         onHide={() => setShowModal(false)}
         closemodal={() => setShowModal(false)}
         Footer={Footer}
+        imagewidth={400}
+        imageheight={400}
       />
     </div>
   );

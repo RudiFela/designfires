@@ -33,6 +33,7 @@ const Navibar = () => {
               width={250}
               height={156}
               className="navbar-logo"
+              priority
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

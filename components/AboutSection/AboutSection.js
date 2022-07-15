@@ -38,7 +38,7 @@ const AboutSection = (props) => {
         from: {props.price}
         {currencySymbol()}
       </h3>
-      <h3></h3>
+      <p className="text-center">Price includes 25% VAT</p>
     </div>
   );
 };

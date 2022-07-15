@@ -43659,7 +43659,7 @@ textarea.form-control-lg {
   margin-bottom: 2rem;
 }
 .about-section li {
-  background: url("http://designfires.pl/wp-content/uploads/2022/06/iconred40.png") no-repeat;
+  background: url("/static/images/iconred40.png") no-repeat;
   line-height: 32px;
   vertical-align: middle;
   font-weight: 500;
@@ -43741,7 +43741,7 @@ textarea.form-control-lg {
 }
 .advantage-right li {
   font-size: clamp(1rem, 2vw, 1.5rem);
-  background: url("http://designfires.pl/wp-content/uploads/2022/06/iconred40.png") no-repeat right;
+  background: url("/static/images/iconred40.png") no-repeat right;
   background-position: 100% 0%;
   line-height: clamp(1rem, 2vw, 1.5rem);
   vertical-align: middle;
@@ -43757,7 +43757,7 @@ textarea.form-control-lg {
 }
 .advantage-left li {
   font-size: clamp(1rem, 2vw, 1.5rem);
-  background: url("http://designfires.pl/wp-content/uploads/2022/06/iconred40.png") no-repeat;
+  background: url("/static/images/iconred40.png") no-repeat;
   line-height: clamp(1rem, 2vw, 1.5rem);
   vertical-align: middle;
   font-weight: 400;

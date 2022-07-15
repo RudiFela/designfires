@@ -22,7 +22,7 @@ $font-weights: (
   "medium": 500,
   "bold": 600,
 );
-$icon: url("http://designfires.pl/wp-content/uploads/2022/06/iconred40.png");
+$icon: url("/static/images/iconred40.png"); //("http://designfires.pl/wp-content/uploads/2022/06/iconred40.png");
 $header-image: url("./assets/headerimage.jpg");
 @mixin flexCenter {
   display: flex;
