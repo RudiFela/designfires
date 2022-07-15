@@ -11,28 +11,8 @@ import axios from "axios";
 import { LanguageContext } from "../components/context/language-context";
 export default function Home(props) {
   const { addVariants, minimalFireplacePrice } = useGetProducts();
-  useEffect(() => {
-    axios
-      .get("https://api.hostip.info/country.php")
-      .then((res) => {
-        switch (res.data) {
-          case "SWE":
-            return setLanguage("swedish");
-          case "DNK":
-            return setLanguage("danish");
-          default:
-            return setLanguage("english");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setLanguage("english");
-      });
-
-    console.log(props);
-  }, []);
   const [cart, setCart] = useState();
-  const [language, setLanguage] = useState();
+  const [language, setLanguage] = useState(props.language);
   const [isLoading, setIsLoading] = useState(true);
   const cartHandler = (cart) => {
     setCart(cart);
@@ -118,6 +98,18 @@ export async function getStaticProps(context) {
   const fireplaceFetch = await axios.get(fireplacesURL, crud);
   const accessoriesFetch = await axios.get(accessoriesURL, crud);
   const decorations = await axios.get(decoURL, crud);
+  const lang = await axios.get("https://api.hostip.info/country.php");
+
+  const LanguageChecker = () => {
+    switch (lang.data) {
+      case "SWE":
+        return "swedish";
+      case "DNK":
+        return "danish";
+      default:
+        return "english";
+    }
+  };
 
   // console.log(fireplacess);
   const [deco, cases, access, fire] = await Promise.all([
@@ -140,6 +132,7 @@ export async function getStaticProps(context) {
       casings: cases,
       accessories: access,
       fireplaces: fire,
+      language: LanguageChecker(),
     },
   };
 }

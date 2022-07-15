@@ -17,20 +17,19 @@ const Body = (props) => {
   const [fireplaceProducts, setFireplaceProducts] = useState([]);
   const [lowestPriceDFM, setLowestPriceDFM] = useState("3066");
   const [lowestPriceDFE, setLowestPriceDFE] = useState("2000");
-  const [variantAdded, setVariantAdded] = useState(false);
   const { setIsLoading, isLoading, lang, language } =
     useContext(LanguageContext);
   const { addVariants, minimalFireplacePrice } = useGetProducts();
   useEffect(() => {
-    getData();
-    setVariantAdded(true);
-    //takePrice();
-  }, []);
-  useEffect(() => {
-    if (variantAdded) {
+    console.log("take price");
+    if (!isLoading) {
       takePrice();
     }
-  }, [language, variantAdded]);
+  }, [language]);
+  useEffect(() => {
+    getData();
+  }, []);
+
   //const handleLoading = () => setIsLoading(true);
 
   const getData = async () => {
@@ -77,10 +76,10 @@ const Body = (props) => {
   }; //SetEnv HTTPS on*/
   const currencyPrice = (item) => {
     switch (language) {
-      case "swedish":
-        return item.SEK_price.value;
       case "english":
         return item.price;
+      case "swedish":
+        return item.SEK_price.value;
 
       case "danish":
         return item.DKK_price.value;
@@ -88,6 +87,7 @@ const Body = (props) => {
   };
 
   const takePrice = () => {
+    console.log(fireplaceProducts[0].variant);
     !isLoading
       ? setLowestPriceDFM(
           currencyPrice(
