@@ -20,11 +20,11 @@ const PhotoCard = (props) => {
         //className="photo-image"
         alt="photocard-picture"
         src={props.image}
-        //objectFit="cover"
+        layout="fill"
+        objectFit="cover"
+        //height={800} //{props.imageheight}
+        //width={500} //{props.imagewidth}
         //layout="responsive"
-        height={props.imageheight}
-        width={props.imagewidth}
-        layout="responsive"
         //sizes="(min-width:767px)33vw,100vw"
         //objectFit="contain"
       />{" "}

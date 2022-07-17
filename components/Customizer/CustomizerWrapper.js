@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import Image from "next/image";
 import { Card, Button, Stack, Popover, OverlayTrigger } from "react-bootstrap";
 import { LanguageContext } from "../context/language-context";
 const CustomizerWrapper = (props) => {
+  const overlayRef = useRef();
   const lang = useContext(LanguageContext);
   const currencySymbol = () => {
     switch (lang.language) {
@@ -49,7 +50,15 @@ const CustomizerWrapper = (props) => {
           <Button className="bolder" variant="primary" disabled>
             {selectedPrice} {currencySymbol()}
           </Button>
-          <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+          <OverlayTrigger
+            ref={overlayRef}
+            //trigger={["hover", "focus"]}
+            trigger="click"
+            placement="bottom"
+            overlay={popover}
+            //delay={{ show: 250, hide: 1600 }}
+            rootClose
+          >
             <Button size="sm">Technical Info</Button>
           </OverlayTrigger>
         </Stack>

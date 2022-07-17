@@ -8,4 +8,8 @@ module.exports = {
   images: {
     domains: ["designfires.pl", "localhost"],
   },
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
 };

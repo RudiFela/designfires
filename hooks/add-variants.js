@@ -59,6 +59,7 @@ export const useGetProducts = () => {
                   bottomsize: item.meta_data.find(
                     (item) => item.key === "bottomsize"
                   ),
+                  drawing3d: item.meta_data.find((item) => item.key === "3d"),
                   technical_image: item.woo_variation_gallery_images,
                   DKK_price: item.meta_data.find(
                     (item) =>

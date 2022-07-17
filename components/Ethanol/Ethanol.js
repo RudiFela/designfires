@@ -49,14 +49,16 @@ const Ethanol = (props) => {
         <Col className="align-self-center mt-3">
           <PhotosGrid
             //image1="https://designfires.pl/wp-content/uploads/2022/06/etanol1.jpg"
-            image1="https://designfires.pl/wp-content/uploads/2022/07/ufonofvA-scaled.jpeg"
-            image2="https://designfires.pl/wp-content/uploads/2022/06/etanol2.jpg"
-            image3="https://designfires.pl/wp-content/uploads/2022/06/etanol3.jpg"
-            image8="https://designfires.pl/wp-content/uploads/2022/06/etanol4.jpg"
-            image5="https://designfires.pl/wp-content/uploads/2022/06/etanol5.jpeg"
-            image6="https://designfires.pl/wp-content/uploads/2022/06/etanol6.jpg"
-            image7="https://designfires.pl/wp-content/uploads/2022/07/a0852542-a3d1-49d4-accf-2d5429e931a9.jpg"
-            image4="https://designfires.pl/wp-content/uploads/2022/07/IMG_5569-scaled.jpg"
+            image1="https://designfires.pl/wp-content/uploads/2022/07/Ethanol1-2.png"
+            image2="https://designfires.pl/wp-content/uploads/2022/07/Ethanol2-2.png"
+            image3="https://designfires.pl/wp-content/uploads/2022/07/Ethanol3-2.png"
+            image8="https://designfires.pl/wp-content/uploads/2022/07/Ethanol4-2.png"
+            image5="https://designfires.pl/wp-content/uploads/2022/07/Ethanol5-2.png"
+            image6="https://designfires.pl/wp-content/uploads/2022/07/Ethanol6-2.png"
+            image7="https://designfires.pl/wp-content/uploads/2022/07/Ethanol7-2.png"
+            image4="https://designfires.pl/wp-content/uploads/2022/07/Ethanol8-2.png"
+            image9="https://designfires.pl/wp-content/uploads/2022/07/Ethanol9-2.png"
+            image10="https://designfires.pl/wp-content/uploads/2022/07/Ethanol10-2.png"
           />
         </Col>
         <Col>

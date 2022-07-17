@@ -37,6 +37,7 @@ const CustomizerFirePlaces = (props) => {
   const showModalHandler = (image) => {
     setModalPhoto(image);
     setShowModal(true);
+    document.body.click();
   };
   const closeModal = () => {
     setShowModal(false);
@@ -243,7 +244,7 @@ const CustomizerFirePlaces = (props) => {
   ));
   const fireplacesDropDown = (
     <DropdownButton
-      id="dropdown-basic-button"
+      id="dropdown-fireplaces-button"
       variant="primary"
       className="fw-bold"
       title={selectedFireplace.name}
@@ -283,7 +284,7 @@ const CustomizerFirePlaces = (props) => {
   const fireplacesLengthDropDown = (
     <DropdownButton
       className="bolder"
-      id="dropdown-basic-button"
+      id="dropdown-fireplacelength-button"
       variant="primary"
       disabled={!selected}
       title={selectedFireplace.length}

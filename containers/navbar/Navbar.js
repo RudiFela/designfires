@@ -49,19 +49,19 @@ const Navibar = () => {
               </Nav.Link>
               <Nav.Link
                 className="text-white text-center"
-                href="https://designfires.com/gas-fireplace/"
+                href="https://old.designfires.com/gas-fireplace/"
               >
                 Gas Fireplace
               </Nav.Link>
               <Nav.Link
                 className="text-white text-center"
-                href="https://designfires.com/traepejse/"
+                href="https://old.designfires.com/traepejse/"
               >
                 Wood Fireplace
               </Nav.Link>
               <Nav.Link
                 className="text-white text-center"
-                href="https://designfires.com/outdoorgarden/"
+                href="https://old.designfires.com/outdoorgarden/"
               >
                 Outdoor Fireplace
               </Nav.Link>

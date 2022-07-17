@@ -2,8 +2,6 @@ import React, { useEffect, useState, lazy, Suspense, useContext } from "react";
 import Accessories from "../../components/Accessories/Accessories";
 import Decorations from "../../components/Decorations/Decorations";
 import Inspired from "../../components/Inspired/Inspired";
-import axios from "axios";
-//import Customizer from "../../components/Customizer/Customizer";
 import Ethanol from "../../components/Ethanol/Ethanol";
 import Mystic from "../../components/Mystic/Mystic";
 import { useGetProducts } from "../../hooks/add-variants";
@@ -21,7 +19,7 @@ const Body = (props) => {
     useContext(LanguageContext);
   const { addVariants, minimalFireplacePrice } = useGetProducts();
   useEffect(() => {
-    console.log("take price");
+    //console.log("take price");
     if (!isLoading) {
       takePrice();
     }
@@ -38,6 +36,7 @@ const Body = (props) => {
     setFireplaceProducts(addVariants(props.fireplaces));
     setCasingsProducts(addVariants(props.casings));
     setIsLoading(false);
+    console.log(addVariants(props.casings));
   };
   /* const getData = async () => {
     // ck ck_b143b31c7842e4a628279fe7b097980c311f08d5

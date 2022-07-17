@@ -3,7 +3,7 @@
 .advantage {
   color: var.$primary-color;
 
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5) !important;
 
   & img {
     overflow: hidden;
@@ -17,11 +17,13 @@
   &-flex {
     display: flex;
     justify-content: space-between;
+    z-index: 1;
   }
   &-right {
     text-align: right;
     padding-right: 2rem;
     flex: 1;
+    z-index: 1;
     & ul {
       list-style-type: none;
     }
@@ -38,6 +40,7 @@
   }
   &-left {
     flex: 1;
+    z-index: 1;
     & ul {
       list-style-type: none;
     }
@@ -59,6 +62,16 @@
 .darker {
   background: rgba(0, 0, 0, 0.35);
 }
+
+.landingImage {
+  height: 500px;
+  z-index: 0;
+}
+.landingRest {
+  position: relative;
+  z-index: 1;
+}
+
 @media only screen and (max-width: 800px) {
   .advantage {
     & ul {

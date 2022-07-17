@@ -31,7 +31,7 @@ const CustomizerItemList = (props) => {
       {list.map((item) => (
         <ListGroup.Item key={item.id}>
           <Button
-            className="w-100 btn-custom"
+            className="w-100 btn-custom text-white"
             onClick={() => {
               props.onAdd(
                 item,

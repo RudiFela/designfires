@@ -54,14 +54,16 @@ const Mystic = (props) => {
       >
         <Col className="align-self-center mt-3">
           <PhotosGrid
-            image1="https://designfires.pl/wp-content/uploads/2022/06/mystic1.jpg"
-            image2="https://designfires.pl/wp-content/uploads/2022/06/mystic2.jpg"
-            image3="https://designfires.pl/wp-content/uploads/2022/06/mystic3.jpg"
-            image4="https://designfires.pl/wp-content/uploads/2022/06/mystic4.jpg"
-            image5="https://designfires.pl/wp-content/uploads/2022/06/mystic5.jpg"
-            image6="https://designfires.pl/wp-content/uploads/2022/06/mystic6.jpg"
-            image7="https://designfires.pl/wp-content/uploads/2022/07/IMG_4689-scaled.jpg"
-            image8="https://designfires.pl/wp-content/uploads/2022/07/IMG_5628-1-scaled.jpg"
+            image1="https://designfires.pl/wp-content/uploads/2022/07/Mystic1-1.png"
+            image2="https://designfires.pl/wp-content/uploads/2022/07/Mystic2-1.png"
+            image3="https://designfires.pl/wp-content/uploads/2022/07/Mystic3-1.png"
+            image4="https://designfires.pl/wp-content/uploads/2022/07/Mystic4-1.png"
+            image5="https://designfires.pl/wp-content/uploads/2022/07/Mystic5-1.png"
+            image6="https://designfires.pl/wp-content/uploads/2022/07/Mystic6-1.png"
+            image7="https://designfires.pl/wp-content/uploads/2022/07/Mystic7.png"
+            image8="https://designfires.pl/wp-content/uploads/2022/07/Mystic8.png"
+            image9="https://designfires.pl/wp-content/uploads/2022/07/Mystic9.png"
+            image10="https://designfires.pl/wp-content/uploads/2022/07/Mystic10.png"
           />
         </Col>
         <Col>

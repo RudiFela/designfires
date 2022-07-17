@@ -1,5 +1,4 @@
 import { BsPlus } from "react-icons/bs";
-import Image from "next/image";
 const Accesories = (props) => {
   const accessoriesImage = "/static/images/Rectangle12.png";
   //You can customize It with our many accessiories!
@@ -15,13 +14,7 @@ const Accesories = (props) => {
         </h2>
         <div className="cards">
           <div className="cards--image">
-            <img
-              src={accessoriesImage}
-              alt="info image"
-              // width={1341}
-              // height={533}
-              //layout="fill"
-            />
+            <img src={accessoriesImage} alt="info image" />
           </div>
           <div className="cards--info info--1" href="#customize">
             <a href="#customize">

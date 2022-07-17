@@ -1,11 +1,11 @@
 @import "../../styles/variables";
 
 .photo {
-  //position: relative;
+  position: relative;
   overflow: hidden;
   //max-height: 240px;
-  // height: 160px;
-  // width: 291px;
+  height: 200px;
+  width: 300px;
   margin-top: 2rem;
   object-fit: cover;
   display: block;
@@ -72,13 +72,23 @@
 @media only screen and (max-width: 800px) {
   .photo {
     margin-top: 0.5rem;
+    width: 200px;
+    height: 150px;
   }
   .photocard-container-1 {
     margin-left: 0.5rem;
   }
 }
+@media only screen and (max-width: 500px) {
+  .photo {
+    width: 150px;
+    height: 100px;
+  }
+}
 @media only screen and (max-width: 400px) {
   .photo {
     border-radius: 15px;
+    width: 120px;
+    height: 80px;
   }
 }

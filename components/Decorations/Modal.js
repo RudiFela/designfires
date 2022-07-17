@@ -27,19 +27,28 @@ const MyVerticallyCenteredModal = (props) => {
         closeVariant="white"
       ></Modal.Header>
       <Modal.Body className="bg-primary">
-        {isLoading && (
-          <div className="text-center">
-            <Spinner animation="border" variant="secondary" />
-          </div>
-        )}
-
-        <Image
-          className="figure-round figure-img img-fluid"
-          width={2400}
-          height={1600}
-          onLoadingComplete={onComplete}
-          src={props.image}
-        />
+        <div className="modal-size">
+          {props.image ? (
+            <>
+              {isLoading && (
+                <div className="text-center">
+                  <Spinner animation="border" variant="secondary" />
+                </div>
+              )}
+              <Image
+                className="figure-round figure-img img-fluid"
+                //width={2400}
+                //height={1600}
+                layout="fill"
+                objectFit="contain"
+                onLoadingComplete={onComplete}
+                src={props.image}
+              />
+            </>
+          ) : (
+            <div className="modal-size">{props.children}</div>
+          )}
+        </div>
       </Modal.Body>
       {props.Footer ? (
         <Modal.Footer className="bg-primary text-white">

@@ -1,4 +1,5 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
+import MyVerticallyCenteredModal from "../Decorations/Modal";
 import {
   Dropdown,
   Row,
@@ -11,9 +12,20 @@ import {
 import { LanguageContext } from "../context/language-context";
 import CustomizerWrapper from "./CustomizerWrapper";
 const CustomizerCasings = (props) => {
+  const [showModal, setShowModal] = useState(false);
+  const [modalPhoto, setModalPhoto] = useState();
   const lang = useContext(LanguageContext);
   const { casings, pickedCaseItem } = props;
   const pickedGlassPcsRef = useRef();
+
+  const showModalHandler = (image) => {
+    setModalPhoto(image);
+    setShowModal(true);
+    document.body.click();
+  };
+  const closeModal = () => {
+    setShowModal(false);
+  };
   const popoverInfo = pickedCaseItem.selected ? (
     <>
       <Row>
@@ -56,6 +68,18 @@ const CustomizerCasings = (props) => {
           </h6>
         </Col>
       </Row>
+      <Row>
+        <Button
+          className="p-0"
+          size="sm"
+          onClick={
+            () => showModalHandler()
+            // "https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
+          }
+        >
+          3D View
+        </Button>
+      </Row>
     </>
   ) : (
     <p>Select Casing to see technical params.</p>
@@ -81,7 +105,7 @@ const CustomizerCasings = (props) => {
   ));
   const casingDropDown = (
     <DropdownButton
-      id="dropdown-basic-button"
+      id="dropdown-casing-button"
       variant="primary"
       className="fw-bold"
       title={pickedCaseItem.name}
@@ -97,63 +121,86 @@ const CustomizerCasings = (props) => {
   );
 
   return (
-    <CustomizerWrapper
-      itemDropDown={casingDropDown}
-      selectedItem={pickedCaseItem}
-      lengthDropDown={casingLengthDropDown}
-      selectedPrice={lang.currencyPrice(
-        pickedCaseItem.priceEUR,
-        pickedCaseItem.priceSEK,
-        pickedCaseItem.priceDKK
-      )}
-      popoverInfo={popoverInfo}
-      selected={pickedCaseItem.selected}
-      cssClass="card-deco mt-3 casings-customizer"
-      pictureheigth={400}
-    >
-      <h6 className="text-white mt-2">Glass Color:</h6>
-      <Form.Check
-        inline
-        label="Clear"
-        name="glass"
-        type="radio"
-        defaultChecked={true}
-        id={`inline-glassclear`}
-        onChange={() => props.changeGlassColor("Clear", 127)}
-      />
-      <Form.Check
-        inline
-        label="Bronze"
-        name="glass"
-        type="radio"
-        id={`inline-glassbronze`}
-        onChange={() => props.changeGlassColor("Bronze", 386)}
-      />
-      {pickedCaseItem.selected && (
-        <p className="text-white fw-bold mt-4">{pickedCaseItem.fullName}</p>
-      )}
-      {!pickedCaseItem.selected && (
-        <div className="text-white fs-7">
-          <p className="m-0">
-            How Many pieces of glass do You need?(For opened fireplaces 4 of
-            them recommended )
-          </p>
-          <Form.Select
-            onChange={() =>
-              props.glassPiecesChange(pickedGlassPcsRef.current.value)
-            }
-            className="mt-1"
-            size="sm"
-            ref={pickedGlassPcsRef}
-          >
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
-          </Form.Select>
+    <>
+      <MyVerticallyCenteredModal
+        image={modalPhoto}
+        show={showModal}
+        closemodal={() => closeModal()}
+      >
+        <div className="embed-responsive embed-responsive-21by9 ">
+          {pickedCaseItem.Drawing3d ? (
+            <iframe
+              style={{ width: "100%" }}
+              className="embed-responsive-item modal-size"
+              src={`${pickedCaseItem.Drawing3d.value}/embed?autospin=1&dnt=1`}
+            ></iframe>
+          ) : (
+            <h2 className="text-white text-center mt-5">
+              Sorry,cant find 3d model
+            </h2>
+          )}
         </div>
-      )}
-    </CustomizerWrapper>
+      </MyVerticallyCenteredModal>
+      <CustomizerWrapper
+        itemDropDown={casingDropDown}
+        selectedItem={pickedCaseItem}
+        lengthDropDown={casingLengthDropDown}
+        selectedPrice={lang.currencyPrice(
+          pickedCaseItem.priceEUR,
+          pickedCaseItem.priceSEK,
+          pickedCaseItem.priceDKK
+        )}
+        popoverInfo={popoverInfo}
+        selected={pickedCaseItem.selected}
+        cssClass="card-deco mt-3 casings-customizer"
+        pictureheigth={400}
+      >
+        <p className="text-white fw-bold m-2 ms-0">Glass Color:</p>
+        <Form.Check
+          inline
+          className="text-white fw-bolder"
+          label="Clear"
+          name="glass"
+          type="radio"
+          defaultChecked={true}
+          id={`inline-glassclear`}
+          onChange={() => props.changeGlassColor("Clear", 127)}
+        />
+        <Form.Check
+          inline
+          className="text-white fw-bolder"
+          label="Bronze"
+          name="glass"
+          type="radio"
+          id={`inline-glassbronze`}
+          onChange={() => props.changeGlassColor("Bronze", 386)}
+        />
+        {pickedCaseItem.selected && (
+          <p className="text-white fw-bold mt-4">{pickedCaseItem.fullName}</p>
+        )}
+        {!pickedCaseItem.selected && (
+          <div className="text-white fs-7">
+            <p className="m-0">
+              How Many pieces of glass do You need?(For opened fireplaces 4 of
+              them recommended )
+            </p>
+            <Form.Select
+              onChange={() =>
+                props.glassPiecesChange(pickedGlassPcsRef.current.value)
+              }
+              className="mt-1"
+              size="sm"
+              ref={pickedGlassPcsRef}
+            >
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </Form.Select>
+          </div>
+        )}
+      </CustomizerWrapper>
+    </>
   );
 };
 export default CustomizerCasings;

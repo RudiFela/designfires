@@ -32661,7 +32661,10 @@ textarea.form-control-lg {
   }
 }
 .photo {
+  position: relative;
   overflow: hidden;
+  height: 200px;
+  width: 300px;
   margin-top: 2rem;
   -o-object-fit: cover;
      object-fit: cover;
@@ -32716,15 +32719,25 @@ textarea.form-control-lg {
 @media only screen and (max-width: 800px) {
   .photo {
     margin-top: 0.5rem;
+    width: 200px;
+    height: 150px;
   }
 
   .photocard-container-1 {
     margin-left: 0.5rem;
   }
 }
+@media only screen and (max-width: 500px) {
+  .photo {
+    width: 150px;
+    height: 100px;
+  }
+}
 @media only screen and (max-width: 400px) {
   .photo {
     border-radius: 15px;
+    width: 120px;
+    height: 80px;
   }
 }
 .flex-container {
@@ -43716,7 +43729,7 @@ textarea.form-control-lg {
 }
 .advantage {
   color: #fff;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5) !important;
 }
 .advantage img {
   overflow: hidden;
@@ -43730,11 +43743,13 @@ textarea.form-control-lg {
 .advantage-flex {
   display: flex;
   justify-content: space-between;
+  z-index: 1;
 }
 .advantage-right {
   text-align: right;
   padding-right: 2rem;
   flex: 1;
+  z-index: 1;
 }
 .advantage-right ul {
   list-style-type: none;
@@ -43751,6 +43766,7 @@ textarea.form-control-lg {
 }
 .advantage-left {
   flex: 1;
+  z-index: 1;
 }
 .advantage-left ul {
   list-style-type: none;
@@ -43771,6 +43787,16 @@ textarea.form-control-lg {
 
 .darker {
   background: rgba(0, 0, 0, 0.35);
+}
+
+.landingImage {
+  height: 500px;
+  z-index: 0;
+}
+
+.landingRest {
+  position: relative;
+  z-index: 1;
 }
 
 @media only screen and (max-width: 800px) {
@@ -54830,17 +54856,6 @@ textarea.form-control-lg {
   margin: 2rem;
   border-radius: 35px;
 }
-.decoration-movie {
-  height: 28.125vw;
-  position: relative;
-}
-.decoration-movie video {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 .decoration-photos {
   align-items: center;
   display: flex;
@@ -54860,15 +54875,6 @@ textarea.form-control-lg {
   display: flex;
   flex-direction: column;
   margin-left: 2rem;
-}
-
-.test {
-  display: flex;
-  justify-content: center;
-}
-.test video {
-  max-width: 291px;
-  height: auto;
 }
 
 .overlay {
@@ -54896,15 +54902,39 @@ textarea.form-control-lg {
   font-weight: 500;
 }
 
+.modal-size {
+  height: 30vw;
+}
+
 @media only screen and (max-width: 400px) {
   .overlay {
     padding: 5px;
   }
 }
+@media only screen and (max-width: 800px) {
+  .modal-size {
+    height: 60vw;
+  }
+}
 .deco {
-  max-width: 291px;
+  width: 300px;
 }
 
+@media only screen and (max-width: 800px) {
+  .deco {
+    width: 200px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .deco {
+    width: 150px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .deco {
+    width: 120px;
+  }
+}
 .inspired img {
   border-radius: 35px !important;
   -o-object-fit: cover !important;
@@ -65906,50 +65936,6 @@ textarea.form-control-lg {
   width: 22rem;
 }
 
-.carousels {
-  max-height: 160px;
-  margin: 2rem;
-}
-.carousels-item {
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  max-height: 160px;
-  max-width: 300px;
-  border-radius: 25px;
-}
-.carousels .inner {
-  white-space: nowrap;
-  transition: transform 0.3s;
-}
-.carousels .image-wrap {
-  height: 100%;
-  width: 100%;
-  border: 1px solid #000000;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-.carousels .image-wrap img {
-  max-width: 100%;
-  max-height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-@media only screen and (max-width: 800px) {
-  .carousels {
-    margin: 0.5rem;
-    padding: 0.5rem;
-  }
-  .carousels-item {
-    border-radius: 5px;
-    margin: 0;
-  }
-
-  .photocard-container-1 {
-    margin-left: 0.2rem;
-  }
-}
 /* import bootstrap to set changes */
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)

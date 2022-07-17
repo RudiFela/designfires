@@ -26,7 +26,7 @@ const Decorations = (props) => {
     const ar = array.map((item) => (
       <Col
         key={item.id}
-        className="flex-shrink-1"
+        className=""
         //onClick={() => showModalHandler(item.images[0].src)}
       >
         <div className="deco">
@@ -53,7 +53,7 @@ const Decorations = (props) => {
       <h1 className="text-center text-white">
         And add some individual style with decorations!
       </h1>
-      <Row xs={2} md={3} lg={3} xl={4}>
+      <Row xs={2} md={2} lg={3} xxl={4}>
         {showdeco}
       </Row>{" "}
     </Container>

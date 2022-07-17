@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Stack } from "react-bootstrap";
 const Advantage = (props) => {
   const itemsLeft = props.itemsLeft.map((item) => {
@@ -9,14 +10,22 @@ const Advantage = (props) => {
   return (
     <>
       <div
-        className="advantage"
-        style={{
+        className="advantage landingRest darker"
+        /*  style={{
           backgroundImage: "url(" + props.image + ")",
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-        }}
+        }}*/
       >
+        <Image
+          className="landingImage darker"
+          src={props.image}
+          alt="Picture of advantages"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
+        />
         <Stack className="justify-content-center darker" direction="horizontal">
           <h2>
             Advantage of

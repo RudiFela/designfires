@@ -378,7 +378,7 @@ const Customizer = (props) => {
   const showCasingPrice = (photo, name, variant, item, mainItem) => {
     // console.log(item);
     // console.log(mainItem);
-
+    console.log(item);
     setCasingItem((prevCasing) => ({
       ...prevCasing,
       name: mainItem.name,
@@ -391,6 +391,7 @@ const Customizer = (props) => {
       priceDKK: item.DKK_price.value,
       fullName: mainItem.meta_data.find((item) => item.key === "fullname")
         .value,
+      Drawing3d: item.drawing3d,
     }));
 
     const openingSides = mainItem.meta_data.find(
