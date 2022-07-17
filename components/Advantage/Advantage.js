@@ -27,7 +27,7 @@ const Advantage = (props) => {
           objectPosition="center"
         />
         <Stack className="justify-content-center darker" direction="horizontal">
-          <h2>
+          <h2 className="landingRest">
             Advantage of
             <span className="shortName fw-bolder"> {props.shortName}</span>
           </h2>

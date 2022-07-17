@@ -1,10 +1,10 @@
-import { useState } from "react";
 import axios from "axios";
 const crud = {
   auth: {
     username: "ck_b143b31c7842e4a628279fe7b097980c311f08d5",
     password: "cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e",
   },
+  headers: { "Accept-Encoding": "br" },
 };
 export const useGetProducts = () => {
   const minimalFireplacePrice = (item) => {
