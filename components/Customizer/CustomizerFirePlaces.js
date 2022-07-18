@@ -326,7 +326,10 @@ const CustomizerFirePlaces = (props) => {
             variant="info"
             className="text-white"
             onClick={() =>
-              downloadFile(technicalInfo.technical_PDF.value, "test.pdf")
+              downloadFile(
+                technicalInfo.technical_PDF.value,
+                `${selectedFireplace.name} ${selectedFireplace.length}.pdf`
+              )
             }
           >
             Download PDF
