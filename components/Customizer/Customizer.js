@@ -1,6 +1,7 @@
 import { Button, Card, Stack, Container } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
 import { LanguageContext } from "../context/language-context";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import CustomizerItemList from "./CustomizerItemList";
 import CustomizerCasings from "./CustomizerCasings";
 import CustomizerFirePlaces from "./CustomizerFirePlaces";
@@ -109,6 +110,7 @@ const Customizer = (props) => {
   });
   useEffect(() => {
     //console.log(casingItem);
+    //console.log(fireplaceItem);
     // if (fireplaceItem.selected) {
     countCart();
     props.cartHandler(cart);
@@ -230,7 +232,7 @@ const Customizer = (props) => {
       ...prevCart,
       addedFilling: {
         name,
-        priceEUR: Number(priceFillingEUR),
+        priceEUR: priceFillingEUR,
         priceSEK: Number(priceFillingSEK),
         priceDKK: Number(priceFillingDKK),
         pcs: 1,
@@ -281,7 +283,7 @@ const Customizer = (props) => {
     arr = undefined;
   };
   const onShowCart = () => {
-    console.log(cart);
+    //console.log(cart);
     setShowCart(true);
   };
   const clearCart = () => {
@@ -378,7 +380,7 @@ const Customizer = (props) => {
   const showCasingPrice = (photo, name, variant, item, mainItem) => {
     // console.log(item);
     // console.log(mainItem);
-    console.log(item);
+    //console.log(item);
     setCasingItem((prevCasing) => ({
       ...prevCasing,
       name: mainItem.name,
@@ -476,16 +478,31 @@ const Customizer = (props) => {
     SEK_price,
     holesize,
     bottomsize,
-    technical_image
+    technical_image,
+    technical_PDF
   ) => {
     //console.log(casingItem);
+
     setFirePlaceItem((prevItem) => ({
       ...prevItem,
-      priceEUR: variantPrice, //currencyPrice(variantPrice, SEK_price, DKK_price),
-      priceSEK: SEK_price,
-      priceDKK: DKK_price,
+      priceEUR:
+        Number(variantPrice) +
+        Number(cart.addedShs.priceEUR) +
+        Number(cart.addedTop.priceEUR) +
+        Number(cart.addedFilling.priceEUR), //currencyPrice(variantPrice, SEK_price, DKK_price),
+      priceSEK:
+        Number(SEK_price) +
+        Number(cart.addedShs.priceSEK) +
+        Number(cart.addedTop.priceSEK) +
+        Number(cart.addedFilling.priceSEK), //Price +  shs top and filling
+      priceDKK:
+        Number(DKK_price) +
+        Number(cart.addedShs.priceDKK) +
+        Number(cart.addedTop.priceDKK) +
+        Number(cart.addedFilling.priceDKK),
       length: pickedLength,
       photo: image,
+      selectedLength: true,
       variant_details: {
         id,
         liters,
@@ -497,6 +514,7 @@ const Customizer = (props) => {
         holesize,
         bottomsize,
         technical_image,
+        technical_PDF,
       },
     }));
     let leng = (Number(pickedLength) + 60).toString();
@@ -520,6 +538,7 @@ const Customizer = (props) => {
           priceEUR: variantPrice,
           priceSEK: SEK_price,
           priceDKK: DKK_price,
+
           photo: image,
           info: `${dimensions.width}mm/${dimensions.heigth}mm`,
           pcs: 1,
@@ -650,7 +669,7 @@ const Customizer = (props) => {
       setCart((prevCart) => ({
         ...prevCart,
         addedShs: {
-          name: "None",
+          name: "",
           priceEUR: "0",
           priceSEK: "0",
           priceDKK: "0",
@@ -692,7 +711,7 @@ const Customizer = (props) => {
       setCart((prevCart) => ({
         ...prevCart,
         addedTop: {
-          name: "Black Top",
+          name: "",
           priceEUR: "0",
           priceSEK: "0",
           priceDKK: "0",
@@ -825,12 +844,16 @@ const Customizer = (props) => {
             {cart.cartPrice}
             {lang.currencySymbol()}
           </Button>
-          <Button className="bolder" variant="info" onClick={() => clearCart()}>
-            Clear Cart
-          </Button>
-          <Button variant="info" onClick={() => onShowCart()}>
+          <Button
+            className="bolder"
+            variant="info"
+            onClick={() => onShowCart()}
+          >
             Check Cart
           </Button>{" "}
+          <Button variant="info" onClick={() => clearCart()}>
+            <RiDeleteBin6Line />
+          </Button>
         </Stack>
       </div>
     </>

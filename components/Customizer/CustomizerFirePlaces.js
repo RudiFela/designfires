@@ -1,4 +1,8 @@
 import { useState, useContext } from "react";
+import { saveAs } from "file-saver";
+import FileSaver from "file-saver";
+import axios from "axios";
+import fileDownload from "js-file-download";
 import {
   Dropdown,
   Badge,
@@ -191,6 +195,7 @@ const CustomizerFirePlaces = (props) => {
     <>
       <Form.Check
         className="mt-3"
+        disabled={!selectedFireplace.selectedLength}
         inline
         label={
           <OverlayTrigger placement="bottom" overlay={popoverEW}>
@@ -205,6 +210,7 @@ const CustomizerFirePlaces = (props) => {
       />
       <Form.Check
         inline
+        disabled={!selectedFireplace.selectedLength}
         label={
           <OverlayTrigger placement="bottom" overlay={popoverT}>
             <p>T</p>
@@ -217,6 +223,7 @@ const CustomizerFirePlaces = (props) => {
       />
       <Form.Check
         inline
+        disabled={!selectedFireplace.selectedLength}
         label={
           <OverlayTrigger placement="bottom" overlay={popoverPW}>
             <p>PW</p>
@@ -271,7 +278,8 @@ const CustomizerFirePlaces = (props) => {
               item.SEK_price.value,
               item.holesize.value,
               item.bottomsize.value,
-              item.technical_image
+              item.technical_image,
+              item.drawing3d
             );
           }}
           eventKey={item}
@@ -292,7 +300,19 @@ const CustomizerFirePlaces = (props) => {
       {fireplaceLengths}
     </DropdownButton>
   );
-
+  const downloadFile = (url, filename) => {
+    //console.log(url);
+    axios
+      .get(url, {
+        responseType: "blob",
+      })
+      .then((res) => {
+        fileDownload(res.data, filename);
+      });
+    //console.log("done");
+    //FileSaver.saveAs(url, "image.jpg");
+    //window.location.href = { url };
+  };
   return (
     <>
       {" "}
@@ -300,7 +320,19 @@ const CustomizerFirePlaces = (props) => {
         image={modalPhoto}
         show={showModal}
         closemodal={() => closeModal()}
-      />
+        Footer={
+          <Button
+            //href={selectedFireplace.variant_details.technical_PDF}
+            variant="info"
+            className="text-white"
+            onClick={() =>
+              downloadFile(technicalInfo.technical_PDF.value, "test.pdf")
+            }
+          >
+            Download PDF
+          </Button>
+        }
+      ></MyVerticallyCenteredModal>
       <CustomizerWrapper
         cssClass="card-deco mt-3 fireplace-customizer"
         selectedItem={selectedFireplace}
@@ -321,6 +353,7 @@ const CustomizerFirePlaces = (props) => {
               <Col>
                 <Form>
                   <Form.Check
+                    disabled={!selectedFireplace.selectedLength}
                     className="text-white mt-2"
                     type="switch"
                     id="custom-switch"
@@ -329,6 +362,7 @@ const CustomizerFirePlaces = (props) => {
                     label="Smart Home System"
                   />
                   <Form.Check
+                    disabled={!selectedFireplace.selectedLength}
                     className="text-white mt-2 mb-2"
                     type="switch"
                     id="custom-switch"

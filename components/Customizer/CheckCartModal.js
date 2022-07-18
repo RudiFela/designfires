@@ -50,6 +50,17 @@ const CheckCartModal = (props) => {
                         {cart.addedFireplace.info}/3mm
                       </p>
                     </Row>{" "}
+                    <Row>
+                      <p>
+                        Price:
+                        {lang.currencyPrice(
+                          cart.addedFireplace.priceEUR,
+                          cart.addedFireplace.priceSEK,
+                          cart.addedFireplace.priceDKK
+                        )}
+                        {props.currency()}
+                      </p>
+                    </Row>
                   </Col>
                   <Row>
                     {cart.addedFilling.name && (
@@ -95,13 +106,22 @@ const CheckCartModal = (props) => {
                     )}
                   </Row>
                 </Row>
-                <Row>
+                <Row className="float-end">
                   <p>
                     Total:
                     {lang.currencyPrice(
-                      cart.addedFireplace.priceEUR,
-                      cart.addedFireplace.priceSEK,
-                      cart.addedFireplace.priceDKK
+                      Number(cart.addedFireplace.priceEUR) +
+                        Number(cart.addedShs.priceEUR) +
+                        Number(cart.addedTop.priceEUR) +
+                        Number(cart.addedFilling.priceEUR),
+                      Number(cart.addedFireplace.priceSEK) +
+                        Number(cart.addedShs.priceSEK) +
+                        Number(cart.addedTop.priceSEK) +
+                        Number(cart.addedFilling.priceSEK),
+                      Number(cart.addedFireplace.priceDKK) +
+                        Number(cart.addedShs.priceDKK) +
+                        Number(cart.addedTop.priceDKK) +
+                        Number(cart.addedFilling.priceDKK)
                     )}
                     {props.currency()}
                   </p>

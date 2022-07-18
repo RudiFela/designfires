@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Modal, Spinner } from "react-bootstrap";
 const MyVerticallyCenteredModal = (props) => {
   const [isLoading, setIsLoading] = useState(true);
-
+  const { ...others } = props;
   const onComplete = () => {
     //isLoading ? console.log("true") : console.log("false");
     setIsLoading(false);
@@ -14,7 +14,7 @@ const MyVerticallyCenteredModal = (props) => {
   };
   return (
     <Modal
-      {...props}
+      {...others}
       onHide={onHide}
       variant="dark"
       size="lg"
@@ -36,13 +36,14 @@ const MyVerticallyCenteredModal = (props) => {
                 </div>
               )}
               <Image
-                className="figure-round figure-img img-fluid"
+                // className="figure-round figure-img img-fluid"
                 //width={2400}
                 //height={1600}
                 layout="fill"
                 objectFit="contain"
                 onLoadingComplete={onComplete}
                 src={props.image}
+                alt="Modal Image"
               />
             </>
           ) : (

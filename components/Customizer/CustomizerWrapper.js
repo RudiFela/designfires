@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Card, Button, Stack, Popover, OverlayTrigger } from "react-bootstrap";
 import { LanguageContext } from "../context/language-context";
 const CustomizerWrapper = (props) => {
-  const overlayRef = useRef();
+  //const overlayRef = useRef();
   const lang = useContext(LanguageContext);
   const currencySymbol = () => {
     switch (lang.language) {
@@ -51,7 +51,7 @@ const CustomizerWrapper = (props) => {
             {selectedPrice} {currencySymbol()}
           </Button>
           <OverlayTrigger
-            ref={overlayRef}
+            //ref={overlayRef}
             //trigger={["hover", "focus"]}
             trigger="click"
             placement="bottom"
