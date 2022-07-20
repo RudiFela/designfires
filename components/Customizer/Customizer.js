@@ -531,7 +531,28 @@ const Customizer = (props) => {
       const colorGlass = accessories.find((accessories) => {
         return accessories.name === `${glassColor} Glass 6mm`;
       });
-      const glass = colorGlass.variant.find((x) => x.length === pickedLength);
+      let glass;
+      const x = Number(pickedLength) + 100;
+      // console.log(x.toString());
+      //console.log(x / 2);
+      if (Number(pickedLength) > 1500) {
+        const countingGlassPcs = Number(pickedLength) % 200;
+        if (countingGlassPcs > 0) {
+          //+ Number(pickedLength-100)
+          const x = Number(pickedLength) + 100;
+
+          glass = colorGlass.variant.find(
+            (x) => x.length === ((Number(pickedLength) + 100) / 2).toString()
+          );
+        } else {
+          //2x glass = colorGlass.variant.find((x) => x.length === "1500");
+          glass = colorGlass.variant.find(
+            (x) => x.length === (Number(pickedLength) / 2).toString()
+          );
+        }
+      } else {
+        glass = colorGlass.variant.find((x) => x.length === pickedLength);
+      }
       const glassHolders = accessories[1];
 
       setCart((prevCart) => ({

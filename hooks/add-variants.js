@@ -43,9 +43,10 @@ export const useGetProducts = () => {
                   stock_status: item.stock_status, //
                   img: item.image.src,
                   dimensions: {
-                    length: item.dimensions.length,
+                    //
+                    length: item.dimensions.length, //
                     width: item.dimensions.width, //
-                    heigth: item.dimensions.height,
+                    heigth: item.dimensions.height, //
                   },
                   power: item.meta_data.find((item) => item.key === "power") //
                     .value,
