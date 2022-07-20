@@ -1,8 +1,7 @@
 import { useState, useContext } from "react";
-import { saveAs } from "file-saver";
-import FileSaver from "file-saver";
 import axios from "axios";
 import fileDownload from "js-file-download";
+import { FaTruck } from "react-icons/fa";
 import {
   Dropdown,
   Badge,
@@ -260,33 +259,37 @@ const CustomizerFirePlaces = (props) => {
     </DropdownButton>
   );
   const fireplaceLengths = selectedFireplace.variant
-    ? selectedFireplace.variant.map((item) => (
-        <Dropdown.Item
-          className="text-white bolder"
-          key={item.id}
-          onClick={() => {
-            props.onPickLength(
-              item.length,
-              item.price,
-              item.img,
-              item.id,
-              item.liters,
-              item.power,
-              item.burningtime,
-              item.dimensions,
-              item.DKK_price.value,
-              item.SEK_price.value,
-              item.holesize.value,
-              item.bottomsize.value,
-              item.technical_image,
-              item.drawing3d
-            );
-          }}
-          eventKey={item}
-        >
-          {item.length}mm
-        </Dropdown.Item>
-      ))
+    ? selectedFireplace.variant
+        .map((item) => (
+          <Dropdown.Item
+            className="text-white bolder"
+            key={item.id}
+            onClick={() => {
+              props.onPickLength(
+                item.length,
+                item.price,
+                item.img,
+                item.id,
+                item.liters,
+                item.power,
+                item.burningtime,
+                item.dimensions,
+                item.DKK_price.value,
+                item.SEK_price.value,
+                item.holesize.value,
+                item.bottomsize.value,
+                item.technical_image,
+                item.drawing3d,
+                item.stock_status
+              );
+            }}
+            eventKey={item}
+          >
+            {item.length}mm{" "}
+            {item.stock_status === "instock" ? null : <FaTruck />}
+          </Dropdown.Item>
+        ))
+        .reverse()
     : null;
 
   const fireplacesLengthDropDown = (
@@ -406,7 +409,7 @@ const CustomizerFirePlaces = (props) => {
           ) : null}
           {selected && selectedFireplace.name === "DFM" ? (
             <Row>
-              <Col className="pe-0 mt-4">
+              <Col className="pe-0 ">
                 <Form>
                   <Form.Check
                     className="text-white mt-2"
@@ -420,7 +423,7 @@ const CustomizerFirePlaces = (props) => {
                 </Form>
                 {selectedFireplace.name === "DFM" && selected ? filing : null}
               </Col>
-              <Col className="pe-0 mt-4">
+              <Col className="pe-0 ">
                 {" "}
                 <Badge bg="info">Standard:</Badge>
                 <ul>
@@ -445,6 +448,10 @@ const CustomizerFirePlaces = (props) => {
               </Col>
             </Row>
           ) : null}
+          <Badge className="m-0 text-white">
+            <FaTruck />
+            <span> </span>Longer delivery time
+          </Badge>
         </>
       </CustomizerWrapper>
     </>

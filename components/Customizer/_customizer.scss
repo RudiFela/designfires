@@ -87,7 +87,7 @@
   border-color: $secondary-color !important;
 }
 .modallo {
-  background-image: url("http://designfires.pl/wp-content/uploads/2022/07/CartBackground.png");
+  background-image: url("https://designfires.pl/wp-content/uploads/2022/07/CartBackground.png");
   background-size: cover;
   // background-size: 20px 31px;
   // background-repeat: repeat;
@@ -117,4 +117,8 @@
 }
 .casings-customizer {
   width: 22rem;
+}
+.dropdown-menu {
+  max-height: 230px;
+  overflow-y: auto;
 }

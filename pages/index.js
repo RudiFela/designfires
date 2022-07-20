@@ -10,9 +10,13 @@ import styles from "../styles/Home.module.css";
 import axios from "axios";
 import { LanguageContext } from "../components/context/language-context";
 export default function Home(props) {
+  const [language, setLanguage] = useState(props.language);
+  useEffect(() => {
+    console.log(props);
+  }, [language, props]);
   const { addVariants, minimalFireplacePrice } = useGetProducts();
   const [cart, setCart] = useState();
-  const [language, setLanguage] = useState(props.language);
+
   const [isLoading, setIsLoading] = useState(true);
   const cartHandler = (cart) => {
     setCart(cart);
@@ -123,7 +127,16 @@ export async function getStaticProps(context) {
   // console.log(d);
 
   // const casings = await addVariants(casingFetch.data, crud);
-  // const accessories = await addVariants(accessoriesFetch.data, crud);
+  //const accessories = await addVariants(cases, crud);
+  //const test = JSON.parse(accessories);
+  //console.log(cases[0].variations);
+  /* const repos = await axios.get(
+    `https://designfires.pl/wp-json/wc/v3/products/${cases[0].id}/variations`,
+    crud
+  );
+  console.log(repos.data);*/
+  // console.log(addVariants(cases, crud));
+  //console.log(cases);
   //const fireplacess = await addVariants(fireplaceFetch.data, crud);
 
   return {
@@ -133,6 +146,7 @@ export async function getStaticProps(context) {
       accessories: access,
       fireplaces: fire,
       language: LanguageChecker(),
+      //test: accessories,
     },
   };
 }

@@ -1,5 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
+import { FaTruck } from "react-icons/fa";
 import {
   Dropdown,
   Row,
@@ -117,6 +118,12 @@ const CustomizerCasings = (props) => {
   const casingLengthDropDown = (
     <Button className="bolder" variant="primary" disabled>
       {pickedCaseItem.length}mm
+      {pickedCaseItem.stock_status === "instock" ? null : (
+        <>
+          <span> </span>
+          <FaTruck />
+        </>
+      )}
     </Button>
   );
 

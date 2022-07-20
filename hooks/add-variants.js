@@ -37,39 +37,40 @@ export const useGetProducts = () => {
                 let file;
                 // if (item.meta_data.length > 0) {
                 file = {
-                  id: item.id,
-                  price: item.price,
+                  id: item.id, //
+                  price: item.price, //
                   length: item.attributes[0].option,
+                  stock_status: item.stock_status, //
                   img: item.image.src,
                   dimensions: {
                     length: item.dimensions.length,
-                    width: item.dimensions.width,
+                    width: item.dimensions.width, //
                     heigth: item.dimensions.height,
                   },
-                  power: item.meta_data.find((item) => item.key === "power")
+                  power: item.meta_data.find((item) => item.key === "power") //
                     .value,
-                  liters: item.meta_data.find((item) => item.key === "liters")
+                  liters: item.meta_data.find((item) => item.key === "liters") //
                     .value,
                   burningtime: item.meta_data.find(
-                    (item) => item.key === "burning"
+                    (item) => item.key === "burning" //
                   ).value,
                   holesize: item.meta_data.find(
-                    (item) => item.key === "holesize"
+                    (item) => item.key === "holesize" //
                   ),
                   bottomsize: item.meta_data.find(
-                    (item) => item.key === "bottomsize"
+                    (item) => item.key === "bottomsize" //
                   ),
-                  drawing3d: item.meta_data.find((item) => item.key === "3d"),
+                  drawing3d: item.meta_data.find((item) => item.key === "3d"), //
                   technical_image: item.woo_variation_gallery_images,
                   DKK_price: item.meta_data.find(
                     (item) =>
                       item.key ===
-                      "_alg_currency_switcher_per_product_regular_price_DKK"
+                      "_alg_currency_switcher_per_product_regular_price_DKK" //
                   ),
                   SEK_price: item.meta_data.find(
                     (item) =>
                       item.key ===
-                      "_alg_currency_switcher_per_product_regular_price_SEK"
+                      "_alg_currency_switcher_per_product_regular_price_SEK" //
                   ),
                 };
                 /*  if (product === 192) {
@@ -92,6 +93,7 @@ export const useGetProducts = () => {
           });
         });
     });
+    //console.log("done");
     return ProductsArray;
   };
 

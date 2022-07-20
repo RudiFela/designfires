@@ -85,7 +85,7 @@ const Customizer = (props) => {
   const [enableShs, setEnableShs] = useState(false);
   const [stainlessTop, setStainlessTop] = useState(false);
   const [casingItem, setCasingItem] = useState({
-    name: ["Select Type"],
+    name: ["Type"],
     length: [""],
     photo:
       "http://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires.png",
@@ -94,6 +94,7 @@ const Customizer = (props) => {
     priceSEK: "",
     priceDKK: "",
     fullName: "",
+    stock_status: "instock",
     variant: [],
     enable: false,
     selected: false,
@@ -109,12 +110,8 @@ const Customizer = (props) => {
     selected: false,
   });
   useEffect(() => {
-    //console.log(casingItem);
-    //console.log(fireplaceItem);
-    // if (fireplaceItem.selected) {
     countCart();
     props.cartHandler(cart);
-    //}
   }, [
     cart.addedCasing.priceEUR,
     cart.addedFireplace.priceEUR,
@@ -362,7 +359,7 @@ const Customizer = (props) => {
       selected: false,
     });
     setCasingItem({
-      name: ["Select Type"],
+      name: ["Type"],
       length: [""],
       photo:
         "http://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires.png",
@@ -371,6 +368,7 @@ const Customizer = (props) => {
       priceSEK: "",
       priceDKK: "",
       fullName: "",
+      stock_status: "instock",
       variant: [],
       enable: false,
       selected: false,
@@ -380,7 +378,10 @@ const Customizer = (props) => {
   const showCasingPrice = (photo, name, variant, item, mainItem) => {
     // console.log(item);
     // console.log(mainItem);
-    //console.log(item);
+    //console.log(mainItem);
+    if (item.stock_status === "instock") {
+      console.log("instock");
+    }
     setCasingItem((prevCasing) => ({
       ...prevCasing,
       name: mainItem.name,
@@ -388,6 +389,7 @@ const Customizer = (props) => {
       //length: ["Length"],
       variant: variant,
       selected: true,
+      stock_status: item.stock_status,
       priceEUR: item.price,
       priceSEK: item.SEK_price.value,
       priceDKK: item.DKK_price.value,
@@ -479,7 +481,8 @@ const Customizer = (props) => {
     holesize,
     bottomsize,
     technical_image,
-    technical_PDF
+    technical_PDF,
+    stock_status
   ) => {
     //console.log(casingItem);
 
@@ -503,6 +506,7 @@ const Customizer = (props) => {
       length: pickedLength,
       photo: image,
       selectedLength: true,
+      stock_status,
       variant_details: {
         id,
         liters,
@@ -594,6 +598,7 @@ const Customizer = (props) => {
         ...prevCasingItem,
         length: leng,
         enable: true,
+        stock_status: findCaseVariantPicked.stock_status,
         priceEUR: findCaseVariantPicked.price,
         priceSEK: findCaseVariantPicked.SEK_price.value,
         priceDKK: findCaseVariantPicked.DKK_price.value,

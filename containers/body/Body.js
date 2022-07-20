@@ -37,6 +37,7 @@ const Body = (props) => {
     setCasingsProducts(addVariants(props.casings));
     setIsLoading(false);
     console.log(addVariants(props.casings));
+    console.log(addVariants(props.fireplaces));
   };
   /* const getData = async () => {
     // ck ck_b143b31c7842e4a628279fe7b097980c311f08d5
@@ -116,13 +117,15 @@ const Body = (props) => {
 
       <Inspired />
       <div>
-        <Customizer
-          decorations={decorationsProducts} //{props.decorations} //{decorationsProducts} />
-          accessories={accessoriesProducts} //{props.accessories} //
-          casings={casingsProducts} //{props.casings} //
-          fireplace={fireplaceProducts} //{props.fireplaces} //
-          cartHandler={props.cartHandler}
-        />
+        {!isLoading && (
+          <Customizer
+            decorations={decorationsProducts} //{props.decorations} //{decorationsProducts} />
+            accessories={accessoriesProducts} //{props.accessories} //
+            casings={casingsProducts} //{props.casings} //
+            fireplace={fireplaceProducts} //{props.fireplaces} //
+            cartHandler={props.cartHandler}
+          />
+        )}
       </div>
     </div>
   );
