@@ -95,7 +95,9 @@ const CustomizerCasings = (props) => {
           item.images[0].src,
           item.name,
           item.variant,
-          item.variant.find((item) => item.length === pickedCaseItem.length),
+          item.variant.find(
+            (item) => item.length.option === pickedCaseItem.length
+          ),
           item
         );
       }}
@@ -139,7 +141,7 @@ const CustomizerCasings = (props) => {
             <iframe
               style={{ width: "100%" }}
               className="embed-responsive-item modal-size"
-              src={`${pickedCaseItem.Drawing3d.value}/embed?autospin=1&dnt=1`}
+              src={`${pickedCaseItem.Drawing3d}/embed?autospin=1&dnt=1`}
             ></iframe>
           ) : (
             <h2 className="text-white text-center mt-5">

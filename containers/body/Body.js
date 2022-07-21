@@ -13,18 +13,18 @@ const Body = (props) => {
   const [accessoriesProducts, setAccessoriesProducts] = useState([]);
   const [casingsProducts, setCasingsProducts] = useState([]);
   const [fireplaceProducts, setFireplaceProducts] = useState([]);
-  const [lowestPriceDFM, setLowestPriceDFM] = useState("3066");
-  const [lowestPriceDFE, setLowestPriceDFE] = useState("2000");
+  const [lowestPriceDFM, setLowestPriceDFM] = useState();
+  const [lowestPriceDFE, setLowestPriceDFE] = useState();
   const { setIsLoading, isLoading, lang, language } =
     useContext(LanguageContext);
   const { addVariants, minimalFireplacePrice } = useGetProducts();
   useEffect(() => {
     //console.log("take price");
-    if (!isLoading) {
-      takePrice();
-    }
+    //if (!isLoading) {
+    takePrice();
+    // }
   }, [language]);
-  useEffect(() => {
+  /* useEffect(() => {
     getData();
   }, []);
 
@@ -32,13 +32,16 @@ const Body = (props) => {
 
   const getData = async () => {
     setDecorationsProducts(props.decorations.reverse());
-    setAccessoriesProducts(addVariants(props.accessories));
-    setFireplaceProducts(addVariants(props.fireplaces));
-    setCasingsProducts(addVariants(props.casings));
+    //  setAccessoriesProducts(addVariants(props.accessories));
+    // setFireplaceProducts(addVariants(props.fireplaces));
+    setAccessoriesProducts(props.accessories);
+    setFireplaceProducts(props.fireplaces);
+    setCasingsProducts(props.casings);
+    //setCasingsProducts(addVariants(props.casings));
     setIsLoading(false);
-    console.log(addVariants(props.casings));
-    console.log(addVariants(props.fireplaces));
-  };
+    // console.log(addVariants(props.casings));
+    // console.log(addVariants(props.fireplaces));
+  };*/
   /* const getData = async () => {
     // ck ck_b143b31c7842e4a628279fe7b097980c311f08d5
     // cs cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e
@@ -79,34 +82,24 @@ const Body = (props) => {
       case "english":
         return item.price;
       case "swedish":
-        return item.SEK_price.value;
+        return item.SEK_price;
 
       case "danish":
-        return item.DKK_price.value;
+        return item.DKK_price;
     }
   };
 
   const takePrice = () => {
-    console.log(fireplaceProducts[0].variant);
-    !isLoading
-      ? setLowestPriceDFM(
-          currencyPrice(
-            fireplaceProducts[0].variant.find((item) => item.length === "500")
-          )
-        )
-      : null;
-
-    !isLoading
-      ? setLowestPriceDFE(
-          currencyPrice(
-            // fireplaceProducts[1].variant.find((item) => item.length === "500")
-            fireplaceProducts[1].variant.find((item) => item.length === "500")
-          )
-        )
-      : null;
-    /*  return currencyPrice(
-      fireplaceProducts[0].variant.find((item) => item.length === "500")
-    );*/
+    setLowestPriceDFM(
+      currencyPrice(
+        props.fireplaces[0].variant.find((item) => item.length.option === "500")
+      )
+    );
+    setLowestPriceDFE(
+      currencyPrice(
+        props.fireplaces[1].variant.find((item) => item.length.option === "500")
+      )
+    );
   };
   return (
     <div>
@@ -119,10 +112,10 @@ const Body = (props) => {
       <div>
         {!isLoading && (
           <Customizer
-            decorations={decorationsProducts} //{props.decorations} //{decorationsProducts} />
-            accessories={accessoriesProducts} //{props.accessories} //
-            casings={casingsProducts} //{props.casings} //
-            fireplace={fireplaceProducts} //{props.fireplaces} //
+            decorations={props.decorations} //{decorationsProducts} //{decorationsProducts} />
+            accessories={props.accessories} //{accessoriesProducts} //
+            casings={props.casings} //{casingsProducts} //
+            fireplace={props.fireplaces} //{fireplaceProducts} //
             cartHandler={props.cartHandler}
           />
         )}

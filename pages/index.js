@@ -11,13 +11,13 @@ import axios from "axios";
 import { LanguageContext } from "../components/context/language-context";
 export default function Home(props) {
   const [language, setLanguage] = useState(props.language);
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(props);
-  }, [language, props]);
+  }, [language, props]);*/
   const { addVariants, minimalFireplacePrice } = useGetProducts();
   const [cart, setCart] = useState();
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const cartHandler = (cart) => {
     setCart(cart);
   };
@@ -88,7 +88,7 @@ export async function getStaticProps(context) {
     },
   };
   const decoURL =
-    "https://designfires.pl/wp-json/wc/v3/products?category=20&per_page=20";
+    "https://designfires.pl/wp-json/wc/v3/products?category=20&per_page=20&orderby=price&order=desc";
   const casingsURL =
     "https://designfires.pl/wp-json/wc/v3/products?category=23";
   const accessoriesURL =

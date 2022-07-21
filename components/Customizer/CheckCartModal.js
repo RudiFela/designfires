@@ -240,7 +240,7 @@ const CheckCartModal = (props) => {
                 <p className="m-0">
                   Glass({cart.addedAccessories.glass.color}):
                 </p>
-                <p>{cart.addedAccessories.glass.length}mm/200mm/6mm</p>
+                <p>{cart.addedAccessories.glass.length.option}mm/200mm/6mm</p>
               </Col>
 
               <Col xs lg="1">

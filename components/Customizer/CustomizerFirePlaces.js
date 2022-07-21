@@ -142,7 +142,7 @@ const CustomizerFirePlaces = (props) => {
         <Button
           className="p-0"
           size="sm"
-          onClick={() => showModalHandler(technicalInfo.technical_image[0].src)}
+          onClick={() => showModalHandler(technicalInfo.technical_image)}
         >
           Technical Drawing
           <MdOutlineLocalSee className="ms-2" />
@@ -259,37 +259,36 @@ const CustomizerFirePlaces = (props) => {
     </DropdownButton>
   );
   const fireplaceLengths = selectedFireplace.variant
-    ? selectedFireplace.variant
-        .map((item) => (
-          <Dropdown.Item
-            className="text-white bolder"
-            key={item.id}
-            onClick={() => {
-              props.onPickLength(
-                item.length,
-                item.price,
-                item.img,
-                item.id,
-                item.liters,
-                item.power,
-                item.burningtime,
-                item.dimensions,
-                item.DKK_price.value,
-                item.SEK_price.value,
-                item.holesize.value,
-                item.bottomsize.value,
-                item.technical_image,
-                item.drawing3d,
-                item.stock_status
-              );
-            }}
-            eventKey={item}
-          >
-            {item.length}mm{" "}
-            {item.stock_status === "instock" ? null : <FaTruck />}
-          </Dropdown.Item>
-        ))
-        .reverse()
+    ? selectedFireplace.variant.map((item) => (
+        <Dropdown.Item
+          className="text-white bolder"
+          key={item.id}
+          onClick={() => {
+            props.onPickLength(
+              item.length.option,
+              item.price,
+              item.img,
+              item.id,
+              item.liters,
+              item.power,
+              item.burning,
+              item.dimensions,
+              item.DKK_price,
+              item.SEK_price,
+              item.holesize,
+              item.bottomsize,
+              item.technical_image[0],
+              item.drawing3d,
+              item.stock_status,
+              item
+            );
+          }}
+          eventKey={item}
+        >
+          {item.length.option}mm{" "}
+          {item.stock_status === "instock" ? null : <FaTruck />}
+        </Dropdown.Item>
+      ))
     : null;
 
   const fireplacesLengthDropDown = (
@@ -330,7 +329,7 @@ const CustomizerFirePlaces = (props) => {
             className="text-white"
             onClick={() =>
               downloadFile(
-                technicalInfo.technical_PDF.value,
+                technicalInfo.technical_PDF,
                 `${selectedFireplace.name} ${selectedFireplace.length}.pdf`
               )
             }

@@ -376,12 +376,6 @@ const Customizer = (props) => {
   };
   ////Casings
   const showCasingPrice = (photo, name, variant, item, mainItem) => {
-    // console.log(item);
-    // console.log(mainItem);
-    //console.log(mainItem);
-    if (item.stock_status === "instock") {
-      console.log("instock");
-    }
     setCasingItem((prevCasing) => ({
       ...prevCasing,
       name: mainItem.name,
@@ -391,8 +385,8 @@ const Customizer = (props) => {
       selected: true,
       stock_status: item.stock_status,
       priceEUR: item.price,
-      priceSEK: item.SEK_price.value,
-      priceDKK: item.DKK_price.value,
+      priceSEK: item.SEK_price,
+      priceDKK: item.DKK_price,
       fullName: mainItem.meta_data.find((item) => item.key === "fullname")
         .value,
       Drawing3d: item.drawing3d,
@@ -402,30 +396,29 @@ const Customizer = (props) => {
       (item) => item.key === "openingsides"
     ).value;
     const glass = accessories[0].variant.find(
-      (x) => x.length === fireplaceItem.length
+      (x) => x.length.option === fireplaceItem.length
     );
 
     const glassHolders = accessories[1];
-    const shortglass = accessories[0].variant.find((x) => x.length === "300");
-    //console.log(shortglass);
+    const shortglass = accessories[0].variant.find(
+      (x) => x.length.option === "300"
+    );
+
     const openingLongSides = mainItem.meta_data.find(
       (item) => item.key === "long_opening_sides"
     ).value;
     const openingShortSides = mainItem.meta_data.find(
       (item) => item.key === "short_opening_sides"
     ).value;
-    //console.log(openingShortSides);
-    // console.log(glass);
-    //console.log(glassHolders);
-    //console.log(accessories[0].variant);
+
     setCart((prevCart) => ({
       ...prevCart,
       addedCasing: {
         name: mainItem.name,
-        length: item.length,
+        length: item.length.option,
         priceEUR: item.price,
-        priceSEK: item.SEK_price.value,
-        priceDKK: item.DKK_price.value,
+        priceSEK: item.SEK_price,
+        priceDKK: item.DKK_price,
         photo,
         fullName: mainItem.meta_data.find((item) => item.key === "fullname")
           .value,
@@ -437,15 +430,15 @@ const Customizer = (props) => {
             short_length: "300",
             short_pcs: openingShortSides,
             priceEUR: shortglass.price,
-            priceSEK: shortglass.SEK_price.value,
-            priceDKK: shortglass.DKK_price.value,
+            priceSEK: shortglass.SEK_price,
+            priceDKK: shortglass.DKK_price,
             //image:shortglass
           },
           length: glass.length,
           pcs: openingLongSides,
           priceEUR: glass.price,
-          priceSEK: glass.SEK_price.value,
-          priceDKK: glass.DKK_price.value,
+          priceSEK: glass.SEK_price,
+          priceDKK: glass.DKK_price,
           color: glassColor,
           image: accessories[0].images[0].shop_catalog,
         },
@@ -482,10 +475,14 @@ const Customizer = (props) => {
     bottomsize,
     technical_image,
     technical_PDF,
-    stock_status
+    stock_status,
+    item
   ) => {
     //console.log(casingItem);
-
+    //console.log(pickedLength);
+    console.log(technical_image);
+    console.log(technical_PDF);
+    console.log(item);
     setFirePlaceItem((prevItem) => ({
       ...prevItem,
       priceEUR:
@@ -504,7 +501,7 @@ const Customizer = (props) => {
         Number(cart.addedTop.priceDKK) +
         Number(cart.addedFilling.priceDKK),
       length: pickedLength,
-      photo: image,
+      //photo: image,                           ///BACK HERE LATER ON!!!!
       selectedLength: true,
       stock_status,
       variant_details: {
@@ -514,47 +511,51 @@ const Customizer = (props) => {
         burningtime,
         length: dimensions.length,
         width: dimensions.width,
-        heigth: dimensions.heigth,
+        heigth: dimensions.height,
         holesize,
         bottomsize,
         technical_image,
         technical_PDF,
       },
     }));
+
+    const colorGlass = accessories.find((accessories) => {
+      return accessories.name === `${glassColor} Glass 6mm`;
+    });
+    let glass;
+    let enableCasingPick;
+    const x = Number(pickedLength) + 100;
+    // console.log(x.toString());
+    //console.log(x / 2);
+    if (Number(pickedLength) > 1500) {
+      enableCasingPick = false;
+      const countingGlassPcs = Number(pickedLength) % 200;
+      if (countingGlassPcs > 0) {
+        //+ Number(pickedLength-100)
+        const x = Number(pickedLength) + 100;
+
+        glass = colorGlass.variant.find(
+          (x) =>
+            x.length.option === ((Number(pickedLength) + 100) / 2).toString()
+        );
+      } else {
+        //2x glass = colorGlass.variant.find((x) => x.length === "1500");
+        glass = colorGlass.variant.find(
+          (x) => x.length.option === (Number(pickedLength) / 2).toString()
+        );
+      }
+    } else {
+      glass = colorGlass.variant.find((x) => x.length.option === pickedLength);
+      enableCasingPick = true;
+    }
+    const glassHolders = accessories[1];
     let leng = (Number(pickedLength) + 60).toString();
     if (!casingItem.selected) {
       setCasingItem((prevCasingItem) => ({
         ...prevCasingItem,
         length: leng,
-        enable: true,
+        enable: enableCasingPick,
       }));
-      const colorGlass = accessories.find((accessories) => {
-        return accessories.name === `${glassColor} Glass 6mm`;
-      });
-      let glass;
-      const x = Number(pickedLength) + 100;
-      // console.log(x.toString());
-      //console.log(x / 2);
-      if (Number(pickedLength) > 1500) {
-        const countingGlassPcs = Number(pickedLength) % 200;
-        if (countingGlassPcs > 0) {
-          //+ Number(pickedLength-100)
-          const x = Number(pickedLength) + 100;
-
-          glass = colorGlass.variant.find(
-            (x) => x.length === ((Number(pickedLength) + 100) / 2).toString()
-          );
-        } else {
-          //2x glass = colorGlass.variant.find((x) => x.length === "1500");
-          glass = colorGlass.variant.find(
-            (x) => x.length === (Number(pickedLength) / 2).toString()
-          );
-        }
-      } else {
-        glass = colorGlass.variant.find((x) => x.length === pickedLength);
-      }
-      const glassHolders = accessories[1];
-
       setCart((prevCart) => ({
         ...prevCart,
         addedFireplace: {
@@ -564,8 +565,8 @@ const Customizer = (props) => {
           priceSEK: SEK_price,
           priceDKK: DKK_price,
 
-          photo: image,
-          info: `${dimensions.width}mm/${dimensions.heigth}mm`,
+          photo: fireplaceItem.photo,
+          info: `${dimensions.width}mm/${dimensions.height}mm`,
           pcs: 1,
         },
         addedAccessories: {
@@ -580,8 +581,8 @@ const Customizer = (props) => {
             length: glass.length,
             pcs: glassPcs,
             priceEUR: glass.price,
-            priceSEK: glass.SEK_price.value,
-            priceDKK: glass.DKK_price.value,
+            priceSEK: glass.SEK_price,
+            priceDKK: glass.DKK_price,
             color: glassColor,
             image: colorGlass.images[0].shop_catalog,
           },
@@ -618,11 +619,11 @@ const Customizer = (props) => {
       setCasingItem((prevCasingItem) => ({
         ...prevCasingItem,
         length: leng,
-        enable: true,
+        enable: enableCasingPick,
         stock_status: findCaseVariantPicked.stock_status,
         priceEUR: findCaseVariantPicked.price,
-        priceSEK: findCaseVariantPicked.SEK_price.value,
-        priceDKK: findCaseVariantPicked.DKK_price.value,
+        priceSEK: findCaseVariantPicked.SEK_price,
+        priceDKK: findCaseVariantPicked.DKK_price,
       }));
       /* setCasingItem({
         length: leng,
@@ -643,8 +644,8 @@ const Customizer = (props) => {
           name: findCaseNamePicked.name,
           length: leng,
           priceEUR: findCaseVariantPicked.price,
-          priceSEK: findCaseVariantPicked.SEK_price.value,
-          priceDKK: findCaseVariantPicked.DKK_price.value,
+          priceSEK: findCaseVariantPicked.SEK_price,
+          priceDKK: findCaseVariantPicked.DKK_price,
           photo: findCaseVariantPicked.img,
           fullName: findCaseNamePicked.meta_data.find(
             (item) => item.key === "fullname"
