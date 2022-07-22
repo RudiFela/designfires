@@ -1,20 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
-import { addVariants } from "../lib/add-variants";
 import Header from "../containers/header/Header";
 import Footer from "../containers/footer/Footer";
-import { useGetProducts } from "../hooks/add-variants";
 import Body from "../containers/body/Body";
 import Navibar from "../containers/navbar/Navbar";
-import styles from "../styles/Home.module.css";
 import axios from "axios";
 import { LanguageContext } from "../components/context/language-context";
 export default function Home(props) {
   const [language, setLanguage] = useState(props.language);
-  /* useEffect(() => {
+  useEffect(() => {
     console.log(props);
-  }, [language, props]);*/
-  const { addVariants, minimalFireplacePrice } = useGetProducts();
+  }, [language, props]);
   const [cart, setCart] = useState();
 
   const [isLoading, setIsLoading] = useState(false);

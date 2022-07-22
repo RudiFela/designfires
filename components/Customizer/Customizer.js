@@ -280,7 +280,7 @@ const Customizer = (props) => {
     arr = undefined;
   };
   const onShowCart = () => {
-    //console.log(cart);
+    console.log(cart);
     setShowCart(true);
   };
   const clearCart = () => {
@@ -326,6 +326,13 @@ const Customizer = (props) => {
           short: {
             short_length: "300",
             short_pcs: 0,
+            priceEUR: "0",
+            priceSEK: "0",
+            priceDKK: "0",
+          },
+          split_glass: {
+            length: "",
+            pcs: 0,
             priceEUR: "0",
             priceSEK: "0",
             priceDKK: "0",
@@ -478,11 +485,6 @@ const Customizer = (props) => {
     stock_status,
     item
   ) => {
-    //console.log(casingItem);
-    //console.log(pickedLength);
-    console.log(technical_image);
-    console.log(technical_PDF);
-    console.log(item);
     setFirePlaceItem((prevItem) => ({
       ...prevItem,
       priceEUR:
@@ -527,6 +529,7 @@ const Customizer = (props) => {
     const x = Number(pickedLength) + 100;
     // console.log(x.toString());
     //console.log(x / 2);
+    let split_glass = "";
     if (Number(pickedLength) > 1500) {
       enableCasingPick = false;
       const countingGlassPcs = Number(pickedLength) % 200;
@@ -538,6 +541,17 @@ const Customizer = (props) => {
           (x) =>
             x.length.option === ((Number(pickedLength) + 100) / 2).toString()
         );
+        const splitGlass = colorGlass.variant.find(
+          (x) =>
+            x.length.option === ((Number(pickedLength) - 100) / 2).toString()
+        );
+        split_glass = {
+          length: splitGlass.length,
+          pcs: 2,
+          priceEUR: glass.price,
+          priceSEK: glass.SEK_price,
+          priceDKK: glass.DKK_price,
+        };
       } else {
         //2x glass = colorGlass.variant.find((x) => x.length === "1500");
         glass = colorGlass.variant.find(
@@ -578,6 +592,7 @@ const Customizer = (props) => {
               priceSEK: "0",
               priceDKK: "0",
             },
+            split_glass: split_glass,
             length: glass.length,
             pcs: glassPcs,
             priceEUR: glass.price,
@@ -607,15 +622,11 @@ const Customizer = (props) => {
       const findCaseNamePicked = casings.find(
         (casings) => casings.name === casingItem.name
       );
-      //console.log(findCaseNamePicked);
+
       const findCaseVariantPicked = findCaseNamePicked.variant.find(
-        (findCaseNamePicked) => findCaseNamePicked.length === leng
+        (findCaseNamePicked) => findCaseNamePicked.length.option === leng
       );
-      //console.log(findCaseVariantPicked);
-      //console.log(findCaseVariantPicked.price);
-      // console.log("dkk");
-      // console.log(findCaseVariantPicked);
-      //console.log(findCaseNamePicked);
+
       setCasingItem((prevCasingItem) => ({
         ...prevCasingItem,
         length: leng,
@@ -625,18 +636,6 @@ const Customizer = (props) => {
         priceSEK: findCaseVariantPicked.SEK_price,
         priceDKK: findCaseVariantPicked.DKK_price,
       }));
-      /* setCasingItem({
-        length: leng,
-        name: findCaseNamePicked.name,
-        fullName: findCaseNamePicked.acf.fullname,
-        photo: findCaseVariantPicked.img,
-        priceEUR: findCaseVariantPicked.price,
-        priceSEK: findCaseVariantPicked.SEK_price.value,
-        priceDKK: findCaseVariantPicked.DKK_price.value,
-        variant: findCaseNamePicked.variant,
-        enable: true,
-        selected: true,
-      });*/
 
       setCart((prevCart) => ({
         ...prevCart,
@@ -664,19 +663,6 @@ const Customizer = (props) => {
         },
       }));
     }
-
-    // console.log(Number(pickedLength) + 60).toString();
-    /*  setCart((prevCart) => ({
-      ...prevCart,
-      addedFireplace: {
-        name: fireplaceItem.name,
-        length: pickedLength,
-        priceEUR: variantPrice,
-        priceSEK: SEK_price,
-        priceDKK: DKK_price,
-        photo: image,
-      },
-    }));*/
   };
   const showFirePlacePrice = (photo, name, variant) => {
     setFirePlaceItem({

@@ -1,10 +1,5 @@
 import PhotoCard from "../PhotoCard/PhotoCard";
-import { useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import Image from "next/image";
-
-import MyVerticallyCenteredModal from "./Modal";
-
 const Decorations = (props) => {
   //const [showModal, setShowModal] = useState(false);
   // const [modalPhoto, setModalPhoto] = useState();
@@ -16,7 +11,27 @@ const Decorations = (props) => {
   const closeModal = () => {
     setShowModal(false);
   };*/
-  let a = props.decorations;
+  const test = props.decorations.map((item) => (
+    <Col
+      key={item.id}
+      className=""
+      //onClick={() => showModalHandler(item.images[0].src)}
+    >
+      <div className="deco">
+        <div className="rel">
+          <PhotoCard
+            image={item.images[0].woocommerce_single}
+            imagebig={item.images[0].src}
+            imagewidth={600}
+            imageheight={400}
+            // click={() => showModalHandler(item.images[0].src)}
+          />
+          <div className="overlay text-white">{item.name}</div>
+        </div>
+      </div>
+    </Col>
+  ));
+  /* let a = props.decorations;
   let arrays = [],
     size = 3;
 
@@ -47,14 +62,14 @@ const Decorations = (props) => {
     return ar;
   };
   const showdeco = arrays.map((array) => help(array));
-
+*/
   return (
     <Container className="text-white">
       <h1 className="text-center text-white">
         And add some individual style with decorations!
       </h1>
       <Row xs={2} md={2} lg={3} xxl={4}>
-        {showdeco}
+        {test}
       </Row>{" "}
     </Container>
   );
