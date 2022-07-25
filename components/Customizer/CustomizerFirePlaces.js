@@ -266,20 +266,7 @@ const CustomizerFirePlaces = (props) => {
           onClick={() => {
             props.onPickLength(
               item.length.option,
-              item.price,
-              item.img,
-              item.id,
-              item.liters,
-              item.power,
-              item.burning,
-              item.dimensions,
-              item.DKK_price,
-              item.SEK_price,
-              item.holesize,
-              item.bottomsize,
-              item.technical_image[0],
-              item.drawing3d,
-              item.stock_status,
+              selectedFireplace.photo,
               item
             );
           }}

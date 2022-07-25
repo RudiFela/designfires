@@ -118,13 +118,22 @@ const ContactForm = (props) => {
         cartHandler.addedAccessories.glass.pcs > 0
           ? cartHandler.addedAccessories.glass.color
           : "-",
-      user_glass_length: `${cartHandler.addedAccessories.glass.length}mm/200mm/6mm`,
+      user_glass_length: `${cartHandler.addedAccessories.glass.length.option}mm/200mm/6mm`,
       user_glass_pcs: cartHandler.addedAccessories.glass.pcs,
       user_glass_price:
         lang.currencyPrice(
           cartHandler.addedAccessories.glass.priceEUR,
           cartHandler.addedAccessories.glass.priceSEK,
           cartHandler.addedAccessories.glass.priceDKK
+        ) + lang.currencySymbol(),
+
+      user_split_glass_length: `${cartHandler.addedAccessories.glass.split_glass.length.option}mm/200mm/6mm`,
+      user_split_glass_pcs: cartHandler.addedAccessories.glass.split_glass.pcs,
+      user_split_glass_price:
+        lang.currencyPrice(
+          cartHandler.addedAccessories.glass.split_glass.priceEUR,
+          cartHandler.addedAccessories.glass.split_glass.priceSEK,
+          cartHandler.addedAccessories.glass.split_glass.priceDKK
         ) + lang.currencySymbol(),
 
       user_short_glass_length: `${cartHandler.addedAccessories.glass.short.short_length}mm/200mm/6mm`,

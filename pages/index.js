@@ -5,12 +5,13 @@ import Footer from "../containers/footer/Footer";
 import Body from "../containers/body/Body";
 import Navibar from "../containers/navbar/Navbar";
 import axios from "axios";
+import SSRProvider from "react-bootstrap/SSRProvider";
 import { LanguageContext } from "../components/context/language-context";
 export default function Home(props) {
   const [language, setLanguage] = useState(props.language);
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(props);
-  }, [language, props]);
+  }, [language, props]);*/
   const [cart, setCart] = useState();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -40,40 +41,42 @@ export default function Home(props) {
     }
   };
   return (
-    <LanguageContext.Provider
-      value={{
-        language,
-        setLanguage,
-        isLoading,
-        setIsLoading,
-        currencyPrice,
-        currencySymbol,
-      }}
-    >
-      <Head>
-        <title>DesignFires.com</title>
-        <meta property="og:title" content="My page title" key="title" />
-        <meta
-          name="description"
-          content="Fireplace for everyone.Quality and design are always our main priority, and we can provide both
+    <SSRProvider>
+      <LanguageContext.Provider
+        value={{
+          language,
+          setLanguage,
+          isLoading,
+          setIsLoading,
+          currencyPrice,
+          currencySymbol,
+        }}
+      >
+        <Head>
+          <title>DesignFires.com</title>
+          <meta property="og:title" content="My page title" key="title" />
+          <meta
+            name="description"
+            content="Fireplace for everyone.Quality and design are always our main priority, and we can provide both
   standard solutions and custom made fireplaces according to your wishes
   and needs."
-        ></meta>
-        <link rel="shortcut icon" href="/favicon.ico" />
-      </Head>
-      <div className="main">
-        <Navibar language={setLanguage} />
-        <Header />
-        <Body
-          cartHandler={cartHandler}
-          decorations={props.decorations}
-          accessories={props.accessories}
-          casings={props.casings}
-          fireplaces={props.fireplaces}
-        />
-        <Footer cartHandler={cart} />
-      </div>
-    </LanguageContext.Provider>
+          ></meta>
+          <link rel="shortcut icon" href="/favicon.ico" />
+        </Head>
+        <div className="main">
+          <Navibar language={setLanguage} />
+          <Header />
+          <Body
+            cartHandler={cartHandler}
+            decorations={props.decorations}
+            accessories={props.accessories}
+            casings={props.casings}
+            fireplaces={props.fireplaces}
+          />
+          <Footer cartHandler={cart} />
+        </div>
+      </LanguageContext.Provider>
+    </SSRProvider>
   );
 }
 export async function getStaticProps(context) {

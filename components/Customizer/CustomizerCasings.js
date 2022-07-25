@@ -17,7 +17,8 @@ const CustomizerCasings = (props) => {
   const [modalPhoto, setModalPhoto] = useState();
   const lang = useContext(LanguageContext);
   const { casings, pickedCaseItem } = props;
-  const pickedGlassPcsRef = useRef();
+  const pickedLongGlassPcsRef = useRef();
+  const pickedShortGlassPcsRef = useRef();
 
   const showModalHandler = (image) => {
     setModalPhoto(image);
@@ -193,19 +194,48 @@ const CustomizerCasings = (props) => {
               How Many pieces of glass do You need?(For opened fireplaces 4 of
               them recommended )
             </p>
-            <Form.Select
-              onChange={() =>
-                props.glassPiecesChange(pickedGlassPcsRef.current.value)
-              }
-              className="mt-1"
-              size="sm"
-              ref={pickedGlassPcsRef}
-            >
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-              <option value="1">1</option>
-            </Form.Select>
+            <Row>
+              <Col>
+                <Form.Label className="m-0">
+                  <Badge>Long(front and back)</Badge>
+                </Form.Label>
+                <Form.Select
+                  onChange={() =>
+                    props.glassPiecesChange(
+                      3,
+                      pickedShortGlassPcsRef.current.value,
+                      pickedLongGlassPcsRef.current.value
+                    )
+                  }
+                  className="mt-1"
+                  size="sm"
+                  ref={pickedLongGlassPcsRef}
+                >
+                  <option value="2">2</option>
+                  <option value="1">1</option>
+                </Form.Select>
+              </Col>
+              <Col>
+                <Form.Label className="m-0">
+                  <Badge>Short(for sides)</Badge>
+                </Form.Label>
+                <Form.Select
+                  onChange={() =>
+                    props.glassPiecesChange(
+                      3,
+                      pickedShortGlassPcsRef.current.value,
+                      pickedLongGlassPcsRef.current.value
+                    )
+                  }
+                  className="mt-1"
+                  size="sm"
+                  ref={pickedShortGlassPcsRef}
+                >
+                  <option value="2">2</option>
+                  <option value="1">1</option>
+                </Form.Select>
+              </Col>
+            </Row>
           </div>
         )}
       </CustomizerWrapper>

@@ -270,6 +270,60 @@ const CheckCartModal = (props) => {
               </Col>
             </Row>
           )}
+
+          {Number(cart.addedAccessories.glass.split_glass.pcs) > 0 && (
+            <Row className="justify-content-md-start align-items-center border">
+              <Col xs lg="2">
+                <Figure className="m-0">
+                  <Image
+                    className="figure-round figure-img img-fluid"
+                    width={100}
+                    height={100}
+                    src={cart.addedAccessories.glass.image}
+                    alt="Glass picture"
+                  />
+                </Figure>
+              </Col>
+              <Col xs lg="3">
+                <p className="m-0">
+                  Glass({cart.addedAccessories.glass.color}):
+                </p>
+                <p>
+                  {cart.addedAccessories.glass.split_glass.length.option}
+                  mm/200mm/6mm
+                </p>
+              </Col>
+
+              <Col xs lg="1">
+                <p className="m-0">
+                  x{cart.addedAccessories.glass.split_glass.pcs}
+                </p>
+              </Col>
+              <Col xs lg="2">
+                <p className="m-0">
+                  Price:
+                  {lang.currencyPrice(
+                    cart.addedAccessories.glass.split_glass.priceEUR,
+                    cart.addedAccessories.glass.split_glass.priceSEK,
+                    cart.addedAccessories.glass.split_glass.priceDKK
+                  )}
+                  {props.currency()}
+                </p>
+              </Col>
+              <Col xs lg="3">
+                <p className="m-0 ps-2">
+                  Total:
+                  {lang.currencyPrice(
+                    cart.addedAccessories.glass.split_glass.priceEUR,
+                    cart.addedAccessories.glass.split_glass.priceSEK,
+                    cart.addedAccessories.glass.split_glass.priceDKK
+                  ) * cart.addedAccessories.glass.split_glass.pcs}
+                  {props.currency()}
+                </p>
+              </Col>
+            </Row>
+          )}
+
           {Number(cart.addedAccessories.glass.short.short_pcs) > 0 && (
             <Row className="justify-content-md-start align-items-center border">
               <Col xs lg="2">
