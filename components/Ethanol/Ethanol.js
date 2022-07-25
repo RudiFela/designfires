@@ -4,7 +4,7 @@ import AboutSection from "../AboutSection/AboutSection";
 import Advantage from "../Advantage/Advantage";
 
 const Ethanol = (props) => {
-  const title = "Digital Bio-Ethanol Fireplace (DFE)";
+  const title = "Digital Bio-Ethanol Fireplace PRO(DFE)";
   const listItems = [
     "Most beautiful flame pictures on the market",
     "Longest fire / Widest fire length on the market, (50mm more fire on all our models)",
