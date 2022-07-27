@@ -84,7 +84,7 @@ const CustomizerCasings = (props) => {
       </Row>
     </>
   ) : (
-    <p>Select Casing to see technical params.</p>
+    <p className="fw-bold">Select Casing to see technical params.</p>
   );
 
   const casingDropDownItems = casings.map((item) => (
@@ -211,8 +211,8 @@ const CustomizerCasings = (props) => {
                   size="sm"
                   ref={pickedLongGlassPcsRef}
                 >
-                  <option value="2">2</option>
-                  <option value="1">1</option>
+                  <option value="2">2 pcs</option>
+                  <option value="1">1 pcs</option>
                 </Form.Select>
               </Col>
               <Col>
@@ -231,8 +231,9 @@ const CustomizerCasings = (props) => {
                   size="sm"
                   ref={pickedShortGlassPcsRef}
                 >
-                  <option value="2">2</option>
-                  <option value="1">1</option>
+                  <option value="2">2 pcs</option>
+                  <option value="1">1 pcs</option>
+                  <option value="0">0 pcs</option>
                 </Form.Select>
               </Col>
             </Row>

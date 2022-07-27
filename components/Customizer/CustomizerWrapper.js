@@ -41,7 +41,7 @@ const CustomizerWrapper = (props) => {
         height={props.pictureheigth}
         width={480}
       />
-      <Card.Body>
+      <Card.Body className="pb-0">
         <Stack className="flex-wrap mb-2" direction="horizontal" gap={3}>
           {itemDropDown}
 

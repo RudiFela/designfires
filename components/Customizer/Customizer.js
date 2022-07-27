@@ -98,7 +98,7 @@ const Customizer = (props) => {
     name: ["Type"],
     length: [""],
     photo:
-      "http://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires.png",
+      "https://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires-1.png",
     price: "0",
     priceEUR: "",
     priceSEK: "",
@@ -386,7 +386,7 @@ const Customizer = (props) => {
       name: ["Type"],
       length: [""],
       photo:
-        "http://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires.png",
+        "https://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires-1.png",
       price: "0",
       priceEUR: "",
       priceSEK: "",

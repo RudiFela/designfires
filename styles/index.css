@@ -59793,8 +59793,8 @@ textarea.form-control-lg {
   }
 }
 .form-check-input:checked {
-  background-color: #800000 !important;
-  border-color: #800000 !important;
+  background-color: #00952e !important;
+  border-color: #00952e !important;
 }
 
 .modallo {
@@ -59837,6 +59837,16 @@ textarea.form-control-lg {
 .dropdown-menu {
   max-height: 230px;
   overflow-y: auto;
+}
+
+.popover-body {
+  background-image: url("https://designfires.pl/wp-content/uploads/2022/07/CartBackground.png");
+  background-size: cover;
+  border-radius: 25px !important;
+}
+
+.popover {
+  border-radius: 25px !important;
 }
 
 /* import bootstrap to set changes */
@@ -69679,4 +69689,17 @@ textarea.form-control-lg {
 
 html {
   scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 12px; /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.329);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #800000;
 }/*# sourceMappingURL=index.css.map */

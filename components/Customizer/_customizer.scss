@@ -83,8 +83,8 @@
   }
 }
 .form-check-input:checked {
-  background-color: $secondary-color !important;
-  border-color: $secondary-color !important;
+  background-color: $success_color !important;
+  border-color: $success_color !important;
 }
 .modallo {
   background-image: url("https://designfires.pl/wp-content/uploads/2022/07/CartBackground.png");
@@ -121,4 +121,12 @@
 .dropdown-menu {
   max-height: 230px;
   overflow-y: auto;
+}
+.popover-body {
+  background-image: url("https://designfires.pl/wp-content/uploads/2022/07/CartBackground.png");
+  background-size: cover;
+  border-radius: 25px !important;
+}
+.popover {
+  border-radius: 25px !important;
 }

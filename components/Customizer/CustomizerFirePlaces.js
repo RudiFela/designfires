@@ -2,6 +2,17 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import { FaTruck } from "react-icons/fa";
+import { GiElectric } from "react-icons/gi";
+import { IoWaterOutline } from "react-icons/io";
+import { MdWaterDrop } from "react-icons/md";
+import { BiTimer } from "react-icons/bi";
+import {
+  CgArrowsMergeAltV,
+  CgArrowsShrinkH,
+  CgArrowsShrinkV,
+  CgArrowsExpandRight,
+} from "react-icons/cg";
+
 import {
   Dropdown,
   Badge,
@@ -49,9 +60,10 @@ const CustomizerFirePlaces = (props) => {
     <>
       <Row>
         <Col>
-          <h6>
-            Power/h KW:{" "}
+          <h6 className="fw-bold">
+            Power/h KW:
             <Badge className="float-end ms-2" bg="secondary">
+              <GiElectric />
               {technicalInfo.power}
             </Badge>
           </h6>
@@ -59,20 +71,20 @@ const CustomizerFirePlaces = (props) => {
       </Row>
       <Row>
         <Col>
-          <h6>
-            Liters/h:{" "}
+          <h6 className="fw-bold">
+            Liters/h:
             <Badge className="float-end" bg="secondary">
-              {technicalInfo.liters}
+              <MdWaterDrop /> {technicalInfo.liters}
             </Badge>
           </h6>
         </Col>
       </Row>
       <Row>
         <Col>
-          <h6>
-            Burning Time/h:{" "}
+          <h6 className="fw-bold">
+            Burning Time/h:
             <Badge className="float-end ms-2" bg="secondary">
-              {technicalInfo.burningtime}
+              <BiTimer /> {technicalInfo.burningtime}
             </Badge>
           </h6>
         </Col>
@@ -80,9 +92,10 @@ const CustomizerFirePlaces = (props) => {
 
       <Row>
         <Col>
-          <h6>
+          <h6 className="fw-bold">
             Length:
             <Badge className="float-end" bg="secondary">
+              <CgArrowsShrinkH className="me-1" />
               {technicalInfo.length}mm
             </Badge>
           </h6>
@@ -90,9 +103,10 @@ const CustomizerFirePlaces = (props) => {
       </Row>
       <Row>
         <Col>
-          <h6>
+          <h6 className="fw-bold">
             Width:
             <Badge className="float-end " bg="secondary">
+              <CgArrowsExpandRight className="me-1" />
               {technicalInfo.width}mm
             </Badge>
           </h6>
@@ -100,9 +114,10 @@ const CustomizerFirePlaces = (props) => {
       </Row>
       <Row>
         <Col>
-          <h6>
+          <h6 className="fw-bold">
             Heigth:
             <Badge className="float-end" bg="secondary">
+              <CgArrowsShrinkV />
               {technicalInfo.heigth}mm
             </Badge>
           </h6>
@@ -110,17 +125,17 @@ const CustomizerFirePlaces = (props) => {
       </Row>
       <Row>
         <Col>
-          <h6>
+          <h6 className="fw-bold">
             Top Plate Thickess:
             <Badge className="float-end" bg="secondary">
-              3mm
+              <CgArrowsMergeAltV /> 3mm
             </Badge>
           </h6>
         </Col>
       </Row>
       <Row>
         <Col>
-          <h6>
+          <h6 className="fw-bold">
             Bottom Size:
             <Badge className="float-end" bg="secondary">
               {technicalInfo.bottomsize} mm
@@ -130,7 +145,7 @@ const CustomizerFirePlaces = (props) => {
       </Row>
       <Row>
         <Col>
-          <h6>
+          <h6 className="fw-bold">
             Hole Size:
             <Badge className="float-end" bg="secondary">
               {technicalInfo.holesize} mm
@@ -138,19 +153,18 @@ const CustomizerFirePlaces = (props) => {
           </h6>
         </Col>
       </Row>
-      <Row>
-        <Button
-          className="p-0"
-          size="sm"
-          onClick={() => showModalHandler(technicalInfo.technical_image)}
-        >
-          Technical Drawing
-          <MdOutlineLocalSee className="ms-2" />
-        </Button>
-      </Row>
+
+      <Button
+        className=""
+        size="sm"
+        onClick={() => showModalHandler(technicalInfo.technical_image)}
+      >
+        Technical Drawing
+        <MdOutlineLocalSee className="ms-2" />
+      </Button>
     </>
   ) : (
-    <p>Select Length to see technical params.</p>
+    <h6 className="fw-bold">Select Length to see technical params.</h6>
   );
 
   const popover = (
@@ -375,15 +389,21 @@ const CustomizerFirePlaces = (props) => {
                   </Badge>
                   <ul>
                     <li>
-                      <Badge className="text-wrap">Remote Control</Badge>
+                      <Badge className="">Remote Control</Badge>
                     </li>{" "}
                     <li>
-                      <Badge className="text-wrap">
+                      <Badge className="text-wrap text-start">
                         Longest burning time on the market 20 hours
                       </Badge>
                     </li>
                     <li>
                       <Badge>Black Top</Badge>
+                    </li>
+                    <li>
+                      <Badge>Digital Control with safety sensors</Badge>
+                    </li>
+                    <li>
+                      <Badge>Electronic refueling system</Badge>
                     </li>
                     <li>
                       <Badge>Support even after varanty expires!</Badge>
@@ -434,10 +454,17 @@ const CustomizerFirePlaces = (props) => {
               </Col>
             </Row>
           ) : null}
-          <Badge className="m-0 text-white">
-            <FaTruck />
-            <span> </span>Longer delivery time
-          </Badge>
+          <span>
+            <Badge className="m-0 text-white" bg="info">
+              <span> </span>Standard delivery time 5 days
+            </Badge>
+          </span>{" "}
+          <span>
+            <Badge className="m-0 text-white" bg="info">
+              <FaTruck />
+              <span> </span>Longer delivery time 50-60 days
+            </Badge>
+          </span>
         </>
       </CustomizerWrapper>
     </>

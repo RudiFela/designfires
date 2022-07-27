@@ -8,15 +8,37 @@ import axios from "axios";
 import SSRProvider from "react-bootstrap/SSRProvider";
 import { LanguageContext } from "../components/context/language-context";
 export default function Home(props) {
-  const [language, setLanguage] = useState(props.language);
-  /* useEffect(() => {
-    console.log(props);
-  }, [language, props]);*/
+  const [language, setLanguage] = useState();
+  useEffect(() => {
+    LanguageChecker();
+  }, []);
   const [cart, setCart] = useState();
 
   const [isLoading, setIsLoading] = useState(false);
   const cartHandler = (cart) => {
     setCart(cart);
+  };
+  /*const LanguageChecker = async () => {
+    const langs = await axios.get("https://api.hostip.info/country.php");
+    switch (langs.data) {
+      case "SWE":
+        return "swedish";
+      case "DNK":
+        return "danish";
+      default:
+        return "english";
+    }
+  };*/
+  const LanguageChecker = async () => {
+    const langs = await axios.get("https://api.hostip.info/country.php");
+    switch (langs.data) {
+      case "SWE":
+        return setLanguage("swedish");
+      case "DNK":
+        return setLanguage("danish");
+      default:
+        return setLanguage("english");
+    }
   };
   const currencySymbol = () => {
     switch (language) {
@@ -101,18 +123,6 @@ export async function getStaticProps(context) {
   const fireplaceFetch = await axios.get(fireplacesURL, crud);
   const accessoriesFetch = await axios.get(accessoriesURL, crud);
   const decorations = await axios.get(decoURL, crud);
-  const lang = await axios.get("https://api.hostip.info/country.php");
-
-  const LanguageChecker = () => {
-    switch (lang.data) {
-      case "SWE":
-        return "swedish";
-      case "DNK":
-        return "danish";
-      default:
-        return "english";
-    }
-  };
 
   // console.log(fireplacess);
   const [deco, cases, access, fire] = await Promise.all([
@@ -144,7 +154,7 @@ export async function getStaticProps(context) {
       casings: cases,
       accessories: access,
       fireplaces: fire,
-      language: LanguageChecker(),
+      // language: LanguageChecker(),
       //test: accessories,
     },
   };
