@@ -66,7 +66,7 @@ const Decorations = (props) => {
   return (
     <Container className="text-white">
       <h1 className="text-center text-white">
-        Add some individual style with Our "HAND MADE" decorations!
+        Add some individual style with Our HAND MADE decorations!
       </h1>
       <Row xs={2} md={2} lg={3} xxl={4}>
         {test}
