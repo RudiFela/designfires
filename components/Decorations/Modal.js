@@ -16,17 +16,22 @@ const MyVerticallyCenteredModal = (props) => {
     <Modal
       {...others}
       onHide={onHide}
+      dialogClassName="rounded-45"
       variant="dark"
       size="lg"
       centered
       aria-labelledby="contained-modal-title-vcenter"
     >
       <Modal.Header
-        className="bg-primary"
+        className="bg-primary pb-2"
         closeButton
         closeVariant="white"
-      ></Modal.Header>
-      <Modal.Body className="bg-primary">
+      >
+        <div className="text-white">
+          <h5>{props.Header}</h5>
+        </div>
+      </Modal.Header>
+      <Modal.Body className="bg-primary ">
         <div className="modal-size">
           {props.image ? (
             <>
@@ -53,7 +58,7 @@ const MyVerticallyCenteredModal = (props) => {
       </Modal.Body>
       {props.Footer ? (
         <Modal.Footer className="bg-primary text-white">
-          {props.Footer}
+          <div className="text-center">{props.Footer}</div>
         </Modal.Footer>
       ) : null}
     </Modal>

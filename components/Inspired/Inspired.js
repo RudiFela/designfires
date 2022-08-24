@@ -18,9 +18,9 @@ const Inspired = () => {
   }, []);
   const Footer = pickedPost ? (
     <>
-      <h3>{pickedPost.acf.fireplace_name}</h3>
-      <h3>{pickedPost.acf.casing_name}</h3>
-      <h3>{pickedPost.acf.decorations}</h3>
+      <h5>{pickedPost.acf.fireplace_name}</h5>
+      <h5>{pickedPost.acf.casing_name}</h5>
+      <h5>{pickedPost.acf.decorations}</h5>
     </>
   ) : null;
   const showModalHandler = (item) => {
@@ -30,14 +30,17 @@ const Inspired = () => {
   const ins = inspiredContent.map((item) => {
     return (
       <Col className="p-2" sm={6} key={item.id}>
-        <Image
-          src={item.acf.image.sizes.medium_large}
-          className="mw-100"
-          onClick={() => showModalHandler(item)}
-          height={410}
-          width={550}
-          alt="inspiration picture of fireplaces"
-        />
+        <div className="rel">
+          <Image
+            src={item.acf.image.sizes.medium_large}
+            className="mw-100"
+            onClick={() => showModalHandler(item)}
+            height={410}
+            width={550}
+            alt="inspiration picture of fireplaces"
+          />
+          <div className="overlay text-white mb-1">{item.acf.place_name}</div>
+        </div>{" "}
       </Col>
     );
   });
@@ -51,6 +54,7 @@ const Inspired = () => {
       </Container>
 
       <MyVerticallyCenteredModal
+        Header={pickedPost ? pickedPost.acf.place_name : null}
         image={pickedPost ? pickedPost.acf.image.url : null}
         show={showModal}
         pickedPost={pickedPost}

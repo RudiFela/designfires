@@ -462,7 +462,8 @@ const CustomizerFirePlaces = (props) => {
           <span>
             <Badge className="m-0 text-white" bg="info">
               <FaTruck />
-              <span> </span>Longer delivery time 50-60 days
+              <span> </span>Longer delivery time 50-60 days, higher shipping
+              price
             </Badge>
           </span>
         </>

@@ -5,6 +5,7 @@ import { LanguageContext } from "../../components/context/language-context";
 const english = "/static/images/greatbritain.png";
 const denmark = "/static/images/denmark.png";
 const sweden = "/static/images/sweden.png";
+const designImage = "/static/images/DanishDesign.png";
 const Navibar = () => {
   const language = useContext(LanguageContext);
   const [lang, setLang] = useState(
@@ -109,7 +110,7 @@ const Navibar = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-          </Navbar.Collapse>
+          </Navbar.Collapse>{" "}
         </Container>
       </Navbar>
     </>

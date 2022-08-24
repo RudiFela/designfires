@@ -4,7 +4,7 @@ const PhotosGrid = (props) => {
   return (
     <>
       <div className="photo-grid  p-3">
-        <Row xs={2}>
+        <Row className="mt-4" xs={2}>
           <Col>
             <PhotoCard
               image={props.image1}
@@ -22,7 +22,7 @@ const PhotosGrid = (props) => {
             />
           </Col>
         </Row>
-        <Row xs={2}>
+        <Row className="mt-4" xs={2}>
           <Col>
             <PhotoCard
               image={props.image3}
@@ -40,7 +40,7 @@ const PhotosGrid = (props) => {
             />
           </Col>
         </Row>
-        <Row xs={2}>
+        <Row className="mt-4" xs={2}>
           <Col>
             <PhotoCard
               image={props.image4}
@@ -58,7 +58,7 @@ const PhotosGrid = (props) => {
             />
           </Col>
         </Row>
-        <Row xs={2}>
+        <Row className="mt-4" xs={2}>
           <Col>
             <PhotoCard
               image={props.image7}
@@ -76,7 +76,7 @@ const PhotosGrid = (props) => {
             />
           </Col>
         </Row>
-        <Row xs={2}>
+        <Row className="mt-4" xs={2}>
           <Col>
             <PhotoCard
               image={props.image9}

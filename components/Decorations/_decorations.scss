@@ -33,10 +33,10 @@
   color: #f1f1f1;
   width: 100%;
   transition: 0.5s ease;
-  opacity: 0;
+  opacity: 1;
   color: white;
-  font-size: clamp(0.5rem, 2.5vw, 1rem);
-  padding: 10px;
+  font-size: clamp(0.5rem, 2vw, 0.8rem);
+  padding: 8px;
   text-align: center;
 }
 .rel:hover .overlay {
@@ -49,6 +49,14 @@
 .modal-size {
   height: 30vw;
 }
+.modal-content {
+  overflow: hidden;
+  border-radius: 25px !important;
+}
+.modal-footer {
+  justify-content: center !important;
+}
+
 @media only screen and (max-width: 400px) {
   .overlay {
     padding: 5px;

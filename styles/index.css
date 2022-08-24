@@ -9927,23 +9927,21 @@ textarea.form-control-lg {
 }
 
 .video-wrapper {
-  width: 100%;
-  height: 56.25vw;
-  position: relative;
-}
-.video-wrapper-video {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  max-width: 1280px;
+  max-height: 530px;
+  display: block;
+  overflow: hidden;
+  margin: 0 auto 80px auto;
+  /* & video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }*/
 }
 .video-wrapper video {
   width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 /* import bootstrap to set changes */
@@ -29618,7 +29616,6 @@ textarea.form-control-lg {
   overflow: hidden;
   height: 200px;
   width: 300px;
-  margin-top: 2rem;
   -o-object-fit: cover;
      object-fit: cover;
   display: block;
@@ -49803,10 +49800,10 @@ textarea.form-control-lg {
   color: #f1f1f1;
   width: 100%;
   transition: 0.5s ease;
-  opacity: 0;
+  opacity: 1;
   color: white;
-  font-size: clamp(0.5rem, 2.5vw, 1rem);
-  padding: 10px;
+  font-size: clamp(0.5rem, 2vw, 0.8rem);
+  padding: 8px;
   text-align: center;
 }
 
@@ -49821,6 +49818,15 @@ textarea.form-control-lg {
 
 .modal-size {
   height: 30vw;
+}
+
+.modal-content {
+  overflow: hidden;
+  border-radius: 25px !important;
+}
+
+.modal-footer {
+  justify-content: center !important;
 }
 
 @media only screen and (max-width: 400px) {

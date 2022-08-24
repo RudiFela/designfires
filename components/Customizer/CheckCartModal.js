@@ -223,53 +223,54 @@ const CheckCartModal = (props) => {
               </Row>
             );
           })}
-          {Number(cart.addedAccessories.glass.pcs) > 0 && (
-            <Row className="justify-content-md-start align-items-center border">
-              <Col xs lg="2">
-                <Figure className="m-0">
-                  <Image
-                    className="figure-round figure-img img-fluid"
-                    width={100}
-                    height={100}
-                    src={cart.addedAccessories.glass.image}
-                    alt="Glass picture"
-                  />
-                </Figure>
-              </Col>
-              <Col xs lg="3">
-                <p className="m-0">
-                  Glass({cart.addedAccessories.glass.color}):
-                </p>
-                <p>{cart.addedAccessories.glass.length.option}mm/200mm/6mm</p>
-              </Col>
+          {Number(cart.addedAccessories.glass.pcs) > 0 &&
+            cart.addedAccessories.glass.image !== "" && (
+              <Row className="justify-content-md-start align-items-center border">
+                <Col xs lg="2">
+                  <Figure className="m-0">
+                    <Image
+                      className="figure-round figure-img img-fluid"
+                      width={100}
+                      height={100}
+                      src={cart.addedAccessories.glass.image}
+                      alt="Glass picture"
+                    />
+                  </Figure>
+                </Col>
+                <Col xs lg="3">
+                  <p className="m-0">
+                    Glass({cart.addedAccessories.glass.color}):
+                  </p>
+                  <p>{cart.addedAccessories.glass.length.option}mm/200mm/6mm</p>
+                </Col>
 
-              <Col xs lg="1">
-                <p className="m-0">x{cart.addedAccessories.glass.pcs}</p>
-              </Col>
-              <Col xs lg="2">
-                <p className="m-0">
-                  Price:
-                  {lang.currencyPrice(
-                    cart.addedAccessories.glass.priceEUR,
-                    cart.addedAccessories.glass.priceSEK,
-                    cart.addedAccessories.glass.priceDKK
-                  )}
-                  {props.currency()}
-                </p>
-              </Col>
-              <Col xs lg="3">
-                <p className="m-0 ps-2">
-                  Total:
-                  {lang.currencyPrice(
-                    cart.addedAccessories.glass.priceEUR,
-                    cart.addedAccessories.glass.priceSEK,
-                    cart.addedAccessories.glass.priceDKK
-                  ) * cart.addedAccessories.glass.pcs}
-                  {props.currency()}
-                </p>
-              </Col>
-            </Row>
-          )}
+                <Col xs lg="1">
+                  <p className="m-0">x{cart.addedAccessories.glass.pcs}</p>
+                </Col>
+                <Col xs lg="2">
+                  <p className="m-0">
+                    Price:
+                    {lang.currencyPrice(
+                      cart.addedAccessories.glass.priceEUR,
+                      cart.addedAccessories.glass.priceSEK,
+                      cart.addedAccessories.glass.priceDKK
+                    )}
+                    {props.currency()}
+                  </p>
+                </Col>
+                <Col xs lg="3">
+                  <p className="m-0 ps-2">
+                    Total:
+                    {lang.currencyPrice(
+                      cart.addedAccessories.glass.priceEUR,
+                      cart.addedAccessories.glass.priceSEK,
+                      cart.addedAccessories.glass.priceDKK
+                    ) * cart.addedAccessories.glass.pcs}
+                    {props.currency()}
+                  </p>
+                </Col>
+              </Row>
+            )}
 
           {Number(cart.addedAccessories.glass.split_glass.pcs) > 0 && (
             <Row className="justify-content-md-start align-items-center border">
@@ -324,58 +325,59 @@ const CheckCartModal = (props) => {
             </Row>
           )}
 
-          {Number(cart.addedAccessories.glass.short.short_pcs) > 0 && (
-            <Row className="justify-content-md-start align-items-center border">
-              <Col xs lg="2">
-                <Figure className="m-0">
-                  <Image
-                    className="figure-round figure-img img-fluid"
-                    width={100}
-                    height={100}
-                    src={cart.addedAccessories.glass.image}
-                    alt="Glass picture"
-                  />
-                </Figure>
-              </Col>
-              <Col xs lg="3">
-                <p className="m-0">
-                  Glass({cart.addedAccessories.glass.color}):
-                </p>
-                <p>
-                  {" "}
-                  {cart.addedAccessories.glass.short.short_length}mm/200mm/6mm
-                </p>
-              </Col>
+          {Number(cart.addedAccessories.glass.short.short_pcs) > 0 &&
+            cart.addedAccessories.glass.image !== "" && (
+              <Row className="justify-content-md-start align-items-center border">
+                <Col xs lg="2">
+                  <Figure className="m-0">
+                    <Image
+                      className="figure-round figure-img img-fluid"
+                      width={100}
+                      height={100}
+                      src={cart.addedAccessories.glass.image}
+                      alt="Glass picture"
+                    />
+                  </Figure>
+                </Col>
+                <Col xs lg="3">
+                  <p className="m-0">
+                    Glass({cart.addedAccessories.glass.color}):
+                  </p>
+                  <p>
+                    {" "}
+                    {cart.addedAccessories.glass.short.short_length}mm/200mm/6mm
+                  </p>
+                </Col>
 
-              <Col xs lg="1">
-                <p className="m-0">
-                  x{cart.addedAccessories.glass.short.short_pcs}
-                </p>
-              </Col>
-              <Col xs lg="2">
-                <p className="m-0">
-                  Price:
-                  {lang.currencyPrice(
-                    cart.addedAccessories.glass.short.priceEUR,
-                    cart.addedAccessories.glass.short.priceSEK,
-                    cart.addedAccessories.glass.short.priceDKK
-                  )}
-                  {props.currency()}
-                </p>
-              </Col>
-              <Col xs lg="3">
-                <p className="m-0 ps-2">
-                  Total:
-                  {lang.currencyPrice(
-                    cart.addedAccessories.glass.short.priceEUR,
-                    cart.addedAccessories.glass.short.priceSEK,
-                    cart.addedAccessories.glass.short.priceDKK
-                  ) * cart.addedAccessories.glass.short.short_pcs}
-                  {props.currency()}
-                </p>
-              </Col>
-            </Row>
-          )}
+                <Col xs lg="1">
+                  <p className="m-0">
+                    x{cart.addedAccessories.glass.short.short_pcs}
+                  </p>
+                </Col>
+                <Col xs lg="2">
+                  <p className="m-0">
+                    Price:
+                    {lang.currencyPrice(
+                      cart.addedAccessories.glass.short.priceEUR,
+                      cart.addedAccessories.glass.short.priceSEK,
+                      cart.addedAccessories.glass.short.priceDKK
+                    )}
+                    {props.currency()}
+                  </p>
+                </Col>
+                <Col xs lg="3">
+                  <p className="m-0 ps-2">
+                    Total:
+                    {lang.currencyPrice(
+                      cart.addedAccessories.glass.short.priceEUR,
+                      cart.addedAccessories.glass.short.priceSEK,
+                      cart.addedAccessories.glass.short.priceDKK
+                    ) * cart.addedAccessories.glass.short.short_pcs}
+                    {props.currency()}
+                  </p>
+                </Col>
+              </Row>
+            )}
           {Number(cart.addedAccessories.holders.pcs) > 0 && (
             <Row className="justify-content-md-start align-items-center border">
               <Col xs lg="2">

@@ -4,14 +4,14 @@ const Header = () => {
       <div
         dangerouslySetInnerHTML={{
           __html: `<video className="video-wrapper-video" autoplay loop muted playsinline>
-          <source src="https://designfires.pl/wp-content/uploads/2022/07/DesignFIresPRO-1.mp4" type="video/mp4" />
+          <source src="https://designfires.pl/wp-content/uploads/2022/07/NewDesignFiresCOMPRESSED.mp4" type="video/mp4" />
           Your browser does not support the video tag.
           </video>`,
         }}
       />
     </div>
     /* 
-<div
+<div  "https://designfires.pl/wp-content/uploads/2022/07/DesignFIresPRO-1.mp4"
         dangerouslySetInnerHTML={{
           __html: `<video className="video-wrapper-video" autoplay loop muted playsinline>
 <source src="https://designfires.pl/wp-content/uploads/2022/07/DesignFIresPRO-1.mp4" type="video/mp4" />

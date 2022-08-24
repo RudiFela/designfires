@@ -60,13 +60,14 @@ const Customizer = (props) => {
     addedDecorations: [],
     addedAccessories: {
       glass: {
-        short: {
-          short_length: "300",
-          short_pcs: shortGlassPcs,
-          priceEUR: "0",
-          priceSEK: "0",
-          priceDKK: "0",
-        },
+        length: "",
+        pcs: longGlassPcs,
+        priceEUR: "0",
+        priceSEK: "0",
+        priceDKK: "0",
+        color: glassColor,
+        image: "",
+        //"https://designfires.pl/wp-content/uploads/2022/07/ClearGlass-scaled.jpg",
         split_glass: {
           length: { option: "" },
           pcs: 0,
@@ -74,12 +75,14 @@ const Customizer = (props) => {
           priceSEK: "0",
           priceDKK: "0",
         },
-        length: "",
-        pcs: longGlassPcs,
-        priceEUR: "0",
-        priceSEK: "0",
-        priceDKK: "0",
-        color: glassColor,
+        short: {
+          short_length: "300",
+          short_pcs: shortGlassPcs,
+          priceEUR: "0",
+          priceSEK: "0",
+          priceDKK: "0",
+          image: "",
+        },
       },
       holders: {
         pcs: 0,
@@ -360,6 +363,7 @@ const Customizer = (props) => {
           priceSEK: "0",
           priceDKK: "0",
           color: glassColor,
+          image: "",
         },
         holders: {
           pcs: 0,
