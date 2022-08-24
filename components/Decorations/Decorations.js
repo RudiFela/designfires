@@ -36,7 +36,7 @@ const Decorations = (props) => {
           </div>
         </div>
       ) : (
-        <div className="m-1" style={{ width: "300px", heigth: "200px" }}>
+        <div className="deco m-1">
           <HoverVideoPlayer
             videoSrc={item.acf.movie_of_decoration_product}
             style={{ borderRadius: "25px", heigth: "200px" }}
@@ -54,7 +54,7 @@ const Decorations = (props) => {
                   alt=""
                   layout="fill"
                   style={{
-                    // Make the image expand to cover the video's dimensions
+                    // Make the image expand to cover the video's dimensionsstyle={{ width: "300px", heigth: "200px" }}
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",

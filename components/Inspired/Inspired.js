@@ -39,7 +39,9 @@ const Inspired = () => {
             width={550}
             alt="inspiration picture of fireplaces"
           />
-          <div className="overlay text-white mb-1">{item.acf.place_name}</div>
+          <div className="overlay text-center text-white mb-1">
+            {item.acf.place_name}
+          </div>
         </div>{" "}
       </Col>
     );
