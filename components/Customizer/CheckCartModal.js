@@ -53,13 +53,34 @@ const CheckCartModal = (props) => {
                     <Row>
                       <p>
                         Price:
-                        {lang.currencyPrice(
-                          cart.addedFireplace.priceEUR,
-                          cart.addedFireplace.priceSEK,
-                          cart.addedFireplace.priceDKK
-                        )}
+                        {Number(
+                          lang.currencyPrice(
+                            cart.addedFireplace.priceEUR,
+                            cart.addedFireplace.priceSEK,
+                            cart.addedFireplace.priceDKK
+                          )
+                        ).toLocaleString(undefined, {
+                          maximumFractionDigits: 2,
+                        })}
                         {props.currency()}
                       </p>
+                      {Number(cart.manufactureCost.manufacture_cost_EUR) > 0 ? (
+                        <p>
+                          Manufacture:
+                          <span className="text-info">
+                            {Number(
+                              lang.currencyPrice(
+                                cart.manufactureCost.manufacture_cost_EUR,
+                                cart.manufactureCost.manufacture_cost_SEK,
+                                cart.manufactureCost.manufacture_cost_DKK
+                              )
+                            ).toLocaleString(undefined, {
+                              maximumFractionDigits: 2,
+                            })}
+                            {props.currency()}
+                          </span>
+                        </p>
+                      ) : null}
                     </Row>
                   </Col>
                   <Row>
@@ -67,11 +88,15 @@ const CheckCartModal = (props) => {
                       <Col lg={true}>
                         <p>
                           Filling Type: {cart.addedFilling.name}(
-                          {lang.currencyPrice(
-                            cart.addedFilling.priceEUR,
-                            cart.addedFilling.priceSEK,
-                            cart.addedFilling.priceDKK
-                          )}
+                          {Number(
+                            lang.currencyPrice(
+                              cart.addedFilling.priceEUR,
+                              cart.addedFilling.priceSEK,
+                              cart.addedFilling.priceDKK
+                            )
+                          ).toLocaleString(undefined, {
+                            maximumFractionDigits: 2,
+                          })}
                           {props.currency()})
                         </p>
                       </Col>
@@ -81,11 +106,15 @@ const CheckCartModal = (props) => {
                       <Col>
                         <p>
                           {cart.addedShs.name}
-                          {lang.currencyPrice(
-                            cart.addedShs.priceEUR,
-                            cart.addedShs.priceSEK,
-                            cart.addedShs.priceDKK
-                          )}
+                          {Number(
+                            lang.currencyPrice(
+                              cart.addedShs.priceEUR,
+                              cart.addedShs.priceSEK,
+                              cart.addedShs.priceDKK
+                            )
+                          ).toLocaleString(undefined, {
+                            maximumFractionDigits: 2,
+                          })}
                           {props.currency()}
                         </p>
                       </Col>
@@ -95,11 +124,15 @@ const CheckCartModal = (props) => {
                         <p>
                           {" "}
                           {cart.addedTop.name}{" "}
-                          {lang.currencyPrice(
-                            cart.addedTop.priceEUR,
-                            cart.addedTop.priceSEK,
-                            cart.addedTop.priceDKK
-                          )}
+                          {Number(
+                            lang.currencyPrice(
+                              cart.addedTop.priceEUR,
+                              cart.addedTop.priceSEK,
+                              cart.addedTop.priceDKK
+                            )
+                          ).toLocaleString(undefined, {
+                            maximumFractionDigits: 2,
+                          })}
                           {props.currency()}
                         </p>
                       </Col>
@@ -109,20 +142,25 @@ const CheckCartModal = (props) => {
                 <Row className="float-end">
                   <p>
                     Total:
-                    {lang.currencyPrice(
-                      Number(cart.addedFireplace.priceEUR) +
-                        Number(cart.addedShs.priceEUR) +
-                        Number(cart.addedTop.priceEUR) +
-                        Number(cart.addedFilling.priceEUR),
-                      Number(cart.addedFireplace.priceSEK) +
-                        Number(cart.addedShs.priceSEK) +
-                        Number(cart.addedTop.priceSEK) +
-                        Number(cart.addedFilling.priceSEK),
-                      Number(cart.addedFireplace.priceDKK) +
-                        Number(cart.addedShs.priceDKK) +
-                        Number(cart.addedTop.priceDKK) +
-                        Number(cart.addedFilling.priceDKK)
-                    )}
+                    {Number(
+                      lang.currencyPrice(
+                        Number(cart.addedFireplace.priceEUR) +
+                          Number(cart.addedShs.priceEUR) +
+                          Number(cart.addedTop.priceEUR) +
+                          Number(cart.addedFilling.priceEUR) +
+                          Number(cart.manufactureCost.manufacture_cost_EUR),
+                        Number(cart.addedFireplace.priceSEK) +
+                          Number(cart.addedShs.priceSEK) +
+                          Number(cart.addedTop.priceSEK) +
+                          Number(cart.addedFilling.priceSEK) +
+                          Number(cart.manufactureCost.manufacture_cost_SEK),
+                        Number(cart.addedFireplace.priceDKK) +
+                          Number(cart.addedShs.priceDKK) +
+                          Number(cart.addedTop.priceDKK) +
+                          Number(cart.addedFilling.priceDKK) +
+                          Number(cart.manufactureCost.manufacture_cost_DKK)
+                      )
+                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     {props.currency()}
                   </p>
                 </Row>
@@ -160,11 +198,15 @@ const CheckCartModal = (props) => {
                     <Col lg={true}>
                       <p>
                         Price:
-                        {lang.currencyPrice(
-                          cart.addedCasing.priceEUR,
-                          cart.addedCasing.priceSEK,
-                          cart.addedCasing.priceDKK
-                        )}
+                        {Number(
+                          lang.currencyPrice(
+                            cart.addedCasing.priceEUR,
+                            cart.addedCasing.priceSEK,
+                            cart.addedCasing.priceDKK
+                          )
+                        ).toLocaleString(undefined, {
+                          maximumFractionDigits: 2,
+                        })}
                         {props.currency()}
                       </p>
                     </Col>
@@ -201,22 +243,26 @@ const CheckCartModal = (props) => {
                 <Col xs lg="2">
                   <p className="m-0">
                     Price:
-                    {lang.currencyPrice(
-                      items.priceEUR,
-                      items.priceSEK,
-                      items.priceDKK
-                    )}
+                    {Number(
+                      lang.currencyPrice(
+                        items.priceEUR,
+                        items.priceSEK,
+                        items.priceDKK
+                      )
+                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     {props.currency()}
                   </p>
                 </Col>
                 <Col xs lg="3">
                   <p className=" m-0 ps-3">
                     Total:
-                    {lang.currencyPrice(
-                      items.priceEUR,
-                      items.priceSEK,
-                      items.priceDKK
-                    ) * items.count}
+                    {Number(
+                      lang.currencyPrice(
+                        items.priceEUR,
+                        items.priceSEK,
+                        items.priceDKK
+                      ) * items.count
+                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     {props.currency()}
                   </p>
                 </Col>
@@ -250,22 +296,26 @@ const CheckCartModal = (props) => {
                 <Col xs lg="2">
                   <p className="m-0">
                     Price:
-                    {lang.currencyPrice(
-                      cart.addedAccessories.glass.priceEUR,
-                      cart.addedAccessories.glass.priceSEK,
-                      cart.addedAccessories.glass.priceDKK
-                    )}
+                    {Number(
+                      lang.currencyPrice(
+                        cart.addedAccessories.glass.priceEUR,
+                        cart.addedAccessories.glass.priceSEK,
+                        cart.addedAccessories.glass.priceDKK
+                      )
+                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     {props.currency()}
                   </p>
                 </Col>
                 <Col xs lg="3">
                   <p className="m-0 ps-2">
                     Total:
-                    {lang.currencyPrice(
-                      cart.addedAccessories.glass.priceEUR,
-                      cart.addedAccessories.glass.priceSEK,
-                      cart.addedAccessories.glass.priceDKK
-                    ) * cart.addedAccessories.glass.pcs}
+                    {Number(
+                      lang.currencyPrice(
+                        cart.addedAccessories.glass.priceEUR,
+                        cart.addedAccessories.glass.priceSEK,
+                        cart.addedAccessories.glass.priceDKK
+                      ) * cart.addedAccessories.glass.pcs
+                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     {props.currency()}
                   </p>
                 </Col>
@@ -303,22 +353,26 @@ const CheckCartModal = (props) => {
               <Col xs lg="2">
                 <p className="m-0">
                   Price:
-                  {lang.currencyPrice(
-                    cart.addedAccessories.glass.split_glass.priceEUR,
-                    cart.addedAccessories.glass.split_glass.priceSEK,
-                    cart.addedAccessories.glass.split_glass.priceDKK
-                  )}
+                  {Number(
+                    lang.currencyPrice(
+                      cart.addedAccessories.glass.split_glass.priceEUR,
+                      cart.addedAccessories.glass.split_glass.priceSEK,
+                      cart.addedAccessories.glass.split_glass.priceDKK
+                    )
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   {props.currency()}
                 </p>
               </Col>
               <Col xs lg="3">
                 <p className="m-0 ps-2">
                   Total:
-                  {lang.currencyPrice(
-                    cart.addedAccessories.glass.split_glass.priceEUR,
-                    cart.addedAccessories.glass.split_glass.priceSEK,
-                    cart.addedAccessories.glass.split_glass.priceDKK
-                  ) * cart.addedAccessories.glass.split_glass.pcs}
+                  {Number(
+                    lang.currencyPrice(
+                      cart.addedAccessories.glass.split_glass.priceEUR,
+                      cart.addedAccessories.glass.split_glass.priceSEK,
+                      cart.addedAccessories.glass.split_glass.priceDKK
+                    ) * cart.addedAccessories.glass.split_glass.pcs
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   {props.currency()}
                 </p>
               </Col>
@@ -357,22 +411,26 @@ const CheckCartModal = (props) => {
                 <Col xs lg="2">
                   <p className="m-0">
                     Price:
-                    {lang.currencyPrice(
-                      cart.addedAccessories.glass.short.priceEUR,
-                      cart.addedAccessories.glass.short.priceSEK,
-                      cart.addedAccessories.glass.short.priceDKK
-                    )}
+                    {Number(
+                      lang.currencyPrice(
+                        cart.addedAccessories.glass.short.priceEUR,
+                        cart.addedAccessories.glass.short.priceSEK,
+                        cart.addedAccessories.glass.short.priceDKK
+                      )
+                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     {props.currency()}
                   </p>
                 </Col>
                 <Col xs lg="3">
                   <p className="m-0 ps-2">
                     Total:
-                    {lang.currencyPrice(
-                      cart.addedAccessories.glass.short.priceEUR,
-                      cart.addedAccessories.glass.short.priceSEK,
-                      cart.addedAccessories.glass.short.priceDKK
-                    ) * cart.addedAccessories.glass.short.short_pcs}
+                    {Number(
+                      lang.currencyPrice(
+                        cart.addedAccessories.glass.short.priceEUR,
+                        cart.addedAccessories.glass.short.priceSEK,
+                        cart.addedAccessories.glass.short.priceDKK
+                      ) * cart.addedAccessories.glass.short.short_pcs
+                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     {props.currency()}
                   </p>
                 </Col>
@@ -401,22 +459,26 @@ const CheckCartModal = (props) => {
               <Col xs lg="2">
                 <p className="m-0">
                   Price:
-                  {lang.currencyPrice(
-                    cart.addedAccessories.holders.priceEUR,
-                    cart.addedAccessories.holders.priceSEK,
-                    cart.addedAccessories.holders.priceDKK
-                  )}
+                  {Number(
+                    lang.currencyPrice(
+                      cart.addedAccessories.holders.priceEUR,
+                      cart.addedAccessories.holders.priceSEK,
+                      cart.addedAccessories.holders.priceDKK
+                    )
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   {props.currency()}
                 </p>
               </Col>
               <Col xs lg="3">
                 <p className="m-0 ps-2">
                   Total:
-                  {lang.currencyPrice(
-                    cart.addedAccessories.holders.priceEUR,
-                    cart.addedAccessories.holders.priceSEK,
-                    cart.addedAccessories.holders.priceDKK
-                  ) * cart.addedAccessories.holders.pcs}
+                  {Number(
+                    lang.currencyPrice(
+                      cart.addedAccessories.holders.priceEUR,
+                      cart.addedAccessories.holders.priceSEK,
+                      cart.addedAccessories.holders.priceDKK
+                    ) * cart.addedAccessories.holders.pcs
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   {props.currency()}
                 </p>
               </Col>
@@ -433,7 +495,10 @@ const CheckCartModal = (props) => {
           ) : (
             <Col>
               <h1 className="mt-4">
-                Total Price:{cart.cartPrice}
+                Total Price:
+                {Number(cart.cartPrice).toLocaleString(undefined, {
+                  maximumFractionDigits: 2,
+                })}
                 {props.currency()}
               </h1>
               <p>All prices includes 25% VAT</p>

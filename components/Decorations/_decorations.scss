@@ -46,9 +46,7 @@
   position: relative;
   font-weight: 500;
 }
-.modal-size {
-  height: 30vw;
-}
+
 .modal-content {
   overflow: hidden;
   border-radius: 25px !important;
@@ -62,11 +60,7 @@
     padding: 5px;
   }
 }
-@media only screen and (max-width: 800px) {
-  .modal-size {
-    height: 60vw;
-  }
-}
+
 .deco {
   width: 300px;
 }

@@ -1,21 +1,18 @@
 import { useContext, useRef } from "react";
 import Image from "next/image";
-import { Card, Button, Stack, Popover, OverlayTrigger } from "react-bootstrap";
+
+import {
+  Card,
+  Button,
+  Stack,
+  Popover,
+  OverlayTrigger,
+  Badge,
+} from "react-bootstrap";
 import { LanguageContext } from "../context/language-context";
 const CustomizerWrapper = (props) => {
   //const overlayRef = useRef();
   const lang = useContext(LanguageContext);
-  const currencySymbol = () => {
-    switch (lang.language) {
-      case "swedish":
-        return "SEK";
-      case "english":
-        return "€";
-
-      case "danish":
-        return "kr";
-    }
-  };
 
   const {
     itemDropDown,
@@ -47,8 +44,25 @@ const CustomizerWrapper = (props) => {
 
           {lengthDropDown}
 
-          <Button className="bolder" variant="primary" disabled>
-            {selectedPrice} {currencySymbol()}
+          <Button as="Badge" className="bolder" variant="primary" disabled>
+            {" "}
+            {Number(selectedPrice).toLocaleString(undefined, {
+              maximumFractionDigits: 2,
+            })}{" "}
+            {lang.currencySymbol()}
+            {selectedItem.stock_status === "instock" ? null : (
+              <p className="m-0 p-0 text-info">
+                +
+                {Number(
+                  lang.currencyPrice(
+                    selectedItem.variant_details.manufacture_cost_EUR,
+                    selectedItem.variant_details.manufacture_cost_SEK,
+                    selectedItem.variant_details.manufacture_cost_DKK
+                  )
+                ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                {lang.currencySymbol()}
+              </p>
+            )}
           </Button>
           <OverlayTrigger
             //ref={overlayRef}

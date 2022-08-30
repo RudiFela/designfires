@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import ImageGallery from "react-image-gallery";
+
 import Image from "next/image";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
 import "react-awesome-slider/dist/styles.css";
@@ -9,6 +11,7 @@ const Inspired = () => {
   const [showModal, setShowModal] = useState(false);
   const [inspiredContent, setInspiredContent] = useState([]);
   const [pickedPost, setPickedPost] = useState();
+  const [postGallery, setPostGallery] = useState([]);
   useEffect(() => {
     axios
       .get("https://designfires.pl/wp-json/wp/v2/inspirations")
@@ -16,6 +19,46 @@ const Inspired = () => {
         setInspiredContent(response.data);
       });
   }, []);
+
+  const prepareGalleryImages = (postPhotos, postVideo) => {
+    let photosArray = [];
+    if (postVideo) {
+      const prepareVideoForGallery = () => {
+        return (
+          //this.state.showVideo[item.embedUrl] ?
+          <div className="gallery-video-wrapper">
+            <a
+              className="close-video"
+              // onClick={this._toggleShowVideo.bind(this, item.embedUrl)}
+            ></a>
+            <iframe
+              width="100%"
+              height="100%"
+              src={postVideo} //"https://designfires.pl/wp-content/uploads/2022/07/GlowFibers.mp4"
+              frameBorder="0"
+              allow="autoplay"
+              //allowFullScreen
+            ></iframe>
+          </div>
+        );
+      };
+      photosArray.push({
+        embedUrl: postVideo,
+        original:
+          "https://designfires.pl/wp-content/uploads/2022/08/IMG_4830-300x246.jpg",
+        thumbnail:
+          "https://designfires.pl/wp-content/uploads/2022/08/IMG_4830-300x246.jpg",
+        renderItem: prepareVideoForGallery,
+      });
+    }
+    postPhotos.forEach((item) => {
+      photosArray.push({
+        original: item.full_image_url,
+        thumbnail: item.thumbnail_image_url,
+      });
+    });
+    setPostGallery(photosArray);
+  };
   const Footer = pickedPost ? (
     <>
       <h5>{pickedPost.acf.fireplace_name}</h5>
@@ -25,6 +68,7 @@ const Inspired = () => {
   ) : null;
   const showModalHandler = (item) => {
     setPickedPost(item);
+    prepareGalleryImages(item.acf.photo_gallery, item.acf.video);
     setShowModal(true);
   };
   const ins = inspiredContent.map((item) => {
@@ -46,6 +90,7 @@ const Inspired = () => {
       </Col>
     );
   });
+
   return (
     <div id="projects">
       <h1 className="text-center text-white m-5">
@@ -57,7 +102,7 @@ const Inspired = () => {
 
       <MyVerticallyCenteredModal
         Header={pickedPost ? pickedPost.acf.place_name : null}
-        image={pickedPost ? pickedPost.acf.image.url : null}
+        //image={pickedPost ? pickedPost.acf.image.url : null}
         show={showModal}
         pickedPost={pickedPost}
         onHide={() => setShowModal(false)}
@@ -65,7 +110,13 @@ const Inspired = () => {
         Footer={Footer}
         imagewidth={400}
         imageheight={400}
-      />
+      >
+        <ImageGallery
+          items={postGallery}
+          thumbnailPosition="left"
+          showPlayButton={false}
+        />
+      </MyVerticallyCenteredModal>
     </div>
   );
 };

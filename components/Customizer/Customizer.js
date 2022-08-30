@@ -92,9 +92,18 @@ const Customizer = (props) => {
         image: "",
       },
     },
+    manufactureCost: {
+      manufacture_cost_EUR: "0",
+      manufacture_cost_SEK: "0",
+      manufacture_cost_DKK: "0",
+    },
     cartPrice: 0,
   });
-
+  /* const [manufactureCost, setManufactureCost] = useState({
+    manufacture_cost_EUR: "0",
+    manufacture_cost_SEK: "0",
+    manufacture_cost_DKK: "0",
+  });*/
   const [enableShs, setEnableShs] = useState(false);
   const [stainlessTop, setStainlessTop] = useState(false);
   const [casingItem, setCasingItem] = useState({
@@ -107,7 +116,7 @@ const Customizer = (props) => {
     priceSEK: "",
     priceDKK: "",
     fullName: "",
-    stock_status: "instock",
+    stock_status: "instock", // was instock
     variant: [],
     enable: false,
     selected: false,
@@ -117,7 +126,11 @@ const Customizer = (props) => {
     length: ["Length"],
     photo: "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES-1.png",
     price: "0",
+    priceEUR: "",
+    priceSEK: "",
+    priceDKK: "",
     variant: [],
+    stock_status: "instock",
     variant_details: undefined,
     filling: [],
     selected: false,
@@ -180,7 +193,8 @@ const Customizer = (props) => {
           Number(cart.addedAccessories.holders.priceEUR) *
             cart.addedAccessories.holders.pcs +
           Number(cart.addedAccessories.glass.short.priceEUR) *
-            cart.addedAccessories.glass.short.short_pcs
+            cart.addedAccessories.glass.short.short_pcs +
+          Number(cart.manufactureCost.manufacture_cost_EUR)
         );
       case "swedish":
         return (
@@ -195,7 +209,8 @@ const Customizer = (props) => {
           Number(cart.addedAccessories.holders.priceSEK) *
             cart.addedAccessories.holders.pcs +
           Number(cart.addedAccessories.glass.short.priceSEK) *
-            cart.addedAccessories.glass.short.short_pcs
+            cart.addedAccessories.glass.short.short_pcs +
+          Number(cart.manufactureCost.manufacture_cost_SEK)
         );
 
       case "danish":
@@ -211,7 +226,8 @@ const Customizer = (props) => {
           Number(cart.addedAccessories.holders.priceDKK) *
             cart.addedAccessories.holders.pcs +
           Number(cart.addedAccessories.glass.short.priceDKK) *
-            cart.addedAccessories.glass.short.short_pcs
+            cart.addedAccessories.glass.short.short_pcs +
+          Number(cart.manufactureCost.manufacture_cost_DKK)
         );
     }
   };
@@ -295,7 +311,7 @@ const Customizer = (props) => {
     arr = undefined;
   };
   const onShowCart = () => {
-    //  console.log(cart);
+    //console.log(cart);
     setShowCart(true);
   };
   const clearCart = () => {
@@ -373,6 +389,11 @@ const Customizer = (props) => {
           image: "",
         },
       },
+      manufactureCost: {
+        manufacture_cost_EUR: "0",
+        manufacture_cost_SEK: "0",
+        manufacture_cost_DKK: "0",
+      },
       cartPrice: 0,
     });
     setFirePlaceItem({
@@ -381,7 +402,11 @@ const Customizer = (props) => {
       photo:
         "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES-1.png",
       price: "0",
+      priceEUR: "",
+      priceSEK: "",
+      priceDKK: "",
       variant: [],
+      stock_status: "instock",
       variant_details: undefined,
       filling: [],
       selected: false,
@@ -493,6 +518,27 @@ const Customizer = (props) => {
 
   ////Fireplaces
   const addFireplaceToCart = (pickedLength, image, item) => {
+    if (item.stock_status !== "instock") {
+      setCasingItem((prevCasingItem) => ({
+        ...prevCasingItem,
+        enable: false,
+      }));
+
+      setCart((prevCart) => ({
+        ...prevCart,
+        manufactureCost: {
+          manufacture_cost_EUR: item.manufacture_cost_EUR,
+          manufacture_cost_SEK: item.manufacture_cost_SEK,
+          manufacture_cost_DKK: item.manufacture_cost_DKK,
+        },
+      }));
+    } else {
+      setCasingItem((prevCasingItem) => ({
+        ...prevCasingItem,
+        enable: true,
+      }));
+    }
+
     setFirePlaceItem((prevItem) => ({
       ...prevItem,
       priceEUR:
@@ -526,6 +572,9 @@ const Customizer = (props) => {
         bottomsize: item.bottomsize,
         technical_image: item.technical_image[0],
         technical_PDF: item.drawing3d,
+        manufacture_cost_EUR: item.manufacture_cost_EUR,
+        manufacture_cost_SEK: item.manufacture_cost_SEK,
+        manufacture_cost_DKK: item.manufacture_cost_DKK,
       },
     }));
 
@@ -662,6 +711,11 @@ const Customizer = (props) => {
             image: glassHolders.images[0].woocommerce_gallery_thumbnail,
           },
         },
+        manufactureCost: {
+          manufacture_cost_EUR: item.manufacture_cost_EUR,
+          manufacture_cost_SEK: item.manufacture_cost_SEK,
+          manufacture_cost_DKK: item.manufacture_cost_DKK,
+        },
       }));
     }
     //////////////////////// length longer than 1500
@@ -676,7 +730,7 @@ const Customizer = (props) => {
         setCasingItem((prevCasingItem) => ({
           ...prevCasingItem,
           length: leng,
-          enable: enableCasingPick,
+          //enable: enableCasingPick,
         }));
         setCart((prevCart) => ({
           ...prevCart,
@@ -735,10 +789,55 @@ const Customizer = (props) => {
         const findCaseVariantPicked = findCaseNamePicked.variant.find(
           (findCaseNamePicked) => findCaseNamePicked.length.option === leng
         );
+        //console.log(findCaseVariantPicked);
+        //if casing variant its not standard(cant findt this variant after change fireplacelength)
+        if (findCaseVariantPicked === undefined) {
+          setCasingItem({
+            name: ["Custom"],
+            length: leng,
+            photo:
+              "https://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires-1.png",
+            price: "0",
+            priceEUR: "0",
+            priceSEK: "0",
+            priceDKK: "0",
+            fullName: "",
+            stock_status: "instock",
+            variant: [],
+            enable: false,
+            selected: false,
+          });
+          setCart((prevCart) => ({
+            ...prevCart,
+            addedCasing: {
+              name: `Custom `, //${findCaseNamePicked.name}`,
+              length: leng,
+              priceEUR: "0",
+              priceSEK: "0",
+              priceDKK: "0",
+              photo: "",
+              fullName: "" /*findCaseNamePicked.meta_data.find(
+                (item) => item.key === "fullname"
+              ).value,*/,
+              pcs: 1,
+            },
+            addedFireplace: {
+              name: fireplaceItem.name,
+              length: pickedLength,
+              priceEUR: item.price,
+              priceSEK: item.SEK_price,
+              priceDKK: item.DKK_price,
+              photo: image,
+              info: `${item.dimensions.width}mm/${item.dimensions.height}mm`,
+              pcs: 1,
+            },
+          }));
+          return;
+        }
         setCasingItem((prevCasingItem) => ({
           ...prevCasingItem,
           length: leng,
-          enable: enableCasingPick,
+          // enable: enableCasingPick,
           stock_status: findCaseVariantPicked.stock_status,
           priceEUR: findCaseVariantPicked.price,
           priceSEK: findCaseVariantPicked.SEK_price,
@@ -779,6 +878,7 @@ const Customizer = (props) => {
       photo,
       length: ["Length"],
       variant: variant,
+      stock_status: "instock",
       selected: true,
     });
   };
@@ -980,7 +1080,10 @@ const Customizer = (props) => {
       <div className="bg-primary d-flex flex-row-reverse bd-highlight">
         <Stack className="mx-auto " direction="horizontal" gap={4}>
           <Button className="my-2 ms-auto bolder" variant="info" disabled>
-            {cart.cartPrice}
+            {Number(cart.cartPrice).toLocaleString(undefined, {
+              maximumFractionDigits: 2,
+            })}
+            <span> </span>
             {lang.currencySymbol()}
           </Button>
           <Button

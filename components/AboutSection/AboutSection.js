@@ -35,7 +35,10 @@ const AboutSection = (props) => {
       </Accordion>
 
       <h3>
-        from: {props.price}
+        from:{" "}
+        {Number(props.price).toLocaleString(undefined, {
+          maximumFractionDigits: 2,
+        })}
         {currencySymbol()}
       </h3>
       <p className="text-center">Price includes 25% VAT</p>

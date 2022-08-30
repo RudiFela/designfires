@@ -1,0 +1,368 @@
+<?php
+/**
+ * Twenty Twenty-Two functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package WordPress
+ * @subpackage Twenty_Twenty_Two
+ * @since Twenty Twenty-Two 1.0
+ */
+
+
+if ( ! function_exists( 'twentytwentytwo_support' ) ) :
+
+	/**
+	 * Sets up theme defaults and registers support for various WordPress features.
+	 *
+	 * @since Twenty Twenty-Two 1.0
+	 *
+	 * @return void
+	 */
+	function twentytwentytwo_support() {
+
+		// Add support for block styles.
+		add_theme_support( 'wp-block-styles' );
+
+		// Enqueue editor styles.
+		add_editor_style( 'style.css' );
+
+	}
+
+endif;
+
+add_action( 'after_setup_theme', 'twentytwentytwo_support' );
+
+if ( ! function_exists( 'twentytwentytwo_styles' ) ) :
+
+	/**
+	 * Enqueue styles.
+	 *
+	 * @since Twenty Twenty-Two 1.0
+	 *
+	 * @return void
+	 */
+	function twentytwentytwo_styles() {
+		// Register theme stylesheet.
+		$theme_version = wp_get_theme()->get( 'Version' );
+
+		$version_string = is_string( $theme_version ) ? $theme_version : false;
+		wp_register_style(
+			'twentytwentytwo-style',
+			get_template_directory_uri() . '/style.css',
+			array(),
+			$version_string
+		);
+
+		// Enqueue theme stylesheet.
+		wp_enqueue_style( 'twentytwentytwo-style' );
+
+	}
+
+endif;
+
+add_action( 'wp_enqueue_scripts', 'twentytwentytwo_styles' );
+
+// Add block patterns
+require get_template_directory() . '/inc/block-patterns.php';
+
+
+// 1. Add custom field input @ Product Data > Variations > Single Variation
+ 
+add_action( 'woocommerce_variation_options_pricing', 'bbloomer_add_custom_field_to_variations', 10, 3 );
+ 
+function bbloomer_add_custom_field_to_variations( $loop, $variation_data, $variation ) {
+   
+	woocommerce_wp_text_input( array(
+		'id' => 'manufacture_cost_EUR[' . $loop . ']',
+		'class' => 'short',
+		'wrapper_class' => 'form-row',
+		'label' => __( 'Manufacture Cost (€)', 'woocommerce' ),
+		'value' => get_post_meta( $variation->ID, 'manufacture_cost_EUR', true ),
+		   ),
+		   
+			   );
+			   woocommerce_wp_text_input( array(
+				'id' => 'manufacture_cost_SEK[' . $loop . ']',
+				'class' => 'short',
+				'wrapper_class' => 'form-row',
+				'label' => __( 'Manufacture Cost (SEK)', 'woocommerce' ),
+				'value' => get_post_meta( $variation->ID, 'manufacture_cost_SEK', true ),
+				   ),
+				   
+					   );  woocommerce_wp_text_input( array(
+						'id' => 'manufacture_cost_DKK[' . $loop . ']',
+						'class' => 'short',
+						'wrapper_class' => 'form-row',
+						'label' => __( 'Manufacture Cost (DKK)', 'woocommerce' ),
+						'value' => get_post_meta( $variation->ID, 'manufacture_cost_DKK', true ),
+						   ),
+						   
+							   );
+	woocommerce_wp_text_input( array(
+'id' => 'power[' . $loop . ']',
+'class' => 'short',
+'wrapper_class' => 'form-row',
+'label' => __( 'Power/h_kW', 'woocommerce' ),
+'value' => get_post_meta( $variation->ID, 'power', true ),
+   ),
+   
+	   );
+	   woocommerce_wp_text_input( array(
+		'id' => 'liters[' . $loop . ']',
+		'class' => 'short',
+		'wrapper_class' => 'form-row',
+		'label' => __( 'L/h', 'woocommerce' ),
+		'value' => get_post_meta( $variation->ID, 'liters', true ),
+		   ),
+		   
+			   );
+			   woocommerce_wp_text_input( array(
+				'id' => 'burning[' . $loop . ']',
+				'class' => 'short',
+				'wrapper_class' => 'form-row',
+				'label' => __( 'Burning Time', 'woocommerce' ),
+				'value' => get_post_meta( $variation->ID, 'burning', true ),
+				   ),
+				   
+					   );
+					   woocommerce_wp_text_input( array(
+						'id' => 'holesize[' . $loop . ']',
+						'class' => 'short',
+						'wrapper_class' => 'form-row',
+						'label' => __( 'Hole Size', 'woocommerce' ),
+						'value' => get_post_meta( $variation->ID, 'holesize', true ),
+						   ),
+						   
+							   );
+							   woocommerce_wp_text_input( array(
+								'id' => 'bottomsize[' . $loop . ']',
+								'class' => 'short',
+								'wrapper_class' => 'form-row',
+								'label' => __( 'Bottom Size', 'woocommerce' ),
+								'value' => get_post_meta( $variation->ID, 'bottomsize', true ),
+								   ),
+								   
+									   );
+									   woocommerce_wp_text_input( array(
+										'id' => '3d[' . $loop . ']',
+										'class' => 'short',
+										'wrapper_class' => 'form-row',
+										'label' => __( '3D Link', 'woocommerce' ),
+										'value' => get_post_meta( $variation->ID, '3d', true ),
+										   ),
+										   
+											   );
+	  
+}
+
+// -----------------------------------------
+// 2. Save custom field on product variation save
+ 
+add_action( 'woocommerce_save_product_variation', 'bbloomer_save_custom_field_variations', 10, 2 );
+ 
+function bbloomer_save_custom_field_variations( $variation_id, $i ) {
+	$custom_field = $_POST['manufacture_cost_EUR'][$i];
+	if ( isset( $custom_field ) ) update_post_meta( $variation_id, 'manufacture_cost_EUR', esc_attr( $custom_field ) );
+	$custom_field = $_POST['manufacture_cost_SEK'][$i];
+   if ( isset( $custom_field ) ) update_post_meta( $variation_id, 'manufacture_cost_SEK', esc_attr( $custom_field ) );
+   $custom_field = $_POST['manufacture_cost_DKK'][$i];
+   if ( isset( $custom_field ) ) update_post_meta( $variation_id, 'manufacture_cost_DKK', esc_attr( $custom_field ) );
+
+	$custom_field = $_POST['power'][$i];
+   if ( isset( $custom_field ) ) update_post_meta( $variation_id, 'power', esc_attr( $custom_field ) );
+   $custom_field = $_POST['liters'][$i];
+   if ( isset( $custom_field ) ) update_post_meta( $variation_id, 'liters', esc_attr( $custom_field ) );
+   $custom_field = $_POST['burning'][$i];
+   if ( isset( $custom_field ) ) update_post_meta( $variation_id, 'burning', esc_attr( $custom_field ) );
+   $custom_field = $_POST['holesize'][$i];
+   if ( isset( $custom_field ) ) update_post_meta( $variation_id, 'holesize', esc_attr( $custom_field ) );
+   $custom_field = $_POST['bottomsize'][$i];
+   if ( isset( $custom_field ) ) update_post_meta( $variation_id, 'bottomsize', esc_attr( $custom_field ) );
+   $custom_field = $_POST['3d'][$i];
+   if ( isset( $custom_field ) ) update_post_meta( $variation_id, '3d', esc_attr( $custom_field ) );
+}
+ 
+// -----------------------------------------
+// 3. Store custom field value into variation data
+ 
+add_filter( 'woocommerce_available_variation', 'bbloomer_add_custom_field_variation_data' );
+ 
+function bbloomer_add_custom_field_variation_data( $variations ) {
+	$variations['manufacture_cost_EUR'] = '<div class="woocommerce_custom_field">manufacture_cost_EUR: <span>' . get_post_meta( $variations[ 'variation_id' ], 'manufacture_cost_EUR', true ) . '</span></div>';
+	$variations['manufacture_cost_SEK'] = '<div class="woocommerce_custom_field">manufacture_cost_SEK: <span>' . get_post_meta( $variations[ 'variation_id' ], 'manufacture_cost_SEK', true ) . '</span></div>';
+	$variations['manufacture_cost_DKK'] = '<div class="woocommerce_custom_field">manufacture_cost_DKK: <span>' . get_post_meta( $variations[ 'variation_id' ], 'manufacture_cost_DKK', true ) . '</span></div>';
+   $variations['power'] = '<div class="woocommerce_custom_field">Power: <span>' . get_post_meta( $variations[ 'variation_id' ], 'power', true ) . '</span></div>';
+   $variations['liters'] = '<div class="woocommerce_custom_field">Liters: <span>' . get_post_meta( $variations[ 'variation_id' ], 'liters', true ) . '</span></div>';
+   $variations['burning'] = '<div class="woocommerce_custom_field">Burning: <span>' . get_post_meta( $variations[ 'variation_id' ], 'burning', true ) . '</span></div>';
+   $variations['holesize'] = '<div class="woocommerce_custom_field">Hole Size: <span>' . get_post_meta( $variations[ 'variation_id' ], 'holesize', true ) . '</span></div>';
+   $variations['bottomsize'] = '<div class="woocommerce_custom_field">Bottom Size: <span>' . get_post_meta( $variations[ 'variation_id' ], 'bottomsize', true ) . '</span></div>';
+   $variations['3d'] = '<div class="woocommerce_custom_field">3D Link: <span>' . get_post_meta( $variations[ 'variation_id' ], '3d', true ) . '</span></div>';
+   return $variations;
+}
+function prepare_product_images($response, $post, $request) {
+    global $_wp_additional_image_sizes;
+
+    if (empty($response->data)) {
+        return $response;
+    }
+
+    foreach ($response->data['images'] as $key => $image) {
+        $image_urls = [];
+        foreach ($_wp_additional_image_sizes as $size => $value) {
+            $image_info = wp_get_attachment_image_src($image['id'], $size);
+            $response->data['images'][$key][$size] = $image_info[0];
+        }
+    }
+    return $response;
+
+}
+
+add_filter("woocommerce_rest_prepare_product_object", "prepare_product_images", 10, 3);
+/**
+ * @snippet       Custom field bulk edit - WooCommerce
+ * @how-to        Get CustomizeWoo.com FREE
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 4.0
+ * @donate $9     https://businessbloomer.com/bloomer-armada/
+ */
+ 
+// Note: change all occurrences of "custom_field" with the key of your custom field
+ 
+add_action( 'woocommerce_product_bulk_edit_start', 'bbloomer_custom_field_bulk_edit_input' );
+          
+function bbloomer_custom_field_bulk_edit_input() {
+    ?>
+    <div class="inline-edit-group">
+      <label class="alignleft">
+         <span class="title"><?php _e( '_alg_currency_switcher_per_product_regular_price_SEK', 'woocommerce' ); ?></span>
+         <span class="input-text-wrap">
+            <input type="text" name="_alg_currency_switcher_per_product_regular_price_SEK" class="text" value="">
+         </span>
+        </label>
+    </div>
+    <?php
+}
+ 
+add_action( 'woocommerce_product_bulk_edit_save', 'bbloomer_custom_field_bulk_edit_save' );
+ 
+function bbloomer_custom_field_bulk_edit_save( $product ) {
+    $post_id = $product->get_id();    
+   if ( isset( $_REQUEST['_alg_currency_switcher_per_product_regular_price_SEK'] ) ) {
+        $custom_field = $_REQUEST['_alg_currency_switcher_per_product_regular_price_SEK'];
+        update_post_meta( $post_id, '_alg_currency_switcher_per_product_regular_price_SEK', wc_clean( $custom_field ) );
+    }
+}
+
+
+/*add_filter('woocommerce_rest_prepare_product_object', 'filter_product_response', 10, 3);
+function filter_product_response($response, $post, $request){
+	// Customize response data here
+	$product_id = $post->get_id();
+	
+	$response->data["custom"] = 12;
+	return $response;
+}*/
+
+
+
+add_filter('woocommerce_rest_prepare_product_object', 'custom_change_product_response', 20, 3);
+add_filter('woocommerce_rest_prepare_product_variation_object', 'custom_change_product_response', 20, 3);
+
+function custom_change_product_response($response, $object, $request) {
+    $variations = $response->data['variations'];
+    $variations_res = array();
+    $variations_array = array();
+    if (!empty($variations) && is_array($variations)) {
+        foreach ($variations as $variation) {
+            $variation_id = $variation;
+            $variation = new WC_Product_Variation($variation_id);
+            $variations_res['id'] = $variation_id;
+            $variations_res['price'] = (float)$variation->get_regular_price();
+            //$variations_res['sku'] = $variation->get_sku();
+			$variations_res['manufacture_cost_EUR']=get_post_meta( $variation_id, 'manufacture_cost_EUR', true );
+			$variations_res['manufacture_cost_SEK']=get_post_meta( $variation_id, 'manufacture_cost_SEK', true );
+			$variations_res['manufacture_cost_DKK']=get_post_meta( $variation_id, 'manufacture_cost_DKK', true );
+			$variations_res['power']=get_post_meta( $variation_id, 'power', true );
+			$variations_res['liters']=get_post_meta( $variation_id, 'liters', true );
+			$variations_res['burning']=get_post_meta( $variation_id, 'burning', true );
+			$variations_res['holesize']=get_post_meta( $variation_id, 'holesize', true );
+			$variations_res['bottomsize']=get_post_meta( $variation_id, 'bottomsize', true );
+			$variations_res['DKK_price']=get_post_meta( $variation_id, '_alg_currency_switcher_per_product_regular_price_DKK', true );
+			$variations_res['SEK_price']=get_post_meta( $variation_id, '_alg_currency_switcher_per_product_regular_price_SEK', true );
+			$variations_res['drawing3d']=get_post_meta( $variation_id, '3d', true );
+			$variations_res['stock_status'] = $variation->get_stock_status();
+			$variations_res['dimensions'] = array(
+				'length'=>$variation->get_length(),
+				'width'=>$variation->get_width(),
+				'height'=>$variation->get_height(),
+			);
+			
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $variation_id ), 'single-post-thumbnail' );
+			$image_src = $image[0];
+			$variations_res['img']=$image_src;
+			
+			//$variations_res['technical_image']=$variation_woo_variation_gallery_images;
+            
+           
+			
+            $attributes = array();
+            // variation attributes
+            foreach ( $variation->get_variation_attributes() as $attribute_name => $attribute ) {
+                // taxonomy-based attributes are prefixed with `pa_`, otherwise simply `attribute_`
+                $attributes[] = array(
+                    'name'   => wc_attribute_label( str_replace( 'attribute_', '', $attribute_name ), $variation ),
+                    'slug'   => str_replace( 'attribute_', '', wc_attribute_taxonomy_slug( $attribute_name ) ),
+                    'option' => $attribute,
+                );
+            }
+			$image_id=get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+			$image_id_ar=$image_id[0];
+			
+			$variations_res['technical_image'] =wp_get_attachment_image_src( $image_id_ar, 'full', false );
+			$att_length= $attributes[0];
+			$variations_res['length']= $att_length;
+            $variations_res['attributes'] = $attributes;
+            $variations_array[] = $variations_res;
+        }
+    }
+   
+	
+	usort($variations_array, function($a, $b) {
+    return $a['price'] <=> $b['price'];
+});
+ $response->data['variant'] = $variations_array;
+	$response->data['new']=$response->data['date_created'];
+
+$new_data=array();
+	$new_data_array=array();
+	
+	$new_data['acf']= $response->data['acf'];
+	$new_data['attributes']= $response->data['attributes'];
+	$new_data['categories']= $response->data['categories'];
+	$new_data['dimensions']= $response->data['dimensions'];
+	$new_data['id']= $response->data['id'];
+	$new_data['images']= $response->data['images'];
+	$new_data['meta_data']= $response->data['meta_data'];
+	$new_data['name']= $response->data['name'];
+	$new_data['price']= $response->data['price'];
+	$new_data['slug']= $response->data['slug'];
+	$new_data['stock_status']= $response->data['stock_status'];
+	$new_data['variant']= $response->data['variant'];
+	$new_data_array[]= $new_data;
+	$response->data['TESTED'] = $new_data;
+	$response->set_data($new_data);
+    return $response;
+}
+function initCors( $value ) {
+  $origin = get_http_origin();
+  $allowed_origins = [ 'site1.example.com', 'site2.example.com', 'localhost:3000' ];
+
+  if ( $origin && in_array( $origin, $allowed_origins ) ) {
+    header( 'Access-Control-Allow-Origin: ' . esc_url_raw( $origin ) );
+    header( 'Access-Control-Allow-Methods: GET' );
+    header( 'Access-Control-Allow-Credentials: true' );
+  }
+
+  return $value;
+}

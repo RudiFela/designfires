@@ -59,7 +59,9 @@ const CustomizerItemList = (props) => {
                 <p>{item.name}</p>
               </div>
               <div className="ms-auto">
-                {switchCurrency(item)}
+                {Number(switchCurrency(item)).toLocaleString(undefined, {
+                  maximumFractionDigits: 2,
+                })}
                 {lang.currencySymbol()}{" "}
               </div>
             </Stack>

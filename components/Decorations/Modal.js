@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import { Modal, Spinner } from "react-bootstrap";
+import { Modal, Spinner, Container } from "react-bootstrap";
 const MyVerticallyCenteredModal = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const { ...others } = props;
@@ -18,7 +18,7 @@ const MyVerticallyCenteredModal = (props) => {
       onHide={onHide}
       dialogClassName="rounded-45"
       variant="dark"
-      size="lg"
+      size="xl"
       centered
       aria-labelledby="contained-modal-title-vcenter"
     >
@@ -32,7 +32,8 @@ const MyVerticallyCenteredModal = (props) => {
         </div>
       </Modal.Header>
       <Modal.Body className="bg-primary ">
-        <div className="modal-size">
+        {" "}
+        <Container>
           {props.image ? (
             <>
               {isLoading && (
@@ -40,11 +41,12 @@ const MyVerticallyCenteredModal = (props) => {
                   <Spinner animation="border" variant="secondary" />
                 </div>
               )}
+
               <Image
                 // className="figure-round figure-img img-fluid"
-                //width={2400}
-                //height={1600}
-                layout="fill"
+                width={1200}
+                height={800}
+                //layout="fill"
                 objectFit="contain"
                 onLoadingComplete={onComplete}
                 src={props.image}
@@ -52,9 +54,9 @@ const MyVerticallyCenteredModal = (props) => {
               />
             </>
           ) : (
-            <div className="modal-size">{props.children}</div>
+            <Container>{props.children}</Container>
           )}
-        </div>
+        </Container>
       </Modal.Body>
       {props.Footer ? (
         <Modal.Footer className="bg-primary text-white">

@@ -2,8 +2,9 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import { FaTruck } from "react-icons/fa";
-import { GiElectric } from "react-icons/gi";
+import { GiElectric, GiAutoRepair } from "react-icons/gi";
 import { IoWaterOutline } from "react-icons/io";
+import { ImFire } from "react-icons/im";
 import { MdWaterDrop } from "react-icons/md";
 import { BiTimer } from "react-icons/bi";
 import {
@@ -287,7 +288,7 @@ const CustomizerFirePlaces = (props) => {
           eventKey={item}
         >
           {item.length.option}mm{" "}
-          {item.stock_status === "instock" ? null : <FaTruck />}
+          {item.stock_status === "instock" ? <ImFire /> : <GiAutoRepair />}
         </Dropdown.Item>
       ))
     : null;
@@ -298,7 +299,15 @@ const CustomizerFirePlaces = (props) => {
       id="dropdown-fireplacelength-button"
       variant="primary"
       disabled={!selected}
-      title={selectedFireplace.length}
+      title={
+        <>
+          {selectedFireplace.length}
+          <span> </span>
+          {selectedFireplace.stock_status === "instock" ? null : (
+            <GiAutoRepair />
+          )}
+        </>
+      }
     >
       {fireplaceLengths}
     </DropdownButton>
@@ -456,14 +465,16 @@ const CustomizerFirePlaces = (props) => {
           ) : null}
           <span>
             <Badge className="m-0 text-white" bg="info">
-              <span> </span>Standard delivery time 5 days
+              <ImFire />
+              <span> </span>
+              On Stock - Standard delivery time 5 days
             </Badge>
           </span>{" "}
           <span>
             <Badge className="m-0 text-white" bg="info">
-              <FaTruck />
-              <span> </span>Longer delivery time 50-60 days, higher shipping
-              price
+              <GiAutoRepair />
+              <span> </span>Custom Variant - Longer delivery time 50-60 days,
+              higher price
             </Badge>
           </span>
         </>

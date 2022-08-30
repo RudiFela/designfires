@@ -14,7 +14,7 @@
   &-links {
     padding: 2rem 0;
     font-weight: 500;
-    font-size: medium;
+    font-size: 1rem;
 
     & li {
       display: inline-block;
@@ -23,13 +23,13 @@
   }
 }
 .dropdown-menu {
-  background-color: var.$shark !important;
+  background-color: #212529 !important;
   border-radius: 15px !important;
-
+  border: none !important;
   min-width: 1rem !important;
 }
 .dropdown-item {
-  background-color: var.$shark !important;
+  background-color: #212529 !important;
   padding: 0.5rem 2rem 0.5rem 2rem !important;
 }
 .dropdown-item:hover {
