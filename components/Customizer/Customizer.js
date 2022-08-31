@@ -312,6 +312,7 @@ const Customizer = (props) => {
   };
   const onShowCart = () => {
     //console.log(cart);
+    //console.log(fireplaceItem);
     setShowCart(true);
   };
   const clearCart = () => {
@@ -880,6 +881,9 @@ const Customizer = (props) => {
       variant: variant,
       stock_status: "instock",
       selected: true,
+      priceEUR: "0",
+      priceSEK: "0",
+      priceDKK: "0",
     });
   };
   /////////

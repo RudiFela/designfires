@@ -471,7 +471,7 @@ const CustomizerFirePlaces = (props) => {
             </Badge>
           </span>{" "}
           <span>
-            <Badge className="m-0 text-white" bg="info">
+            <Badge className="m-0 mt-1 p-1 text-white text-wrap" bg="info">
               <GiAutoRepair />
               <span> </span>Custom Variant - Longer delivery time 50-60 days,
               higher price

@@ -5,6 +5,7 @@ import Footer from "../containers/footer/Footer";
 import Body from "../containers/body/Body";
 import Navibar from "../containers/navbar/Navbar";
 import axios from "axios";
+import Script from "next/script";
 import SSRProvider from "react-bootstrap/SSRProvider";
 import { LanguageContext } from "../components/context/language-context";
 export default function Home(props) {
