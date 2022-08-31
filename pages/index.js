@@ -31,11 +31,11 @@ export default function Home(props) {
     }
   };*/
   const LanguageChecker = async () => {
-    const langs = await axios.get("http://ip-api.com/json/"); //("https://api.hostip.info/country.php");
-    // console.log(langs.data.countryCode);
+    const langs = await axios.get("https://ipapi.co/json/"); //("https://api.hostip.info/country.php");
+    //console.log(langs.data.country_code);
     // let x = "SE";
     //console.log(x);
-    switch (langs.data.countryCode) {
+    switch (langs.data.country_code) {
       case "SE":
         return setLanguage("swedish");
       case "DK":

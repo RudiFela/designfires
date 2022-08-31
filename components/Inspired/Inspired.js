@@ -4,7 +4,7 @@ import ImageGallery from "react-image-gallery";
 
 import Image from "next/image";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
-import "react-awesome-slider/dist/styles.css";
+
 import axios from "axios";
 
 const Inspired = () => {
@@ -20,7 +20,7 @@ const Inspired = () => {
       });
   }, []);
 
-  const prepareGalleryImages = (postPhotos, postVideo) => {
+  const prepareGalleryImages = (postPhotos, postVideo, mainPhoto) => {
     let photosArray = [];
     if (postVideo) {
       const prepareVideoForGallery = () => {
@@ -44,10 +44,8 @@ const Inspired = () => {
       };
       photosArray.push({
         embedUrl: postVideo,
-        original:
-          "https://designfires.pl/wp-content/uploads/2022/08/IMG_4830-300x246.jpg",
-        thumbnail:
-          "https://designfires.pl/wp-content/uploads/2022/08/IMG_4830-300x246.jpg",
+        original: mainPhoto,
+        thumbnail: mainPhoto,
         renderItem: prepareVideoForGallery,
       });
     }
@@ -68,7 +66,11 @@ const Inspired = () => {
   ) : null;
   const showModalHandler = (item) => {
     setPickedPost(item);
-    prepareGalleryImages(item.acf.photo_gallery, item.acf.video);
+    prepareGalleryImages(
+      item.acf.photo_gallery,
+      item.acf.video,
+      item.acf.image.sizes.medium_large
+    );
     setShowModal(true);
   };
   const ins = inspiredContent.map((item) => {
