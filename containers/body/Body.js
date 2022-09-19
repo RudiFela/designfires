@@ -6,6 +6,8 @@ import Ethanol from "../../components/Ethanol/Ethanol";
 import Mystic from "../../components/Mystic/Mystic";
 import { LanguageContext } from "../../components/context/language-context";
 import Customizer from "../../components/Customizer/Customizer";
+import BioFuel from "../../components/BioFuel/BioFuel";
+import ServiceSection from "../../components/ServiceSection/ServiceSection";
 
 const Body = (props) => {
   const [lowestPriceDFM, setLowestPriceDFM] = useState();
@@ -39,7 +41,7 @@ const Body = (props) => {
     );
   };
   return (
-    <div>
+    <>
       <Ethanol price={lowestPriceDFE} />
       <Mystic price={lowestPriceDFM} />
       <Accessories />
@@ -54,7 +56,7 @@ const Body = (props) => {
         fireplace={props.fireplaces}
         cartHandler={props.cartHandler}
       />
-    </div>
+    </>
   );
 };
 export default Body;

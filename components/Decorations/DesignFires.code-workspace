@@ -1,11 +1,23 @@
 {
   "folders": [
-	{
-		"path": "../../../../../../../Volumes/AdataNVME/React/orderAPP"
-	},
-	{
-		"path": "../.."
-	}
-],
+    {
+      "path": "../../../../../../../Volumes/AdataNVME/React/orderAPP"
+    },
+    {
+      "path": "../.."
+    },
+    {
+      "path": "../../../../React/rudi"
+    },
+    {
+      "path": "../../../../OrderProgram"
+    },
+    {
+      "path": "../../../../React/orderAPP"
+    },
+    {
+      "path": "../../../../React/CollectOrdersApp"
+    }
+  ],
   "settings": {}
 }

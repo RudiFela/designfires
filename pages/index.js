@@ -161,5 +161,6 @@ export async function getStaticProps(context) {
       // language: LanguageChecker(),
       //test: accessories,
     },
+    revalidate: 3600,
   };
 }
