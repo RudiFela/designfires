@@ -36,10 +36,9 @@ const MotionSlider = ({ slides }) => {
         {slides !== undefined
           ? slides.map((image) => {
               return (
-                <AnimatePresence>
+                <AnimatePresence key={image.acf.image.url}>
                   <motion.img
                     className="w-100"
-                    key={image.acf.image.url}
                     src={image.acf.image.url}
                     initial={{ x: 300, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
