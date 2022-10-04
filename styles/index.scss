@@ -17,7 +17,7 @@
   margin: 0;
 }
 .main {
-  background: black;
+  background: rgb(0, 0, 0);
 }
 html {
   scroll-behavior: smooth;
@@ -33,4 +33,22 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background: $secondary-color;
+}
+.carouselo-item {
+  min-height: 40vw;
+  min-width: 50vw;
+  padding: 40px;
+}
+.carouselo-item img {
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
+  pointer-events: none;
+}
+.inner-carouselo {
+  display: flex;
+}
+.carouselo {
+  cursor: grab;
+  overflow: hidden;
 }

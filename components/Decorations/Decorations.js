@@ -15,8 +15,9 @@ const Decorations = (props) => {
   };*/
   const test = props.decorations.map((item) => (
     <Col
+      md="auto"
       key={item.id}
-      className=""
+      className="justify-content-center"
       //onClick={() => showModalHandler(item.images[0].src)}
     >
       {item.acf.movie_of_decoration_product === false ? (
@@ -118,7 +119,7 @@ const Decorations = (props) => {
   //"https://youtu.be/Lqh99Re13ow";
   return (
     <Container className="text-white">
-      <h1 className="text-center text-white">
+      <h1 className="text-center text-white my-4">
         Add some individual style with Our HAND MADE decorations!
       </h1>
       <Row xs={2} md={2} lg={3} xxl={4}>

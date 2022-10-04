@@ -41,8 +41,8 @@ const Navibar = () => {
         className="py-0"
         sticky="top"
       >
-        <Container className="py-0 ">
-          <Navbar.Brand href="#home" className="w-50">
+        <Container className="p-0 ">
+          <Navbar.Brand href="#home" className="w-50 p-0">
             <Image
               src="https://designfires.pl/wp-content/uploads/2022/08/designfiresn.png" //"https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
               //layout="fill"
@@ -85,11 +85,17 @@ const Navibar = () => {
               >
                 Outdoor Fireplace
               </Nav.Link>
-              <Nav.Link className="text-white text-center" href="#customize">
-                Customize
-              </Nav.Link>
-
-              <NavDropdown
+            </Nav>
+          </Navbar.Collapse>{" "}
+        </Container>
+      </Navbar>
+    </>
+  );
+};
+export default Navibar;
+/*
+dropdown change language
+<NavDropdown
                 className="text-center"
                 align="end"
                 flip="true"
@@ -128,12 +134,4 @@ const Navibar = () => {
                 >
                   <Image src={sweden} height={45} width={45} alt="SWE flag" />
                 </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>{" "}
-        </Container>
-      </Navbar>
-    </>
-  );
-};
-export default Navibar;
+              </NavDropdown>*/

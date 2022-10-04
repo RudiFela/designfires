@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { AiOutlineCheck } from "react-icons/ai";
 import { VscError } from "react-icons/vsc";
@@ -35,8 +35,128 @@ const ContactForm = (props) => {
         lang.currencyPrice(item.priceEUR, item.priceSEK, item.priceDKK) +
         lang.currencySymbol(),
     }));
+    prepareDeco();
     return arrayToString(preparedDeco, 3);
   };
+
+  const prepareDeco = () => {
+    const deco = cartHandler.addedDecorations.map(
+      (item) =>
+        `<tr style="" bgcolor="#f2f2f2">
+        <td
+          style="line-height: 24px; font-size: 16px; margin: 0; padding: 12px; border: 1px solid #e2e8f0;"
+          align="left"
+          valign="top"
+        >
+          ${item.name}
+        </td>
+       
+        <td
+          style="line-height: 24px; font-size: 16px; margin: 0; padding: 12px; border: 1px solid #e2e8f0;"
+          align="left"
+          valign="top"
+        >
+          x ${item.count}
+        </td>
+        <td
+          style="line-height: 24px; font-size: 16px; margin: 0; padding: 12px; border: 1px solid #e2e8f0;"
+          align="left"
+          valign="top"
+        >
+          ${
+            lang.currencyPrice(item.priceEUR, item.priceSEK, item.priceDKK) +
+            lang.currencySymbol()
+          }
+        </td>
+      </tr>`
+    );
+    //console.log(deco.toString());
+    let table = ` <table class="bg-light body" valign="top" role="presentation" border="0" cellpadding="0" cellspacing="0" style="outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; color: #000000; margin: 0; padding: 0; border-width: 0;">
+    <tbody>
+      <tr>
+        <td valign="top" style="line-height: 24px; font-size: 16px; margin: 0;" align="left" >
+          <table class="container" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tbody>
+              <tr>
+                <td align="center" style="line-height: 24px; font-size: 16px; margin: 0; padding: 0 16px;">
+                  <!--[if (gte mso 9)|(IE)]>
+                    <table align="center" role="presentation">
+                      <tbody>
+                        <tr>
+                          <td width="600">
+                  <![endif]-->
+                  <table align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 600px; margin: 0 auto;">
+                    <tbody>
+                      <tr>
+                        <td style="line-height: 24px; font-size: 16px; margin: 0;" align="left">
+                          <table class="s-10 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
+                            <tbody>
+                              <tr>
+                                <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;" align="left" width="100%" height="40">
+                                  &#160;
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <table class="card" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important; width: 100%; overflow: hidden; border: 1px solid #e2e8f0;" >
+                            <tbody>
+                              <tr>
+                                <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left" bgcolor="#ffffff">
+                                  <table class="card-body" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                                    <tbody>
+                                      <tr>
+                                        <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 20px;" align="left">
+                                          <table class="table table-striped thead-default table-bordered" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 100%; border: 1px solid #e2e8f0;">
+                                            <thead>
+                                              <tr>
+                                                <th style="line-height: 24px; font-size: 16px; margin: 0; padding: 12px; border-color: #e2e8f0; border-style: solid; border-width: 1px 1px 2px;" align="left" valign="top">Name</th>
+                                                <th style="line-height: 24px; font-size: 16px; margin: 0; padding: 12px; border-color: #e2e8f0; border-style: solid; border-width: 1px 1px 2px;" align="left" valign="top">PCS</th>
+                                                <th style="line-height: 24px; font-size: 16px; margin: 0; padding: 12px; border-color: #e2e8f0; border-style: solid; border-width: 1px 1px 2px;" align="left" valign="top">Price</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              ${deco.toString()}
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <table class="s-10 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
+                            <tbody>
+                              <tr>
+                                <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;" align="left" width="100%" height="40">
+                                  &#160;
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!--[if (gte mso 9)|(IE)]>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+                  <![endif]-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>`;
+
+    return table;
+  };
+
   const prepareDataToSend = () => {
     let fireplace = `Name: ${cartHandler.addedFireplace.name}"Length:"${cartHandler.addedFireplace.length}"mm"`;
     let casing = `Name: ${cartHandler.addedCasing.name}"Length:"${cartHandler.addedCasing.length}"mm"`;
@@ -51,6 +171,7 @@ const ContactForm = (props) => {
     setSending(true);
     let dec = splitDecorationsArray();
     const emailData = {
+      //from_name: `<h1>${nameInputRef.current.value} its ref value in h1 tag</h1>`,
       user_name: nameInputRef.current.value,
       user_email: emailInputRef.current.value,
       user_phone: phoneInputRef.current.value,
@@ -113,7 +234,7 @@ const ContactForm = (props) => {
       user_filling_pcs:
         cartHandler.addedFilling.pcs === 1 ? cartHandler.addedFilling.pcs : "-",
       //user_filling: JSON.stringify(cartHandler.addedFilling, null, "<br/>"),
-      user_decorations: splitDecorationsArray(),
+      user_decorations: prepareDeco(), //splitDecorationsArray(),
       user_glass_color:
         cartHandler.addedAccessories.glass.pcs > 0
           ? cartHandler.addedAccessories.glass.color
@@ -159,7 +280,7 @@ const ContactForm = (props) => {
     emailjs
       .send(
         "service_q2uegul",
-        "template_ikf1gyk",
+        "template_test", //"template_ikf1gyk",
         emailData,
         "iHSdOd-oJFmGSr9Zp"
       )

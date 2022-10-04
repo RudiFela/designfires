@@ -1,11 +1,13 @@
-import { Button, Card, Stack, Container } from "react-bootstrap";
+import { Button, Card, Stack, Container, Badge } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
+import { renderToString } from "react-dom/server";
 import { LanguageContext } from "../context/language-context";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import CustomizerItemList from "./CustomizerItemList";
 import CustomizerCasings from "./CustomizerCasings";
 import CustomizerFirePlaces from "./CustomizerFirePlaces";
 import CheckCartModal from "./CheckCartModal";
+import { motion } from "framer-motion";
 
 const Customizer = (props) => {
   const lang = useContext(LanguageContext);
@@ -1023,30 +1025,33 @@ const Customizer = (props) => {
     setGlassColor(color);
   };
   return (
-    <>
-      <h1 id="customize" className="text-center text-white p-5 ">
+    <div className="bg-primary pb-2">
+      <h1 id="customize" className="text-center text-white p-4 mt-3 ">
         Check possibilities on Your own!
       </h1>
-
-      <div className="customizer  bg-primary pt-4 pb-2">
-        <div className="customizer-item ">
-          <Container>
-            <CustomizerFirePlaces
-              className="ml-5"
-              onSelect={showFirePlacePrice}
-              onPickLength={addFireplaceToCart}
-              fireplaces={fireplace}
-              selectedFireplace={fireplaceItem}
-              technicalInfo={fireplaceItem.variant_details}
-              shsSwitcher={toggleShsHandler}
-              selected={fireplaceItem.selected}
-              topSwitcher={toggleStainlessTopHandler}
-              onFillingChange={onFillingChange}
-            />
-          </Container>
-        </div>
-        <div className="customizer-item">
-          <Container>
+      <div className="">
+        <Container>
+          <CustomizerFirePlaces
+            className="ml-5 "
+            onSelect={showFirePlacePrice}
+            onPickLength={addFireplaceToCart}
+            fireplaces={fireplace}
+            selectedFireplace={fireplaceItem}
+            technicalInfo={fireplaceItem.variant_details}
+            shsSwitcher={toggleShsHandler}
+            selected={fireplaceItem.selected}
+            topSwitcher={toggleStainlessTopHandler}
+            onFillingChange={onFillingChange}
+            changeGlassColor={changeGlassColor}
+            glassPiecesChange={glassPiecesChange}
+          />
+        </Container>
+      </div>{" "}
+      <Container>
+        {" "}
+        <div className="customizer pt-4 pb-2">
+          {" "}
+          <div className="customizer-item">
             <CustomizerCasings
               className="ml-5"
               casings={casings}
@@ -1056,32 +1061,35 @@ const Customizer = (props) => {
               changeGlassColor={changeGlassColor}
               glassPiecesChange={glassPiecesChange}
             />
-          </Container>
-        </div>
-        <CheckCartModal
-          cart={cart}
-          showCart={showCart}
-          onClose={() => closeModalCart()}
-          onClear={() => clearModalCart()}
-          currency={() => lang.currencySymbol()}
-        />
-        <div className="customizer-item mt-3 ">
-          <div>
-            <Card className="card-deco carder">
-              <Card.Header className="tab-content">
-                <CustomizerItemList
-                  ItemToList={decorations}
-                  onAdd={addDecorationsToCart}
-                />
-              </Card.Header>
-              <h5 className="text-white m-0 mx-auto pt-1 float-end">
-                All prices includes 25% VAT
-              </h5>
-            </Card>{" "}
           </div>
+          <CheckCartModal
+            cart={cart}
+            showCart={showCart}
+            onClose={() => closeModalCart()}
+            onClear={() => clearModalCart()}
+            currency={() => lang.currencySymbol()}
+          />
+          <div className="customizer-item mt-3 ">
+            <div>
+              <Card className="card-deco carder">
+                <h3 className="text-white text-center mb-2">
+                  <Badge bg="danger">Select Accessories</Badge>
+                </h3>
+                <Card.Header className="tab-content">
+                  <CustomizerItemList
+                    ItemToList={decorations}
+                    onAdd={addDecorationsToCart}
+                  />
+                </Card.Header>
+                <h5 className="text-white m-0 mx-auto pt-1 float-end">
+                  All prices includes 25% VAT
+                </h5>
+              </Card>{" "}
+            </div>
+          </div>{" "}
         </div>{" "}
-      </div>
-      <div className="bg-primary d-flex flex-row-reverse bd-highlight">
+      </Container>
+      <div className=" d-flex flex-row-reverse bd-highlight">
         <Stack className="mx-auto " direction="horizontal" gap={4}>
           <Button className="my-2 ms-auto bolder" variant="info" disabled>
             {Number(cart.cartPrice).toLocaleString(undefined, {
@@ -1090,19 +1098,24 @@ const Customizer = (props) => {
             <span> </span>
             {lang.currencySymbol()}
           </Button>
-          <Button
-            className="bolder"
-            variant="info"
-            onClick={() => onShowCart()}
-          >
-            Check Cart
-          </Button>{" "}
-          <Button variant="info" onClick={() => clearCart()}>
-            <RiDeleteBin6Line />
-          </Button>
+          <motion.div whileHover={{ scale: 1.1 }}>
+            {" "}
+            <Button
+              className="bolder"
+              variant="info"
+              onClick={() => onShowCart()}
+            >
+              Check Cart
+            </Button>{" "}
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.1 }}>
+            <Button variant="info" onClick={() => clearCart()}>
+              <RiDeleteBin6Line />
+            </Button>
+          </motion.div>
         </Stack>
       </div>
-    </>
+    </div>
   );
 };
 export default Customizer;

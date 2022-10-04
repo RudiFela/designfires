@@ -7,7 +7,7 @@ import Mystic from "../../components/Mystic/Mystic";
 import { LanguageContext } from "../../components/context/language-context";
 import Customizer from "../../components/Customizer/Customizer";
 import BioFuel from "../../components/BioFuel/BioFuel";
-import ServiceSection from "../../components/ServiceSection/ServiceSection";
+import MotionSlider from "../../components/UI/Slider/MotionSlider";
 
 const Body = (props) => {
   const [lowestPriceDFM, setLowestPriceDFM] = useState();
@@ -15,6 +15,7 @@ const Body = (props) => {
   const { language } = useContext(LanguageContext);
   useEffect(() => {
     takePrice();
+    // console.log(props.fireplaces);
   }, [language]);
   const currencyPrice = (item) => {
     switch (language) {
@@ -44,11 +45,9 @@ const Body = (props) => {
     <>
       <Ethanol price={lowestPriceDFE} />
       <Mystic price={lowestPriceDFM} />
-      <Accessories />
-      <Decorations decorations={props.decorations} />
 
       <Inspired />
-
+      <Decorations decorations={props.decorations} />
       <Customizer
         decorations={props.decorations}
         accessories={props.accessories}
@@ -56,6 +55,8 @@ const Body = (props) => {
         fireplace={props.fireplaces}
         cartHandler={props.cartHandler}
       />
+      <MotionSlider />
+      <BioFuel decorations={props.decorations} />
     </>
   );
 };

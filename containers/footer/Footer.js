@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Col, Row, Stack, Figure } from "react-bootstrap";
 import { BsTelephone } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
+import Aboutus from "../../components/AboutUs/Aboutus";
 import ContactForm from "./ContactForm";
 const Footer = (props) => {
   const { cartHandler } = props;
@@ -9,7 +10,7 @@ const Footer = (props) => {
   return (
     <div>
       <div id="contact" className=" px-5 mt-4">
-        <Row className="footer-wrap">
+        <Row sm={1} md={3} className="footer-wrap">
           <Col>
             <Stack className="fs-4 text fw-bolder">
               <div className="">
@@ -47,7 +48,10 @@ const Footer = (props) => {
             </Stack>
           </Col>
           <Col>
-            <h2 className="text-white">
+            <Aboutus />
+          </Col>
+          <Col>
+            <h2 className="text-white my-2">
               Any questions? Maybe need some more information? Just order
               contact!
             </h2>

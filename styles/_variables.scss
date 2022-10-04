@@ -4,7 +4,7 @@ $theme-colors: (
   "info": #800000,
   "danger": rgb(59, 59, 59),
   "primary": #252525,
-  "success": #212529,
+  "success": #6a6868,
 );
 
 /* import bootstrap to set changes */
@@ -23,6 +23,7 @@ $font-weights: (
   "medium": 500,
   "bold": 600,
 );
+$icon-grey: url("/static/images/iconred40.png");
 $icon: url("/static/images/iconred40.png"); //("http://designfires.pl/wp-content/uploads/2022/06/iconred40.png");
 $header-image: url("./assets/headerimage.jpg");
 @mixin flexCenter {
@@ -44,5 +45,31 @@ $header-image: url("./assets/headerimage.jpg");
 @mixin for-phone {
   @media (max-width: 600px) {
     @content;
+  }
+}
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+.grow:hover {
+  transform: scale(1.1);
+}
+.anchor {
+  margin-top: -300px;
+  padding-top: 300px;
+  display: inline-block;
+}
+.list {
+  & ul {
+    list-style-type: none;
+  }
+  & li {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    background: $icon no-repeat;
+
+    line-height: clamp(1rem, 2vw, 1.5rem);
+    vertical-align: middle;
+    font-weight: 400;
+    padding: 1rem 0 1.5rem 3rem;
+    margin: 0.5rem;
   }
 }

@@ -8,6 +8,8 @@ import {
   Popover,
   OverlayTrigger,
   Badge,
+  Row,
+  Col,
 } from "react-bootstrap";
 import { LanguageContext } from "../context/language-context";
 const CustomizerWrapper = (props) => {
@@ -28,58 +30,64 @@ const CustomizerWrapper = (props) => {
   );
 
   return (
-    <Card className={props.cssClass}>
+    <>
       {" "}
-      <Image
-        className="card-image-bottom"
-        style={{ maxheigth: "50vh", borderRadius: 35 }}
-        alt="photocard-picture"
-        src={selectedItem.photo}
-        height={props.pictureheigth}
-        width={480}
-      />
-      <Card.Body className="pb-0">
-        <Stack className="flex-wrap mb-2" direction="horizontal" gap={3}>
-          {itemDropDown}
+      <Card className={props.cssClass}>
+        {" "}
+        <h3 className="text-white text-center mb-3">
+          <Badge bg="danger">Select Standard Casing</Badge>
+        </h3>
+        <Image
+          className="card-image-bottom"
+          style={{ maxheigth: "50vh", borderRadius: 35 }}
+          alt="photocard-picture"
+          src={selectedItem.photo}
+          height={props.pictureheigth}
+          width={480}
+        />
+        <Card.Body className="pb-0">
+          <Stack className="flex-wrap my-2" direction="horizontal" gap={3}>
+            {itemDropDown}
 
-          {lengthDropDown}
+            {lengthDropDown}
 
-          <Button as="Badge" className="bolder" variant="primary" disabled>
-            {" "}
-            {Number(selectedPrice).toLocaleString(undefined, {
-              maximumFractionDigits: 2,
-            })}{" "}
-            {lang.currencySymbol()}
-            {selectedItem.stock_status === "instock" ? null : (
-              <p className="m-0 p-0 text-info">
-                +
-                {Number(
-                  lang.currencyPrice(
-                    selectedItem.variant_details.manufacture_cost_EUR,
-                    selectedItem.variant_details.manufacture_cost_SEK,
-                    selectedItem.variant_details.manufacture_cost_DKK
-                  )
-                ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                {lang.currencySymbol()}
-              </p>
-            )}
-          </Button>
-          <OverlayTrigger
-            //ref={overlayRef}
-            //trigger={["hover", "focus"]}
-            trigger="click"
-            placement="bottom"
-            overlay={popover}
-            //delay={{ show: 250, hide: 1600 }}
-            rootClose
-          >
-            <Button size="sm">Technical Info</Button>
-          </OverlayTrigger>
-        </Stack>
+            <Button as="Badge" className="bolder" variant="primary" disabled>
+              {" "}
+              {Number(selectedPrice).toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}{" "}
+              {lang.currencySymbol()}
+              {selectedItem.stock_status === "instock" ? null : (
+                <p className="m-0 p-0 text-info">
+                  +
+                  {Number(
+                    lang.currencyPrice(
+                      selectedItem.variant_details.manufacture_cost_EUR,
+                      selectedItem.variant_details.manufacture_cost_SEK,
+                      selectedItem.variant_details.manufacture_cost_DKK
+                    )
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  {lang.currencySymbol()}
+                </p>
+              )}
+            </Button>
+            <OverlayTrigger
+              //ref={overlayRef}
+              //trigger={["hover", "focus"]}
+              trigger="click"
+              placement="bottom"
+              overlay={popover}
+              //delay={{ show: 250, hide: 1600 }}
+              rootClose
+            >
+              <Button>Technical Info</Button>
+            </OverlayTrigger>
+          </Stack>
 
-        {props.children}
-      </Card.Body>{" "}
-    </Card>
+          {props.children}
+        </Card.Body>{" "}
+      </Card>
+    </>
   );
 };
 export default CustomizerWrapper;

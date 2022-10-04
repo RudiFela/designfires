@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { LanguageContext } from "../context/language-context";
 import { Button, ListGroup, Figure, Stack } from "react-bootstrap";
 const CustomizerItemList = (props) => {
@@ -30,43 +31,47 @@ const CustomizerItemList = (props) => {
     <div>
       {list.map((item) => (
         <ListGroup.Item key={item.id}>
-          <Button
-            id={item.id}
-            className="w-100 btn-custom text-white"
-            onClick={() => {
-              props.onAdd(
-                item,
+          <motion.div whileTap={{ scale: 0.9 }} whileHover={{ scale: 1 }}>
+            <Button
+              //active={true}
+              size="sm"
+              className="w-100 btn-custom text-white "
+              onClick={() => {
+                props.onAdd(
+                  item,
 
-                //switchCurrency(item, lang),
-                item.name,
-                item.id,
-                item.images[0].woocommerce_gallery_thumbnail
-              );
-            }}
-            variant="outline-danger"
-          >
-            <Stack direction="horizontal" gap={4}>
-              <Figure className="m-0">
-                <Image
-                  className="figure-round figure-img img-fluid"
-                  width={100}
-                  height={100}
-                  src={item.images[0].woocommerce_gallery_thumbnail}
-                  alt="decorations image"
-                />
-              </Figure>
+                  //switchCurrency(item, lang),
+                  item.name,
+                  item.id,
+                  item.images[0].woocommerce_gallery_thumbnail
+                );
+              }}
+              variant="outline-danger"
+            >
+              <span id={item.id} className="anchor"></span>
+              <Stack direction="horizontal" gap={4}>
+                <Figure className="m-0">
+                  <Image
+                    className="figure-round figure-img img-fluid"
+                    width={70}
+                    height={70}
+                    src={item.images[0].woocommerce_gallery_thumbnail}
+                    alt="decorations image"
+                  />
+                </Figure>
 
-              <div className="item-name">
-                <p>{item.name}</p>
-              </div>
-              <div className="ms-auto">
-                {Number(switchCurrency(item)).toLocaleString(undefined, {
-                  maximumFractionDigits: 2,
-                })}
-                {lang.currencySymbol()}{" "}
-              </div>
-            </Stack>
-          </Button>
+                <div className="item-name">
+                  <p>{item.name}</p>
+                </div>
+                <div className="ms-auto">
+                  {Number(switchCurrency(item)).toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })}
+                  {lang.currencySymbol()}{" "}
+                </div>
+              </Stack>
+            </Button>
+          </motion.div>
         </ListGroup.Item>
       ))}
     </div>

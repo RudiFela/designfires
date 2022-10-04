@@ -3,7 +3,13 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  & svg {
+    fill: $secondary-color;
+  }
+  & svg:hover {
+    fill: white;
+  }
   & ul {
     padding: 0;
   }
@@ -37,6 +43,7 @@
   border: #fff !important;
   font-weight: 500 !important;
 }
+
 .nav-link {
   color: black !important;
 }
@@ -116,7 +123,7 @@
   width: 32rem;
 }
 .casings-customizer {
-  width: 22rem;
+  max-width: 32rem;
 }
 .dropdown-menu {
   max-height: 230px;

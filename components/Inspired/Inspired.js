@@ -6,17 +6,21 @@ import Image from "next/image";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
 
 import axios from "axios";
+import Slider from "../UI/Slider/Slider";
+import MotionSlider from "../UI/Slider/MotionSlider";
 
 const Inspired = () => {
   const [showModal, setShowModal] = useState(false);
   const [inspiredContent, setInspiredContent] = useState([]);
   const [pickedPost, setPickedPost] = useState();
   const [postGallery, setPostGallery] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axios
       .get("https://designfires.pl/wp-json/wp/v2/inspirations")
       .then(function (response) {
         setInspiredContent(response.data);
+        setIsLoading(false);
       });
   }, []);
 
@@ -92,16 +96,24 @@ const Inspired = () => {
       </Col>
     );
   });
-
+  const containerStyles = {
+    width: "100%",
+    height: "35vw",
+    margin: "0px auto",
+  };
   return (
     <div id="projects">
+      {" "}
       <h1 className="text-center text-white m-5">
         Get Inspired by Our customers projects
-      </h1>
-      <Container className="inspired">
-        <Row className="mb-1">{ins}</Row>
+      </h1>{" "}
+      <Container className="my-5">
+        <div className="mx-2" style={containerStyles}>
+          {!isLoading && (
+            <Slider onPick={showModalHandler} slides={inspiredContent} />
+          )}{" "}
+        </div>
       </Container>
-
       <MyVerticallyCenteredModal
         Header={pickedPost ? pickedPost.acf.place_name : null}
         //image={pickedPost ? pickedPost.acf.image.url : null}
@@ -123,3 +135,7 @@ const Inspired = () => {
   );
 };
 export default Inspired;
+/* <Container className="inspired">
+        {" "}
+        <Row className="mb-1">{ins}</Row>
+      </Container>*/

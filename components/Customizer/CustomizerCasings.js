@@ -150,7 +150,7 @@ const CustomizerCasings = (props) => {
             </h2>
           )}
         </div>
-      </MyVerticallyCenteredModal>
+      </MyVerticallyCenteredModal>{" "}
       <CustomizerWrapper
         itemDropDown={casingDropDown}
         selectedItem={pickedCaseItem}
@@ -164,8 +164,14 @@ const CustomizerCasings = (props) => {
         selected={pickedCaseItem.selected}
         cssClass="card-deco mt-3 casings-customizer"
         pictureheigth={400}
-      >
-        <p className="text-white fw-bold m-2 ms-0">Glass Color:</p>
+      ></CustomizerWrapper>
+    </>
+  );
+};
+export default CustomizerCasings;
+
+/*
+<p className="text-white fw-bold m-2 ms-0">Glass Color:</p>
         <Form.Check
           inline
           className="text-white fw-bolder"
@@ -239,8 +245,4 @@ const CustomizerCasings = (props) => {
             </Row>
           </div>
         )}
-      </CustomizerWrapper>
-    </>
-  );
-};
-export default CustomizerCasings;
+        */
