@@ -1032,7 +1032,7 @@ const Customizer = (props) => {
       <div className="">
         <Container>
           <CustomizerFirePlaces
-            className="ml-5 "
+            className=" "
             onSelect={showFirePlacePrice}
             onPickLength={addFireplaceToCart}
             fireplaces={fireplace}
@@ -1051,9 +1051,9 @@ const Customizer = (props) => {
         {" "}
         <div className="customizer pt-4 pb-2">
           {" "}
-          <div className="customizer-item">
+          <div className="">
             <CustomizerCasings
-              className="ml-5"
+              className="ml-5 "
               casings={casings}
               onSelect={showCasingPrice}
               pickedCaseItem={casingItem}
@@ -1072,7 +1072,7 @@ const Customizer = (props) => {
           <div className="customizer-item mt-3 ">
             <div>
               <Card className="card-deco carder">
-                <h3 className="text-white text-center mb-2">
+                <h3 className="text-white text-center mb-1">
                   <Badge bg="danger">Select Accessories</Badge>
                 </h3>
                 <Card.Header className="tab-content">

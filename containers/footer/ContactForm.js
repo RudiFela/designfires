@@ -157,7 +157,7 @@ const ContactForm = (props) => {
     return table;
   };
 
-  const prepareDataToSend = () => {
+  /*const prepareDataToSend = () => {
     let fireplace = `Name: ${cartHandler.addedFireplace.name}"Length:"${cartHandler.addedFireplace.length}"mm"`;
     let casing = `Name: ${cartHandler.addedCasing.name}"Length:"${cartHandler.addedCasing.length}"mm"`;
     let filling = `Fill: ${cartHandler.addedFilling.name}`;
@@ -165,9 +165,10 @@ const ContactForm = (props) => {
     let top = `TOP:${cartHandler.addedTop.name}`;
     let glass = `Glass:${cartHandler.addedAccessories.glass.color}" Length:${cartHandler.addedAccessories.glass} x:${cartHandler.addedAccessories.glass.pcs}`;
     let holders = `Holders x2 x:${cartHandler.addedAccessories.holder.pcs}`;
-  };
+  };*/
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(cartHandler);
     setSending(true);
     let dec = splitDecorationsArray();
     const emailData = {
@@ -300,104 +301,106 @@ const ContactForm = (props) => {
   };
   const handleClick = () => setSending(true);
   return (
-    <Form ref={formInputRef} onSubmit={submitHandler}>
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridName">
-          <FloatingLabel
-            controlId="floatingNameInput"
-            label="Name"
-            className="mb-3"
-          >
-            <Form.Control
-              type="text"
-              placeholder="Enter Name"
-              ref={nameInputRef}
-              name="user_name"
-              required
-            />
-          </FloatingLabel>
-        </Form.Group>
+    <div>
+      <Form ref={formInputRef} onSubmit={submitHandler}>
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="formGridName">
+            <FloatingLabel
+              controlId="floatingNameInput"
+              label="Name"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                placeholder="Enter Name"
+                ref={nameInputRef}
+                name="user_name"
+                required
+              />
+            </FloatingLabel>
+          </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridEmail">
-          <FloatingLabel
-            controlId="floatingEmailInput"
-            label="Email address"
-            className="mb-3 "
-          >
-            {" "}
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              ref={emailInputRef}
-              name="user_email"
+          <Form.Group as={Col} controlId="formGridEmail">
+            <FloatingLabel
+              controlId="floatingEmailInput"
+              label="Email address"
+              className="mb-3 "
+            >
+              {" "}
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                ref={emailInputRef}
+                name="user_email"
+                required
+              />
+            </FloatingLabel>
+          </Form.Group>
+        </Row>
+        <Row className="mb-3 ">
+          <Form.Group as={Col} controlId="formGridTelephone">
+            <FloatingLabel
+              controlId="floatingTelephoneInput"
+              label="Telephone"
+              className="mb-3"
+              name="user_phone"
               required
-            />
-          </FloatingLabel>
-        </Form.Group>
-      </Row>
-      <Row className="mb-3 ">
-        <Form.Group as={Col} controlId="formGridTelephone">
-          <FloatingLabel
-            controlId="floatingTelephoneInput"
-            label="Telephone"
-            className="mb-3"
-            name="user_phone"
-            required
-          >
-            <Form.Control
-              type="text"
-              placeholder="Enter Telephone"
-              ref={phoneInputRef}
-            />
-          </FloatingLabel>
-        </Form.Group>
+            >
+              <Form.Control
+                type="text"
+                placeholder="Enter Telephone"
+                ref={phoneInputRef}
+              />
+            </FloatingLabel>
+          </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridState">
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Subject"
-            name="user_subject"
-            className="mb-3"
-          >
-            <Form.Select defaultValue="" ref={subjectInputRef}>
-              <option>Select Subject</option>
-              <option>Bio-Ethanol</option>
-              <option>Mystic Steamfire</option>
-              <option>Others</option>
-            </Form.Select>
-          </FloatingLabel>
+          <Form.Group as={Col} controlId="formGridState">
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Subject"
+              name="user_subject"
+              className="mb-3"
+            >
+              <Form.Select defaultValue="" ref={subjectInputRef}>
+                <option>Select Subject</option>
+                <option>Bio-Ethanol</option>
+                <option>Mystic Steamfire</option>
+                <option>Others</option>
+              </Form.Select>
+            </FloatingLabel>
+          </Form.Group>
+        </Row>
+        <Form.Group
+          className="mb-3 bg-secondary"
+          controlId="exampleForm.ControlTextarea1"
+        >
+          <Form.Control
+            className="p-3 mb-2  "
+            as="textarea"
+            placeholder="Your questions..."
+            rows={5}
+            name="user_textarea"
+            ref={textAreaInputRef}
+          />
         </Form.Group>
-      </Row>
-      <Form.Group
-        className="mb-3 bg-secondary"
-        controlId="exampleForm.ControlTextarea1"
-      >
-        <Form.Control
-          className="p-3 mb-2  "
-          as="textarea"
-          placeholder="Your questions..."
-          rows={5}
-          name="user_textarea"
-          ref={textAreaInputRef}
-        />
-      </Form.Group>
-      <Button
-        className="float-end"
-        variant="info"
-        type="submit"
-        disabled={sending}
-        //onClick={!sending ? handleClick : null}
-      >
-        {sending ? "Sending..." : "Send"}
-      </Button>
-      <p className="float-end p-1">
-        {emailResponse === undefined ? null : emailResponse ? (
-          <AiOutlineCheck size={30} color="green" />
-        ) : (
-          <VscError size={30} color="red" />
-        )}
-      </p>
-    </Form>
+        <Button
+          className="float-end"
+          variant="info"
+          type="submit"
+          disabled={sending}
+          //onClick={!sending ? handleClick : null}
+        >
+          {sending ? "Sending..." : "Send"}
+        </Button>
+        <p className="float-end p-1">
+          {emailResponse === undefined ? null : emailResponse ? (
+            <AiOutlineCheck size={30} color="green" />
+          ) : (
+            <VscError size={30} color="red" />
+          )}
+        </p>
+      </Form>
+    </div>
   );
 };
 export default ContactForm;

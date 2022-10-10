@@ -107,8 +107,8 @@ const Inspired = () => {
       <h1 className="text-center text-white m-5">
         Get Inspired by Our customers projects
       </h1>{" "}
-      <Container className="my-5">
-        <div className="mx-2" style={containerStyles}>
+      <Container className="my-5" style={{ overflow: "hidden" }}>
+        <div className="mx-2">
           {!isLoading && (
             <Slider onPick={showModalHandler} slides={inspiredContent} />
           )}{" "}

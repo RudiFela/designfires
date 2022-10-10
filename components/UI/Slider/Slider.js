@@ -1,18 +1,19 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Ratio } from "react-bootstrap";
 const Slider = ({ slides, onPick }) => {
   const [currentIndex, setCurrentIndex] = useState(3);
   const [nextIndex, setNextIndex] = useState(2);
+  const [isHover, setIsHover] = useState(false);
   useEffect(() => {
     // console.log("current", currentIndex, "next", nextIndex);
     const intervalId = setInterval(() => {
-      goToNext();
-    }, 3000);
+      !isHover && goToNext();
+    }, 4000);
     return () => {
       clearInterval(intervalId);
     };
-  }, [nextIndex]);
+  }, [nextIndex, isHover]);
 
   const sliderStyles = {
     height: "100%",
@@ -24,6 +25,7 @@ const Slider = ({ slides, onPick }) => {
     borderRadius: "10px",
     backgroundPosition: "center",
     backgroundSize: "cover",
+    overflow: "hidden",
   };
 
   const goToPrevious = () => {
@@ -43,63 +45,104 @@ const Slider = ({ slides, onPick }) => {
     setCurrentIndex(newLeftIndex);
     setNextIndex(newRightIndex);
   };
+
+  const leftArrowStyles = {
+    position: "absolute",
+    top: "50%",
+    transform: "translate(0,-50%)",
+    left: "8px",
+    fontSize: "45px",
+    color: "#fff",
+    zIndex: 1,
+    cursor: "pointer",
+  };
+  const rightArrowStyles = {
+    position: "absolute",
+    top: "50%",
+    transform: "translate(0,-50%)",
+    right: "8px",
+    fontSize: "45px",
+    color: "#fff",
+    zIndex: 1,
+    cursor: "pointer",
+  };
   return (
     <>
       <div style={sliderStyles}>
+        <div style={leftArrowStyles} onClick={goToPrevious}>
+          {" "}
+          {`<`}
+        </div>
+        <div style={rightArrowStyles} onClick={goToNext}>
+          {" "}
+          {`>`}{" "}
+        </div>
         <AnimatePresence style={slideStyles}>
-          <Row className="h-100">
-            <Col className="h-100 m-3">
-              {" "}
-              <motion.div className="h-100" whileHover={{ scale: 1.1 }}>
-                <div className="rel h-100">
-                  <motion.img
-                    whileHover={{ cursor: "pointer" }}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: "25px",
-                      backgroundPosition: "center",
-                      backgroundSize: "100%,100%",
-                      backgroundImage: `url(${slides[currentIndex].acf.image.url})`,
-                    }}
-                    key={`url(${slides[nextIndex].acf.image.url})`}
-                    src={slides[currentIndex].acf.image.url}
-                    initial={{ x: 200, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ x: -200, opacity: 0 }}
-                    onClick={() => onPick(slides[currentIndex])}
-                  />{" "}
-                  <motion.div className="overlay text-center text-white">
-                    {slides[currentIndex].acf.place_name}
-                  </motion.div>
-                </div>
+          <Row
+            onMouseOver={() => setIsHover(true)}
+            onMouseOut={() => setIsHover(false)}
+            className=""
+          >
+            <Col className="p-3" style={{ height: "auto", width: "auto" }}>
+              <motion.div className="" whileHover={{ scale: 1.1 }}>
+                <Ratio aspectRatio="4x3">
+                  <div className="rel ">
+                    <>
+                      <motion.img
+                        whileHover={{ cursor: "pointer" }}
+                        style={{
+                          overflow: "hidden",
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: "25px",
+                          backgroundPosition: "center",
+                          backgroundSize: "100%,100%",
+                          backgroundImage: `url(${slides[currentIndex].acf.image.url})`,
+                        }}
+                        key={`url(${slides[nextIndex].acf.image.url})`}
+                        src={slides[currentIndex].acf.image.url}
+                        initial={{ x: 200, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: -100, opacity: 0 }}
+                        transition={{ duration: 0.7 }}
+                        onClick={() => onPick(slides[currentIndex])}
+                      />{" "}
+                      <motion.div className="overlay text-center text-white">
+                        {slides[currentIndex].acf.place_name}
+                      </motion.div>
+                    </>
+                  </div>
+                </Ratio>
               </motion.div>
             </Col>
-            <Col className="h-100 m-3">
+            <Col className="p-3">
               <motion.div className="h-100" whileHover={{ scale: 1.1 }}>
-                <div className="rel h-100">
-                  <motion.img
-                    whileHover={{ cursor: "pointer" }}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: "25px",
-                      backgroundPosition: "center",
-                      backgroundSize: "cover",
-                      backgroundImage: `url(${slides[nextIndex].acf.image.url})`,
-                      overflow: "hidden",
-                    }}
-                    key={`url(${slides[nextIndex].acf.image.url})`}
-                    src={slides[nextIndex].acf.image.url}
-                    initial={{ x: 200, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ x: -200, opacity: 0 }}
-                    onClick={() => onPick(slides[nextIndex])}
-                  />
-                  <motion.div className="overlay text-center text-white">
-                    {slides[nextIndex].acf.place_name}
-                  </motion.div>
-                </div>
+                <Ratio aspectRatio="4x3">
+                  <div className="rel">
+                    <motion.img
+                      whileHover={{ cursor: "pointer" }}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "25px",
+                        // backgroundPosition: "center",
+                        // backgroundSize: "cover",
+                        // backgroundImage: `url(${slides[nextIndex].acf.image.url})`,
+                        overflow: "hidden",
+                      }}
+                      key={`url(${slides[nextIndex].acf.image.url})`}
+                      src={slides[nextIndex].acf.image.url}
+                      initial={{ x: 200, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: -200, opacity: 0 }}
+                      transition={{ duration: 0.7 }}
+                      onClick={() => onPick(slides[nextIndex])}
+                    />
+                    <motion.div className="overlay text-center text-white">
+                      {slides[nextIndex].acf.place_name}
+                    </motion.div>
+                  </div>
+                </Ratio>
               </motion.div>
             </Col>
           </Row>
@@ -145,23 +188,4 @@ export default Slider;
     backgroundSize: "cover",
     backgroundImage: `url(${slides[nextIndex].acf.image.url})`,
   };
-  const leftArrowStyles = {
-    position: "absolute",
-    top: "50%",
-    transform: "translate(0,-50%)",
-    left: "32px",
-    fontSize: "45px",
-    color: "#fff",
-    zIndex: 1,
-    cursor: "pointer",
-  };
-  const rightArrowStyles = {
-    position: "absolute",
-    top: "50%",
-    transform: "translate(0,-50%)",
-    right: "32px",
-    fontSize: "45px",
-    color: "#fff",
-    zIndex: 1,
-    cursor: "pointer",
-  }; */
+  */

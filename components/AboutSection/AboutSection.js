@@ -23,7 +23,7 @@ const AboutSection = (props) => {
   return (
     <div className="about-section">
       <h2>{props.title}</h2>
-      <ul>{list}</ul>
+      <ul className="fs-5">{list}</ul>
       <p>{props.aboutParagraph}</p>
       <Accordion color="success" className="mt-3">
         <Accordion.Item className="bg-primary text-white" eventKey="0">

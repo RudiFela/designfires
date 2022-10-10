@@ -1,9 +1,23 @@
-import { useContext } from "react";
-import { Row, Col, Button, Card, Container } from "react-bootstrap";
-
+import { useContext, useState } from "react";
+import {
+  Row,
+  Col,
+  Button,
+  Card,
+  Container,
+  Modal,
+  Badge,
+} from "react-bootstrap";
+import ContactForm from "../../containers/footer/ContactForm";
+import Image from "next/image";
+import CheckCartModal from "../Customizer/CheckCartModal";
 import { LanguageContext } from "../context/language-context";
 
 const BioFuel = (props) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [pickedFuel, setPickedFuel] = useState();
+  const [pcsFuel, setPcsFuel] = useState(0);
   const lang = useContext(LanguageContext);
 
   const FuelProducts = props.decorations.filter(
@@ -14,10 +28,127 @@ const BioFuel = (props) => {
 
     return findedPriceObj;
   };
+  const onFuelSelect = (item) => {
+    setPickedFuel(item);
+    setOpenModal(true);
+  };
+  const onAdd = () => {
+    setPcsFuel((prevState) => prevState + 1);
+  };
+  const onRemove = () => {
+    setPcsFuel((prevState) => prevState - 1);
+  };
+  const onModalClose = () => {
+    setShowContactForm(false);
+    setOpenModal(false);
+  };
+  const onConfirm = () => {
+    const decoArray = [];
+    const priceSEK = pickedFuel.meta_data.find(
+      (key) =>
+        key.key === "_alg_currency_switcher_per_product_regular_price_SEK"
+    );
+    const priceDKK = pickedFuel.meta_data.find(
+      (key) =>
+        key.key === "_alg_currency_switcher_per_product_regular_price_DKK"
+    );
+    decoArray.push({
+      id: pickedFuel.id,
+      name: pickedFuel.name,
+      priceEUR: pickedFuel.price,
+      priceSEK: priceSEK.value,
+      priceDKK: priceDKK.value,
+      count: pcsFuel,
+      image: pickedFuel.images[0].src,
+    });
+
+    props.cartHandler((prevCart) => ({
+      ...prevCart,
+      addedDecorations: decoArray,
+    }));
+
+    console.log(decoArray);
+    setShowContactForm(!showContactForm);
+  };
   return (
     <div className="text-white text-center mb-5">
+      <Modal size="xl" centered show={openModal} onHide={onModalClose}>
+        {" "}
+        <Modal.Header closeButton>
+          <Modal.Title>Your Choise</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modallo">
+          <Container>
+            {pickedFuel && (
+              <>
+                <div>
+                  <Row
+                    xs={1}
+                    md={4}
+                    className="justify-content-between align-items-center p-2"
+                  >
+                    <Col>
+                      <Image
+                        className="rounded"
+                        src={pickedFuel.images[0].shop_thumbnail}
+                        alt="fuel image"
+                        height={100}
+                        width={100}
+                      />
+                    </Col>
+                    <Col>
+                      <p className="bolder mt-3">{pickedFuel.name}</p>
+                    </Col>
+                    <Col md="auto">
+                      <p className="bolder mt-3">
+                        {pickedFuel.price} {lang.currencySymbol()}
+                      </p>
+                    </Col>
+                    <Col>
+                      <Badge>x {pcsFuel}</Badge>
+
+                      <Button
+                        variant="info"
+                        className="m-1"
+                        size="sm"
+                        //as={Badge}
+                        onClick={onAdd}
+                      >
+                        +
+                      </Button>
+                      <Button
+                        variant="info"
+                        className=""
+                        size="sm"
+                        //as={Badge}
+                        onClick={onRemove}
+                      >
+                        -
+                      </Button>
+                    </Col>{" "}
+                  </Row>{" "}
+                  <h5 className="float-end">
+                    Total:{pickedFuel.price * pcsFuel} {lang.currencySymbol()}
+                  </h5>
+                  <Row>
+                    <p>30 pcs its max on 1 pallet</p>
+                  </Row>
+                </div>
+                <div className="my-3">
+                  <Button variant="info" onClick={() => onConfirm()}>
+                    Send it to us
+                  </Button>
+                  <span> </span>
+                  <Button onClick={onModalClose}>Close</Button>
+                </div>
+              </>
+            )}
+            {showContactForm && <ContactForm cartHandler={props.cart} />}
+          </Container>
+        </Modal.Body>
+      </Modal>
       <Container>
-        <h1 className="m-5">High Quality Bio-Ethanol Fuel</h1>
+        <h2 className="m-5">High Quality Bio-Ethanol Fuel</h2>
         <h4>
           We are very proud to be able to deliver the best quality in the class
           of Bio-Ethanol. Use only the best Ethanol. Cheap ethanol is often sold
@@ -59,13 +190,13 @@ const BioFuel = (props) => {
           Ethanol fuel.
         </h5>
 
-        <Row className="my-5 justify-content-center">
+        <Row className="my-5 justify-content-center flex-nowrap">
           {FuelProducts.map((item) => (
-            <Col key={item.id} md="auto">
+            <Col key={item.id} className="d-flex justify-content-center">
               <Card
                 bg="danger"
                 className="grow"
-                style={{ width: "18rem", borderRadius: "25px" }}
+                style={{ maxWidth: "24rem", borderRadius: "25px" }}
               >
                 <Card.Img
                   variant="top"
@@ -92,7 +223,11 @@ const BioFuel = (props) => {
                     <span> </span>
                     {lang.currencySymbol()}
                   </Card.Text>
-                  <Button href={`#${item.id}`} variant="info">
+                  <Button
+                    //href={`#${item.id}`}
+                    onClick={() => onFuelSelect(item)}
+                    variant="info"
+                  >
                     Order
                   </Button>
                 </Card.Body>

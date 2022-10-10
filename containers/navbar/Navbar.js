@@ -1,15 +1,16 @@
-import { useContext, useState, useEffect } from "react";
+//import { useContext, useState, useEffect } from "react";
+import { useScrollPosition } from "../../hooks/useScrollPosition";
 import Image from "next/image";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import { LanguageContext } from "../../components/context/language-context";
-const english = "/static/images/greatbritain.png";
-const denmark = "/static/images/denmark.png";
-const sweden = "/static/images/sweden.png";
-const designImage = "/static/images/DanishDesign.png";
+import { Navbar, Container, Nav } from "react-bootstrap";
+//import { LanguageContext } from "../../components/context/language-context";
+//const english = "/static/images/greatbritain.png";
+//const denmark = "/static/images/denmark.png";
+//const sweden = "/static/images/sweden.png";
+//const designImage = "/static/images/DanishDesign.png";
 const Navibar = () => {
-  const language = useContext(LanguageContext);
-  const [lang, setLang] = useState();
-  useEffect(() => {
+  // const language = useContext(LanguageContext);
+  //const [lang, setLang] = useState();
+  /*useEffect(() => {
     //console.log(language.language);
     switch (language.language) {
       case "swedish":
@@ -21,16 +22,23 @@ const Navibar = () => {
       default:
         return onLanguageChange(english, "english");
     }
-  }, []);
-
-  const onLanguageChange = (langPhoto, langName) => {
+  }, []);*/
+  const scrollPosition = useScrollPosition();
+  //console.log(scrollPosition);
+  const navbarClasses = scrollPosition >= 550 ? "hideBar" : "showBar";
+  const image =
+    scrollPosition > 549
+      ? "https://designfires.pl/wp-content/uploads/2022/10/designfiresLOGOss.png"
+      : "https://designfires.pl/wp-content/uploads/2022/08/designfiresn.png";
+  /*const onLanguageChange = (langPhoto, langName) => {
     setLang(
       <Image src={langPhoto} height={40} width={40} alt="Country Flag" />
     );
     //props.setLanguage(langName);
     language.setLanguage(langName);
-  };
+  };*/ //
   /**/
+
   return (
     <>
       <Navbar
@@ -38,29 +46,29 @@ const Navibar = () => {
         expand="xl"
         bg="dark"
         variant="dark"
-        className="py-0"
-        sticky="top"
+        className={`py-0 sticky-top ${navbarClasses}`}
+        //sticky="top"
       >
-        <Container className="p-0 ">
-          <Navbar.Brand href="#home" className="w-50 p-0">
-            <Image
-              src="https://designfires.pl/wp-content/uploads/2022/08/designfiresn.png" //"https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
+        <Container fluid className="p-0 ">
+          <Navbar.Brand href="#home" className="w-50">
+            <img
+              src={image} //"https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
               //layout="fill"
               //width={376}
               //height={114}
-              width={572}
-              height={172}
+              //width={572}
+              //height={172}
               alt="DesignFires.com LOGO"
-              className="navbar-logo"
+              className="navbar-logo img-fluid"
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse
             id="responsive-navbar-nav"
-            //className="justify-content-end"
+            className="align-items-center"
             //className="flex-wrap"
           >
-            <Nav className="navbar-links fs-6 fw-light">
+            <Nav className="navbar-links fs-6 fw-semibold align-items-center">
               <Nav.Link className="text-white text-center" href="#bio">
                 Digital DFE Bio-Ehtanol Fireplace PRO
               </Nav.Link>

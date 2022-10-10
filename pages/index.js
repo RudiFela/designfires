@@ -98,6 +98,7 @@ export default function Home(props) {
             accessories={props.accessories}
             casings={props.casings}
             fireplaces={props.fireplaces}
+            cart={cart}
           />
           <Footer cartHandler={cart} />
         </div>

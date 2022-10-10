@@ -8,7 +8,7 @@ import {
   Badge,
   Button,
   DropdownButton,
-  Form,
+  Ratio,
 } from "react-bootstrap";
 import { LanguageContext } from "../context/language-context";
 import CustomizerWrapper from "./CustomizerWrapper";
@@ -89,7 +89,7 @@ const CustomizerCasings = (props) => {
 
   const casingDropDownItems = casings.map((item) => (
     <Dropdown.Item
-      className="text-white bolder"
+      className="text-white bolder svg-image"
       key={item.id}
       onClick={() => {
         props.onSelect(
@@ -104,7 +104,14 @@ const CustomizerCasings = (props) => {
       }}
       eventKey={item}
     >
-      {item.name}
+      <svg width="90" height="90">
+        <image
+          xlinkHref={item.images[1].src}
+          src="yourfallback.png"
+          width="90"
+          height="90"
+        />
+      </svg>
     </Dropdown.Item>
   ));
   const casingDropDown = (
@@ -139,11 +146,13 @@ const CustomizerCasings = (props) => {
       >
         <div className="embed-responsive embed-responsive-21by9 ">
           {pickedCaseItem.Drawing3d ? (
-            <iframe
-              style={{ width: "100%" }}
-              className="embed-responsive-item modal-size"
-              src={`${pickedCaseItem.Drawing3d}/embed?autospin=1&dnt=1`}
-            ></iframe>
+            <Ratio aspectRatio="4x3">
+              <iframe
+                style={{ width: "100%" }}
+                className="embed-responsive-item modal-size"
+                src={`${pickedCaseItem.Drawing3d}/embed?autospin=1&dnt=1`}
+              ></iframe>
+            </Ratio>
           ) : (
             <h2 className="text-white text-center mt-5">
               Sorry,cant find 3d model

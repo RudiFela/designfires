@@ -9900,23 +9900,6 @@ textarea.form-control-lg {
 .navbar a:hover {
   color: #800000 !important;
 }
-.navbar nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.navbar-logo {
-  width: 200px;
-}
-.navbar-links {
-  padding: 2rem 0;
-  font-weight: 500;
-  font-size: 1rem;
-}
-.navbar-links li {
-  display: inline-block;
-  margin: 0 1rem;
-}
 
 .dropdown-menu {
   background-color: #212529 !important;
@@ -9952,6 +9935,18 @@ textarea.form-control-lg {
 }
 .under a:hover::after {
   width: 100%;
+}
+
+.showBar {
+  display: block;
+}
+
+.hideBar {
+  display: none;
+  margin-top: 500px;
+}
+.hideBar img {
+  height: 70px;
 }
 
 .video-wrapper {
@@ -19828,9 +19823,6 @@ textarea.form-control-lg {
   margin: 0.5rem;
 }
 
-.footer-wrap {
-  flex-wrap: wrap-reverse !important;
-}
 .footer-wrap a {
   color: white !important;
   text-decoration: none !important;
@@ -29693,84 +29685,23 @@ textarea.form-control-lg {
   margin: 0.5rem;
 }
 
-.photo {
-  position: relative;
+.photo-wrapper {
   overflow: hidden;
-  height: 200px;
-  width: 300px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  display: block;
-  border-radius: 25px;
-  border: 1px solid #000000;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  /* &-wrapper {
-    overflow: hidden;
-    max-height: 200px;
-  }
-
-   .photo-image {
-    overflow: hidden;
-    object-fit: cover;
-    object-position: 23%73%;
-    max-width: 300px;
-    max-height: 200px;
-    width: 100%;
-    // height: auto;
-    transition: 0.5s all ease-in-out;
-    & img {
-      overflow: hidden;
-      object-fit: cover;
-      object-position: 23%73%;
-      max-width: 300px;
-      max-height: 200px;
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      transition: 0.5s all ease-in-out;
-    }
-  }*/
-}
-.photo .photo-image {
+  width: 100%;
+  height: 100%;
   position: relative;
-  width: 360px;
-  height: 240px;
+  border: 1px solid #000000;
+  border-radius: 25px;
+  background: black;
 }
-.photo img {
+.photo-wrapper img {
   transition: 0.5s all ease-in-out;
 }
 
-.photo:hover img {
+.photo-wrapper:hover img {
   transform: scale(1.5);
 }
 
-.photo-image:hover {
-  transform: scale(1.5);
-}
-
-@media only screen and (max-width: 800px) {
-  .photo {
-    margin-top: 0.5rem;
-    width: 200px;
-    height: 150px;
-  }
-  .photocard-container-1 {
-    margin-left: 0.5rem;
-  }
-}
-@media only screen and (max-width: 500px) {
-  .photo {
-    width: 150px;
-    height: 100px;
-  }
-}
-@media only screen and (max-width: 400px) {
-  .photo {
-    border-radius: 15px;
-    width: 120px;
-    height: 80px;
-  }
-}
 .flex-container {
   display: flex;
   justify-content: space-around;
@@ -39652,54 +39583,9 @@ textarea.form-control-lg {
   margin: 0.5rem;
 }
 
-.cardbox {
-  align-items: flex-end;
-  background-color: #252525;
-  display: flex;
-  justify-content: center;
-  max-width: 801px;
-  padding: 3rem;
-  border-radius: 35px;
-}
-
-.photocard-container {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-}
-
-.photocard-container-1 {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  margin-left: 3rem;
-}
-
-.photo-grid {
-  background-color: #252525;
-  border-radius: 35px;
-  padding: 2rem;
-  min-width: 700px;
-}
-
-@media only screen and (max-width: 800px) {
-  .cardbox {
-    padding: 0.5rem 0.5rem 2.5rem 0.5rem;
-  }
-  .photocard-container-1 {
-    margin-left: 0.2rem;
-  }
-}
-@media only screen and (max-width: 700px) {
-  .photo-grid {
-    min-width: 90vw;
-  }
-}
 .about-section {
   color: #fff;
   padding: 2rem;
-  max-width: 460px;
   background-color: #252525;
   border-radius: 35px;
 }
@@ -49902,32 +49788,6 @@ textarea.form-control-lg {
   margin: 0.5rem;
 }
 
-.decoration {
-  background-color: #252525;
-  margin: 2rem;
-  border-radius: 35px;
-}
-.decoration-photos {
-  align-items: center;
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  max-width: 801px;
-  padding: 55px 66px;
-}
-.decoration-photos-1 {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-}
-.decoration-photos-2 {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  margin-left: 2rem;
-}
-
 .overlay {
   position: absolute;
   bottom: 0;
@@ -49961,30 +49821,6 @@ textarea.form-control-lg {
   justify-content: center !important;
 }
 
-@media only screen and (max-width: 400px) {
-  .overlay {
-    padding: 5px;
-  }
-}
-.deco {
-  width: 300px;
-}
-
-@media only screen and (max-width: 800px) {
-  .deco {
-    width: 200px;
-  }
-}
-@media only screen and (max-width: 500px) {
-  .deco {
-    width: 150px;
-  }
-}
-@media only screen and (max-width: 400px) {
-  .deco {
-    width: 120px;
-  }
-}
 .inspired img {
   border-radius: 35px !important;
   -o-object-fit: cover !important;
@@ -60308,7 +60144,6 @@ textarea.form-control-lg {
 }
 
 .tab-content {
-  max-height: 32rem;
   overflow-y: scroll;
   background-color: #6a6868 !important;
 }
@@ -60347,7 +60182,7 @@ textarea.form-control-lg {
   border: none !important;
   padding: 1rem !important;
   background-color: #6a6868 !important;
-  height: 35rem;
+  height: 40rem;
 }
 
 .list-group-item {
@@ -60365,7 +60200,7 @@ textarea.form-control-lg {
 }
 
 .carder {
-  width: 32rem;
+  width: 35rem;
 }
 
 @media only screen and (max-width: 550px) {
@@ -60441,6 +60276,13 @@ textarea.form-control-lg {
 
 .popover {
   border-radius: 25px !important;
+}
+
+.svg-image svg {
+  filter: invert(10%) sepia(96%) saturate(3359%) hue-rotate(359deg) brightness(86%) contrast(119%);
+}
+.svg-image svg:hover {
+  filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(73deg) brightness(104%) contrast(101%);
 }
 
 /* import bootstrap to set changes */
@@ -70346,4 +70188,12 @@ html {
   cursor: -webkit-grab;
   cursor: grab;
   overflow: hidden;
+}
+
+.nav-link {
+  max-width: 250px !important;
+}
+
+.borderr {
+  border-radius: 25px;
 }/*# sourceMappingURL=index.css.map */

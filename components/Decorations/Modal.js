@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import { Modal, Spinner, Container } from "react-bootstrap";
+import { Modal, Spinner, Container, Ratio } from "react-bootstrap";
 const MyVerticallyCenteredModal = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const { ...others } = props;
@@ -34,25 +34,28 @@ const MyVerticallyCenteredModal = (props) => {
       <Modal.Body className="bg-primary ">
         {" "}
         <Container>
+          {" "}
           {props.image ? (
-            <>
-              {isLoading && (
-                <div className="text-center">
-                  <Spinner animation="border" variant="secondary" />
-                </div>
-              )}
+            <Ratio aspectRatio="16x9">
+              <>
+                {isLoading && (
+                  <div className="text-center">
+                    <Spinner animation="border" variant="secondary" />
+                  </div>
+                )}
 
-              <Image
-                // className="figure-round figure-img img-fluid"
-                width={1200}
-                height={800}
-                //layout="fill"
-                objectFit="contain"
-                onLoadingComplete={onComplete}
-                src={props.image}
-                alt="Modal Image"
-              />
-            </>
+                <Image
+                  // className="figure-round figure-img img-fluid"
+                  //width={1200}
+                  //height={800}
+                  layout="fill"
+                  objectFit="contain"
+                  onLoadingComplete={onComplete}
+                  src={props.image}
+                  alt="Modal Image"
+                />
+              </>
+            </Ratio>
           ) : (
             <Container>{props.children}</Container>
           )}

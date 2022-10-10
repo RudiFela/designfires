@@ -3,24 +3,6 @@
   a:hover {
     color: var.$secondary-color !important;
   }
-  & nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  &-logo {
-    width: 200px;
-  }
-  &-links {
-    padding: 2rem 0;
-    font-weight: 500;
-    font-size: 1rem;
-
-    & li {
-      display: inline-block;
-      margin: 0 1rem;
-    }
-  }
 }
 .dropdown-menu {
   background-color: #212529 !important;
@@ -55,4 +37,15 @@
       width: 100%;
     }
   }
+}
+.showBar {
+  display: block;
+}
+.hideBar {
+  display: none;
+  //max-height: 100px !important;
+  & img {
+    height: 70px;
+  }
+  margin-top: 500px;
 }

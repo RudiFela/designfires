@@ -496,6 +496,27 @@ const CustomizerFirePlaces = (props) => {
       </g>
     </svg>
   );
+  const allSideSvg = (
+    <svg
+      version="1.1"
+      viewBox="0 0 119.78 116.01"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        transform="translate(-49.198 -105.42)"
+        //fill="none"
+        stroke="#000000"
+        color="#000000"
+        fillRule="evenodd"
+        strokeLinejoin="round"
+      >
+        <path d="m50.824 172.62 34.795-20.089v-45.48l-34.795 20.089z" />
+        <path d="m85.62 152.53v-45.48l81.729 47.186v45.48z" />
+        <path d="m50.824 172.62v-45.48l81.729 47.186v45.481z" />
+        <path d="m132.55 219.8 34.796-20.089v-45.48l-34.796 20.089z" />
+      </g>
+    </svg>
+  );
   const onSelectMountType = (setPieces, svgElement) => {
     setPieces();
     setMountTitle(svgElement);
@@ -599,7 +620,7 @@ const CustomizerFirePlaces = (props) => {
                     </Dropdown.Item>
                     <Dropdown.Item
                       className="text-white customizer p-3"
-                      style={{ width: "70px" }}
+                      style={{ width: "90px" }}
                       onClick={() =>
                         onSelectMountType(
                           () => props.glassPiecesChange(3, "1", "2"),
@@ -608,6 +629,18 @@ const CustomizerFirePlaces = (props) => {
                       }
                     >
                       {fourSideSvg}
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      className="text-white customizer p-3"
+                      style={{ width: "90px" }}
+                      onClick={() =>
+                        onSelectMountType(
+                          () => props.glassPiecesChange(3, "2", "2"),
+                          allSideSvg
+                        )
+                      }
+                    >
+                      {allSideSvg}
                     </Dropdown.Item>
                   </DropdownButton>
                 </ButtonGroup>

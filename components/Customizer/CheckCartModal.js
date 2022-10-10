@@ -1,7 +1,5 @@
 import { useContext, useState, useRef } from "react";
-import { renderToString } from "react-dom/server";
 import { LanguageContext } from "../context/language-context";
-import GeneratePdf from "../GeneratePDF/GeneratePdf";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Modal, Row, Col, Button, Figure, Container } from "react-bootstrap";
 import Image from "next/image";
@@ -522,6 +520,7 @@ const CheckCartModal = (props) => {
               </Row>
             )}
           </Container>
+          {props.children}
           {cart.addedCasing.length.length === 0 &&
           cart.addedFireplace.length.length === 0 &&
           cart.addedDecorations.length === 0 ? (

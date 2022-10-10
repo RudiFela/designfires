@@ -21,7 +21,7 @@
   font-weight: 600 !important;
 }
 .tab-content {
-  max-height: 32rem;
+  //max-height: 32rem;
 
   overflow-y: scroll;
   background-color: $light-shark !important;
@@ -55,7 +55,7 @@
   border: none !important;
   padding: 1rem !important;
   background-color: $light-shark !important;
-  height: 35rem;
+  height: 40rem;
 }
 .list-group-item {
   padding: 0 !important;
@@ -69,7 +69,7 @@
   text-align: center;
 }
 .carder {
-  width: 32rem;
+  width: 35rem;
 }
 @media only screen and (max-width: 550px) {
   .carder {
@@ -136,4 +136,14 @@
 }
 .popover {
   border-radius: 25px !important;
+}
+.svg-image {
+  & svg {
+    filter: invert(10%) sepia(96%) saturate(3359%) hue-rotate(359deg)
+      brightness(86%) contrast(119%);
+  }
+  & svg:hover {
+    filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(73deg)
+      brightness(104%) contrast(101%);
+  }
 }

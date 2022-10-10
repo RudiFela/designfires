@@ -1,6 +1,7 @@
 const Aboutus = () => {
   return (
     <div className="text-white my-3">
+      <h2 className="text-center pb-4">About Us</h2>
       <p>
         DesignFires is a Scandinavian brand, founded by Danes now living in
         Sweden. We have many years of experience of working with fire -

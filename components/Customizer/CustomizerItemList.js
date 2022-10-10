@@ -35,7 +35,7 @@ const CustomizerItemList = (props) => {
             <Button
               //active={true}
               size="sm"
-              className="w-100 btn-custom text-white "
+              className="w-100 btn-custom text-white pb-2"
               onClick={() => {
                 props.onAdd(
                   item,
@@ -48,20 +48,21 @@ const CustomizerItemList = (props) => {
               }}
               variant="outline-danger"
             >
-              <span id={item.id} className="anchor"></span>
-              <Stack direction="horizontal" gap={4}>
-                <Figure className="m-0">
-                  <Image
-                    className="figure-round figure-img img-fluid"
-                    width={70}
-                    height={70}
-                    src={item.images[0].woocommerce_gallery_thumbnail}
-                    alt="decorations image"
-                  />
-                </Figure>
-
-                <div className="item-name">
-                  <p>{item.name}</p>
+              <span id={item.id} className="anchor "></span>
+              <Stack className="fs-6" direction="horizontal" gap={4}>
+                <div>
+                  <Figure className="m-0">
+                    <Image
+                      className="figure-round figure-img img-fluid"
+                      width={100}
+                      height={100}
+                      src={item.images[0].woocommerce_gallery_thumbnail}
+                      alt="decorations image"
+                    />
+                  </Figure>
+                </div>
+                <div className="item-name  justify-content-center">
+                  <p className="">{item.name}</p>
                 </div>
                 <div className="ms-auto">
                   {Number(switchCurrency(item)).toLocaleString(undefined, {
