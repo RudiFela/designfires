@@ -42,40 +42,38 @@ const Ethanol = (props) => {
     "Best customer support on the market, We help you all the way, even after warranty has expired",
   ];
   return (
-    <div id="bio">
-      <Container className="my-3">
-        <Row className=" flex-wrap-reverse" xs={1} md={1} lg={2} xl={2}>
-          <Col className="align-self-center mt-3">
-            <PhotosGrid
-              //image1="https://designfires.pl/wp-content/uploads/2022/06/etanol1.jpg"
-              image1="https://designfires.pl/wp-content/uploads/2022/07/Ethanol1-2.png"
-              image2="https://designfires.pl/wp-content/uploads/2022/07/Ethanol2-2.png"
-              image3="https://designfires.pl/wp-content/uploads/2022/07/Ethanol3-2.png"
-              image8="https://designfires.pl/wp-content/uploads/2022/07/Ethanol4-2.png"
-              image5="https://designfires.pl/wp-content/uploads/2022/07/Ethanol5-2.png"
-              image6="https://designfires.pl/wp-content/uploads/2022/07/Ethanol6-2.png"
-              image7="https://designfires.pl/wp-content/uploads/2022/07/Ethanol7-2.png"
-              image4="https://designfires.pl/wp-content/uploads/2022/07/Ethanol8-2.png"
-              image9="https://designfires.pl/wp-content/uploads/2022/07/Ethanol9-2.png"
-              image10="https://designfires.pl/wp-content/uploads/2022/07/Ethanol10-2.png"
-            />
-          </Col>
-          <Col>
-            <AboutSection
-              title={title}
-              listItem1={listItems[0]}
-              listItem2={listItems[1]}
-              listItem3={listItems[2]}
-              listItem4={listItems[3]}
-              listItem5={listItems[4]}
-              listItem={listItems}
-              paragraph={paragraphs}
-              price={props.price}
-              aboutParagraph={aboutParagraph}
-            />
-          </Col>
-        </Row>
-      </Container>
+    <div id="bio" className="my-4">
+      <Row className=" flex-wrap-reverse" xs={1} md={1} lg={2} xl={2}>
+        <Col className="align-self-center mt-3">
+          <PhotosGrid
+            //image1="https://designfires.pl/wp-content/uploads/2022/06/etanol1.jpg"
+            image1="https://designfires.pl/wp-content/uploads/2022/07/Ethanol1-2.png"
+            image2="https://designfires.pl/wp-content/uploads/2022/07/Ethanol2-2.png"
+            image3="https://designfires.pl/wp-content/uploads/2022/07/Ethanol3-2.png"
+            image8="https://designfires.pl/wp-content/uploads/2022/07/Ethanol4-2.png"
+            image5="https://designfires.pl/wp-content/uploads/2022/07/Ethanol5-2.png"
+            image6="https://designfires.pl/wp-content/uploads/2022/07/Ethanol6-2.png"
+            image7="https://designfires.pl/wp-content/uploads/2022/07/Ethanol7-2.png"
+            image4="https://designfires.pl/wp-content/uploads/2022/07/Ethanol8-2.png"
+            image9="https://designfires.pl/wp-content/uploads/2022/07/Ethanol9-2.png"
+            image10="https://designfires.pl/wp-content/uploads/2022/07/Ethanol10-2.png"
+          />
+        </Col>
+        <Col>
+          <AboutSection
+            title={title}
+            listItem1={listItems[0]}
+            listItem2={listItems[1]}
+            listItem3={listItems[2]}
+            listItem4={listItems[3]}
+            listItem5={listItems[4]}
+            listItem={listItems}
+            paragraph={paragraphs}
+            price={props.price}
+            aboutParagraph={aboutParagraph}
+          />
+        </Col>
+      </Row>
 
       <div className="item3 mt-4">
         <Advantage

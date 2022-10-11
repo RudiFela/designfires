@@ -29,13 +29,30 @@ const BioFuel = (props) => {
     return findedPriceObj;
   };
   const onFuelSelect = (item) => {
-    setPickedFuel(item);
+    const priceSEK = item.meta_data.find(
+      (key) =>
+        key.key === "_alg_currency_switcher_per_product_regular_price_SEK"
+    );
+    const priceDKK = item.meta_data.find(
+      (key) =>
+        key.key === "_alg_currency_switcher_per_product_regular_price_DKK"
+    );
+    const itemWithPrices = {
+      ...item,
+      priceSEK: priceSEK.value,
+      priceDKK: priceDKK.value,
+    };
+
+    setPickedFuel(itemWithPrices);
     setOpenModal(true);
   };
   const onAdd = () => {
     setPcsFuel((prevState) => prevState + 1);
   };
   const onRemove = () => {
+    if (pcsFuel === 0) {
+      return;
+    }
     setPcsFuel((prevState) => prevState - 1);
   };
   const onModalClose = () => {
@@ -67,11 +84,11 @@ const BioFuel = (props) => {
       addedDecorations: decoArray,
     }));
 
-    console.log(decoArray);
+    //console.log(decoArray);
     setShowContactForm(!showContactForm);
   };
   return (
-    <div className="text-white text-center mb-5">
+    <div id="fuel" className="text-white text-center mb-5">
       <Modal size="xl" centered show={openModal} onHide={onModalClose}>
         {" "}
         <Modal.Header closeButton>
@@ -101,7 +118,12 @@ const BioFuel = (props) => {
                     </Col>
                     <Col md="auto">
                       <p className="bolder mt-3">
-                        {pickedFuel.price} {lang.currencySymbol()}
+                        {lang.currencyPrice(
+                          pickedFuel.price,
+                          pickedFuel.priceSEK,
+                          pickedFuel.priceDKK
+                        )}
+                        {lang.currencySymbol()}
                       </p>
                     </Col>
                     <Col>
@@ -128,7 +150,13 @@ const BioFuel = (props) => {
                     </Col>{" "}
                   </Row>{" "}
                   <h5 className="float-end">
-                    Total:{pickedFuel.price * pcsFuel} {lang.currencySymbol()}
+                    Total:
+                    {lang.currencyPrice(
+                      pickedFuel.price,
+                      pickedFuel.priceSEK,
+                      pickedFuel.priceDKK
+                    ) * pcsFuel}{" "}
+                    {lang.currencySymbol()}
                   </h5>
                   <Row>
                     <p>30 pcs its max on 1 pallet</p>

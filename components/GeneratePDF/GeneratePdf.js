@@ -21,44 +21,48 @@ const GeneratePdf = ({ html }) => {
     doc.setFillColor(204, 204, 204, 0);*/
 
   const generatePdf = () => {
+    document.getElementById("print").className =
+      "hide-background fw-bold modal-body";
     const printArea = document.getElementById("print");
+    //console.log(document.getElementById("print"));
 
-    html2canvas(printArea, { allowTaint: true, useCORS: true }).then(
-      (canvas) => {
-        const dataURL = canvas.toDataURL();
-        const pdf = new jsPDF({
-          orientation: "p",
-          unit: "mm",
-          format: "a4",
-          putOnlyUsedFonts: true,
-        });
-        //background colour
-        /* let width = pdf.internal.pageSize.getWidth();
-        let height = pdf.internal.pageSize.getHeight();
-        
-         pdf.addImage(
-          "https://designfires.pl/wp-content/uploads/2022/07/CartBackground.png",
-          "JPG",
-          0,
-          0,
-          width + 500,
-          height
-        );*/
+    // document.getElementById("print").className = "modallos fw-bold modal-body";
+    html2canvas(printArea, {
+      allowTaint: true,
+      useCORS: true,
+      backgroundColor: null,
+    }).then((canvas) => {
+      const dataURL = canvas.toDataURL();
+      const pdf = new jsPDF({
+        orientation: "p",
+        unit: "mm",
+        format: "a4",
+        putOnlyUsedFonts: true,
+      });
+      var width = pdf.internal.pageSize.getWidth();
+      var height = pdf.internal.pageSize.getHeight();
+      pdf.addImage(
+        "https://designfires.pl/wp-content/uploads/2022/10/CartBackgroundA4.png",
+        "JPG",
+        0,
+        0,
+        width + 150,
+        height + 220
+      );
 
-        //pdf.text("OFFER", 50, 5);
-        pdf.addImage(
-          "https://designfires.pl/wp-content/uploads/2022/09/RB-com-1.jpg",
-          "JPEG",
-          10,
-          10,
-          70,
-          30
-        );
-        pdf.addImage(dataURL, "JPEG", 10, 50, 180, 160);
-        //pdf.output("dataurlnewwindow");
-        pdf.save("saved.pdf");
-      }
-    );
+      //pdf.text("OFFER", 50, 5);
+      pdf.addImage(
+        "https://designfires.pl/wp-content/uploads/2022/09/RB-com-1.jpg",
+        "JPEG",
+        10,
+        10,
+        70,
+        30
+      );
+      pdf.addImage(dataURL, "JPEG", 10, 50, 180, 160);
+      //pdf.output("dataurlnewwindow");
+      pdf.save("DesignFiresOffer.pdf");
+    });
 
     /*  const doc = new jsPDF();
     doc.setFont("Montserrat");
@@ -79,6 +83,7 @@ const GeneratePdf = ({ html }) => {
       width: 200, // <- here
       windowWidth: 1200, // <- here
     });*/
+    document.getElementById("print").className = "modallo fw-bold modal-body";
   };
 
   return (

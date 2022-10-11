@@ -102,6 +102,12 @@
     font-size: clamp(0.7rem, 2vw, 1.2rem);
   }
 }
+.hide-background {
+  background-color: transparent !important;
+  & p {
+    font-size: clamp(0.7rem, 2vw, 1.2rem);
+  }
+}
 .alert-enter {
   opacity: 0;
   transform: scale(0.9);
@@ -126,8 +132,9 @@
   max-width: 32rem;
 }
 .dropdown-menu {
-  max-height: 230px;
+  max-height: 300px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .popover-body {
   background-image: url("https://designfires.pl/wp-content/uploads/2022/07/CartBackground.png");

@@ -47,39 +47,38 @@ const Mystic = (props) => {
     "All our fireplaces are tested and packed to the highest standard, so we know they work and come to you without, you having to spend time on problems.Read the manual and then it plug and play",
   ];
   return (
-    <div id="steamfire">
-      <Container className="my-3">
-        <Row className=" flex-wrap-reverse" xs={1} md={1} lg={2} xl={2}>
-          <Col className="align-self-center mt-3">
-            <PhotosGrid
-              image1="https://designfires.pl/wp-content/uploads/2022/07/Mystic1-1.png"
-              image2="https://designfires.pl/wp-content/uploads/2022/07/Mystic2-1.png"
-              image3="https://designfires.pl/wp-content/uploads/2022/07/Mystic3-1.png"
-              image4="https://designfires.pl/wp-content/uploads/2022/07/Mystic4-1.png"
-              image5="https://designfires.pl/wp-content/uploads/2022/07/Mystic5-1.png"
-              image6="https://designfires.pl/wp-content/uploads/2022/07/Mystic6-1.png"
-              image7="https://designfires.pl/wp-content/uploads/2022/07/Mystic7.png"
-              image8="https://designfires.pl/wp-content/uploads/2022/07/Mystic8.png"
-              image9="https://designfires.pl/wp-content/uploads/2022/07/Mystic9.png"
-              image10="https://designfires.pl/wp-content/uploads/2022/07/Mystic10.png"
-            />
-          </Col>
-          <Col>
-            <AboutSection
-              title={title}
-              listItem1={listItems[0]}
-              listItem2={listItems[1]}
-              listItem3={listItems[2]}
-              listItem4={listItems[3]}
-              listItem5={listItems[4]}
-              listItem={listItems}
-              paragraph={paragraphs}
-              price={props.price}
-              aboutParagraph={aboutParagraph}
-            />
-          </Col>
-        </Row>
-      </Container>
+    <div id="steamfire" className="my-4">
+      <Row className=" flex-wrap-reverse" xs={1} md={1} lg={2} xl={2}>
+        <Col className="align-self-center mt-3">
+          <PhotosGrid
+            image1="https://designfires.pl/wp-content/uploads/2022/07/Mystic1-1.png"
+            image2="https://designfires.pl/wp-content/uploads/2022/07/Mystic2-1.png"
+            image3="https://designfires.pl/wp-content/uploads/2022/07/Mystic3-1.png"
+            image4="https://designfires.pl/wp-content/uploads/2022/07/Mystic4-1.png"
+            image5="https://designfires.pl/wp-content/uploads/2022/07/Mystic5-1.png"
+            image6="https://designfires.pl/wp-content/uploads/2022/07/Mystic6-1.png"
+            image7="https://designfires.pl/wp-content/uploads/2022/07/Mystic7.png"
+            image8="https://designfires.pl/wp-content/uploads/2022/07/Mystic8.png"
+            image9="https://designfires.pl/wp-content/uploads/2022/07/Mystic9.png"
+            image10="https://designfires.pl/wp-content/uploads/2022/07/Mystic10.png"
+          />
+        </Col>
+        <Col>
+          <AboutSection
+            title={title}
+            listItem1={listItems[0]}
+            listItem2={listItems[1]}
+            listItem3={listItems[2]}
+            listItem4={listItems[3]}
+            listItem5={listItems[4]}
+            listItem={listItems}
+            paragraph={paragraphs}
+            price={props.price}
+            aboutParagraph={aboutParagraph}
+          />
+        </Col>
+      </Row>
+
       <div className="item3 mt-4">
         <Advantage
           image="https://designfires.pl/wp-content/uploads/2022/06/mysticadvantage.jpg"

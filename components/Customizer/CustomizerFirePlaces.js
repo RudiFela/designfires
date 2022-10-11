@@ -52,7 +52,7 @@ const CustomizerFirePlaces = (props) => {
   };
   const [showModal, setShowModal] = useState(false);
   const [modalPhoto, setModalPhoto] = useState();
-  const [mountTitle, setMountTitle] = useState("Mount");
+  const [mountTitle, setMountTitle] = useState("Glass");
   //return <div className="photo-card">{props.children}</div>;
   const showModalHandler = (image) => {
     setModalPhoto(image);
@@ -434,6 +434,7 @@ const CustomizerFirePlaces = (props) => {
     ) : null;
   const oneSideSvg = (
     <svg
+      className=""
       version="1.1"
       viewBox="0 0 84.981 95.918" //viewBox="0 0 84.981 95.918"
       xmlns="http://www.w3.org/2000/svg"
@@ -449,8 +450,9 @@ const CustomizerFirePlaces = (props) => {
   );
   const twoSideSvg = (
     <svg
+      className=""
       version="1.1"
-      viewBox="0 0 84.98 116.01"
+      viewBox="0 0 119.78 116.01"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g transform="translate(-77.201 127.66)">
@@ -465,6 +467,7 @@ const CustomizerFirePlaces = (props) => {
   );
   const threeSideSvg = (
     <svg
+      className=""
       version="1.1"
       viewBox="0 0 119.78 116.01"
       xmlns="http://www.w3.org/2000/svg"
@@ -481,6 +484,7 @@ const CustomizerFirePlaces = (props) => {
   );
   const fourSideSvg = (
     <svg
+      className=""
       version="1.1"
       viewBox="0 0 119.78 116.01"
       xmlns="http://www.w3.org/2000/svg"
@@ -498,22 +502,18 @@ const CustomizerFirePlaces = (props) => {
   );
   const allSideSvg = (
     <svg
+      className=""
       version="1.1"
       viewBox="0 0 119.78 116.01"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g
-        transform="translate(-49.198 -105.42)"
-        //fill="none"
-        stroke="#000000"
-        color="#000000"
-        fillRule="evenodd"
-        strokeLinejoin="round"
-      >
-        <path d="m50.824 172.62 34.795-20.089v-45.48l-34.795 20.089z" />
-        <path d="m85.62 152.53v-45.48l81.729 47.186v45.48z" />
-        <path d="m50.824 172.62v-45.48l81.729 47.186v45.481z" />
-        <path d="m132.55 219.8 34.796-20.089v-45.48l-34.796 20.089z" />
+      <g transform="translate(-49.198 -105.42)">
+        <path
+          d="m85.498 105.42a1.6261 1.6261 0 00-.13746.02067 1.6261 1.6261 0 00-.040825.0062 1.6261 1.6261 0 00-.51315.18655l-34.795 20.09a1.6261 1.6261 0 00-.38861.32556 1.6261 1.6261 0 00-.091984.11937 1.6261 1.6261 0 00-.1881.32608 1.6261 1.6261 0 00-.056844.13695 1.6261 1.6261 0 00-.088884.50022v45.48a1.6261 1.6261 0 00.092501.52142 1.6261 1.6261 0 00.07028.14624 1.6261 1.6261 0 00.18345.31729 1.6261 1.6261 0 00.12971.13953 1.6261 1.6261 0 00.26252.22014 1.6261 1.6261 0 00.075964.06356l81.729 47.186a1.6261 1.6261 0 00.10232.03721 1.6261 1.6261 0 00.30385.11007 1.6261 1.6261 0 00.19637.04496 1.6261 1.6261 0 00.3576 0 1.6261 1.6261 0 00.16899-.01292 1.6261 1.6261 0 00.49557-.17932l34.797-20.088a1.6261 1.6261 0 00.12195-.07906 1.6261 1.6261 0 00.01396-.01034 1.6261 1.6261 0 00.2222-.19275 1.6261 1.6261 0 00.00827-.00827 1.6261 1.6261 0 00.185-.23513 1.6261 1.6261 0 00.00465-.00672 1.6261 1.6261 0 00.13746-.26665 1.6261 1.6261 0 00.00362-.00878 1.6261 1.6261 0 00.08475-.28836 1.6261 1.6261 0 00.00207-.00775 1.6261 1.6261 0 00.02894-.30489v-45.48a1.6261 1.6261 0 00-.01654-.22169 1.6261 1.6261 0 00-.00362-.02945 1.6261 1.6261 0 00-.04806-.20929 1.6261 1.6261 0 00-.00826-.02894 1.6261 1.6261 0 00-.07907-.20102 1.6261 1.6261 0 00-.01189-.02584 1.6261 1.6261 0 00-.108-.18707 1.6261 1.6261 0 00-.01757-.02532 1.6261 1.6261 0 00-.13436-.16898 1.6261 1.6261 0 00-.0186-.01964 1.6261 1.6261 0 00-.16278-.15038 1.6261 1.6261 0 00-.01344-.01033 1.6261 1.6261 0 00-.19068-.13023h-.00052l-81.72-47.182a1.6261 1.6261 0 00-.52452-.19276 1.6261 1.6261 0 00-.038758-.00568 1.6261 1.6261 0 00-.38034-.02067zm-1.5043 4.438v34.547l-29.918-17.273 29.918-17.273zm3.252 0 76.851 44.37-31.544 18.211-45.307-26.158v-36.424zm-34.797 20.09 31.545 18.212v3.4246l-31.545 18.211v-39.848zm34.797 20.09 43.682 25.219v1.5477l-43.682-25.22v-1.5472zm-1.6268 4.362 45.308 26.16v36.422l-76.852-44.369 31.543-18.212zm80.104 2.6458v39.848l-31.545-18.212v-3.4241l31.545-18.211zm-31.545 25.391 29.918 17.274-29.918 17.271v-34.545z"
+          color="#000000"
+          fillRule="evenodd"
+          strokeLinejoin="round"
+        />
       </g>
     </svg>
   );
@@ -582,11 +582,14 @@ const CustomizerFirePlaces = (props) => {
                   {fireplacesLengthDropDown}
                   <DropdownButton
                     id="dropdown-basic-button"
+                    className=""
                     title={mountTitle}
+                    disabled={!selected}
                     variant="info"
                   >
                     <Dropdown.Item
-                      className="text-white customizer p-3"
+                      className="text-white customizer px-3 mx-3"
+                      style={{ width: "220px" }}
                       onClick={() =>
                         onSelectMountType(
                           () => props.glassPiecesChange(3, "0", "1"),
@@ -594,10 +597,11 @@ const CustomizerFirePlaces = (props) => {
                         )
                       }
                     >
-                      {oneSideSvg}
+                      <div className="w-100"> {oneSideSvg}</div>
                     </Dropdown.Item>
                     <Dropdown.Item
-                      className="text-white customizer p-3"
+                      className="text-white customizer px-3 mx-3"
+                      style={{ width: "220px" }}
                       onClick={() =>
                         onSelectMountType(
                           () => props.glassPiecesChange(3, "1", "1"),
@@ -605,7 +609,7 @@ const CustomizerFirePlaces = (props) => {
                         )
                       }
                     >
-                      {twoSideSvg}
+                      <div className="w-100"> {twoSideSvg}</div>
                     </Dropdown.Item>
                     <Dropdown.Item
                       onClick={() =>
@@ -614,13 +618,14 @@ const CustomizerFirePlaces = (props) => {
                           threeSideSvg
                         )
                       }
-                      className="text-white customizer p-3"
+                      style={{ width: "220px" }}
+                      className="text-white customizer px-3 mx-3"
                     >
-                      {threeSideSvg}
+                      <div className="w-100">{threeSideSvg}</div>
                     </Dropdown.Item>
                     <Dropdown.Item
-                      className="text-white customizer p-3"
-                      style={{ width: "90px" }}
+                      className="text-white customizer px-3 mx-3"
+                      style={{ width: "220px" }}
                       onClick={() =>
                         onSelectMountType(
                           () => props.glassPiecesChange(3, "1", "2"),
@@ -628,11 +633,11 @@ const CustomizerFirePlaces = (props) => {
                         )
                       }
                     >
-                      {fourSideSvg}
+                      <div className=" w-100">{fourSideSvg}</div>
                     </Dropdown.Item>
                     <Dropdown.Item
-                      className="text-white customizer p-3"
-                      style={{ width: "90px" }}
+                      className="text-white customizer px-3 mx-3"
+                      style={{ width: "200px" }}
                       onClick={() =>
                         onSelectMountType(
                           () => props.glassPiecesChange(3, "2", "2"),
@@ -640,7 +645,7 @@ const CustomizerFirePlaces = (props) => {
                         )
                       }
                     >
-                      {allSideSvg}
+                      <div className="w-100">{allSideSvg}</div>
                     </Dropdown.Item>
                   </DropdownButton>
                 </ButtonGroup>
@@ -678,6 +683,7 @@ const CustomizerFirePlaces = (props) => {
                           ).toLocaleString(undefined, {
                             maximumFractionDigits: 2,
                           })}
+                          <span> </span>
                           {lang.currencySymbol()}
                         </p>
                       )}

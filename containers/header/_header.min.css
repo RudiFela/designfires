@@ -1,1 +1,1 @@
-.video-wrapper{max-width:1280px;max-height:530px;display:block;overflow:hidden;margin:0 auto 80px auto}.video-wrapper video{width:100%}
+.video-wrapper{border-bottom-left-radius:25px 25px;border-bottom-right-radius:25px 25px}.video-wrapper video{width:100%}.video{border-bottom-left-radius:25px 25px;border-bottom-right-radius:25px 25px}

@@ -89,7 +89,7 @@ const CustomizerCasings = (props) => {
 
   const casingDropDownItems = casings.map((item) => (
     <Dropdown.Item
-      className="text-white bolder svg-image"
+      className="text-white bolder svg-image px-3 mx-3"
       key={item.id}
       onClick={() => {
         props.onSelect(
@@ -104,12 +104,12 @@ const CustomizerCasings = (props) => {
       }}
       eventKey={item}
     >
-      <svg width="90" height="90">
+      <svg width="240" height="240">
         <image
           xlinkHref={item.images[1].src}
           src="yourfallback.png"
-          width="90"
-          height="90"
+          width="240"
+          height="240"
         />
       </svg>
     </Dropdown.Item>

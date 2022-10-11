@@ -69,6 +69,9 @@ const Navibar = () => {
             //className="flex-wrap"
           >
             <Nav className="navbar-links fs-6 fw-semibold align-items-center">
+              <Nav.Link className="text-white text-center" href="#fuel">
+                Bio-Ehtanol Fuel
+              </Nav.Link>
               <Nav.Link className="text-white text-center" href="#bio">
                 Digital DFE Bio-Ehtanol Fireplace PRO
               </Nav.Link>

@@ -6,6 +6,8 @@ import { LanguageContext } from "../../context/language-context";
 const english = "/static/images/greatbritain.png";
 const denmark = "/static/images/denmark.png";
 const sweden = "/static/images/sweden.png";
+const europe = "/static/images/europe.png";
+
 const designImage = "/static/images/DanishDesign.png";
 
 const LanguageSwitcher = (props) => {
@@ -21,7 +23,7 @@ const LanguageSwitcher = (props) => {
       case "danish":
         return onLanguageChange(denmark, "danish");
       default:
-        return onLanguageChange(english, "english");
+        return onLanguageChange(europe, "english");
     }
   }, []);
 
@@ -43,14 +45,14 @@ const LanguageSwitcher = (props) => {
     >
       <NavDropdown.Item
         onClick={() => {
-          onLanguageChange(english, "english");
+          onLanguageChange(europe, "english");
         }}
         //  href="#action/3.1"
         className="text-white text-center fs-5 text fw-normal p-1"
       >
         <motion.div whileHover={{ scale: 1.1 }}>
           {" "}
-          <Image src={english} height={45} width={45} alt="English flag" />
+          <Image src={europe} height={45} width={45} alt="English flag" />
         </motion.div>
       </NavDropdown.Item>
       <NavDropdown.Item

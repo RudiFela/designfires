@@ -1,10 +1,12 @@
 .video-wrapper {
-  max-width: 1280px;
-  max-height: 530px; //calc(100vw * 9 / 16);
+  // max-width: 1280px;
+  //max-height: 530px; //calc(100vw * 9 / 16);
   // position: relative;
-  display: block;
-  overflow: hidden;
-  margin: 0 auto 80px auto;
+  //display: block;
+  //overflow: hidden;
+  //margin: 0 auto 0 auto;
+  border-bottom-left-radius: 25px 25px;
+  border-bottom-right-radius: 25px 25px;
 
   &-video {
     //height: 100%;
@@ -26,4 +28,8 @@
     top: 0;
     left: 0;
   }*/
+}
+.video {
+  border-bottom-left-radius: 25px 25px;
+  border-bottom-right-radius: 25px 25px;
 }
