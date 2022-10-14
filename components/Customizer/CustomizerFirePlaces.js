@@ -63,114 +63,115 @@ const CustomizerFirePlaces = (props) => {
     setShowModal(false);
   };
   const popoverInfo = technicalInfo ? (
-    <>
-      <Row>
+    <div className="fs-5 ">
+      <Row className="my-1">
         <Col>
-          <h6 className="fw-bold">
+          <span className="fw-bold">
             Power/h KW:
-            <Badge className="float-end ms-2" bg="secondary">
+            <Badge className="fs-5 float-end ms-2" bg="secondary">
               <GiElectric />
               {technicalInfo.power}
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-1">
         <Col>
-          <h6 className="fw-bold">
+          <span className="fw-bold">
             Liters/h:
-            <Badge className="float-end" bg="secondary">
+            <Badge className="fs-5 float-end" bg="secondary">
               <MdWaterDrop /> {technicalInfo.liters}
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-1">
         <Col>
-          <h6 className="fw-bold">
+          <span className="fw-bold">
             Burning Time/h:
-            <Badge className="float-end ms-2" bg="secondary">
+            <Badge className="fs-5 float-end ms-2" bg="secondary">
               <BiTimer /> {technicalInfo.burningtime}
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
 
-      <Row>
+      <Row className="my-1">
         <Col>
-          <h6 className="fw-bold">
+          <span className="fw-bold">
             Length:
-            <Badge className="float-end" bg="secondary">
+            <Badge className="fs-5 float-end" bg="secondary">
               <CgArrowsShrinkH className="me-1" />
               {technicalInfo.length}mm
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-1">
         <Col>
-          <h6 className="fw-bold">
+          <span className="fw-bold">
             Width:
-            <Badge className="float-end " bg="secondary">
+            <Badge className="fs-5 float-end " bg="secondary">
               <CgArrowsExpandRight className="me-1" />
               {technicalInfo.width}mm
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-1">
         <Col>
-          <h6 className="fw-bold">
+          <span className="fw-bold">
             Heigth:
-            <Badge className="float-end" bg="secondary">
+            <Badge className="fs-5 float-end" bg="secondary">
               <CgArrowsShrinkV />
               {technicalInfo.heigth}mm
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <h6 className="fw-bold">
+      <Row className="my-1">
+        <Col className="flex-nowrap">
+          <span className="fw-bold">
             Top Plate Thickess:
-            <Badge className="float-end" bg="secondary">
+            <Badge className="fs-5 float-end" bg="secondary">
               <CgArrowsMergeAltV /> 3mm
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-1">
         <Col>
-          <h6 className="fw-bold">
+          <span className="fw-bold">
             Bottom Size:
-            <Badge className="float-end" bg="secondary">
+            <Badge className="fs-5 float-end" bg="secondary">
               {technicalInfo.bottomsize} mm
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-1">
         <Col>
-          <h6 className="fw-bold">
+          <span className="fw-bold">
             Hole Size:
-            <Badge className="float-end" bg="secondary">
+            <Badge className="fs-5 float-end" bg="secondary">
               {technicalInfo.holesize} mm
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
 
       <Button
-        className=""
-        size="sm"
+        className="mt-3 w-100"
         onClick={() => showModalHandler(technicalInfo.technical_image)}
       >
         Technical Drawing
         <MdOutlineLocalSee className="ms-2" />
       </Button>
-    </>
+    </div>
   ) : (
-    <h6 className="fw-bold">Select Length to see technical params.</h6>
+    <span className="fw-bold fs-5 bold">
+      Select Length to see technical params.
+    </span>
   );
 
   const popover = (
@@ -181,47 +182,54 @@ const CustomizerFirePlaces = (props) => {
   const popoverEW = (
     <Popover id="popover-basic">
       <Popover.Body>
-        <h6>Side filling without pressure water </h6>{" "}
-        <p>Refueling from external water tank.</p> <p>Standard.</p>
+        <div className="fw-bold fs-5">
+          <p>Side filling without pressure water </p>{" "}
+          <p className="fs-6">Refueling from external water tank.</p>{" "}
+          <p className="fs-6">Standard.</p>
+        </div>
       </Popover.Body>
     </Popover>
   );
   const popoverT = (
     <Popover id="popover-basic">
       <Popover.Body>
-        <h6>Top filling = Top refueling.</h6>{" "}
-        <p>
-          Extra {currencyPriceT()}
-          {lang.currencySymbol()} for this option
-        </p>
+        <div className="fw-bold fs-5">
+          <p>Top filling = Top refueling.</p>{" "}
+          <p className="fs-6">
+            Extra {currencyPriceT()}
+            {lang.currencySymbol()} for this option
+          </p>
+        </div>
       </Popover.Body>
     </Popover>
   );
   const popoverPW = (
     <Popover id="popover-basic">
       <Popover.Body>
-        <h6> Side filling with the presssure water</h6>{" "}
-        <p>Ready for connection to water pipe </p>
-        <p>
-          Extra {currencyPricePW()}
-          {lang.currencySymbol()} for this option.
-        </p>
+        <div className="fw-bold fs-5">
+          <p> Side filling with the presssure water</p>{" "}
+          <p className="fs-6">Ready for connection to water pipe </p>
+          <p className="fs-6">
+            Extra {currencyPricePW()}
+            {lang.currencySymbol()} for this option.
+          </p>
+        </div>
       </Popover.Body>
     </Popover>
   );
 
   const filing = (
-    <>
-      <h5 className="text-white fw-bold mt-3">
+    <div className="fs-5 my-2">
+      <h5 className="text-white fw-bold fs-2">
         <Badge bg="danger">Filling Type</Badge>
       </h5>
       <Form.Check
-        className="mt-1"
+        className="my-2"
         disabled={!selectedFireplace.selectedLength}
         inline
         label={
           <OverlayTrigger placement="bottom" overlay={popoverEW}>
-            <p>EW</p>
+            <span>EW</span>
           </OverlayTrigger>
         }
         name="group1"
@@ -235,7 +243,7 @@ const CustomizerFirePlaces = (props) => {
         disabled={!selectedFireplace.selectedLength}
         label={
           <OverlayTrigger placement="bottom" overlay={popoverT}>
-            <p>T</p>
+            <span>T</span>
           </OverlayTrigger>
         }
         name="group1"
@@ -248,7 +256,7 @@ const CustomizerFirePlaces = (props) => {
         disabled={!selectedFireplace.selectedLength}
         label={
           <OverlayTrigger placement="bottom" overlay={popoverPW}>
-            <p>PW</p>
+            <span>PW</span>
           </OverlayTrigger>
         }
         name="group1"
@@ -256,7 +264,7 @@ const CustomizerFirePlaces = (props) => {
         id={`inline--1PW`}
         onChange={() => onFillingChange("PW", "995", "9995", "7555")}
       />
-    </>
+    </div>
   );
 
   const fireplacesDropDownItems = fireplaces.map((item) => (
@@ -276,7 +284,7 @@ const CustomizerFirePlaces = (props) => {
       id="dropdown-fireplaces-button"
       variant="primary"
       className="fw-bold"
-      title={selectedFireplace.name}
+      title={<p className="fw-bold m-0 fs-5">{selectedFireplace.name}</p>}
     >
       {fireplacesDropDownItems}
     </DropdownButton>
@@ -309,13 +317,13 @@ const CustomizerFirePlaces = (props) => {
       variant="primary"
       disabled={!selected}
       title={
-        <>
+        <p className="m-0 fw-bold fs-5">
           {selectedFireplace.length}
           <span> </span>
           {selectedFireplace.stock_status === "instock" ? null : (
             <GiAutoRepair />
           )}
-        </>
+        </p>
       }
     >
       {fireplaceLengths}
@@ -338,7 +346,7 @@ const CustomizerFirePlaces = (props) => {
   const dfeOptions =
     selected && selectedFireplace.name !== "DFM" ? (
       <>
-        <Form className="mt-3">
+        <Form className="mt-3 fs-4">
           <Form.Check
             disabled={!selectedFireplace.selectedLength}
             className="text-white mt-2"
@@ -358,12 +366,14 @@ const CustomizerFirePlaces = (props) => {
             label="Stainless Top"
           />
         </Form>
-        <p className="text-white fw-bold">Remember to pick Bio-Ethanol fuel!</p>
+        <p className="text-white fw-bold mt-3">
+          Remember to pick Bio-Ethanol fuel!
+        </p>
       </>
     ) : null;
   const dfeStandard =
     selected && selectedFireplace.name !== "DFM" ? (
-      <>
+      <div className="fs-5">
         <ul>
           <li>
             <Badge className="">Remote Control</Badge>
@@ -386,14 +396,14 @@ const CustomizerFirePlaces = (props) => {
             <Badge>Support even after varanty expires!</Badge>
           </li>
         </ul>
-      </>
+      </div>
     ) : null;
 
   const dfmOptions =
     selected && selectedFireplace.name === "DFM" ? (
       <>
         {" "}
-        <Form className="mt-3">
+        <Form className="mt-3 fs-4">
           <Form.Check
             className="text-white mt-2"
             type="switch"
@@ -409,8 +419,7 @@ const CustomizerFirePlaces = (props) => {
     ) : null;
   const dfmStandard =
     selected && selectedFireplace.name === "DFM" ? (
-      <>
-        <Badge bg="info">Standard:</Badge>
+      <div className="fs-5">
         <ul>
           <li>
             <Badge>Smart Home System</Badge>
@@ -430,7 +439,7 @@ const CustomizerFirePlaces = (props) => {
             </Badge>
           </li>
         </ul>
-      </>
+      </div>
     ) : null;
   const oneSideSvg = (
     <svg
@@ -556,14 +565,17 @@ const CustomizerFirePlaces = (props) => {
               width={600}
             />
             <span>
-              <Badge className="m-0 text-white" bg="info">
+              <Badge className="mt-2 p-2 fs-6 text-white" bg="info">
                 <ImFire />
                 <span> </span>
                 On Stock - Standard delivery time 5 days
               </Badge>
             </span>{" "}
             <span>
-              <Badge className="m-0 mt-1 p-1 text-white text-wrap" bg="info">
+              <Badge
+                className="m-0 mt-2 p-2 fs-6 text-white text-wrap"
+                bg="info"
+              >
                 <GiAutoRepair />
                 <span> </span>Custom Variant - Longer delivery time 50-60 days,
                 higher price
@@ -573,7 +585,7 @@ const CustomizerFirePlaces = (props) => {
           <Col>
             <Row>
               <Col>
-                <h3 className="text-white">
+                <h3 className="text-white fs-2">
                   <Badge bg="danger">Select Fireplace</Badge>
                 </h3>
 
@@ -583,7 +595,7 @@ const CustomizerFirePlaces = (props) => {
                   <DropdownButton
                     id="dropdown-basic-button"
                     className=""
-                    title={mountTitle}
+                    title={<p className="fw-bold fs-5 m-0"> {mountTitle}</p>}
                     disabled={!selected}
                     variant="info"
                   >
@@ -699,23 +711,25 @@ const CustomizerFirePlaces = (props) => {
                     //delay={{ show: 250, hide: 1600 }}
                     rootClose
                   >
-                    <Button size="sm">Technical Info</Button>
+                    <Button>
+                      <span className="fw-bold fs-5">Technical Info</span>
+                    </Button>
                   </OverlayTrigger>
                 </Stack>
               </Col>
               <Col>
-                <h3 className="text-white">
+                <h3 className="text-white fs-2">
                   <Badge bg="danger">Extra options</Badge>
                 </h3>
                 {dfeOptions}
                 {dfmOptions}
 
-                <h5 className="text-white fw-bold">
+                <h5 className="text-white fw-bold fs-2">
                   <Badge bg="danger">Glass Color:</Badge>
                 </h5>
                 <Form.Check
                   inline
-                  className="text-white fw-bolder"
+                  className="text-white fw-bolder fs-5"
                   label="Clear"
                   name="glass"
                   type="radio"
@@ -725,7 +739,7 @@ const CustomizerFirePlaces = (props) => {
                 />
                 <Form.Check
                   inline
-                  className="text-white fw-bolder"
+                  className="text-white fw-bolder fs-5"
                   label="Bronze"
                   name="glass"
                   type="radio"

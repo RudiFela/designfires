@@ -29,51 +29,50 @@ const CustomizerCasings = (props) => {
     setShowModal(false);
   };
   const popoverInfo = pickedCaseItem.selected ? (
-    <>
-      <Row>
+    <div className="fs-5 ">
+      <Row className="my-1">
         <Col>
-          <h6>
+          <span className="fw-bold">
             Length:
-            <Badge className="float-end" bg="secondary">
+            <Badge className="fs-5 float-end" bg="secondary">
               {pickedCaseItem.length}mm
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-1">
         <Col>
-          <h6>
+          <span className="fw-bold">
             Width:
-            <Badge className="float-end " bg="secondary">
+            <Badge className="fs-5 float-end " bg="secondary">
               350mm
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-1">
         <Col>
-          <h6>
+          <span className="fw-bold">
             Heigth:
-            <Badge className="float-end" bg="secondary">
+            <Badge className="fs-5 float-end" bg="secondary">
               500mm
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-1">
         <Col>
-          <h6>
+          <span className="fw-bold">
             Thickness:
-            <Badge className="float-end" bg="secondary">
+            <Badge className="fs-5 float-end" bg="secondary">
               5mm
             </Badge>
-          </h6>
+          </span>
         </Col>
       </Row>
       <Row>
         <Button
-          className="p-0"
-          size="sm"
+          className="mt-2"
           onClick={
             () => showModalHandler()
             // "https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
@@ -82,9 +81,9 @@ const CustomizerCasings = (props) => {
           3D View
         </Button>
       </Row>
-    </>
+    </div>
   ) : (
-    <p className="fw-bold">Select Casing to see technical params.</p>
+    <span className="fw-bold fs-5">Select Casing to see technical params.</span>
   );
 
   const casingDropDownItems = casings.map((item) => (

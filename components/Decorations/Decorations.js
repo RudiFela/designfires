@@ -57,14 +57,18 @@ const Decorations = (props) => {
   ));
 
   return (
-    <Container className="text-white">
-      <h1 className="text-center text-white my-4">
-        Add some individual style with Our HAND MADE decorations!
-      </h1>
-      <Row xs={2} md={2} lg={3} xxl={4}>
-        {test}
-      </Row>
-    </Container>
+    <>
+      <div className="w-100 bg-danger p-3 fst-italic my-4">
+        <h1 className="text-center text-white my-4">
+          Add some individual style with Our HAND MADE decorations!
+        </h1>
+      </div>
+      <Container className="text-white">
+        <Row xs={2} md={2} lg={3} xxl={4}>
+          {test}
+        </Row>
+      </Container>
+    </>
   );
 };
 export default Decorations;

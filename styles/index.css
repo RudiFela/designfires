@@ -60286,6 +60286,7 @@ textarea.form-control-lg {
 
 .popover {
   border-radius: 25px !important;
+  max-width: 600px !important;
 }
 
 .svg-image svg {

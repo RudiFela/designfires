@@ -104,9 +104,11 @@ const Inspired = () => {
   return (
     <div id="projects">
       {" "}
-      <h1 className="text-center text-white m-5">
-        Get Inspired by Our customers projects
-      </h1>{" "}
+      <div className="w-100 bg-danger p-3 fst-italic">
+        <h1 className="text-center text-white m-3">
+          Get Inspired by Our customers projects
+        </h1>{" "}
+      </div>
       <Container className="my-5" style={{ overflow: "hidden" }}>
         <div className="mx-2">
           {!isLoading && (

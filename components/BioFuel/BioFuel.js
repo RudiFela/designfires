@@ -174,19 +174,23 @@ const BioFuel = (props) => {
             {showContactForm && <ContactForm cartHandler={props.cart} />}
           </Container>
         </Modal.Body>
-      </Modal>
+      </Modal>{" "}
+      <div className="w-100 bg-danger p-3 my-5 fst-italic">
+        <h1 className="">High Quality Bio-Ethanol Fuel</h1>
+      </div>
       <Container>
-        <h2 className="m-5">High Quality Bio-Ethanol Fuel</h2>
-        <h4>
-          We are very proud to be able to deliver the best quality in the class
-          of Bio-Ethanol. Use only the best Ethanol. Cheap ethanol is often sold
-          as good quality.
-        </h4>
-        <p>
-          Ethanol is not just ethanol, it can be made from mineral or vegetable
-          (from underground or from plants) and there is a very big difference
-          between ethanol and Ethanol.
-        </p>
+        <div className="my-5">
+          <h4 className="py-3">
+            We are very proud to be able to deliver the best quality in the
+            class of Bio-Ethanol. Use only the best Ethanol. Cheap ethanol is
+            often sold as good quality.
+          </h4>
+          <p>
+            Ethanol is not just ethanol, it can be made from mineral or
+            vegetable (from underground or from plants) and there is a very big
+            difference between ethanol and Ethanol.
+          </p>
+        </div>
         <Row className="bg-danger p-3 list" style={{ borderRadius: 35 }}>
           <Col>
             <h2 className="text-white p-3 mb-3">

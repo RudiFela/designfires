@@ -1026,10 +1026,12 @@ const Customizer = (props) => {
   };
   return (
     <div className="bg-primary pb-2">
-      <h1 id="customize" className="text-center text-white p-4 mt-3 ">
-        Check possibilities on Your own!
-      </h1>
-      <div className="">
+      <div className="w-100 bg-danger p-3 fst-italic">
+        <h1 id="customize" className="text-center text-white p-4 mt-3 ">
+          Check possibilities on Your own!
+        </h1>
+      </div>
+      <div className="mt-4">
         <Container>
           <CustomizerFirePlaces
             className=" "
@@ -1105,7 +1107,7 @@ const Customizer = (props) => {
               variant="info"
               onClick={() => onShowCart()}
             >
-              Check Cart
+              Check Your Choises
             </Button>{" "}
           </motion.div>
           <motion.div whileHover={{ scale: 1.1 }}>

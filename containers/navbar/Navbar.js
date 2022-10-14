@@ -50,7 +50,11 @@ const Navibar = () => {
         //sticky="top"
       >
         <Container fluid className="p-0 ">
-          <Navbar.Brand href="#home" className="w-50">
+          <Navbar.Brand
+            href="#home"
+            className="w-50
+      "
+          >
             <img
               src={image} //"https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
               //layout="fill"
@@ -68,8 +72,11 @@ const Navibar = () => {
             className="align-items-center"
             //className="flex-wrap"
           >
-            <Nav className="navbar-links fs-6 fw-semibold align-items-center">
-              <Nav.Link className="text-white text-center" href="#fuel">
+            <Nav className="navbar-links fs-6 bolder fw-semibold align-items-center">
+              <Nav.Link
+                className="text-white text-center fs-6 bolder"
+                href="#fuel"
+              >
                 Bio-Ehtanol Fuel
               </Nav.Link>
               <Nav.Link className="text-white text-center" href="#bio">
