@@ -124,7 +124,7 @@ const Customizer = (props) => {
     selected: false,
   });
   const [fireplaceItem, setFirePlaceItem] = useState({
-    name: ["Select FirePlace"],
+    name: ["Type"],
     length: ["Length"],
     photo: "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES-1.png",
     price: "0",

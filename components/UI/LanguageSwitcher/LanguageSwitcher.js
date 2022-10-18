@@ -10,24 +10,37 @@ const europe = "/static/images/europe.png";
 
 const designImage = "/static/images/DanishDesign.png";
 
-const LanguageSwitcher = (props) => {
+const LanguageSwitcher = () => {
   const language = useContext(LanguageContext);
   const [lang, setLang] = useState();
+  const [changed, setChanged] = useState(true);
   useEffect(() => {
     //console.log(language.language);
-    switch (language.language) {
-      case "swedish":
-        return setLang(
-          <Image src={sweden} height={40} width={40} alt="Country Flag" />
-        );
-      case "danish":
-        return onLanguageChange(denmark, "danish");
-      default:
-        return onLanguageChange(europe, "english");
+    if (changed) {
+      switch (language.language) {
+        case "swedish":
+          return setLang(
+            //onLanguageChange(sweden, "swedish");
+
+            <Image src={sweden} height={40} width={40} alt="Country Flag" />
+          );
+        case "danish":
+          return setLang(
+            //onLanguageChange(sweden, "swedish");
+
+            <Image src={denmark} height={40} width={40} alt="Country Flag" />
+          ); //onLanguageChange(denmark, "danish");
+        default:
+          return setLang(
+            <Image src={europe} height={40} width={40} alt="Country Flag" />
+          ); //onLanguageChange(europe, "english");
+      }
     }
-  }, []);
+    setChanged(false);
+  }, [language]);
 
   const onLanguageChange = (langPhoto, langName) => {
+    setChanged(true);
     setLang(
       <Image src={langPhoto} height={40} width={40} alt="Country Flag" />
     );
@@ -36,7 +49,7 @@ const LanguageSwitcher = (props) => {
   };
   return (
     <NavDropdown
-      className="text-center bg-primary"
+      className="text-center bg-primary p-0"
       style={{ borderRadius: 2 }}
       align="end"
       flip="true"

@@ -565,7 +565,7 @@ const CustomizerFirePlaces = (props) => {
               width={600}
             />
             <span>
-              <Badge className="mt-2 p-2 fs-6 text-white" bg="info">
+              <Badge className="mt-2 p-2 fs-6 text-wrap text-white" bg="info">
                 <ImFire />
                 <span> </span>
                 On Stock - Standard delivery time 5 days

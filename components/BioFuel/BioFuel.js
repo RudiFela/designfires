@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
 import {
   Row,
   Col,
@@ -234,27 +235,39 @@ const BioFuel = (props) => {
                   variant="top"
                   src={item.images[0].woocommerce_thumbnail}
                   className="p-3 "
-                  style={{ borderRadius: "25px" }}
+                  style={{ borderRadius: "25px", maxHeight: "350px" }}
                 />
                 <Card.Body>
                   <Card.Title className="fs-4">{item.name}</Card.Title>
-                  <Card.Text className="fs-5 fw-bold">
-                    {" "}
-                    Price:{" "}
-                    {lang.currencyPrice(
-                      item.price,
-                      findCurrencyPrice(
-                        item.meta_data,
-                        "_alg_currency_switcher_per_product_regular_price_SEK"
-                      ).value,
-                      findCurrencyPrice(
-                        item.meta_data,
-                        "_alg_currency_switcher_per_product_regular_price_DKK"
-                      ).value
-                    )}
-                    <span> </span>
-                    {lang.currencySymbol()}
-                  </Card.Text>
+                  <div className="fs-5 fw-bold my-3">
+                    <Row>
+                      <Col className="d-flex justify-content-end">
+                        <span className="text-center py-3">
+                          Price:<span> </span>
+                          {Number(
+                            lang.currencyPrice(
+                              item.price,
+                              findCurrencyPrice(
+                                item.meta_data,
+                                "_alg_currency_switcher_per_product_regular_price_SEK"
+                              ).value,
+                              findCurrencyPrice(
+                                item.meta_data,
+                                "_alg_currency_switcher_per_product_regular_price_DKK"
+                              ).value
+                            )
+                          ).toLocaleString(undefined, {
+                            maximumFractionDigits: 2,
+                          })}
+                          <span> </span>
+                          {lang.currencySymbol()}
+                        </span>
+                      </Col>
+                      <Col md="auto">
+                        <LanguageSwitcher />
+                      </Col>
+                    </Row>
+                  </div>
                   <Button
                     //href={`#${item.id}`}
                     onClick={() => onFuelSelect(item)}
@@ -263,6 +276,7 @@ const BioFuel = (props) => {
                     Order
                   </Button>
                 </Card.Body>
+                <span className="p-2">Price includes 25% VAT</span>
               </Card>
             </Col>
           ))}

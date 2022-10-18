@@ -4,42 +4,44 @@ import AboutSection from "../AboutSection/AboutSection";
 import Advantage from "../Advantage/Advantage";
 import Image from "next/image";
 import PhotoCard from "../PhotoCard/PhotoCard";
+
 const Ethanol = (props) => {
   const title = "Digital Bio-Ethanol Fireplace PRO(DFE)";
   const listItems = [
-    "Most beautiful flame pictures on the market",
-    "Longest fire / Widest fire length on the market, (50mm more fire on all our models)",
-    "20 hours burning time (largest standard Ethanol Fuel tank on the market)",
-    "Starts fastest of all automatic ethanol fireplaces on the market, starting as soon as you press the start button",
-    "Remote Control is standard",
-    "Is very operationally safe and simple to service, best on the market",
-    "It can be built in anywhere and is safe and easy to use",
-    "The best choice and most for your money if you want real fire and cosiness in your apartment or house",
+    "Most realistic flames on the market.",
+    "Highest flame on the market.",
+    "Longest flame width on the market(50mm longer line of fire on all our models).",
+    "20 hours burning time (largest standard Ethanol Fuel tank on the market).",
+    "Starts fastest of all automatic ethanol fireplaces on the market, starting as soon as you press the start button.",
+    "Remote Control is standard.",
+    "Is very operationally safe and simple to service, best on the market.",
+    "It can be built in anywhere and is safe and easy to use.",
+    "The best choice and most for your money if you want real fire and cosiness in your apartment or house.",
   ];
   const aboutParagraph =
-    "DFE provides cosiness & warmth in a old open fireplace that often looks very boring in private houses or in public environments.You can design and get the style and look you want, as standard. We make your fireplace, according to your tastes and dreams";
+    "Install a DFE in your old open fireplace to create a cozy and warm feeling with no smoke.You can design and get the style and look you want, as standard. We make your fireplace, according to your tastes and dreams";
   const paragraphs = [
     "It can be made in length from DFE500mm, DFE700mm, DFE1000mm, DFE1200mm and not standart up to DFE2400mm",
-    " We can build around it for you in hand made Steel Casing from Long: 560mm 760mm 1060mm 1260mm High: 500mm Deep: 350mm only. With openings on all sides or only 1 side or 2 or 3 sides open or in concrete, 100% according to your needs",
+    " We can build fireplaces to meet 100% of your needs, in concrete or handmade steel casings in lengths from 560mm, 760mm, 1060mm, and 1260mm, with heights of 500mm, and depth of 350mm (only), with openings on all sides or 1-3 sides.",
     "You decide for yourself the decoration from the large selection of luxury hand made Accessories",
   ];
 
   const advantageItemsLeft = [
-    "High safety, Thanks to a Digital Fireplace with many safety sensor and electronic refueling. (Many accidents happen when refueling the Ethanol fireplaces).",
-    "Automatic Ethanol Fuel pump built-in, which stops automatic when the Ethanol tank is full, it makes it 100% safe to refuel, and very easy to refuel, as there is only a silicone hose in between the DFE and the Ethanol can",
+    "High safety thanks to a digitally controlled pump with safety sensors. Superior and safer design than standard hand filled ethanol fireplaces",
     "Beautiful real hot orange fire, that is alive and provides just as much heat as a real Wood stove",
-    "It will provides from 3.6kW in heating the DFE500. or 5.76kW DFE700. or 8.64kW DFE1000. or 10.08kW DFE1200. to the wild 21,06kW in the DFE2400",
-    "Market's Largest Ethanol FuelTank as standard, that provides up to over 20 hours of burning time. Additional we can make the Ethanol Fueltank as big as you wish",
-    "DFE burns clean and gives a real sound of flames while the Bio-Ethanol is burning, as we have the market's best quality Bio-Ethanol Fuel on the market. and we will gladly send it to you",
+    "High level of heat output:DFE500 = 3.6kW, DFE700 = 5.76kW, DFE1000 = 8.64kW,DFE1200 = 10.08kW and DFE2400 = 21.06kW",
+    "Market's Largest Ethanol FuelTank as standard, that provides up to over 20 hours of burning time. We can make ethanol fuel tanks to any size you need",
+    "DFE bio-ethanol fuel burns clean and makes the sound of real flames. We also sell the market's best quality bio-ethanol fuel",
+    "Child lock",
   ];
   const advantageItemsRight = [
-    "Voice info from the Fireplace with info about when to refuel, or message about what the fireplace does or need from you",
-    "Child safety. with children lock",
-    "Cheap to install. Can be built in anywhere, you want a fireplace indoors. requires only 220V",
-    "You do not have to spend money on a chimney. or gas system as bottles, pipes, and cabinet. It will save you more than DFE costs you in purchasing",
-    "All our fireplaces are tested and packed to the highest standard, so we know they work and come to you without, you having to spend time on problems.Read the manual and then it plug and play",
-    "It can be controlled via SHS (smart home system) (Optional) works on all control systems such as KNX",
-    "Best customer support on the market, We help you all the way, even after warranty has expired",
+    "Fireplaces provade voice info about when to refual and messages about any service nejds",
+
+    "Cheap to install. Can be built anywhere you want a fireplace indoors. Requires only 220V",
+    "You do not have to spend money on a chimney or gas system as bottles, pipes, and cabinet. It will save you more than DFE costs you in purchasing",
+    "All our fireplaces are tested and packed to the highest standard, so we know they work and come to you without you having to spend time on problems.Read the manual and then plug and play",
+    "It can be controlled via SHS (smart home system) (Optional) and works on all control systems such as KNX",
+    "Best customer support on the market. We help you all the way, even after warranty has expired",
   ];
   return (
     <div id="bio" className="my-4">
