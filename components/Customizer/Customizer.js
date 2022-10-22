@@ -1,4 +1,13 @@
-import { Button, Card, Stack, Container, Badge } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Stack,
+  Container,
+  Badge,
+  Row,
+  Col,
+} from "react-bootstrap";
+import { SketchPicker, BlockPicker } from "react-color";
 import { useState, useEffect, useContext } from "react";
 import { renderToString } from "react-dom/server";
 import { LanguageContext } from "../context/language-context";
@@ -8,6 +17,8 @@ import CustomizerCasings from "./CustomizerCasings";
 import CustomizerFirePlaces from "./CustomizerFirePlaces";
 import CheckCartModal from "./CheckCartModal";
 import { motion } from "framer-motion";
+import CustomizerCard from "./CustomizerCard";
+import Circle from "react-color/lib/components/circle/Circle";
 
 const Customizer = (props) => {
   const lang = useContext(LanguageContext);
@@ -18,6 +29,18 @@ const Customizer = (props) => {
   const [glassColor, setGlassColor] = useState("Clear");
   const [showCart, setShowCart] = useState(false);
   const [split, setSplit] = useState(false);
+  const [blockPickerColor, setBlockPickerColor] = useState("#FFFFFF");
+  const [colorTouched, setColorTouched] = useState(false);
+  const [customColorPick, setCustomColorPick] = useState(false);
+  const [furnitureBox, setFurnitureBox] = useState({
+    name: "-",
+    priceEUR: "0",
+    priceSEK: "0",
+    priceDKK: "0",
+    color: "none",
+    image:
+      "https://designfires.pl/wp-content/uploads/2022/10/DSC02309-EDIT_FIXADXXX.png",
+  });
   const [cart, setCart] = useState({
     addedCasing: {
       name: "",
@@ -535,11 +558,42 @@ const Customizer = (props) => {
           manufacture_cost_DKK: item.manufacture_cost_DKK,
         },
       }));
+
+      // setFurnitureBox({})
     } else {
       setCasingItem((prevCasingItem) => ({
         ...prevCasingItem,
         enable: true,
       }));
+
+      if (fireplaceItem.name === "DFM") {
+        const fireplaceBox = props.boxes[0].variant.find((box) => {
+          return box.length.option === pickedLength;
+        });
+        setFurnitureBox({
+          name: "DFM Furniture Box",
+          priceEUR: fireplaceBox.price,
+          priceSEK: fireplaceBox.SEK_price,
+          priceDKK: fireplaceBox.DKK_price,
+          color: "jakistam",
+          image: props.boxes[0].images[0].src,
+          length: pickedLength,
+        });
+      }
+      if (fireplaceItem.name === "DFE") {
+        const fireplaceBox = props.boxes[1].variant.find((box) => {
+          return box.length.option === pickedLength;
+        });
+        setFurnitureBox({
+          name: "DFM Furniture Box",
+          priceEUR: fireplaceBox.price,
+          priceSEK: fireplaceBox.SEK_price,
+          priceDKK: fireplaceBox.DKK_price,
+          color: "jakistam",
+          image: props.boxes[1].images[0].src,
+          length: pickedLength,
+        });
+      }
     }
 
     setFirePlaceItem((prevItem) => ({
@@ -1024,6 +1078,82 @@ const Customizer = (props) => {
     }));
     setGlassColor(color);
   };
+
+  const onAddFurnitureBox = () => {
+    setCasingItem({
+      name: ["Type"],
+      length: [""],
+      photo:
+        "https://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires-1.png",
+      price: "0",
+      priceEUR: "",
+      priceSEK: "",
+      priceDKK: "",
+      fullName: "",
+      stock_status: "instock",
+      variant: [],
+      enable: false,
+      selected: false,
+    });
+    setCart((prevCart) => ({
+      ...prevCart,
+      /*addedCasing: {
+        name: "",
+        length: "",
+        priceEUR: "0",
+        priceSEK: "0",
+        priceDKK: "0",
+        pcs: 0,
+      },*/
+      addedCasing: {
+        name: "Furniture Box",
+        length: Number(furnitureBox.length) + 100,
+        priceEUR: furnitureBox.priceEUR,
+        priceSEK: furnitureBox.priceSEK,
+        priceDKK: furnitureBox.priceDKK,
+        photo: furnitureBox.image,
+        fullName: "Furniture Box ",
+        pcs: 1,
+      },
+    }));
+  };
+  useEffect(() => {
+    if (customColorPick && !colorTouched) {
+      const customPriceEUR = Number((furnitureBox.priceEUR / 100) * 110);
+      const customPriceDKK = Number((furnitureBox.priceDKK / 100) * 110);
+      const customPriceSEK = Number((furnitureBox.priceSEK / 100) * 110);
+      setFurnitureBox((prevBox) => ({
+        ...prevBox,
+        priceEUR: customPriceEUR,
+        priceSEK: customPriceSEK,
+        priceDKK: customPriceDKK,
+      }));
+
+      setColorTouched(true);
+    }
+    if (!customColorPick && colorTouched) {
+      const customPriceEUR = Number((furnitureBox.priceEUR / 110) * 100);
+      const customPriceDKK = Number((furnitureBox.priceDKK / 110) * 100);
+      const customPriceSEK = Number((furnitureBox.priceSEK / 110) * 100);
+
+      setFurnitureBox((prevBox) => ({
+        ...prevBox,
+        priceEUR: customPriceEUR,
+        priceSEK: customPriceSEK,
+        priceDKK: customPriceDKK,
+      }));
+      setColorTouched(false);
+    }
+  }, [customColorPick]);
+
+  const onBoxColorChange = (color) => {
+    if (color.hex === "#ffffff") {
+      setCustomColorPick(false);
+    } else {
+      setCustomColorPick(true);
+    }
+    setBlockPickerColor(color.hex);
+  };
   return (
     <div className="bg-primary pb-2">
       <div className="w-100 bg-danger p-3 fst-italic">
@@ -1049,11 +1179,11 @@ const Customizer = (props) => {
           />
         </Container>
       </div>{" "}
-      <Container>
+      <Container style={{ position: "relative", zindex: 1250 }}>
         {" "}
         <div className="customizer pt-4 pb-2">
           {" "}
-          <div className="">
+          <div style={{ position: "relative", zindex: 50 }}>
             <CustomizerCasings
               className="ml-5 "
               casings={casings}
@@ -1063,7 +1193,7 @@ const Customizer = (props) => {
               changeGlassColor={changeGlassColor}
               glassPiecesChange={glassPiecesChange}
             />
-          </div>
+          </div>{" "}
           <CheckCartModal
             cart={cart}
             showCart={showCart}
@@ -1121,3 +1251,54 @@ const Customizer = (props) => {
   );
 };
 export default Customizer;
+/*
+Furniture
+  <div
+            style={{ width: "500px", backgroundColor: `${blockPickerColor}` }}
+          >
+            <CustomizerCard
+              title="Select Furniture Box"
+              photo={furnitureBox.image}
+            >
+              <Stack className="mx-auto " direction="horizontal" gap={1}>
+                <Button variant="info" onClick={onAddFurnitureBox}>
+                  ADD
+                </Button>
+
+                <Button variant="primary" className="fw-bold">
+                  {lang.currencyPrice(
+                    furnitureBox.priceEUR,
+                    furnitureBox.priceSEK,
+                    furnitureBox.priceDKK
+                  )}
+                  <span> </span>
+                  {lang.currencySymbol()}
+                </Button>
+                <Button variant="primary">Technical Info</Button>
+              </Stack>
+              <Row className="my-3 fs-4">
+                <Badge>Standard - white laminate</Badge>
+              </Row>
+              <Row>
+                <Badge bg="info">Pick Custom Color:</Badge>
+
+               
+                <div className="py-3 ">
+                  <Circle
+                    onChange={(color) => {
+                      onBoxColorChange(color);
+                    }}
+                    width="100%"
+                    colors={[
+                      "#FFFFFF",
+                      "#c3c3c3",
+                      "#9c9c9c",
+                      "#636363",
+                      "#383838",
+                      "",
+                    ]}
+                  />
+                </div>
+              </Row>
+            </CustomizerCard>
+          </div> */

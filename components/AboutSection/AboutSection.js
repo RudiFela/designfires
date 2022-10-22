@@ -22,7 +22,7 @@ const AboutSection = (props) => {
   });
   return (
     <div className="about-section">
-      <h2>{props.title}</h2>
+      <h1>{props.title}</h1>
       <ul className="fs-5">{list}</ul>
       <p>{props.aboutParagraph}</p>
       <Accordion color="success" className="mt-3">

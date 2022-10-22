@@ -87,6 +87,8 @@
   }
   .casings-customizer {
     width: auto !important;
+    position: relative !important;
+    z-index: 50 !important;
   }
 }
 .form-check-input:checked {
@@ -155,3 +157,7 @@
       brightness(104%) contrast(101%);
   }
 }
+/*.dropdown-menu {
+  position: relative;
+  z-index: 1001 !important;
+}*/

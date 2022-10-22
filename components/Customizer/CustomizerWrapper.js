@@ -1,6 +1,6 @@
 import { useContext, useRef } from "react";
 import Image from "next/image";
-
+import CustomizerCard from "./CustomizerCard";
 import {
   Card,
   Button,
@@ -31,21 +31,11 @@ const CustomizerWrapper = (props) => {
 
   return (
     <>
-      {" "}
-      <Card className={props.cssClass}>
-        {" "}
-        <h3 className="text-white text-center mb-3">
-          <Badge bg="danger">Select Standard Casing</Badge>
-        </h3>
-        <Image
-          className="card-image-bottom"
-          style={{ maxheigth: "50vh", borderRadius: 35 }}
-          alt="photocard-picture"
-          src={selectedItem.photo}
-          height={props.pictureheigth}
-          width={480}
-        />
-        <Card.Body className="pb-0">
+      <div
+        className="casings-customizer"
+        style={{ position: "relative", zindex: 50 }}
+      >
+        <CustomizerCard photo={selectedItem.photo} title="Select Casing">
           <Stack className="flex-wrap my-2" direction="horizontal" gap={3}>
             {itemDropDown}
 
@@ -85,8 +75,8 @@ const CustomizerWrapper = (props) => {
           </Stack>
 
           {props.children}
-        </Card.Body>{" "}
-      </Card>
+        </CustomizerCard>
+      </div>
     </>
   );
 };

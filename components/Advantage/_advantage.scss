@@ -8,8 +8,7 @@
   & img {
     overflow: hidden;
   }
-  & h2 {
-    font-size: 2rem;
+  & h1 {
     text-align: center;
     padding: 2rem;
     font-weight: 600;
@@ -57,7 +56,8 @@
   }
 }
 .shortName {
-  color: var.$secondary-color;
+  color: rgb(196, 24, 24);
+  //text-shadow: 2px 2px rgb(177, 16, 16);
 }
 .darker {
   background: rgba(0, 0, 0, 0.35);

@@ -1,4 +1,5 @@
 import { useContext, useRef, useState } from "react";
+import Image from "next/image";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
 import { FaTruck } from "react-icons/fa";
 import {
@@ -88,8 +89,9 @@ const CustomizerCasings = (props) => {
 
   const casingDropDownItems = casings.map((item) => (
     <Dropdown.Item
-      className="text-white bolder svg-image px-3 mx-3"
+      className="text-white bolder svg-image"
       key={item.id}
+      // style={{ overflow: "auto" }}
       onClick={() => {
         props.onSelect(
           item.images[0].src,
@@ -103,14 +105,21 @@ const CustomizerCasings = (props) => {
       }}
       eventKey={item}
     >
-      <svg width="240" height="240">
-        <image
-          xlinkHref={item.images[1].src}
-          src="yourfallback.png"
-          width="240"
-          height="240"
-        />
-      </svg>
+      <div className="w-100">
+        <Ratio aspectRatio="4x3">
+          <Image
+            src={item.images[0].src}
+            alt="casing photo"
+            //width={200}
+            //height={200}
+            style={{ borderRadius: "25px" }}
+            layout="fill"
+          />
+        </Ratio>
+        <p className="mt-3 fs-6 text-center">
+          {item.meta_data.find((item) => item.key === "fullname").value}
+        </p>
+      </div>
     </Dropdown.Item>
   ));
   const casingDropDown = (
@@ -179,6 +188,17 @@ const CustomizerCasings = (props) => {
 export default CustomizerCasings;
 
 /*
+svg image
+ <svg width="240" height="240">
+          <image
+            //xlinkHref={item.images[1].src}
+            src="yourfallback.png"
+            width="240"
+            height="240"
+          />
+        </svg>
+
+
 <p className="text-white fw-bold m-2 ms-0">Glass Color:</p>
         <Form.Check
           inline

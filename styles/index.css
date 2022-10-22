@@ -9898,7 +9898,7 @@ textarea.form-control-lg {
 }
 
 .navbar a:hover {
-  color: #800000 !important;
+  color: #a50000 !important;
 }
 
 .dropdown-menu {
@@ -9914,7 +9914,7 @@ textarea.form-control-lg {
 }
 
 .dropdown-item:hover {
-  color: #800000 !important;
+  color: #a50000 !important;
 }
 
 .under a {
@@ -9925,7 +9925,7 @@ textarea.form-control-lg {
 }
 .under a::after {
   content: "";
-  background: #800000;
+  background: #a50000;
   width: 0;
   height: 2px;
   position: absolute;
@@ -19830,7 +19830,7 @@ textarea.form-control-lg {
   text-decoration: none !important;
 }
 .footer-wrap a:hover {
-  color: #800000 !important;
+  color: #a50000 !important;
 } /* import bootstrap to set changes */
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
@@ -39591,7 +39591,7 @@ textarea.form-control-lg {
   background-color: #252525;
   border-radius: 35px;
 }
-.about-section h2, .about-section .h2 {
+.about-section h1, .about-section .h1 {
   padding: 2rem;
   text-align: center;
   font-weight: 600;
@@ -39629,13 +39629,13 @@ textarea.form-control-lg {
 .accordion-button:focus {
   z-index: 3;
   color: #fff !important;
-  border-color: #800000;
+  border-color: #a50000;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(104, 3, 3, 0.25) !important;
 }
 
 .accordion-button {
-  background-color: #800000 !important;
+  background-color: #a50000 !important;
   color: #fff !important;
 }
 
@@ -39663,8 +39663,7 @@ textarea.form-control-lg {
 .advantage img {
   overflow: hidden;
 }
-.advantage h2, .advantage .h2 {
-  font-size: 2rem;
+.advantage h1, .advantage .h1 {
   text-align: center;
   padding: 2rem;
   font-weight: 600;
@@ -39711,7 +39710,7 @@ textarea.form-control-lg {
 }
 
 .shortName {
-  color: #800000;
+  color: rgb(196, 24, 24);
 }
 
 .darker {
@@ -60221,6 +60220,8 @@ textarea.form-control-lg {
   }
   .casings-customizer {
     width: auto !important;
+    position: relative !important;
+    z-index: 50 !important;
   }
 }
 .form-check-input:checked {
@@ -60296,6 +60297,10 @@ textarea.form-control-lg {
   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(73deg) brightness(104%) contrast(101%);
 }
 
+/*.dropdown-menu {
+  position: relative;
+  z-index: 1001 !important;
+}*/
 /* import bootstrap to set changes */
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
@@ -70175,7 +70180,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #800000;
+  background: #a50000;
 }
 
 .carouselo-item {

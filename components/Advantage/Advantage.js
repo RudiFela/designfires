@@ -27,10 +27,10 @@ const Advantage = (props) => {
           objectPosition="center"
         />
         <Stack className="justify-content-center darker" direction="horizontal">
-          <h2 className="landingRest">
+          <h1 className="landingRest">
             Advantage of
             <span className="shortName fw-bolder"> {props.shortName}</span>
-          </h2>
+          </h1>
         </Stack>
         <div className="advantage-flex darker">
           <div className="advantage-left">

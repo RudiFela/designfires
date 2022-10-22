@@ -16,7 +16,7 @@ const Body = (props) => {
   useEffect(() => {
     takePrice();
 
-    // console.log(props.fireplaces);
+    //console.log(props.casings);
   }, [language]);
   const currencyPrice = (item) => {
     switch (language) {
@@ -55,6 +55,7 @@ const Body = (props) => {
         casings={props.casings}
         fireplace={props.fireplaces}
         cartHandler={props.cartHandler}
+        boxes={props.boxes}
       />
       <MotionSlider />
       <BioFuel

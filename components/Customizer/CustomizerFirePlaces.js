@@ -27,6 +27,7 @@ import {
   Button,
   Stack,
   ButtonGroup,
+  Ratio,
 } from "react-bootstrap";
 import { MdOutlineLocalSee } from "react-icons/md";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
@@ -556,14 +557,16 @@ const CustomizerFirePlaces = (props) => {
       <div style={{ borderRadius: 35 }} className="bg-success p-3 ">
         <Row className="p-1">
           <Col className="mb-2">
-            <Image
-              className="card-image-bottom"
-              style={{ maxheigth: "50vh", borderRadius: 35 }}
-              alt="photocard-picture"
-              src={selectedFireplace.photo}
-              height={380}
-              width={600}
-            />
+            <Ratio aspectRatio="16x9">
+              <Image
+                className="card-image-bottom"
+                style={{ maxheigth: "50vh", borderRadius: 35 }}
+                alt="photocard-picture"
+                src={selectedFireplace.photo}
+                //height={380}
+                layout="fill" //width={600}
+              />
+            </Ratio>
             <span>
               <Badge className="mt-2 p-2 fs-6 text-wrap text-white" bg="info">
                 <ImFire />
@@ -609,7 +612,11 @@ const CustomizerFirePlaces = (props) => {
                         )
                       }
                     >
-                      <div className="w-100"> {oneSideSvg}</div>
+                      <div className="w-100">
+                        {" "}
+                        {oneSideSvg}
+                        <p className="fw-bold my-3 text-center">1 Long Glass</p>
+                      </div>
                     </Dropdown.Item>
                     <Dropdown.Item
                       className="text-white customizer px-3 mx-3"
@@ -621,7 +628,13 @@ const CustomizerFirePlaces = (props) => {
                         )
                       }
                     >
-                      <div className="w-100"> {twoSideSvg}</div>
+                      <div className="w-100">
+                        {" "}
+                        {twoSideSvg}{" "}
+                        <p className="fw-bold my-3 text-center">
+                          1 Long, 1 Short Glass
+                        </p>
+                      </div>
                     </Dropdown.Item>
                     <Dropdown.Item
                       onClick={() =>
@@ -633,7 +646,12 @@ const CustomizerFirePlaces = (props) => {
                       style={{ width: "220px" }}
                       className="text-white customizer px-3 mx-3"
                     >
-                      <div className="w-100">{threeSideSvg}</div>
+                      <div className="w-100">
+                        {threeSideSvg}
+                        <p className="fw-bold my-3 text-center">
+                          1 Long, 2 Short Glass
+                        </p>
+                      </div>
                     </Dropdown.Item>
                     <Dropdown.Item
                       className="text-white customizer px-3 mx-3"
@@ -645,7 +663,12 @@ const CustomizerFirePlaces = (props) => {
                         )
                       }
                     >
-                      <div className=" w-100">{fourSideSvg}</div>
+                      <div className=" w-100">
+                        {fourSideSvg}
+                        <p className="fw-bold my-3 text-center">
+                          2 Long, 1 Short Glass
+                        </p>
+                      </div>
                     </Dropdown.Item>
                     <Dropdown.Item
                       className="text-white customizer px-3 mx-3"
@@ -657,7 +680,12 @@ const CustomizerFirePlaces = (props) => {
                         )
                       }
                     >
-                      <div className="w-100">{allSideSvg}</div>
+                      <div className="w-100">
+                        {allSideSvg}
+                        <p className="fw-bold my-3 text-center">
+                          2 Long, 2 Short Glass
+                        </p>
+                      </div>
                     </Dropdown.Item>
                   </DropdownButton>
                 </ButtonGroup>

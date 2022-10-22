@@ -194,8 +194,8 @@ const BioFuel = (props) => {
         </div>
         <Row className="bg-danger p-3 list" style={{ borderRadius: 35 }}>
           <Col>
-            <h2 className="text-white p-3 mb-3">
-              <span className="text-info">DesignFires</span> Ethanol Fuel
+            <h2 className="text-white fw-bold p-3 mb-3">
+              <span className="shortName">DesignFires</span> Ethanol Fuel
             </h2>
             <ul className="">
               <li>Best alcohol % gives beautiful real yellow flames</li>

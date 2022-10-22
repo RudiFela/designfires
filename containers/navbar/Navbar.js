@@ -80,10 +80,10 @@ const Navibar = () => {
                 Bio-Ehtanol Fuel
               </Nav.Link>
               <Nav.Link className="text-white text-center" href="#bio">
-                Digital DFE Bio-Ehtanol Fireplace PRO
+                Digital Bio-Ethanol Fireplace PRO (DFE)
               </Nav.Link>
               <Nav.Link className="text-white text-center" href="#steamfire">
-                Mystic SteamFire DFM PRO Fireplace
+                Mystic SteamFire Pro (DFM)
               </Nav.Link>
               <Nav.Link
                 className="text-white text-center"
