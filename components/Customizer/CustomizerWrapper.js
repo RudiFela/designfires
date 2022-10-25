@@ -1,41 +1,38 @@
 import { useContext, useRef } from "react";
 import Image from "next/image";
 import CustomizerCard from "./CustomizerCard";
-import {
-  Card,
-  Button,
-  Stack,
-  Popover,
-  OverlayTrigger,
-  Badge,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Button, Stack, Popover, OverlayTrigger } from "react-bootstrap";
 import { LanguageContext } from "../context/language-context";
 const CustomizerWrapper = (props) => {
   //const overlayRef = useRef();
   const lang = useContext(LanguageContext);
 
-  const {
-    itemDropDown,
-    lengthDropDown,
-    selectedPrice,
-    popoverInfo,
-    selectedItem,
-  } = props;
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Body>{popoverInfo}</Popover.Body>
-    </Popover>
-  );
+  const { itemDropDown, lengthDropDown, selectedPrice, selectedItem } = props;
 
   return (
     <>
       <div
-        className="casings-customizer"
+        className="casings-customizer "
         style={{ position: "relative", zindex: 50 }}
       >
-        <CustomizerCard photo={selectedItem.photo} title="Select Casing">
+        <CustomizerCard
+          image={
+            <Image
+              className="card-image-bottom"
+              style={{
+                //maxheigth: "50vh",
+                borderRadius: 25,
+                backgroundColor: "black",
+              }}
+              alt="photocard-picture"
+              src={selectedItem.photo}
+              //height={400}
+
+              layout="fill" //width={480}
+            />
+          }
+          title="Select Casing"
+        >
           <Stack className="flex-wrap my-2" direction="horizontal" gap={3}>
             {itemDropDown}
 
@@ -66,7 +63,7 @@ const CustomizerWrapper = (props) => {
               //trigger={["hover", "focus"]}
               trigger="click"
               placement="bottom"
-              overlay={popover}
+              overlay={props.popover}
               //delay={{ show: 250, hide: 1600 }}
               rootClose
             >

@@ -4,12 +4,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  & svg {
-    fill: rgb(66, 164, 209);
-  }
-  & svg:hover {
-    fill: white;
-  }
+
   & ul {
     padding: 0;
   }
@@ -19,6 +14,14 @@
 }
 .bolder {
   font-weight: 600 !important;
+}
+.glass-picker {
+  & svg {
+    fill: rgb(66, 164, 209);
+  }
+  & svg:hover {
+    fill: white;
+  }
 }
 .tab-content {
   //max-height: 32rem;
@@ -55,7 +58,7 @@
   border: none !important;
   padding: 1rem !important;
   background-color: $light-shark !important;
-  height: 40rem;
+  //height: 40rem;
 }
 .list-group-item {
   padding: 0 !important;
@@ -161,3 +164,54 @@
   position: relative;
   z-index: 1001 !important;
 }*/
+.box-filter {
+  filter: invert(54%) sepia(88%) saturate(321%) hue-rotate(154deg)
+    brightness(90%) contrast(94%);
+}
+.product {
+  position: relative;
+  box-shadow: 0 0 2em rgba(0, 0, 0, 0.2);
+  border-radius: 1em;
+  overflow: hidden;
+}
+.img-1 {
+  width: 100%;
+  z-index: 0;
+}
+.img-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+.color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+.disable-element {
+  pointer-events: none;
+  opacity: 0.3;
+}
+.deco-item-text {
+  font-size: clamp(0.7rem, 2vw, 1.2rem);
+}
+.deco-card {
+  height: 50rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.customizer-card {
+  height: 33rem;
+}

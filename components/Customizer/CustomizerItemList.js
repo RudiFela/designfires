@@ -2,7 +2,15 @@ import { useContext } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { LanguageContext } from "../context/language-context";
-import { Button, ListGroup, Figure, Stack } from "react-bootstrap";
+import {
+  Button,
+  ListGroup,
+  Figure,
+  Stack,
+  Ratio,
+  Row,
+  Col,
+} from "react-bootstrap";
 const CustomizerItemList = (props) => {
   const lang = useContext(LanguageContext);
   const list = props.ItemToList;
@@ -30,10 +38,73 @@ const CustomizerItemList = (props) => {
   return (
     <div>
       {list.map((item) => (
-        <ListGroup.Item key={item.id}>
+        <div className="border-top mb-3 deco-item-text mx-3" key={item.id}>
           <motion.div whileTap={{ scale: 0.9 }} whileHover={{ scale: 1 }}>
-            <Button
-              //active={true}
+            <div
+              className="text-white"
+              //active={true} button
+              //size="sm"
+              //className="w-100 btn-custom text-white pb-2"
+              onClick={() => {
+                props.onAdd(
+                  item,
+
+                  //switchCurrency(item, lang),
+                  item.name,
+                  item.id,
+                  item.images[0].woocommerce_gallery_thumbnail
+                );
+              }}
+              variant="outline-danger"
+            >
+              <span id={item.id} className="anchor "></span>
+              <Row className=" fw-bold justify-content-center">
+                <Col xs={2} xs="5" sm="4" md="2" lg="2">
+                  <Ratio aspectRatio="4x3">
+                    <Figure className="m-0">
+                      <Image
+                        className="figure-round figure-img img-fluid"
+                        //width={100}
+                        // height={100}
+                        layout="fill"
+                        src={item.images[0].src}
+                        alt="decorations image"
+                      />
+                    </Figure>
+                  </Ratio>
+                </Col>
+                <Col
+                  xs="5"
+                  md="7"
+                  lg="8"
+                  className="text-center d-flex justify-content-center"
+                >
+                  <span className="align-self-center">{item.name}</span>
+                </Col>
+                <Col
+                  className="text-center d-flex justify-content-center"
+                  xs={2}
+                >
+                  <span className="align-self-center">
+                    {Number(switchCurrency(item)).toLocaleString(undefined, {
+                      maximumFractionDigits: 2,
+                    })}
+                    {lang.currencySymbol()}{" "}
+                  </span>
+                </Col>
+              </Row>
+            </div>
+          </motion.div>
+        </div>
+      ))}
+    </div>
+  );
+};
+export default CustomizerItemList;
+//€
+/* 
+ <Button
+              //active={true} button
               size="sm"
               className="w-100 btn-custom text-white pb-2"
               onClick={() => {
@@ -72,11 +143,4 @@ const CustomizerItemList = (props) => {
                 </div>
               </Stack>
             </Button>
-          </motion.div>
-        </ListGroup.Item>
-      ))}
-    </div>
-  );
-};
-export default CustomizerItemList;
-//€
+*/

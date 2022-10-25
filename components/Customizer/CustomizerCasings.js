@@ -10,9 +10,11 @@ import {
   Button,
   DropdownButton,
   Ratio,
+  Popover,
 } from "react-bootstrap";
 import { LanguageContext } from "../context/language-context";
 import CustomizerWrapper from "./CustomizerWrapper";
+import PopoverComponent from "../UI/Popover";
 const CustomizerCasings = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalPhoto, setModalPhoto] = useState();
@@ -29,62 +31,42 @@ const CustomizerCasings = (props) => {
   const closeModal = () => {
     setShowModal(false);
   };
-  const popoverInfo = pickedCaseItem.selected ? (
-    <div className="fs-5 ">
-      <Row className="my-1">
-        <Col>
-          <span className="fw-bold">
-            Length:
-            <Badge className="fs-5 float-end" bg="secondary">
-              {pickedCaseItem.length}mm
-            </Badge>
-          </span>
-        </Col>
-      </Row>
-      <Row className="my-1">
-        <Col>
-          <span className="fw-bold">
-            Width:
-            <Badge className="fs-5 float-end " bg="secondary">
-              350mm
-            </Badge>
-          </span>
-        </Col>
-      </Row>
-      <Row className="my-1">
-        <Col>
-          <span className="fw-bold">
-            Heigth:
-            <Badge className="fs-5 float-end" bg="secondary">
-              500mm
-            </Badge>
-          </span>
-        </Col>
-      </Row>
-      <Row className="my-1">
-        <Col>
-          <span className="fw-bold">
-            Thickness:
-            <Badge className="fs-5 float-end" bg="secondary">
-              5mm
-            </Badge>
-          </span>
-        </Col>
-      </Row>
-      <Row>
-        <Button
-          className="mt-2"
-          onClick={
-            () => showModalHandler()
-            // "https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
-          }
+
+  const popover = pickedCaseItem.selected ? (
+    <Popover id="popover-basic">
+      <Popover.Body>
+        <PopoverComponent
+          info={[
+            { name: "Length", value: pickedCaseItem.length },
+            { name: "Width", value: "350" },
+            { name: "Heigth", value: "500" },
+            { name: "Thickness", value: "5" },
+          ]}
         >
-          3D View
-        </Button>
-      </Row>
-    </div>
+          <Row>
+            <Button
+              className="mt-2"
+              onClick={
+                () => showModalHandler()
+                // "https://designfires.pl/wp-content/uploads/2022/07/designfires.svg"
+              }
+            >
+              3D View
+            </Button>
+          </Row>
+        </PopoverComponent>
+      </Popover.Body>
+    </Popover>
   ) : (
-    <span className="fw-bold fs-5">Select Casing to see technical params.</span>
+    <Popover id="popover-basic">
+      <Popover.Body>
+        <div className="fw-bold fs-5">
+          <span className="fw-bold fs-5">
+            Select Casing to see technical params.
+          </span>
+        </div>
+      </Popover.Body>
+    </Popover>
   );
 
   const casingDropDownItems = casings.map((item) => (
@@ -177,7 +159,7 @@ const CustomizerCasings = (props) => {
           pickedCaseItem.priceSEK,
           pickedCaseItem.priceDKK
         )}
-        popoverInfo={popoverInfo}
+        popover={popover}
         selected={pickedCaseItem.selected}
         cssClass="card-deco mt-3 casings-customizer"
         pictureheigth={400}

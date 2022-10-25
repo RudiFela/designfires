@@ -225,8 +225,25 @@ const CheckCartModal = (props) => {
                     <Row>
                       <p>{cart.addedCasing.length}mm/350mm/500mm/5mm</p>
                     </Row>{" "}
+                    {cart.addedCasing.name === "Furniture Box" ? (
+                      <Row>
+                        <p>
+                          <span>
+                            Color:
+                            <div
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                backgroundColor: cart.addedCasing.color,
+                                border: "solid 1px",
+                              }}
+                              className="text-black"
+                            ></div>
+                          </span>
+                        </p>
+                      </Row>
+                    ) : null}
                   </Col>
-
                   <Row>
                     <Col lg={true}>
                       <p className="float-end">

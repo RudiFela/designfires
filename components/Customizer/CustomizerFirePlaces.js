@@ -230,7 +230,7 @@ const CustomizerFirePlaces = (props) => {
         inline
         label={
           <OverlayTrigger placement="bottom" overlay={popoverEW}>
-            <span>EW</span>
+            <span className="text-white fw-bold">EW</span>
           </OverlayTrigger>
         }
         name="group1"
@@ -244,7 +244,7 @@ const CustomizerFirePlaces = (props) => {
         disabled={!selectedFireplace.selectedLength}
         label={
           <OverlayTrigger placement="bottom" overlay={popoverT}>
-            <span>T</span>
+            <span className="text-white fw-bold">T</span>
           </OverlayTrigger>
         }
         name="group1"
@@ -257,7 +257,7 @@ const CustomizerFirePlaces = (props) => {
         disabled={!selectedFireplace.selectedLength}
         label={
           <OverlayTrigger placement="bottom" overlay={popoverPW}>
-            <span>PW</span>
+            <span className="text-white fw-bold">PW</span>
           </OverlayTrigger>
         }
         name="group1"
@@ -597,7 +597,7 @@ const CustomizerFirePlaces = (props) => {
                   {fireplacesLengthDropDown}
                   <DropdownButton
                     id="dropdown-basic-button"
-                    className=""
+                    className="glass-picker"
                     title={<p className="fw-bold fs-5 m-0"> {mountTitle}</p>}
                     disabled={!selected}
                     variant="info"

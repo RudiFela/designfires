@@ -7,9 +7,8 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import { SketchPicker, BlockPicker } from "react-color";
 import { useState, useEffect, useContext } from "react";
-import { renderToString } from "react-dom/server";
+import FurnitureBox from "./FurnitureBox";
 import { LanguageContext } from "../context/language-context";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import CustomizerItemList from "./CustomizerItemList";
@@ -18,8 +17,131 @@ import CustomizerFirePlaces from "./CustomizerFirePlaces";
 import CheckCartModal from "./CheckCartModal";
 import { motion } from "framer-motion";
 import CustomizerCard from "./CustomizerCard";
-import Circle from "react-color/lib/components/circle/Circle";
+import { GiDivert, GiTreasureMap } from "react-icons/gi";
+import DeleteButton from "../UI/DeleteButton";
 
+const initialCartState = {
+  addedCasing: {
+    name: "",
+    length: "",
+    priceEUR: "0",
+    priceSEK: "0",
+    priceDKK: "0",
+    pcs: 0,
+  },
+  addedFireplace: {
+    name: "",
+    length: "",
+    priceEUR: "0",
+    priceSEK: "0",
+    priceDKK: "0",
+    pcs: 0,
+  },
+  addedShs: {
+    name: "",
+    price: "0",
+    priceEUR: "0",
+    priceSEK: "0",
+    priceDKK: "0",
+    pcs: 0,
+  },
+  addedTop: {
+    name: "",
+    price: "0",
+    priceEUR: "0",
+    priceSEK: "0",
+    priceDKK: "0",
+    pcs: 0,
+  },
+  addedFilling: {
+    name: "",
+    price: "0",
+    priceEUR: "0",
+    priceSEK: "0",
+    priceDKK: "0",
+    pcs: 0,
+  },
+  addedDecorations: [],
+  addedAccessories: {
+    glass: {
+      length: "",
+      pcs: 2,
+      priceEUR: "0",
+      priceSEK: "0",
+      priceDKK: "0",
+      color: "Clear",
+      image: "",
+      //"https://designfires.pl/wp-content/uploads/2022/07/ClearGlass-scaled.jpg",
+      split_glass: {
+        length: { option: "" },
+        pcs: 0,
+        priceEUR: "0",
+        priceSEK: "0",
+        priceDKK: "0",
+      },
+      short: {
+        short_length: "300",
+        short_pcs: 2,
+        priceEUR: "0",
+        priceSEK: "0",
+        priceDKK: "0",
+        image: "",
+      },
+    },
+    holders: {
+      pcs: 0,
+      priceEUR: "0",
+      priceSEK: "0",
+      priceDKK: "0",
+      image: "",
+    },
+  },
+  manufactureCost: {
+    manufacture_cost_EUR: "0",
+    manufacture_cost_SEK: "0",
+    manufacture_cost_DKK: "0",
+  },
+  cartPrice: 0,
+};
+const initialFireplaceState = {
+  name: ["Type"],
+  length: ["Length"],
+  photo: "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES-1.png",
+  price: "0",
+  priceEUR: "",
+  priceSEK: "",
+  priceDKK: "",
+  variant: [],
+  stock_status: "instock",
+  variant_details: undefined,
+  filling: [],
+  selected: false,
+};
+const initialCasingState = {
+  name: ["Type"],
+  length: [""],
+  photo:
+    "https://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires-1.png",
+  price: "0",
+  priceEUR: "",
+  priceSEK: "",
+  priceDKK: "",
+  fullName: "",
+  stock_status: "instock", // was instock
+  variant: [],
+  enable: false,
+  selected: false,
+};
+const initialFurnitureBoxState = {
+  name: "-",
+  priceEUR: "0",
+  priceSEK: "0",
+  priceDKK: "0",
+  color: "none",
+  image: "https://designfires.pl/wp-content/uploads/2022/10/FurnitureBOX.png",
+  length: "0",
+  enable: false,
+};
 const Customizer = (props) => {
   const lang = useContext(LanguageContext);
   const { decorations, accessories, casings, fireplace } = props;
@@ -32,98 +154,8 @@ const Customizer = (props) => {
   const [blockPickerColor, setBlockPickerColor] = useState("#FFFFFF");
   const [colorTouched, setColorTouched] = useState(false);
   const [customColorPick, setCustomColorPick] = useState(false);
-  const [furnitureBox, setFurnitureBox] = useState({
-    name: "-",
-    priceEUR: "0",
-    priceSEK: "0",
-    priceDKK: "0",
-    color: "none",
-    image:
-      "https://designfires.pl/wp-content/uploads/2022/10/DSC02309-EDIT_FIXADXXX.png",
-  });
-  const [cart, setCart] = useState({
-    addedCasing: {
-      name: "",
-      length: "",
-      priceEUR: "0",
-      priceSEK: "0",
-      priceDKK: "0",
-      pcs: 0,
-    },
-    addedFireplace: {
-      name: "",
-      length: "",
-      priceEUR: "0",
-      priceSEK: "0",
-      priceDKK: "0",
-      pcs: 0,
-    },
-    addedShs: {
-      name: "",
-      price: "0",
-      priceEUR: "0",
-      priceSEK: "0",
-      priceDKK: "0",
-      pcs: 0,
-    },
-    addedTop: {
-      name: "",
-      price: "0",
-      priceEUR: "0",
-      priceSEK: "0",
-      priceDKK: "0",
-      pcs: 0,
-    },
-    addedFilling: {
-      name: "",
-      price: "0",
-      priceEUR: "0",
-      priceSEK: "0",
-      priceDKK: "0",
-      pcs: 0,
-    },
-    addedDecorations: [],
-    addedAccessories: {
-      glass: {
-        length: "",
-        pcs: longGlassPcs,
-        priceEUR: "0",
-        priceSEK: "0",
-        priceDKK: "0",
-        color: glassColor,
-        image: "",
-        //"https://designfires.pl/wp-content/uploads/2022/07/ClearGlass-scaled.jpg",
-        split_glass: {
-          length: { option: "" },
-          pcs: 0,
-          priceEUR: "0",
-          priceSEK: "0",
-          priceDKK: "0",
-        },
-        short: {
-          short_length: "300",
-          short_pcs: shortGlassPcs,
-          priceEUR: "0",
-          priceSEK: "0",
-          priceDKK: "0",
-          image: "",
-        },
-      },
-      holders: {
-        pcs: 0,
-        priceEUR: "0",
-        priceSEK: "0",
-        priceDKK: "0",
-        image: "",
-      },
-    },
-    manufactureCost: {
-      manufacture_cost_EUR: "0",
-      manufacture_cost_SEK: "0",
-      manufacture_cost_DKK: "0",
-    },
-    cartPrice: 0,
-  });
+  const [furnitureBox, setFurnitureBox] = useState(initialFurnitureBoxState);
+  const [cart, setCart] = useState(initialCartState);
   /* const [manufactureCost, setManufactureCost] = useState({
     manufacture_cost_EUR: "0",
     manufacture_cost_SEK: "0",
@@ -131,35 +163,8 @@ const Customizer = (props) => {
   });*/
   const [enableShs, setEnableShs] = useState(false);
   const [stainlessTop, setStainlessTop] = useState(false);
-  const [casingItem, setCasingItem] = useState({
-    name: ["Type"],
-    length: [""],
-    photo:
-      "https://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires-1.png",
-    price: "0",
-    priceEUR: "",
-    priceSEK: "",
-    priceDKK: "",
-    fullName: "",
-    stock_status: "instock", // was instock
-    variant: [],
-    enable: false,
-    selected: false,
-  });
-  const [fireplaceItem, setFirePlaceItem] = useState({
-    name: ["Type"],
-    length: ["Length"],
-    photo: "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES-1.png",
-    price: "0",
-    priceEUR: "",
-    priceSEK: "",
-    priceDKK: "",
-    variant: [],
-    stock_status: "instock",
-    variant_details: undefined,
-    filling: [],
-    selected: false,
-  });
+  const [casingItem, setCasingItem] = useState(initialCasingState);
+  const [fireplaceItem, setFirePlaceItem] = useState(initialFireplaceState);
   useEffect(() => {
     countCart();
     props.cartHandler(cart);
@@ -336,122 +341,16 @@ const Customizer = (props) => {
     arr = undefined;
   };
   const onShowCart = () => {
-    //console.log(cart);
+    console.log(cart);
     //console.log(fireplaceItem);
     setShowCart(true);
   };
   const clearCart = () => {
-    setCart({
-      addedCasing: {
-        name: "",
-        length: "",
-        priceEUR: "0",
-        priceSEK: "0",
-        priceDKK: "0",
-        pcs: 0,
-      },
-      addedFireplace: {
-        name: "",
-        length: "",
-        priceEUR: "0",
-        priceSEK: "0",
-        priceDKK: "0",
-        pcs: 0,
-      },
-      addedShs: {
-        name: "",
-        price: "0",
-        priceEUR: "0",
-        priceSEK: "0",
-        priceDKK: "0",
-        pcs: 0,
-      },
-      addedTop: {
-        name: "",
-        price: "0",
-        priceEUR: "0",
-        priceSEK: "0",
-        priceDKK: "0",
-        pcs: 0,
-      },
-      addedFilling: {
-        name: "",
-        price: "0",
-        priceEUR: "0",
-        priceSEK: "0",
-        priceDKK: "0",
-        pcs: 0,
-      },
-      addedDecorations: [],
-      addedAccessories: {
-        glass: {
-          short: {
-            short_length: "300",
-            short_pcs: shortGlassPcs,
-            priceEUR: "0",
-            priceSEK: "0",
-            priceDKK: "0",
-          },
-          split_glass: {
-            length: { option: "" },
-            pcs: 0,
-            priceEUR: "0",
-            priceSEK: "0",
-            priceDKK: "0",
-          },
-          length: "",
-          pcs: longGlassPcs,
-          priceEUR: "0",
-          priceSEK: "0",
-          priceDKK: "0",
-          color: glassColor,
-          image: "",
-        },
-        holders: {
-          pcs: 0,
-          priceEUR: "0",
-          priceSEK: "0",
-          priceDKK: "0",
-          image: "",
-        },
-      },
-      manufactureCost: {
-        manufacture_cost_EUR: "0",
-        manufacture_cost_SEK: "0",
-        manufacture_cost_DKK: "0",
-      },
-      cartPrice: 0,
-    });
-    setFirePlaceItem({
-      name: ["Select FirePlace"],
-      length: ["Length"],
-      photo:
-        "http://designfires.pl/wp-content/uploads/2022/07/FIREPLACES-1.png",
-      price: "0",
-      priceEUR: "",
-      priceSEK: "",
-      priceDKK: "",
-      variant: [],
-      stock_status: "instock",
-      variant_details: undefined,
-      filling: [],
-      selected: false,
-    });
-    setCasingItem({
-      name: ["Type"],
-      length: [""],
-      photo:
-        "https://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires-1.png",
-      price: "0",
-      priceEUR: "",
-      priceSEK: "",
-      priceDKK: "",
-      fullName: "",
-      stock_status: "instock",
-      variant: [],
-      enable: false,
-      selected: false,
-    });
+    setCart(initialCartState);
+    setFirePlaceItem(initialFireplaceState);
+    setCasingItem(initialCasingState);
+    setFurnitureBox(initialFurnitureBoxState);
+    setBlockPickerColor("#FFFFFF");
   };
   ////Casings
   const showCasingPrice = (photo, name, variant, item, mainItem) => {
@@ -469,6 +368,7 @@ const Customizer = (props) => {
       fullName: mainItem.meta_data.find((item) => item.key === "fullname")
         .value,
       Drawing3d: item.drawing3d,
+      pcs: 1,
     }));
 
     const glass = accessories[0].variant.find(
@@ -558,7 +458,7 @@ const Customizer = (props) => {
           manufacture_cost_DKK: item.manufacture_cost_DKK,
         },
       }));
-
+      setFurnitureBox(initialFurnitureBoxState);
       // setFurnitureBox({})
     } else {
       setCasingItem((prevCasingItem) => ({
@@ -575,9 +475,11 @@ const Customizer = (props) => {
           priceEUR: fireplaceBox.price,
           priceSEK: fireplaceBox.SEK_price,
           priceDKK: fireplaceBox.DKK_price,
-          color: "jakistam",
+          color: blockPickerColor,
           image: props.boxes[0].images[0].src,
           length: pickedLength,
+
+          enable: true,
         });
       }
       if (fireplaceItem.name === "DFE") {
@@ -585,13 +487,15 @@ const Customizer = (props) => {
           return box.length.option === pickedLength;
         });
         setFurnitureBox({
-          name: "DFM Furniture Box",
+          name: "DFE Furniture Box",
           priceEUR: fireplaceBox.price,
           priceSEK: fireplaceBox.SEK_price,
           priceDKK: fireplaceBox.DKK_price,
-          color: "jakistam",
+          color: blockPickerColor,
           image: props.boxes[1].images[0].src,
           length: pickedLength,
+
+          enable: true,
         });
       }
     }
@@ -1080,21 +984,7 @@ const Customizer = (props) => {
   };
 
   const onAddFurnitureBox = () => {
-    setCasingItem({
-      name: ["Type"],
-      length: [""],
-      photo:
-        "https://designfires.pl/wp-content/uploads/2022/07/CasingsDesignFires-1.png",
-      price: "0",
-      priceEUR: "",
-      priceSEK: "",
-      priceDKK: "",
-      fullName: "",
-      stock_status: "instock",
-      variant: [],
-      enable: false,
-      selected: false,
-    });
+    setCasingItem(initialCasingState);
     setCart((prevCart) => ({
       ...prevCart,
       /*addedCasing: {
@@ -1112,10 +1002,12 @@ const Customizer = (props) => {
         priceSEK: furnitureBox.priceSEK,
         priceDKK: furnitureBox.priceDKK,
         photo: furnitureBox.image,
-        fullName: "Furniture Box ",
+        fullName: furnitureBox.name,
+        color: blockPickerColor,
         pcs: 1,
       },
     }));
+    setFurnitureBox((prevState) => ({ ...prevState, pcs: 1 }));
   };
   useEffect(() => {
     if (customColorPick && !colorTouched) {
@@ -1154,6 +1046,11 @@ const Customizer = (props) => {
     }
     setBlockPickerColor(color.hex);
   };
+  const onFurnitureReset = () => {
+    setFurnitureBox(initialFurnitureBoxState);
+    setCustomColorPick(false);
+    setBlockPickerColor("#ffffff");
+  };
   return (
     <div className="bg-primary pb-2">
       <div className="w-100 bg-danger p-3 fst-italic">
@@ -1164,7 +1061,7 @@ const Customizer = (props) => {
       <div className="mt-4">
         <Container>
           <CustomizerFirePlaces
-            className=" "
+            className=""
             onSelect={showFirePlacePrice}
             onPickLength={addFireplaceToCart}
             fireplaces={fireplace}
@@ -1183,7 +1080,14 @@ const Customizer = (props) => {
         {" "}
         <div className="customizer pt-4 pb-2">
           {" "}
-          <div style={{ position: "relative", zindex: 50 }}>
+          <div
+            className={
+              furnitureBox.pcs > 0 || !furnitureBox.enable
+                ? "disable-element"
+                : ""
+            }
+            style={{ position: "relative", zindex: 50 }}
+          >
             <CustomizerCasings
               className="ml-5 "
               casings={casings}
@@ -1194,6 +1098,24 @@ const Customizer = (props) => {
               glassPiecesChange={glassPiecesChange}
             />
           </div>{" "}
+          <div
+            className={
+              !furnitureBox.enable || casingItem.pcs > 0
+                ? "disable-element "
+                : ""
+            }
+            style={{}}
+          >
+            <FurnitureBox
+              color={blockPickerColor}
+              onConfirm={onAddFurnitureBox}
+              disabled={!casingItem.enable}
+              item={furnitureBox}
+              onColorPick={onBoxColorChange}
+              length={fireplaceItem.length}
+              reset={onFurnitureReset}
+            ></FurnitureBox>
+          </div>
           <CheckCartModal
             cart={cart}
             showCart={showCart}
@@ -1201,24 +1123,24 @@ const Customizer = (props) => {
             onClear={() => clearModalCart()}
             currency={() => lang.currencySymbol()}
           />
-          <div className="customizer-item mt-3 ">
-            <div>
-              <Card className="card-deco carder">
-                <h3 className="text-white text-center mb-1">
-                  <Badge bg="danger">Select Accessories</Badge>
-                </h3>
-                <Card.Header className="tab-content">
-                  <CustomizerItemList
-                    ItemToList={decorations}
-                    onAdd={addDecorationsToCart}
-                  />
-                </Card.Header>
-                <h5 className="text-white m-0 mx-auto pt-1 float-end">
-                  All prices includes 25% VAT
-                </h5>
-              </Card>{" "}
-            </div>
-          </div>{" "}
+        </div>
+        <div className="mt-3 ">
+          <div style={{ width: "100%" }}>
+            <div style={{ width: "100%" }} className="card-deco deco-card test">
+              <h3 className="text-white text-center mb-1">
+                <Badge bg="danger">Select Accessories</Badge>
+              </h3>
+              <div className="tab-content">
+                <CustomizerItemList
+                  ItemToList={decorations}
+                  onAdd={addDecorationsToCart}
+                />
+              </div>
+              <h5 className="text-white m-0 mx-auto pt-1 float-end">
+                All prices includes 25% VAT
+              </h5>
+            </div>{" "}
+          </div>
         </div>{" "}
       </Container>
       <div className=" d-flex flex-row-reverse bd-highlight">
@@ -1240,11 +1162,8 @@ const Customizer = (props) => {
               Check Your Choises
             </Button>{" "}
           </motion.div>
-          <motion.div whileHover={{ scale: 1.1 }}>
-            <Button variant="info" onClick={() => clearCart()}>
-              <RiDeleteBin6Line />
-            </Button>
-          </motion.div>
+
+          <DeleteButton reset={clearCart} />
         </Stack>
       </div>
     </div>
@@ -1253,52 +1172,4 @@ const Customizer = (props) => {
 export default Customizer;
 /*
 Furniture
-  <div
-            style={{ width: "500px", backgroundColor: `${blockPickerColor}` }}
-          >
-            <CustomizerCard
-              title="Select Furniture Box"
-              photo={furnitureBox.image}
-            >
-              <Stack className="mx-auto " direction="horizontal" gap={1}>
-                <Button variant="info" onClick={onAddFurnitureBox}>
-                  ADD
-                </Button>
-
-                <Button variant="primary" className="fw-bold">
-                  {lang.currencyPrice(
-                    furnitureBox.priceEUR,
-                    furnitureBox.priceSEK,
-                    furnitureBox.priceDKK
-                  )}
-                  <span> </span>
-                  {lang.currencySymbol()}
-                </Button>
-                <Button variant="primary">Technical Info</Button>
-              </Stack>
-              <Row className="my-3 fs-4">
-                <Badge>Standard - white laminate</Badge>
-              </Row>
-              <Row>
-                <Badge bg="info">Pick Custom Color:</Badge>
-
-               
-                <div className="py-3 ">
-                  <Circle
-                    onChange={(color) => {
-                      onBoxColorChange(color);
-                    }}
-                    width="100%"
-                    colors={[
-                      "#FFFFFF",
-                      "#c3c3c3",
-                      "#9c9c9c",
-                      "#636363",
-                      "#383838",
-                      "",
-                    ]}
-                  />
-                </div>
-              </Row>
-            </CustomizerCard>
-          </div> */
+  */
