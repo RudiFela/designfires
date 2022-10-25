@@ -14,7 +14,7 @@ import {
 const CustomizerItemList = (props) => {
   const lang = useContext(LanguageContext);
   const list = props.ItemToList;
-  const { FireplaceLength } = props;
+  //const { FireplaceLength } = props;
 
   const switchCurrency = (item) => {
     switch (lang.language) {
@@ -59,7 +59,7 @@ const CustomizerItemList = (props) => {
             >
               <span id={item.id} className="anchor "></span>
               <Row className=" fw-bold justify-content-center">
-                <Col xs={2} xs="5" sm="4" md="2" lg="2">
+                <Col xs="5" sm="4" md="2" lg="2">
                   <Ratio aspectRatio="4x3">
                     <Figure className="m-0">
                       <Image
