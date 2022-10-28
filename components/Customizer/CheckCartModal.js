@@ -1,4 +1,5 @@
 import { useContext, useState, useRef } from "react";
+import Dimensions from "../UI/Dimensions";
 import { LanguageContext } from "../context/language-context";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {
@@ -15,6 +16,7 @@ import {
   Figure,
   Container,
   Badge,
+  Ratio,
 } from "react-bootstrap";
 import Image from "next/image";
 import ContactForm from "../../containers/footer/ContactForm";
@@ -82,46 +84,14 @@ const CheckCartModal = (props) => {
                       </Figure>
                     </Col>
                     <Col>
-                      <Row className="fs-4">
-                        <span>
-                          Name:{" "}
-                          <Badge className="float-end">
-                            {cart.addedFireplace.name}
-                          </Badge>
-                        </span>
-                      </Row>
-                      <Row className="fs-4">
-                        <span>
-                          Length:{" "}
-                          <Badge className="float-end">
-                            <CgArrowsShrinkH /> <span> </span>
-                            {cart.addedFireplace.length}mm{" "}
-                          </Badge>
-                        </span>
-                        <span>
-                          Height:{" "}
-                          <Badge className="float-end">
-                            <CgArrowsShrinkV /> <span> </span>
-                            {cart.addedFireplace.height}{" "}
-                          </Badge>
-                        </span>
-                        <span>
-                          Deep:{" "}
-                          <Badge className="float-end">
-                            <CgArrowsExpandRight />
-                            <span> </span>
-                            {cart.addedFireplace.width}{" "}
-                          </Badge>
-                        </span>
-                        <span>
-                          Thickness:
-                          <Badge className="float-end">
-                            {" "}
-                            <CgArrowsMergeAltV />
-                            <span> </span> 3mm
-                          </Badge>
-                        </span>
-                      </Row>{" "}
+                      <Dimensions
+                        name={cart.addedFireplace.name}
+                        length={cart.addedFireplace.length}
+                        height={cart.addedFireplace.height}
+                        width={cart.addedFireplace.width}
+                        thickness="3mm"
+                      />
+
                       <Row>
                         <p className="fs-4">
                           Price:
@@ -266,73 +236,73 @@ const CheckCartModal = (props) => {
                 </>
               )}
             </Row>
-            <Row className="border p-2">
-              {cart.addedCasing.length && (
-                <>
-                  <h2>Casing</h2>
 
-                  <Col>
-                    <Figure className="m-0">
-                      <Image
-                        className="figure-round figure-img img-fluid"
-                        width={250}
-                        height={200}
-                        src={cart.addedCasing.photo}
-                        alt="Casing Image"
-                      />
-                    </Figure>
-                  </Col>
-                  <Col>
+            {cart.addedCasing.length && (
+              <Row className="border p-2" xs="1" md="1" lg="2">
+                <Figure className="m-0">
+                  <img
+                    className="figure-round figure-img img-fluid"
+                    //width={250}
+                    //height={200}
+                    width={350}
+                    height={250}
+                    //layout="fill"
+                    src={cart.addedCasing.photo}
+                    alt="Casing Image"
+                  />
+                </Figure>
+
+                <Col>
+                  <Dimensions
+                    name={cart.addedCasing.fullName}
+                    length={cart.addedCasing.length}
+                    width="350"
+                    height="500"
+                    thickness={
+                      cart.addedCasing.name === "Furniture Box" ? "25mm" : "5mm"
+                    }
+                  />{" "}
+                  {cart.addedCasing.name === "Furniture Box" ? (
                     <Row>
-                      <p>Name:{cart.addedCasing.name}</p>
-                    </Row>{" "}
-                    <Row>
-                      <Col lg={true}>
-                        <p>{cart.addedCasing.fullName}</p>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <p>{cart.addedCasing.length}mm/350mm/500mm/5mm</p>
-                    </Row>{" "}
-                    {cart.addedCasing.name === "Furniture Box" ? (
-                      <Row>
-                        <p>
-                          <span>
-                            Color:
-                            <div
-                              style={{
-                                width: "50px",
-                                height: "50px",
-                                backgroundColor: cart.addedCasing.color,
-                                border: "solid 1px",
-                              }}
-                              className="text-black"
-                            ></div>
-                          </span>
-                        </p>
-                      </Row>
-                    ) : null}
-                  </Col>
-                  <Row>
-                    <Col lg={true}>
-                      <p className="float-end">
-                        Price:
-                        {Number(
-                          lang.currencyPrice(
-                            cart.addedCasing.priceEUR,
-                            cart.addedCasing.priceSEK,
-                            cart.addedCasing.priceDKK
-                          )
-                        ).toLocaleString(undefined, {
-                          maximumFractionDigits: 2,
-                        })}
-                        <span> </span> {props.currency()}
+                      <p>
+                        <span>
+                          Color:
+                          <div
+                            style={{
+                              width: "50px",
+                              height: "50px",
+                              backgroundColor: cart.addedCasing.color,
+                              border: "solid 1px",
+                            }}
+                            className="text-black"
+                          ></div>
+                        </span>
                       </p>
-                    </Col>
-                  </Row>
-                </>
-              )}
-            </Row>
+                    </Row>
+                  ) : null}
+                  <Col>
+                    <Row>
+                      <p className="fs-4">
+                        Price:
+                        <Badge className="float-end">
+                          {" "}
+                          {Number(
+                            lang.currencyPrice(
+                              cart.addedCasing.priceEUR,
+                              cart.addedCasing.priceSEK,
+                              cart.addedCasing.priceDKK
+                            )
+                          ).toLocaleString(undefined, {
+                            maximumFractionDigits: 2,
+                          })}
+                          <span> </span> {props.currency()}
+                        </Badge>
+                      </p>
+                    </Row>
+                  </Col>
+                </Col>
+              </Row>
+            )}
 
             {cart.addedDecorations.map((items) => {
               return (
