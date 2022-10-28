@@ -15,9 +15,12 @@
 * {
   font-family: $font !important;
   margin: 0;
+  //outline: 1px solid red;
 }
 .main {
   background: rgb(0, 0, 0);
+  position: relative;
+  overflow-x: hidden;
 }
 html {
   scroll-behavior: smooth;

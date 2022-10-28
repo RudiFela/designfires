@@ -33,7 +33,7 @@ const CustomizerWrapper = (props) => {
           }
           title="Select Casing"
         >
-          <Stack className="flex-wrap my-2" direction="horizontal" gap={3}>
+          <Stack className="flex-wrap" direction="horizontal" gap={1}>
             {itemDropDown}
 
             {lengthDropDown}

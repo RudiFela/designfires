@@ -1,7 +1,21 @@
 import { useContext, useState, useRef } from "react";
 import { LanguageContext } from "../context/language-context";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Modal, Row, Col, Button, Figure, Container } from "react-bootstrap";
+import {
+  CgArrowsMergeAltV,
+  CgArrowsShrinkH,
+  CgArrowsShrinkV,
+  CgArrowsExpandRight,
+} from "react-icons/cg";
+import {
+  Modal,
+  Row,
+  Col,
+  Button,
+  Figure,
+  Container,
+  Badge,
+} from "react-bootstrap";
 import Image from "next/image";
 import ContactForm from "../../containers/footer/ContactForm";
 import dynamic from "next/dynamic";
@@ -51,8 +65,10 @@ const CheckCartModal = (props) => {
             <Row className="border p-2" id="text">
               {cart.addedFireplace.length && (
                 <>
-                  <h2 className="fw-bolder my-2">FirePlace</h2>
-                  <Row>
+                  <h1 className="fw-bolder mb-3 text-center">
+                    <Badge>FirePlace</Badge>
+                  </h1>
+                  <Row xs="1" md="1" lg="3">
                     {" "}
                     <Col>
                       <Figure className="m-0">
@@ -66,131 +82,184 @@ const CheckCartModal = (props) => {
                       </Figure>
                     </Col>
                     <Col>
-                      <Row>
-                        <p>{cart.addedFireplace.name}</p>
+                      <Row className="fs-4">
+                        <span>
+                          Name:{" "}
+                          <Badge className="float-end">
+                            {cart.addedFireplace.name}
+                          </Badge>
+                        </span>
                       </Row>
-                      <Row>
-                        <p>
-                          {cart.addedFireplace.length}mm/
-                          {cart.addedFireplace.info}/3mm
-                        </p>
+                      <Row className="fs-4">
+                        <span>
+                          Length:{" "}
+                          <Badge className="float-end">
+                            <CgArrowsShrinkH /> <span> </span>
+                            {cart.addedFireplace.length}mm{" "}
+                          </Badge>
+                        </span>
+                        <span>
+                          Height:{" "}
+                          <Badge className="float-end">
+                            <CgArrowsShrinkV /> <span> </span>
+                            {cart.addedFireplace.height}{" "}
+                          </Badge>
+                        </span>
+                        <span>
+                          Deep:{" "}
+                          <Badge className="float-end">
+                            <CgArrowsExpandRight />
+                            <span> </span>
+                            {cart.addedFireplace.width}{" "}
+                          </Badge>
+                        </span>
+                        <span>
+                          Thickness:
+                          <Badge className="float-end">
+                            {" "}
+                            <CgArrowsMergeAltV />
+                            <span> </span> 3mm
+                          </Badge>
+                        </span>
                       </Row>{" "}
                       <Row>
-                        <p>
+                        <p className="fs-4">
                           Price:
-                          {Number(
-                            lang.currencyPrice(
-                              cart.addedFireplace.priceEUR,
-                              cart.addedFireplace.priceSEK,
-                              cart.addedFireplace.priceDKK
-                            )
-                          ).toLocaleString(undefined, {
-                            maximumFractionDigits: 2,
-                          })}
-                          {props.currency()}
+                          <Badge className="float-end">
+                            {" "}
+                            {Number(
+                              lang.currencyPrice(
+                                cart.addedFireplace.priceEUR,
+                                cart.addedFireplace.priceSEK,
+                                cart.addedFireplace.priceDKK
+                              )
+                            ).toLocaleString(undefined, {
+                              maximumFractionDigits: 2,
+                            })}
+                            <span> </span> {props.currency()}
+                          </Badge>
                         </p>
                         {Number(cart.manufactureCost.manufacture_cost_EUR) >
                         0 ? (
-                          <p>
+                          <p className="fs-4">
                             Manufacture:
                             <span className="text-info">
-                              {Number(
-                                lang.currencyPrice(
-                                  cart.manufactureCost.manufacture_cost_EUR,
-                                  cart.manufactureCost.manufacture_cost_SEK,
-                                  cart.manufactureCost.manufacture_cost_DKK
-                                )
-                              ).toLocaleString(undefined, {
-                                maximumFractionDigits: 2,
-                              })}
-                              {props.currency()}
+                              <Badge bg="info" className="float-end">
+                                {Number(
+                                  lang.currencyPrice(
+                                    cart.manufactureCost.manufacture_cost_EUR,
+                                    cart.manufactureCost.manufacture_cost_SEK,
+                                    cart.manufactureCost.manufacture_cost_DKK
+                                  )
+                                ).toLocaleString(undefined, {
+                                  maximumFractionDigits: 2,
+                                })}
+                                <span> </span> {props.currency()}
+                              </Badge>{" "}
                             </span>
                           </p>
                         ) : null}
                       </Row>
                     </Col>
-                    <Row>
+                    <Col>
+                      <Badge className="mb-3">
+                        <span className="fs-4">Extra options</span>
+                      </Badge>
                       {cart.addedFilling.name && (
                         <Col lg={true}>
-                          <p>
-                            Filling Type: {cart.addedFilling.name}(
-                            {Number(
-                              lang.currencyPrice(
-                                cart.addedFilling.priceEUR,
-                                cart.addedFilling.priceSEK,
-                                cart.addedFilling.priceDKK
-                              )
-                            ).toLocaleString(undefined, {
-                              maximumFractionDigits: 2,
-                            })}
-                            {props.currency()})
+                          <p className="fs-5">
+                            Filling Type: {cart.addedFilling.name}
+                            <Badge className="float-end">
+                              {Number(
+                                lang.currencyPrice(
+                                  cart.addedFilling.priceEUR,
+                                  cart.addedFilling.priceSEK,
+                                  cart.addedFilling.priceDKK
+                                )
+                              ).toLocaleString(undefined, {
+                                maximumFractionDigits: 2,
+                              })}
+                              <span> </span> {props.currency()}
+                            </Badge>
                           </p>
                         </Col>
                       )}
 
                       {cart.addedShs.name && (
                         <Col>
-                          <p>
+                          <p className="fs-5">
                             {cart.addedShs.name}
-                            {Number(
-                              lang.currencyPrice(
-                                cart.addedShs.priceEUR,
-                                cart.addedShs.priceSEK,
-                                cart.addedShs.priceDKK
-                              )
-                            ).toLocaleString(undefined, {
-                              maximumFractionDigits: 2,
-                            })}
-                            {props.currency()}
+                            <Badge className="float-end">
+                              {Number(
+                                lang.currencyPrice(
+                                  cart.addedShs.priceEUR,
+                                  cart.addedShs.priceSEK,
+                                  cart.addedShs.priceDKK
+                                )
+                              ).toLocaleString(undefined, {
+                                maximumFractionDigits: 2,
+                              })}
+                              <span> </span> {props.currency()}
+                            </Badge>
                           </p>
                         </Col>
                       )}
                       {cart.addedTop.name && (
                         <Col>
-                          <p>
+                          <p className="fs-5">
                             {" "}
                             {cart.addedTop.name}{" "}
-                            {Number(
-                              lang.currencyPrice(
-                                cart.addedTop.priceEUR,
-                                cart.addedTop.priceSEK,
-                                cart.addedTop.priceDKK
-                              )
-                            ).toLocaleString(undefined, {
-                              maximumFractionDigits: 2,
-                            })}
-                            {props.currency()}
+                            <Badge className="float-end">
+                              {Number(
+                                lang.currencyPrice(
+                                  cart.addedTop.priceEUR,
+                                  cart.addedTop.priceSEK,
+                                  cart.addedTop.priceDKK
+                                )
+                              ).toLocaleString(undefined, {
+                                maximumFractionDigits: 2,
+                              })}
+                              <span> </span> {props.currency()}
+                            </Badge>
                           </p>
                         </Col>
                       )}
-                    </Row>
+                    </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <p className="float-end">
+                      <p className="fs-4 float-end">
                         Total:
-                        {Number(
-                          lang.currencyPrice(
-                            Number(cart.addedFireplace.priceEUR) +
-                              Number(cart.addedShs.priceEUR) +
-                              Number(cart.addedTop.priceEUR) +
-                              Number(cart.addedFilling.priceEUR) +
-                              Number(cart.manufactureCost.manufacture_cost_EUR),
-                            Number(cart.addedFireplace.priceSEK) +
-                              Number(cart.addedShs.priceSEK) +
-                              Number(cart.addedTop.priceSEK) +
-                              Number(cart.addedFilling.priceSEK) +
-                              Number(cart.manufactureCost.manufacture_cost_SEK),
-                            Number(cart.addedFireplace.priceDKK) +
-                              Number(cart.addedShs.priceDKK) +
-                              Number(cart.addedTop.priceDKK) +
-                              Number(cart.addedFilling.priceDKK) +
-                              Number(cart.manufactureCost.manufacture_cost_DKK)
-                          )
-                        ).toLocaleString(undefined, {
-                          maximumFractionDigits: 2,
-                        })}
-                        {props.currency()}
+                        <Badge>
+                          {Number(
+                            lang.currencyPrice(
+                              Number(cart.addedFireplace.priceEUR) +
+                                Number(cart.addedShs.priceEUR) +
+                                Number(cart.addedTop.priceEUR) +
+                                Number(cart.addedFilling.priceEUR) +
+                                Number(
+                                  cart.manufactureCost.manufacture_cost_EUR
+                                ),
+                              Number(cart.addedFireplace.priceSEK) +
+                                Number(cart.addedShs.priceSEK) +
+                                Number(cart.addedTop.priceSEK) +
+                                Number(cart.addedFilling.priceSEK) +
+                                Number(
+                                  cart.manufactureCost.manufacture_cost_SEK
+                                ),
+                              Number(cart.addedFireplace.priceDKK) +
+                                Number(cart.addedShs.priceDKK) +
+                                Number(cart.addedTop.priceDKK) +
+                                Number(cart.addedFilling.priceDKK) +
+                                Number(
+                                  cart.manufactureCost.manufacture_cost_DKK
+                                )
+                            )
+                          ).toLocaleString(undefined, {
+                            maximumFractionDigits: 2,
+                          })}
+                          <span> </span> {props.currency()}
+                        </Badge>
                       </p>
                     </Col>
                   </Row>
@@ -257,7 +326,7 @@ const CheckCartModal = (props) => {
                         ).toLocaleString(undefined, {
                           maximumFractionDigits: 2,
                         })}
-                        {props.currency()}
+                        <span> </span> {props.currency()}
                       </p>
                     </Col>
                   </Row>
@@ -299,7 +368,7 @@ const CheckCartModal = (props) => {
                           items.priceDKK
                         )
                       ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      {props.currency()}
+                      <span> </span> {props.currency()}
                     </p>
                   </Col>
                   <Col xs lg="3">
@@ -312,7 +381,7 @@ const CheckCartModal = (props) => {
                           items.priceDKK
                         ) * items.count
                       ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      {props.currency()}
+                      <span> </span> {props.currency()}
                     </p>
                   </Col>
                 </Row>
@@ -354,7 +423,7 @@ const CheckCartModal = (props) => {
                           cart.addedAccessories.glass.priceDKK
                         )
                       ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      {props.currency()}
+                      <span> </span> {props.currency()}
                     </p>
                   </Col>
                   <Col xs lg="3">
@@ -367,7 +436,7 @@ const CheckCartModal = (props) => {
                           cart.addedAccessories.glass.priceDKK
                         ) * cart.addedAccessories.glass.pcs
                       ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      {props.currency()}
+                      <span> </span> {props.currency()}
                     </p>
                   </Col>
                 </Row>
@@ -411,7 +480,7 @@ const CheckCartModal = (props) => {
                         cart.addedAccessories.glass.split_glass.priceDKK
                       )
                     ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                    {props.currency()}
+                    <span> </span> {props.currency()}
                   </p>
                 </Col>
                 <Col xs lg="3">
@@ -424,7 +493,7 @@ const CheckCartModal = (props) => {
                         cart.addedAccessories.glass.split_glass.priceDKK
                       ) * cart.addedAccessories.glass.split_glass.pcs
                     ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                    {props.currency()}
+                    <span> </span> {props.currency()}
                   </p>
                 </Col>
               </Row>
@@ -470,7 +539,7 @@ const CheckCartModal = (props) => {
                           cart.addedAccessories.glass.short.priceDKK
                         )
                       ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      {props.currency()}
+                      <span> </span> {props.currency()}
                     </p>
                   </Col>
                   <Col xs lg="3">
@@ -483,7 +552,7 @@ const CheckCartModal = (props) => {
                           cart.addedAccessories.glass.short.priceDKK
                         ) * cart.addedAccessories.glass.short.short_pcs
                       ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      {props.currency()}
+                      <span> </span> {props.currency()}
                     </p>
                   </Col>
                 </Row>
@@ -518,7 +587,7 @@ const CheckCartModal = (props) => {
                         cart.addedAccessories.holders.priceDKK
                       )
                     ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                    {props.currency()}
+                    <span> </span> {props.currency()}
                   </p>
                 </Col>
                 <Col xs lg="3">
@@ -531,7 +600,7 @@ const CheckCartModal = (props) => {
                         cart.addedAccessories.holders.priceDKK
                       ) * cart.addedAccessories.holders.pcs
                     ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                    {props.currency()}
+                    <span> </span> {props.currency()}
                   </p>
                 </Col>
               </Row>
@@ -552,7 +621,7 @@ const CheckCartModal = (props) => {
                 {Number(cart.cartPrice).toLocaleString(undefined, {
                   maximumFractionDigits: 2,
                 })}
-                {props.currency()}
+                <span> </span> {props.currency()}
               </h3>
               <p>All prices includes 25% VAT</p>
             </Col>

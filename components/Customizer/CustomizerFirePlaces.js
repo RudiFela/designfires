@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import { FaTruck } from "react-icons/fa";
@@ -7,6 +7,7 @@ import { IoWaterOutline } from "react-icons/io";
 import { ImFire } from "react-icons/im";
 import { MdWaterDrop } from "react-icons/md";
 import { BiTimer } from "react-icons/bi";
+import { motion, useAnimation } from "framer-motion";
 import {
   CgArrowsMergeAltV,
   CgArrowsShrinkH,
@@ -54,7 +55,22 @@ const CustomizerFirePlaces = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalPhoto, setModalPhoto] = useState();
   const [mountTitle, setMountTitle] = useState("Glass");
+  const [playAnimation, setPlayAnimation] = useState(true);
   //return <div className="photo-card">{props.children}</div>;
+  const animation = useAnimation();
+  async function sequence() {
+    await animation.start({ scale: 1.2 });
+
+    animation.start({ scale: 1 });
+  }
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      playAnimation && sequence();
+    }, 2000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [playAnimation]);
   const showModalHandler = (image) => {
     setModalPhoto(image);
     setShowModal(true);
@@ -111,7 +127,7 @@ const CustomizerFirePlaces = (props) => {
       <Row className="my-1">
         <Col>
           <span className="fw-bold">
-            Width:
+            Deep:
             <Badge className="fs-5 float-end " bg="secondary">
               <CgArrowsExpandRight className="me-1" />
               {technicalInfo.width}mm
@@ -281,14 +297,20 @@ const CustomizerFirePlaces = (props) => {
     </Dropdown.Item>
   ));
   const fireplacesDropDown = (
-    <DropdownButton
-      id="dropdown-fireplaces-button"
-      variant="primary"
-      className="fw-bold"
-      title={<p className="fw-bold m-0 fs-5">{selectedFireplace.name}</p>}
+    <motion.div
+      animate={animation}
+      whileHover={{ scale: 1 }}
+      onClick={() => setPlayAnimation(false)}
     >
-      {fireplacesDropDownItems}
-    </DropdownButton>
+      <DropdownButton
+        id="dropdown-fireplaces-button"
+        variant="primary"
+        className="fw-bold"
+        title={<p className="fw-bold m-0 fs-5">{selectedFireplace.name}</p>}
+      >
+        {fireplacesDropDownItems}
+      </DropdownButton>
+    </motion.div>
   );
   const fireplaceLengths = selectedFireplace.variant
     ? selectedFireplace.variant.map((item) => (
@@ -531,6 +553,7 @@ const CustomizerFirePlaces = (props) => {
     setPieces();
     setMountTitle(svgElement);
   };
+
   return (
     <>
       {" "}
@@ -589,7 +612,9 @@ const CustomizerFirePlaces = (props) => {
             <Row>
               <Col>
                 <h3 className="text-white fs-2">
-                  <Badge bg="danger">Select Fireplace</Badge>
+                  <motion.div animate={animation} onTap={sequence}>
+                    <Badge bg="danger">Select Fireplace</Badge>
+                  </motion.div>
                 </h3>
 
                 <ButtonGroup className="mt-2">
@@ -789,7 +814,16 @@ const CustomizerFirePlaces = (props) => {
               </Col>
             </Row>
           </Col>
-        </Row>
+        </Row>{" "}
+        <div className="d-flex justify-content-end p-1">
+          <Button
+            className="bolder float-end"
+            variant="info"
+            onClick={props.onShowCart}
+          >
+            Check Your Choises
+          </Button>{" "}
+        </div>
       </div>
     </>
   );

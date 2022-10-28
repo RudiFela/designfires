@@ -15,6 +15,12 @@ import {
 import { LanguageContext } from "../context/language-context";
 import CustomizerWrapper from "./CustomizerWrapper";
 import PopoverComponent from "../UI/Popover";
+import {
+  CgArrowsExpandRight,
+  CgArrowsShrinkH,
+  CgArrowsShrinkV,
+  CgArrowsMergeAltV,
+} from "react-icons/cg";
 const CustomizerCasings = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalPhoto, setModalPhoto] = useState();
@@ -37,10 +43,26 @@ const CustomizerCasings = (props) => {
       <Popover.Body>
         <PopoverComponent
           info={[
-            { name: "Length", value: pickedCaseItem.length },
-            { name: "Width", value: "350" },
-            { name: "Heigth", value: "500" },
-            { name: "Thickness", value: "5" },
+            {
+              name: "Length",
+              value: pickedCaseItem.length,
+              icon: <CgArrowsShrinkH className="me-1" />,
+            },
+            {
+              name: "Deep",
+              value: "350",
+              icon: <CgArrowsExpandRight className="me-1" />,
+            },
+            {
+              name: "Heigth",
+              value: "500",
+              icon: <CgArrowsShrinkV className="me-1" />,
+            },
+            {
+              name: "Thickness",
+              value: "5",
+              icon: <CgArrowsMergeAltV className="me-1" />,
+            },
           ]}
         >
           <Row>

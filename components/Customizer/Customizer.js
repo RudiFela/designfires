@@ -7,7 +7,7 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import FurnitureBox from "./FurnitureBox";
 import { LanguageContext } from "../context/language-context";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -141,6 +141,7 @@ const initialFurnitureBoxState = {
   image: "https://designfires.pl/wp-content/uploads/2022/10/FurnitureBOX.png",
   length: "0",
   enable: false,
+  pcs: 0,
 };
 const Customizer = (props) => {
   const lang = useContext(LanguageContext);
@@ -181,7 +182,34 @@ const Customizer = (props) => {
     shortGlassPcs,
     longGlassPcs,
   ]);
+  useEffect(() => {
+    if (customColorPick && !colorTouched) {
+      const customPriceEUR = Number((furnitureBox.priceEUR / 100) * 110);
+      const customPriceDKK = Number((furnitureBox.priceDKK / 100) * 110);
+      const customPriceSEK = Number((furnitureBox.priceSEK / 100) * 110);
+      setFurnitureBox((prevBox) => ({
+        ...prevBox,
+        priceEUR: customPriceEUR,
+        priceSEK: customPriceSEK,
+        priceDKK: customPriceDKK,
+      }));
 
+      setColorTouched(true);
+    }
+    if (!customColorPick && colorTouched) {
+      const customPriceEUR = Number((furnitureBox.priceEUR / 110) * 100);
+      const customPriceDKK = Number((furnitureBox.priceDKK / 110) * 100);
+      const customPriceSEK = Number((furnitureBox.priceSEK / 110) * 100);
+
+      setFurnitureBox((prevBox) => ({
+        ...prevBox,
+        priceEUR: customPriceEUR,
+        priceSEK: customPriceSEK,
+        priceDKK: customPriceDKK,
+      }));
+      setColorTouched(false);
+    }
+  }, [customColorPick]);
   const countPriceOfArrayItems = (products) => {
     const countPrice = products.map((item) => {
       return {
@@ -341,7 +369,7 @@ const Customizer = (props) => {
     arr = undefined;
   };
   const onShowCart = () => {
-    console.log(cart);
+    //console.log(cart);
     //console.log(fireplaceItem);
     setShowCart(true);
   };
@@ -635,6 +663,8 @@ const Customizer = (props) => {
           priceDKK: item.DKK_price,
           photo: image,
           info: `${item.dimensions.width}mm/${item.dimensions.height}mm`,
+          height: `${item.dimensions.height}mm`,
+          width: `${item.dimensions.width}mm`,
           pcs: 1,
         },
         addedAccessories: {
@@ -704,6 +734,8 @@ const Customizer = (props) => {
 
             photo: fireplaceItem.photo,
             info: `${item.dimensions.width}mm/${item.dimensions.height}mm`,
+            height: `${item.dimensions.height}mm`,
+            width: `${item.dimensions.width}mm`,
             pcs: 1,
           },
           addedAccessories: {
@@ -790,6 +822,8 @@ const Customizer = (props) => {
               priceDKK: item.DKK_price,
               photo: image,
               info: `${item.dimensions.width}mm/${item.dimensions.height}mm`,
+              height: `${item.dimensions.height}mm`,
+              width: `${item.dimensions.width}mm`,
               pcs: 1,
             },
           }));
@@ -826,6 +860,8 @@ const Customizer = (props) => {
             priceDKK: item.DKK_price,
             photo: image,
             info: `${item.dimensions.width}mm/${item.dimensions.height}mm`,
+            height: `${item.dimensions.height}mm`,
+            width: `${item.dimensions.width}mm`,
             pcs: 1,
           },
         }));
@@ -982,8 +1018,24 @@ const Customizer = (props) => {
     }));
     setGlassColor(color);
   };
-
+  const onBoxColorChange = (color) => {
+    if (color === "#FFFFFF") {
+      setCustomColorPick(false);
+    } else {
+      setCustomColorPick(true);
+    }
+    if (furnitureBox.pcs > 0) {
+      onAddFurnitureBox();
+    }
+    setBlockPickerColor(color);
+  };
+  const onFurnitureReset = () => {
+    setFurnitureBox(initialFurnitureBoxState);
+    setCustomColorPick(false);
+    setBlockPickerColor("#FFFFFF");
+  };
   const onAddFurnitureBox = () => {
+    glassPiecesChange(3, "2", "2");
     setCasingItem(initialCasingState);
     setCart((prevCart) => ({
       ...prevCart,
@@ -1009,48 +1061,7 @@ const Customizer = (props) => {
     }));
     setFurnitureBox((prevState) => ({ ...prevState, pcs: 1 }));
   };
-  useEffect(() => {
-    if (customColorPick && !colorTouched) {
-      const customPriceEUR = Number((furnitureBox.priceEUR / 100) * 110);
-      const customPriceDKK = Number((furnitureBox.priceDKK / 100) * 110);
-      const customPriceSEK = Number((furnitureBox.priceSEK / 100) * 110);
-      setFurnitureBox((prevBox) => ({
-        ...prevBox,
-        priceEUR: customPriceEUR,
-        priceSEK: customPriceSEK,
-        priceDKK: customPriceDKK,
-      }));
 
-      setColorTouched(true);
-    }
-    if (!customColorPick && colorTouched) {
-      const customPriceEUR = Number((furnitureBox.priceEUR / 110) * 100);
-      const customPriceDKK = Number((furnitureBox.priceDKK / 110) * 100);
-      const customPriceSEK = Number((furnitureBox.priceSEK / 110) * 100);
-
-      setFurnitureBox((prevBox) => ({
-        ...prevBox,
-        priceEUR: customPriceEUR,
-        priceSEK: customPriceSEK,
-        priceDKK: customPriceDKK,
-      }));
-      setColorTouched(false);
-    }
-  }, [customColorPick]);
-
-  const onBoxColorChange = (color) => {
-    if (color.hex === "#ffffff") {
-      setCustomColorPick(false);
-    } else {
-      setCustomColorPick(true);
-    }
-    setBlockPickerColor(color.hex);
-  };
-  const onFurnitureReset = () => {
-    setFurnitureBox(initialFurnitureBoxState);
-    setCustomColorPick(false);
-    setBlockPickerColor("#ffffff");
-  };
   return (
     <div className="bg-primary pb-2">
       <div className="w-100 bg-danger p-3 fst-italic">
@@ -1073,49 +1084,56 @@ const Customizer = (props) => {
             onFillingChange={onFillingChange}
             changeGlassColor={changeGlassColor}
             glassPiecesChange={glassPiecesChange}
+            onShowCart={onShowCart}
           />
         </Container>
       </div>{" "}
       <Container style={{ position: "relative", zindex: 1250 }}>
         {" "}
-        <div className="customizer pt-4 pb-2">
+        <div className="customize pt-4 pb-2">
           {" "}
-          <div
-            className={
-              furnitureBox.pcs > 0 || !furnitureBox.enable
-                ? "disable-element"
-                : ""
-            }
-            style={{ position: "relative", zindex: 50 }}
-          >
-            <CustomizerCasings
-              className="ml-5 "
-              casings={casings}
-              onSelect={showCasingPrice}
-              pickedCaseItem={casingItem}
-              enable={casingItem.enable}
-              changeGlassColor={changeGlassColor}
-              glassPiecesChange={glassPiecesChange}
-            />
-          </div>{" "}
-          <div
-            className={
-              !furnitureBox.enable || casingItem.pcs > 0
-                ? "disable-element "
-                : ""
-            }
-            style={{}}
-          >
-            <FurnitureBox
-              color={blockPickerColor}
-              onConfirm={onAddFurnitureBox}
-              disabled={!casingItem.enable}
-              item={furnitureBox}
-              onColorPick={onBoxColorChange}
-              length={fireplaceItem.length}
-              reset={onFurnitureReset}
-            ></FurnitureBox>
-          </div>
+          <Row xs="1" md="1" lg="2">
+            <Col>
+              <div
+                className={
+                  furnitureBox.pcs > 0 || !furnitureBox.enable
+                    ? "disable-element"
+                    : ""
+                }
+                style={{ position: "relative", zindex: 50 }}
+              >
+                <CustomizerCasings
+                  className="ml-5 "
+                  casings={casings}
+                  onSelect={showCasingPrice}
+                  pickedCaseItem={casingItem}
+                  enable={casingItem.enable}
+                  changeGlassColor={changeGlassColor}
+                  glassPiecesChange={glassPiecesChange}
+                />
+              </div>{" "}
+            </Col>
+            <Col>
+              {" "}
+              <div
+                className={
+                  !furnitureBox.enable || casingItem.pcs > 0
+                    ? "disable-element "
+                    : ""
+                }
+              >
+                <FurnitureBox
+                  color={blockPickerColor}
+                  onConfirm={onAddFurnitureBox}
+                  disabled={!casingItem.enable}
+                  item={furnitureBox}
+                  onColorPick={onBoxColorChange}
+                  length={fireplaceItem.length}
+                  reset={onFurnitureReset}
+                ></FurnitureBox>
+              </div>
+            </Col>
+          </Row>
           <CheckCartModal
             cart={cart}
             showCart={showCart}
@@ -1127,7 +1145,7 @@ const Customizer = (props) => {
         <div className="mt-3 ">
           <div style={{ width: "100%" }}>
             <div style={{ width: "100%" }} className="card-deco deco-card test">
-              <h3 className="text-white text-center mb-1">
+              <h3 className="text-white text-center mb-3">
                 <Badge bg="danger">Select Accessories</Badge>
               </h3>
               <div className="tab-content">

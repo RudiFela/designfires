@@ -63,7 +63,7 @@ const Mystic = (props) => {
             image10="https://designfires.pl/wp-content/uploads/2022/07/Mystic10.png"
           />
         </Col>
-        <Col>
+        <Col className="p-0 m-0">
           <AboutSection
             title={title}
             listItem1={listItems[0]}

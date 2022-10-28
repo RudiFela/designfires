@@ -11,7 +11,10 @@ const PopoverComponent = (props) => {
                 <Col>
                   <span className="fw-bold">
                     {item.name}
+
                     <Badge className="fs-5 float-end" bg="secondary">
+                      {item.icon}
+                      <span> </span>
                       {item.value} mm
                     </Badge>
                   </span>

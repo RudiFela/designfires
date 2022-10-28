@@ -7,10 +7,12 @@ const CustomizerCard = (props) => {
       <h3 className="text-white text-center mb-3">
         <Badge bg="danger">{props.title}</Badge>
       </h3>
-      <div className="">
-        <Ratio aspectRatio="4x3">{props.image}</Ratio>
-      </div>
-      <Card.Body className="pb-0">{props.children}</Card.Body>{" "}
+      <Ratio aspectRatio="4x3" className="mb-2">
+        {props.image}
+      </Ratio>
+      <Card.Body style={{ position: "relative" }} className="pb-0">
+        {props.children}
+      </Card.Body>{" "}
     </Card>
   );
 };

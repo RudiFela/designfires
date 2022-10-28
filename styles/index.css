@@ -60147,6 +60147,7 @@ textarea.form-control-lg {
 
 .tab-content {
   overflow-y: scroll;
+  overflow-x: hidden;
   background-color: #6a6868 !important;
 }
 
@@ -60357,7 +60358,7 @@ textarea.form-control-lg {
 }
 
 .customizer-card {
-  height: 33rem;
+  height: 35rem;
 }
 
 /* import bootstrap to set changes */
@@ -70223,6 +70224,8 @@ textarea.form-control-lg {
 
 .main {
   background: rgb(0, 0, 0);
+  position: relative;
+  overflow-x: hidden;
 }
 
 html {
