@@ -66,17 +66,15 @@ const FurnitureBox = (props) => {
         image={
           <div className="product">
             <Image
-              className="card-image-bottom"
+              className="card-image-bottom img-1"
               alt="FurnitureBox"
               layout="fill"
-              className="img-1"
               src="https://designfires.pl/wp-content/uploads/2022/10/FurnitureBox1.png"
             />
             <Image
-              className="card-image-bottom"
+              className="card-image-bottom img-2 "
               alt="FurnitureBox"
               layout="fill"
-              className="img-2"
               src="https://designfires.pl/wp-content/uploads/2022/10/FurnitureBox2.png"
             />
             <div
