@@ -100,6 +100,7 @@ export default function Home(props) {
             fireplaces={props.fireplaces}
             boxes={props.boxes}
             cart={cart}
+            fuel={props.fuel}
           />
           <Footer cartHandler={cart} />
         </div>
@@ -123,6 +124,7 @@ export async function getStaticProps(context) {
   const fireplacesURL =
     "https://designfires.pl/wp-json/wc/v3/products?category=26";
   const boxesUrl = "https://designfires.pl/wp-json/wc/v3/products?category=30";
+  const fuelUrl = "https://designfires.pl/wp-json/wc/v3/products?category=29";
   // ck ck_b143b31c7842e4a628279fe7b097980c311f08d5
   // cs cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e
   const casingFetch = await axios.get(casingsURL, crud);
@@ -130,14 +132,16 @@ export async function getStaticProps(context) {
   const accessoriesFetch = await axios.get(accessoriesURL, crud);
   const decorations = await axios.get(decoURL, crud);
   const boxesFetch = await axios.get(boxesUrl, crud);
+  const fuelFetch = await axios.get(fuelUrl, crud);
 
   // console.log(fireplacess);
-  const [deco, cases, access, fire, boxes] = await Promise.all([
+  const [deco, cases, access, fire, boxes, fuel] = await Promise.all([
     decorations.data,
     casingFetch.data,
     accessoriesFetch.data,
     fireplaceFetch.data,
     boxesFetch.data,
+    fuelFetch.data,
   ]);
   //let d;
   //addVariants(cases, crud).then((res) => console.log(res));
@@ -163,6 +167,7 @@ export async function getStaticProps(context) {
       accessories: access,
       fireplaces: fire,
       boxes,
+      fuel,
       // language: LanguageChecker(),
       //test: accessories,
     },

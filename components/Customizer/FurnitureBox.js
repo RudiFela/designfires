@@ -3,14 +3,8 @@ import CustomizerCard from "./CustomizerCard";
 import ColorPicker from "../UI/ColorPicker";
 import Image from "next/image";
 import { LanguageContext } from "../context/language-context";
-import { SwatchesPicker } from "react-color";
-import {
-  Stack,
-  Button,
-  OverlayTrigger,
-  Popover,
-  Container,
-} from "react-bootstrap";
+
+import { Stack, Button, OverlayTrigger, Popover } from "react-bootstrap";
 import { motion, AnimatePresence } from "framer-motion";
 import colorPalete from "../UI/colors";
 import PopoverComponent from "../UI/Popover";
@@ -54,8 +48,8 @@ const FurnitureBox = (props) => {
     setShowColorPalete(false);
   };
 
-  const onChangeColor = (color) => {
-    props.onColorPick(color);
+  const onChangeColor = (color, ral) => {
+    props.onColorPick(color, ral);
   };
   return (
     <div className="casings-customizer">

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
 import {
   Row,
@@ -21,9 +21,7 @@ const BioFuel = (props) => {
   const [pcsFuel, setPcsFuel] = useState(0);
   const lang = useContext(LanguageContext);
 
-  const FuelProducts = props.decorations.filter(
-    (product) => product.categories.length > 1
-  );
+  const FuelProducts = props.fuel;
   const findCurrencyPrice = (itemArray, keyToSearch) => {
     let findedPriceObj = itemArray.find((item) => item.key === keyToSearch);
 

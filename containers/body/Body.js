@@ -59,7 +59,7 @@ const Body = (props) => {
       />
       <MotionSlider />
       <BioFuel
-        decorations={props.decorations}
+        fuel={props.fuel}
         cart={props.cart}
         cartHandler={props.cartHandler}
       />

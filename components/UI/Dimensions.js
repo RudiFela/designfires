@@ -7,7 +7,7 @@ import {
 } from "react-icons/cg";
 const Dimensions = (props) => {
   return (
-    <Row className="fs-4">
+    <Row className="fs-5">
       <span>
         Name: <Badge className="float-end text-wrap">{props.name}</Badge>
       </span>
@@ -26,14 +26,16 @@ const Dimensions = (props) => {
           {props.height}{" "}
         </Badge>
       </span>
-      <span>
-        Deep:{" "}
-        <Badge className="float-end">
-          <CgArrowsExpandRight />
-          <span> </span>
-          {props.width}{" "}
-        </Badge>
-      </span>
+      {props.width ? (
+        <span>
+          Deep:{" "}
+          <Badge className="float-end">
+            <CgArrowsExpandRight />
+            <span> </span>
+            {props.width}{" "}
+          </Badge>
+        </span>
+      ) : null}
       <span>
         Thickness:
         <Badge className="float-end">

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Image from "next/image";
 import HoverVideoPlayer from "react-hover-video-player";
 import { motion } from "framer-motion";
@@ -16,9 +16,19 @@ import {
 } from "react-bootstrap";
 const CustomizerItemList = (props) => {
   const lang = useContext(LanguageContext);
+
   const list = props.ItemToList;
   //const { FireplaceLength } = props;
+  const countDecoPieces = (id) => {
+    const finded = props.cartDeco.find((deco) => deco.id === id);
 
+    if (finded) {
+      return finded.count;
+    } else {
+      return 0;
+    }
+    //finded?return finded.count:null;
+  };
   const switchCurrency = (item) => {
     switch (lang.language) {
       case "swedish":
@@ -104,7 +114,7 @@ const CustomizerItemList = (props) => {
                 >
                   ADD
                 </Button>{" "}
-                <span className="m-2 fw-bold">x0</span>
+                <span className="m-2 fw-bold">x{countDecoPieces(item.id)}</span>
               </Card.Body>
             </Card>
           </motion.div>

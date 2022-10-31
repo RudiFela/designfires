@@ -1,4 +1,4 @@
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Badge } from "react-bootstrap";
 import { motion, AnimatePresence } from "framer-motion";
 const ColorPicker = (props) => {
   return (
@@ -18,18 +18,20 @@ const ColorPicker = (props) => {
               <div className="d-flex justify-content-center">
                 <motion.div whileHover={{ scale: 1.1 }}>
                   <div
-                    onClick={() => props.onPick(item.hex)}
+                    onClick={() => props.onPick(item.hex, item.ral)}
                     className="text-center "
                     style={{
                       width: "70px",
-                      height: "50px",
+                      height: "60px",
                       backgroundColor: `${item.hex}`,
                       borderRadius: "5px",
                       border: "solid 1px",
                       zIndex: "1000",
                     }}
                   >
-                    <span className=" fw-bolder fs-6">{item.ral}</span>
+                    <Badge bg="danger" className="text-wrap">
+                      {item.ral}
+                    </Badge>
                   </div>
                 </motion.div>
               </div>

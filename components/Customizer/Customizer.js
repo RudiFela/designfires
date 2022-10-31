@@ -152,7 +152,10 @@ const Customizer = (props) => {
   const [glassColor, setGlassColor] = useState("Clear");
   const [showCart, setShowCart] = useState(false);
   const [split, setSplit] = useState(false);
-  const [blockPickerColor, setBlockPickerColor] = useState("#FFFFFF");
+  const [blockPickerColor, setBlockPickerColor] = useState({
+    color: "#FFFFFF",
+    ral: "lol",
+  });
   const [colorTouched, setColorTouched] = useState(false);
   const [customColorPick, setCustomColorPick] = useState(false);
   const [furnitureBox, setFurnitureBox] = useState(initialFurnitureBoxState);
@@ -503,7 +506,7 @@ const Customizer = (props) => {
           priceEUR: fireplaceBox.price,
           priceSEK: fireplaceBox.SEK_price,
           priceDKK: fireplaceBox.DKK_price,
-          color: blockPickerColor,
+          color: blockPickerColor.color,
           image: props.boxes[0].images[0].src,
           length: pickedLength,
 
@@ -519,7 +522,7 @@ const Customizer = (props) => {
           priceEUR: fireplaceBox.price,
           priceSEK: fireplaceBox.SEK_price,
           priceDKK: fireplaceBox.DKK_price,
-          color: blockPickerColor,
+          color: blockPickerColor.color,
           image: props.boxes[1].images[0].src,
           length: pickedLength,
 
@@ -1018,7 +1021,7 @@ const Customizer = (props) => {
     }));
     setGlassColor(color);
   };
-  const onBoxColorChange = (color) => {
+  const onBoxColorChange = (color, colorCode) => {
     if (color === "#FFFFFF") {
       setCustomColorPick(false);
     } else {
@@ -1027,7 +1030,8 @@ const Customizer = (props) => {
     if (furnitureBox.pcs > 0) {
       onAddFurnitureBox();
     }
-    setBlockPickerColor(color);
+    setBlockPickerColor({ color, ral: colorCode });
+    console.log(colorCode);
   };
   const onFurnitureReset = () => {
     setFurnitureBox(initialFurnitureBoxState);
@@ -1055,7 +1059,8 @@ const Customizer = (props) => {
         priceDKK: furnitureBox.priceDKK,
         photo: furnitureBox.image,
         fullName: furnitureBox.name,
-        color: blockPickerColor,
+        color: blockPickerColor.color,
+        colorCode: blockPickerColor.ral,
         pcs: 1,
       },
     }));
@@ -1123,7 +1128,7 @@ const Customizer = (props) => {
                 }
               >
                 <FurnitureBox
-                  color={blockPickerColor}
+                  color={blockPickerColor.color}
                   onConfirm={onAddFurnitureBox}
                   disabled={!casingItem.enable}
                   item={furnitureBox}
@@ -1152,6 +1157,7 @@ const Customizer = (props) => {
                 <CustomizerItemList
                   ItemToList={decorations}
                   onAdd={addDecorationsToCart}
+                  cartDeco={cart.addedDecorations}
                 />
               </div>
               <h5 className="text-white m-0 mx-auto pt-1 float-end">

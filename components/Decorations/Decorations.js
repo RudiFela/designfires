@@ -64,7 +64,7 @@ const Decorations = (props) => {
         </h1>
       </div>
       <Container className="text-white">
-        <Row xs={2} md={2} lg={3} xxl={4}>
+        <Row xs={2} md={2} lg={2} xxl={3}>
           {test}
         </Row>
       </Container>

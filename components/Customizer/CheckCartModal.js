@@ -21,6 +21,7 @@ import {
 import Image from "next/image";
 import ContactForm from "../../containers/footer/ContactForm";
 import dynamic from "next/dynamic";
+import ListItem from "../CheckCartModal/ListItem";
 const GeneratePDF = dynamic(() => import("./../GeneratePDF/GeneratePdf"), {
   ssr: false,
 });
@@ -264,20 +265,22 @@ const CheckCartModal = (props) => {
                   />{" "}
                   {cart.addedCasing.name === "Furniture Box" ? (
                     <Row>
-                      <p>
-                        <span>
-                          Color:
+                      <span className="fw-bold fs-4">
+                        Color:{" "}
+                        <span className="">{cart.addedCasing.colorCode}</span>
+                        <span className="float-end">
                           <div
                             style={{
                               width: "50px",
-                              height: "50px",
+                              height: "25px",
                               backgroundColor: cart.addedCasing.color,
                               border: "solid 1px",
+                              borderRadius: "5px",
                             }}
-                            className="text-black"
+                            className="text-black fw-6"
                           ></div>
                         </span>
-                      </p>
+                      </span>
                     </Row>
                   ) : null}
                   <Col>
@@ -306,274 +309,141 @@ const CheckCartModal = (props) => {
 
             {cart.addedDecorations.map((items) => {
               return (
-                <Row
+                <ListItem
                   key={items.id}
-                  className="justify-content-between align-items-center border p-2"
-                >
-                  <Col xs="auto">
-                    <Figure className="m-0">
-                      <img
-                        className="figure-round figure-img img-fluid"
-                        width={100}
-                        height={100}
-                        src={items.image}
-                        alt="Decoration Image"
-                      />
-                    </Figure>
-                  </Col>
-                  <Col xs lg="3">
-                    <p className="m-0">{items.name}</p>
-                  </Col>
-
-                  <Col xs="auto">
-                    <p className="m-0">x{items.count}</p>
-                  </Col>
-                  <Col xs lg="2">
-                    <p className="m-0">
-                      Price:
-                      {Number(
-                        lang.currencyPrice(
-                          items.priceEUR,
-                          items.priceSEK,
-                          items.priceDKK
-                        )
-                      ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      <span> </span> {props.currency()}
-                    </p>
-                  </Col>
-                  <Col xs lg="3">
-                    <p className=" m-0 ps-3 float-end">
-                      Total:
-                      {Number(
-                        lang.currencyPrice(
-                          items.priceEUR,
-                          items.priceSEK,
-                          items.priceDKK
-                        ) * items.count
-                      ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      <span> </span> {props.currency()}
-                    </p>
-                  </Col>
-                </Row>
+                  name={items.name}
+                  currencySymbol={props.currency()}
+                  pcs={items.count}
+                  price={Number(
+                    lang.currencyPrice(
+                      items.priceEUR,
+                      items.priceSEK,
+                      items.priceDKK
+                    )
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  totalPrice={Number(
+                    lang.currencyPrice(
+                      items.priceEUR,
+                      items.priceSEK,
+                      items.priceDKK
+                    ) * items.count
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  image={items.image}
+                ></ListItem>
               );
             })}
             {Number(cart.addedAccessories.glass.pcs) > 0 &&
               cart.addedAccessories.glass.image !== "" && (
-                <Row className="justify-content-between align-items-center border p-2">
-                  <Col xs="auto">
-                    <Figure className="m-0">
-                      <img
-                        className="figure-round figure-img img-fluid"
-                        width={100}
-                        height={100}
-                        src={cart.addedAccessories.glass.image}
-                        alt="Glass picture"
-                      />
-                    </Figure>
-                  </Col>
-                  <Col xs lg="3">
-                    <p className="m-0">
-                      Glass({cart.addedAccessories.glass.color}):
-                    </p>
-                    <p>
-                      {cart.addedAccessories.glass.length.option}mm/200mm/6mm
-                    </p>
-                  </Col>
-
-                  <Col xs="auto">
-                    <p className="m-0">x{cart.addedAccessories.glass.pcs}</p>
-                  </Col>
-                  <Col xs lg="2">
-                    <p className="m-0">
-                      Price:
-                      {Number(
-                        lang.currencyPrice(
-                          cart.addedAccessories.glass.priceEUR,
-                          cart.addedAccessories.glass.priceSEK,
-                          cart.addedAccessories.glass.priceDKK
-                        )
-                      ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      <span> </span> {props.currency()}
-                    </p>
-                  </Col>
-                  <Col xs lg="3">
-                    <p className="m-0 ps-2 float-end">
-                      Total:
-                      {Number(
-                        lang.currencyPrice(
-                          cart.addedAccessories.glass.priceEUR,
-                          cart.addedAccessories.glass.priceSEK,
-                          cart.addedAccessories.glass.priceDKK
-                        ) * cart.addedAccessories.glass.pcs
-                      ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      <span> </span> {props.currency()}
-                    </p>
-                  </Col>
-                </Row>
+                <ListItem
+                  dimensions={true}
+                  currencySymbol={props.currency()}
+                  pcs={cart.addedAccessories.glass.pcs}
+                  price={Number(
+                    lang.currencyPrice(
+                      cart.addedAccessories.glass.priceEUR,
+                      cart.addedAccessories.glass.priceSEK,
+                      cart.addedAccessories.glass.priceDKK
+                    )
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  totalPrice={Number(
+                    lang.currencyPrice(
+                      cart.addedAccessories.glass.priceEUR,
+                      cart.addedAccessories.glass.priceSEK,
+                      cart.addedAccessories.glass.priceDKK
+                    ) * cart.addedAccessories.glass.pcs
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  image={cart.addedAccessories.glass.image}
+                >
+                  <Dimensions
+                    name={`Glass ${cart.addedAccessories.glass.color}`}
+                    length={cart.addedAccessories.glass.length.option}
+                    height="200"
+                    thickness="6mm"
+                  />
+                </ListItem>
               )}
 
             {Number(cart.addedAccessories.glass.split_glass.pcs) > 0 && (
-              <Row className="justify-content-between align-items-center border p-2">
-                <Col xs="auto">
-                  <Figure className="m-0">
-                    <img
-                      className="figure-round figure-img img-fluid"
-                      width={100}
-                      height={100}
-                      src={cart.addedAccessories.glass.image}
-                      alt="Glass picture"
-                    />
-                  </Figure>
-                </Col>
-                <Col xs lg="3">
-                  <p className="m-0">
-                    Glass({cart.addedAccessories.glass.color}):
-                  </p>
-                  <p>
-                    {cart.addedAccessories.glass.split_glass.length.option}
-                    mm/200mm/6mm
-                  </p>
-                </Col>
-
-                <Col xs="auto">
-                  <p className="m-0">
-                    x{cart.addedAccessories.glass.split_glass.pcs}
-                  </p>
-                </Col>
-                <Col xs lg="2">
-                  <p className="m-0">
-                    Price:
-                    {Number(
-                      lang.currencyPrice(
-                        cart.addedAccessories.glass.split_glass.priceEUR,
-                        cart.addedAccessories.glass.split_glass.priceSEK,
-                        cart.addedAccessories.glass.split_glass.priceDKK
-                      )
-                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                    <span> </span> {props.currency()}
-                  </p>
-                </Col>
-                <Col xs lg="3">
-                  <p className="m-0 ps-2 float-end">
-                    Total:
-                    {Number(
-                      lang.currencyPrice(
-                        cart.addedAccessories.glass.split_glass.priceEUR,
-                        cart.addedAccessories.glass.split_glass.priceSEK,
-                        cart.addedAccessories.glass.split_glass.priceDKK
-                      ) * cart.addedAccessories.glass.split_glass.pcs
-                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                    <span> </span> {props.currency()}
-                  </p>
-                </Col>
-              </Row>
+              <ListItem
+                dimensions={true}
+                currencySymbol={props.currency()}
+                pcs={cart.addedAccessories.glass.split_glass.pcs}
+                price={Number(
+                  lang.currencyPrice(
+                    cart.addedAccessories.glass.split_glass.priceEUR,
+                    cart.addedAccessories.glass.split_glass.priceSEK,
+                    cart.addedAccessories.glass.split_glass.priceDKK
+                  )
+                ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                totalPrice={Number(
+                  lang.currencyPrice(
+                    cart.addedAccessories.glass.split_glass.priceEUR,
+                    cart.addedAccessories.glass.split_glass.priceSEK,
+                    cart.addedAccessories.glass.split_glass.priceDKK
+                  ) * cart.addedAccessories.glass.split_glass.pcs
+                ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                image={cart.addedAccessories.glass.image}
+              >
+                <Dimensions
+                  name={`Glass ${cart.addedAccessories.glass.color}`}
+                  length={cart.addedAccessories.glass.split_glass.length.option}
+                  height="200"
+                  thickness="6mm"
+                />
+              </ListItem>
             )}
 
             {Number(cart.addedAccessories.glass.short.short_pcs) > 0 &&
               cart.addedAccessories.glass.image !== "" && (
-                <Row className="justify-content-between align-items-center border p-2">
-                  <Col xs="auto">
-                    <Figure className="m-0">
-                      <img
-                        className="figure-round figure-img img-fluid"
-                        width={100}
-                        height={100}
-                        src={cart.addedAccessories.glass.image}
-                        alt="Glass picture"
-                      />
-                    </Figure>
-                  </Col>
-                  <Col xs lg="3">
-                    <p className="m-0">
-                      Glass({cart.addedAccessories.glass.color}):
-                    </p>
-                    <p>
-                      {" "}
-                      {cart.addedAccessories.glass.short.short_length}
-                      mm/200mm/6mm
-                    </p>
-                  </Col>
-
-                  <Col xs="auto">
-                    <p className="m-0">
-                      x{cart.addedAccessories.glass.short.short_pcs}
-                    </p>
-                  </Col>
-                  <Col xs lg="2">
-                    <p className="m-0">
-                      Price:
-                      {Number(
-                        lang.currencyPrice(
-                          cart.addedAccessories.glass.short.priceEUR,
-                          cart.addedAccessories.glass.short.priceSEK,
-                          cart.addedAccessories.glass.short.priceDKK
-                        )
-                      ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      <span> </span> {props.currency()}
-                    </p>
-                  </Col>
-                  <Col xs lg="3">
-                    <p className="m-0 ps-2 float-end">
-                      Total:
-                      {Number(
-                        lang.currencyPrice(
-                          cart.addedAccessories.glass.short.priceEUR,
-                          cart.addedAccessories.glass.short.priceSEK,
-                          cart.addedAccessories.glass.short.priceDKK
-                        ) * cart.addedAccessories.glass.short.short_pcs
-                      ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      <span> </span> {props.currency()}
-                    </p>
-                  </Col>
-                </Row>
+                <ListItem
+                  image={cart.addedAccessories.glass.image}
+                  price={Number(
+                    lang.currencyPrice(
+                      cart.addedAccessories.glass.short.priceEUR,
+                      cart.addedAccessories.glass.short.priceSEK,
+                      cart.addedAccessories.glass.short.priceDKK
+                    )
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  totalPrice={Number(
+                    lang.currencyPrice(
+                      cart.addedAccessories.glass.short.priceEUR,
+                      cart.addedAccessories.glass.short.priceSEK,
+                      cart.addedAccessories.glass.short.priceDKK
+                    ) * cart.addedAccessories.glass.short.short_pcs
+                  ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  dimensions={true}
+                  pcs={cart.addedAccessories.glass.short.short_pcs}
+                  currencySymbol={props.currency()}
+                >
+                  <Dimensions
+                    name={`Glass ${cart.addedAccessories.glass.color}`}
+                    length={cart.addedAccessories.glass.short.short_length}
+                    height="500"
+                    thickness="6mm"
+                  />
+                </ListItem>
               )}
             {Number(cart.addedAccessories.holders.pcs) > 0 && (
-              <Row className="justify-content-between align-items-center border p-2">
-                <Col xs="auto">
-                  <Figure className="m-0">
-                    <img
-                      className="figure-round figure-img img-fluid"
-                      width={100}
-                      height={100}
-                      src={cart.addedAccessories.holders.image}
-                      alt="Fireplace decoration"
-                    />
-                  </Figure>
-                </Col>
-                <Col xs lg="3">
-                  <p className="m-0">Glass Holders x2 pcs </p>
-                </Col>
-
-                <Col xs="auto">
-                  <p className="m-0">x{cart.addedAccessories.holders.pcs}</p>
-                </Col>
-                <Col xs lg="2">
-                  <p className="m-0">
-                    Price:
-                    {Number(
-                      lang.currencyPrice(
-                        cart.addedAccessories.holders.priceEUR,
-                        cart.addedAccessories.holders.priceSEK,
-                        cart.addedAccessories.holders.priceDKK
-                      )
-                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                    <span> </span> {props.currency()}
-                  </p>
-                </Col>
-                <Col xs lg="3">
-                  <p className="m-0 ps-2 float-end">
-                    Total:
-                    {Number(
-                      lang.currencyPrice(
-                        cart.addedAccessories.holders.priceEUR,
-                        cart.addedAccessories.holders.priceSEK,
-                        cart.addedAccessories.holders.priceDKK
-                      ) * cart.addedAccessories.holders.pcs
-                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                    <span> </span> {props.currency()}
-                  </p>
-                </Col>
-              </Row>
+              <ListItem
+                name="Glass Holders x2 pcs"
+                pcs={cart.addedAccessories.holders.pcs}
+                image={cart.addedAccessories.holders.image}
+                totalPrice={Number(
+                  lang.currencyPrice(
+                    cart.addedAccessories.holders.priceEUR,
+                    cart.addedAccessories.holders.priceSEK,
+                    cart.addedAccessories.holders.priceDKK
+                  ) * cart.addedAccessories.holders.pcs
+                ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                price={Number(
+                  lang.currencyPrice(
+                    cart.addedAccessories.holders.priceEUR,
+                    cart.addedAccessories.holders.priceSEK,
+                    cart.addedAccessories.holders.priceDKK
+                  )
+                ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                currencySymbol={props.currency()}
+              />
             )}
           </Container>
           {props.children}

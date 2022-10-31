@@ -214,6 +214,7 @@ const CustomizerFirePlaces = (props) => {
           <p>Top filling = Top refueling.</p>{" "}
           <p className="fs-6">
             Extra {currencyPriceT()}
+            <span> </span>
             {lang.currencySymbol()} for this option
           </p>
         </div>
@@ -228,6 +229,7 @@ const CustomizerFirePlaces = (props) => {
           <p className="fs-6">Ready for connection to water pipe </p>
           <p className="fs-6">
             Extra {currencyPricePW()}
+            <span> </span>
             {lang.currencySymbol()} for this option.
           </p>
         </div>
@@ -734,22 +736,24 @@ const CustomizerFirePlaces = (props) => {
                       })}{" "}
                       {lang.currencySymbol()}
                       {selectedFireplace.stock_status === "instock" ? null : (
-                        <p className="m-0 p-0 text-info">
-                          +
-                          {Number(
-                            lang.currencyPrice(
-                              selectedFireplace.variant_details
-                                .manufacture_cost_EUR,
-                              selectedFireplace.variant_details
-                                .manufacture_cost_SEK,
-                              selectedFireplace.variant_details
-                                .manufacture_cost_DKK
-                            )
-                          ).toLocaleString(undefined, {
-                            maximumFractionDigits: 2,
-                          })}
-                          <span> </span>
-                          {lang.currencySymbol()}
+                        <p className="m-0 p-0 ">
+                          <Badge bg="info">
+                            +
+                            {Number(
+                              lang.currencyPrice(
+                                selectedFireplace.variant_details
+                                  .manufacture_cost_EUR,
+                                selectedFireplace.variant_details
+                                  .manufacture_cost_SEK,
+                                selectedFireplace.variant_details
+                                  .manufacture_cost_DKK
+                              )
+                            ).toLocaleString(undefined, {
+                              maximumFractionDigits: 2,
+                            })}
+                            <span> </span>
+                            {lang.currencySymbol()}
+                          </Badge>
                         </p>
                       )}
                     </Button>
