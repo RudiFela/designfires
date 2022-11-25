@@ -1,10 +1,12 @@
 import { Row, Col, Form, Badge } from "react-bootstrap";
+import LabelWraper from "../UI/LabelWraper";
+import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
 const WoodFilterOptions = (props) => {
   return (
     <Row>
-      <Col className=" p-3 text-center">
-        <div className="bg-success p-3" style={{ borderRadius: "15px" }}>
-          <h2 className="text-white">
+      <Col className=" p-3">
+        <LabelWraper>
+          <h2 className="text-white text-center">
             <Badge>Mount Type</Badge>
           </h2>
           <Form.Check
@@ -26,11 +28,11 @@ const WoodFilterOptions = (props) => {
             onChange={() => props.mountTypeChange("free-stand")}
             //onChange={() => props.changeGlassColor("Bronze", 386)}
           />
-        </div>
+        </LabelWraper>
       </Col>
-      <Col className="p-3 text-center">
-        <div className="bg-success p-3" style={{ borderRadius: "15px" }}>
-          <h2 className="text-white">
+      <Col className="p-3 ">
+        <LabelWraper>
+          <h2 className="text-white text-center">
             <Badge>Average kW</Badge>
           </h2>
           <Form.Check
@@ -52,7 +54,16 @@ const WoodFilterOptions = (props) => {
             onChange={() => props.rangeChange(10, 50)}
             //onChange={() => props.changeGlassColor("Bronze", 386)}
           />
-        </div>
+        </LabelWraper>
+      </Col>
+      <Col className="p-3 text-center">
+        <LabelWraper>
+          {" "}
+          <h2 className="text-white text-center">
+            <Badge>Currency</Badge>
+          </h2>
+          <LanguageSwitcher />
+        </LabelWraper>
       </Col>
     </Row>
   );

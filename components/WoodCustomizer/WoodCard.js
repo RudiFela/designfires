@@ -40,19 +40,23 @@ const WoodCard = (props) => {
             <Card.Title className="fw-bold fs-5">{item.name}</Card.Title>
             <Card.Text className="fw-bold fs-5">
               <Badge bg="success">
-                {currencyPrice(
-                  item.price,
-                  item.meta_data.find(
-                    (item) =>
-                      item.key ===
-                      "_alg_currency_switcher_per_product_regular_price_SEK" //
-                  ).value,
-                  item.meta_data.find(
-                    (item) =>
-                      item.key ===
-                      "_alg_currency_switcher_per_product_regular_price_DKK" //
-                  ).value
-                )}
+                {Number(
+                  currencyPrice(
+                    item.price,
+                    item.meta_data.find(
+                      (item) =>
+                        item.key ===
+                        "_alg_currency_switcher_per_product_regular_price_SEK" //
+                    ).value,
+                    item.meta_data.find(
+                      (item) =>
+                        item.key ===
+                        "_alg_currency_switcher_per_product_regular_price_DKK" //
+                    ).value
+                  )
+                ).toLocaleString(undefined, {
+                  maximumFractionDigits: 2,
+                })}
                 <span> </span>
                 {currencySymbol()}
               </Badge>{" "}
