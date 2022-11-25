@@ -227,7 +227,7 @@ const ModalInfoLayout = (props) => {
         <Col>
           {" "}
           <Row>
-            <Badge bg="info" className="fs-4 my-2" bg="success">
+            <Badge className="fs-4 my-2" bg="success">
               Equipment
             </Badge>
             <span>
