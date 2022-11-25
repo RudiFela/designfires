@@ -50,8 +50,8 @@ const Slider = ({ slides, onPick }) => {
     position: "absolute",
     top: "50%",
     transform: "translate(0,-50%)",
-    left: "8px",
-    fontSize: "45px",
+    left: "1px",
+    fontSize: "50px",
     color: "#fff",
     zIndex: 1,
     cursor: "pointer",
@@ -60,8 +60,8 @@ const Slider = ({ slides, onPick }) => {
     position: "absolute",
     top: "50%",
     transform: "translate(0,-50%)",
-    right: "8px",
-    fontSize: "45px",
+    right: "1px",
+    fontSize: "50px",
     color: "#fff",
     zIndex: 1,
     cursor: "pointer",
@@ -69,11 +69,11 @@ const Slider = ({ slides, onPick }) => {
   return (
     <>
       <div style={sliderStyles}>
-        <div style={leftArrowStyles} onClick={goToPrevious}>
+        <div style={leftArrowStyles} className="p-4" onClick={goToPrevious}>
           {" "}
           {`<`}
-        </div>
-        <div style={rightArrowStyles} onClick={goToNext}>
+        </div>{" "}
+        <div style={rightArrowStyles} className="p-4" onClick={goToNext}>
           {" "}
           {`>`}{" "}
         </div>

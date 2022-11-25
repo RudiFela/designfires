@@ -1,11 +1,16 @@
+import { useEffect, useContext } from "react";
 import Navibar from "../containers/navbar/Navbar";
 import PhotosGrid from "../components/PhotosGrid.js/PhotosGrid";
 import AboutSection from "../components/AboutSection/AboutSection";
-
+import SSRProvider from "react-bootstrap/SSRProvider";
+import axios from "axios";
 import Footer from "../containers/footer/Footer";
 import { Col, Row, Figure, Button, Badge } from "react-bootstrap";
-
+import WoodCustomizer from "../components/WoodCustomizer/WoodCustomizer";
+import { LanguageContext } from "../components/context/language-context";
 const Wood = (props) => {
+  const { language } = useContext(LanguageContext);
+
   const title = "Wood Fireplace";
   const listItems = [
     "Most realistic flames on the market.",
@@ -62,9 +67,64 @@ const Wood = (props) => {
           </Col>
         </Row>
       </div>
-
+      <WoodCustomizer
+        decorations={props.decorations}
+        fireplace={props.woodFireplaces}
+      />
       <Footer />
     </div>
   );
 };
 export default Wood;
+export async function getStaticProps(context) {
+  const crud = {
+    auth: {
+      username: "ck_b143b31c7842e4a628279fe7b097980c311f08d5",
+      password: "cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e",
+    },
+  };
+  const decoURL =
+    "https://designfires.pl/wp-json/wc/v3/products?category=20&per_page=20&orderby=price&order=desc";
+  const woodURL =
+    "https://designfires.pl/wp-json/wc/v3/products?category=31&per_page=50";
+  const accessoriesURL =
+    "https://designfires.pl/wp-json/wc/v3/products?category=21";
+  const fireplacesURL =
+    "https://designfires.pl/wp-json/wc/v3/products?category=26";
+  const boxesUrl = "https://designfires.pl/wp-json/wc/v3/products?category=30";
+  const fuelUrl = "https://designfires.pl/wp-json/wc/v3/products?category=29";
+  // ck ck_b143b31c7842e4a628279fe7b097980c311f08d5
+  // cs cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e
+
+  const decorations = await axios.get(decoURL, crud);
+  const woodFetch = await axios.get(woodURL, crud);
+
+  // console.log(fireplacess);
+  const [deco, wood] = await Promise.all([decorations.data, woodFetch.data]);
+  //let d;
+  //addVariants(cases, crud).then((res) => console.log(res));
+  // console.log(d);
+
+  // const casings = await addVariants(casingFetch.data, crud);
+  //const accessories = await addVariants(cases, crud);
+  //const test = JSON.parse(accessories);
+  //console.log(cases[0].variations);
+  /* const repos = await axios.get(
+    `https://designfires.pl/wp-json/wc/v3/products/${cases[0].id}/variations`,
+    crud
+  );
+  console.log(repos.data);*/
+  // console.log(addVariants(cases, crud));
+  //console.log(cases);
+  //const fireplacess = await addVariants(fireplaceFetch.data, crud);
+
+  return {
+    props: {
+      decorations: deco,
+      woodFireplaces: wood,
+      // language: LanguageChecker(),
+      //test: accessories,
+    },
+    revalidate: 3600,
+  };
+}

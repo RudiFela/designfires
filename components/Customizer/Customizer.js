@@ -154,7 +154,7 @@ const Customizer = (props) => {
   const [split, setSplit] = useState(false);
   const [blockPickerColor, setBlockPickerColor] = useState({
     color: "#FFFFFF",
-    ral: "lol",
+    ral: "RAL 9010",
   });
   const [colorTouched, setColorTouched] = useState(false);
   const [customColorPick, setCustomColorPick] = useState(false);
