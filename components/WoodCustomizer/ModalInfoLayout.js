@@ -37,7 +37,7 @@ const ModalInfoLayout = (props) => {
         </Col>
         <Col>
           <Row className="my-3">
-            <Badge bg="info" className="fs-4 mb-2" bg="success">
+            <Badge className="fs-4 mb-2" bg="success">
               General Information
             </Badge>
             <span>
@@ -122,7 +122,7 @@ const ModalInfoLayout = (props) => {
 
         <Col>
           <Row>
-            <Badge bg="info" className="fs-4 mb-2" bg="success">
+            <Badge className="fs-4 mb-2" bg="success">
               Basic dimensions
             </Badge>
           </Row>
@@ -159,7 +159,7 @@ const ModalInfoLayout = (props) => {
         <Col>
           {" "}
           <Row>
-            <Badge bg="info" className="fs-4 mb-2" bg="success">
+            <Badge className="fs-4 mb-2" bg="success">
               Energetic efficiency
             </Badge>
             <span>
@@ -195,7 +195,7 @@ const ModalInfoLayout = (props) => {
         <Col>
           {" "}
           <Row>
-            <Badge bg="info" className="fs-4 my-2" bg="success">
+            <Badge className="fs-4 my-2" bg="success">
               Certificates / Compliance
             </Badge>
             <span>
@@ -243,11 +243,7 @@ const ModalInfoLayout = (props) => {
               <Badge bg="info" className="float-end">
                 {" "}
                 <span> </span>{" "}
-                {item.acf.chamber_lining ? (
-                  <BsCheckSquare />
-                ) : (
-                  <BsFillXSquare />
-                )}
+                {item.acf.chamber_lining ? <BsCheckSquare /> : <BsXSquare />}
               </Badge>
             </span>
             <span>
@@ -263,7 +259,6 @@ const ModalInfoLayout = (props) => {
       </Row>
 
       <Button
-        variant="success"
         variant="info"
         className="text-white"
         onClick={() => openInNewTab(item.acf.technical_drawing.url)}
