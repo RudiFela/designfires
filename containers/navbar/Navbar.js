@@ -2,6 +2,7 @@
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import Image from "next/image";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import Link from "next/link";
 //import { LanguageContext } from "../../components/context/language-context";
 //const english = "/static/images/greatbritain.png";
 //const denmark = "/static/images/denmark.png";
@@ -91,10 +92,7 @@ const Navibar = () => {
               >
                 Gas Fireplace
               </Nav.Link>
-              <Nav.Link
-                className="text-white text-center"
-                href="https://old.designfires.com/traepejse/"
-              >
+              <Nav.Link className="text-white text-center" href="/wood">
                 Wood Fireplace
               </Nav.Link>
               <Nav.Link
