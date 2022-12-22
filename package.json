@@ -20,11 +20,13 @@
     "next": "12.1.6",
     "react": "18.2.0",
     "react-bootstrap": "^2.4.0",
+    "react-bootstrap-range-slider": "^3.0.8",
     "react-color": "^2.19.3",
     "react-dom": "18.2.0",
     "react-hover-video-player": "^9.7.0",
     "react-icons": "^4.4.0",
     "react-image-gallery": "^1.2.9",
+    "react-range": "^1.8.14",
     "react-transition-group": "^4.4.2"
   },
   "devDependencies": {

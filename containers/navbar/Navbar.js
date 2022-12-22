@@ -52,7 +52,7 @@ const Navibar = () => {
       >
         <Container fluid className="p-0 ">
           <Navbar.Brand
-            href="#home"
+            href="/"
             className="w-50
       "
           >

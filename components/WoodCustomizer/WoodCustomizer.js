@@ -12,14 +12,14 @@ import { motion } from "framer-motion";
 import WoodFilterOptions from "./WoodFilterOptions";
 import WoodCard from "./WoodCard";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
-import ModalInfoLayout from "./ModalInfoLayout";
+import ModalInfoLayout from "./ProductLayout";
 const WoodCustomizer = (props) => {
   const [fireplacesToList, setFireplacesToList] = useState(props.fireplace);
   const [showModal, setShowModal] = useState(false);
   const [productInfo, setProductInfo] = useState();
   //const [expandCard, setExpandCard] = useState();
   useEffect(() => {
-    // console.log(props.fireplace);
+    console.log(props.fireplace);
   }, []);
   const filterByMountType = (value) => {
     //fireplacesToList

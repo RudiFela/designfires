@@ -1,13 +1,13 @@
 import { useEffect, useContext } from "react";
-import Navibar from "../containers/navbar/Navbar";
-import PhotosGrid from "../components/PhotosGrid.js/PhotosGrid";
-import AboutSection from "../components/AboutSection/AboutSection";
+import Navibar from "../../containers/navbar/Navbar";
+import PhotosGrid from "../../components/PhotosGrid.js/PhotosGrid";
+import AboutSection from "../../components/AboutSection/AboutSection";
 import SSRProvider from "react-bootstrap/SSRProvider";
 import axios from "axios";
-import Footer from "../containers/footer/Footer";
+import Footer from "../../containers/footer/Footer";
 import { Col, Row, Figure, Button, Badge } from "react-bootstrap";
-import WoodCustomizer from "../components/WoodCustomizer/WoodCustomizer";
-import { LanguageContext } from "../components/context/language-context";
+import WoodCustomizer from "../../components/WoodCustomizer/WoodCustomizer";
+import { LanguageContext } from "../../components/context/language-context";
 const Wood = (props) => {
   const { language } = useContext(LanguageContext);
 

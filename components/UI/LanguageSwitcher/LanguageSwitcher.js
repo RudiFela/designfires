@@ -50,7 +50,7 @@ const LanguageSwitcher = () => {
   return (
     <NavDropdown
       className="text-center bg-primary p-0"
-      style={{ borderRadius: 2 }}
+      style={{ borderRadius: "15px" }}
       align="end"
       flip="true"
       title={lang}

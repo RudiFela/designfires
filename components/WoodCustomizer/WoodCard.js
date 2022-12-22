@@ -1,23 +1,13 @@
-import { useEffect, useState, useContext } from "react";
-import ImageGallery from "react-image-gallery";
-import {
-  Row,
-  Col,
-  Badge,
-  Button,
-  Card,
-  Form,
-  Container,
-  Accordion,
-} from "react-bootstrap";
-import { motion } from "framer-motion";
+import { useContext } from "react";
+import Link from "next/link";
+import { Row, Col, Badge, Card, Accordion } from "react-bootstrap";
+
 import Dimensions from "../UI/Dimensions";
 import { LanguageContext } from "../context/language-context";
-import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
+
 const WoodCard = (props) => {
   //const { item } = props.items;
-  const { language, currencyPrice, currencySymbol } =
-    useContext(LanguageContext);
+  const { currencyPrice, currencySymbol } = useContext(LanguageContext);
   return props.items.map((item) =>
     item.stock_status == "instock" ? (
       <Col className="py-3 text-white" key={item.id}>
@@ -27,36 +17,72 @@ const WoodCard = (props) => {
         >
           {item.images[0] ? (
             <>
-              <Card.Img
-                className="p-4"
-                style={{ borderRadius: "15px", cursor: "pointer" }}
-                variant="top"
-                src={item.images[0].src}
-                onClick={() => props.showModal(item)}
-              />
+              <Link href={`wood/${item.id}`}>
+                <Card.Img
+                  className="p-4"
+                  style={{ borderRadius: "15px", cursor: "pointer" }}
+                  variant="top"
+                  src={item.images[0].shop_catalog}
+                  //onClick={() => props.showModal(item)}
+                />
+              </Link>
+              <Row>
+                {item.variant.length > 0
+                  ? item.variant.map((item) => (
+                      <Col className="flex justify-content-start">
+                        <img
+                          width={50}
+                          src={item.img}
+                          // onClick={() => console.log(item.length.option)}
+                          //onMouseEnter={() => console.log(item.length.option)}
+                        />
+                      </Col>
+                    ))
+                  : null}
+              </Row>
             </>
           ) : null}{" "}
           <Card.Body>
             <Card.Title className="fw-bold fs-5">{item.name}</Card.Title>
             <Card.Text className="fw-bold fs-5">
               <Badge bg="success">
-                {Number(
-                  currencyPrice(
-                    item.price,
-                    item.meta_data.find(
-                      (item) =>
-                        item.key ===
-                        "_alg_currency_switcher_per_product_regular_price_SEK" //
-                    ).value,
-                    item.meta_data.find(
-                      (item) =>
-                        item.key ===
-                        "_alg_currency_switcher_per_product_regular_price_DKK" //
-                    ).value
-                  )
-                ).toLocaleString(undefined, {
-                  maximumFractionDigits: 2,
-                })}
+                {item.meta_data.find(
+                  (item) =>
+                    item.key ===
+                    "_alg_currency_switcher_per_product_regular_price_SEK" //
+                ).value === "#N/D!" ? (
+                  <>
+                    from:<span> </span>
+                    {Number(
+                      currencyPrice(
+                        item.price,
+                        item.variant[0].SEK_price,
+                        item.variant[0].DKK_price
+                      )
+                    ).toLocaleString(undefined, {
+                      maximumFractionDigits: 2,
+                    })}
+                  </>
+                ) : (
+                  Number(
+                    currencyPrice(
+                      item.price,
+                      item.meta_data.find(
+                        (item) =>
+                          item.key ===
+                          "_alg_currency_switcher_per_product_regular_price_SEK" //
+                      ).value,
+                      item.meta_data.find(
+                        (item) =>
+                          item.key ===
+                          "_alg_currency_switcher_per_product_regular_price_DKK" //
+                      ).value
+                    )
+                  ).toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })
+                )}
+
                 <span> </span>
                 {currencySymbol()}
               </Badge>{" "}
