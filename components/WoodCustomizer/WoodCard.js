@@ -29,7 +29,7 @@ const WoodCard = (props) => {
               <Row>
                 {item.variant.length > 0
                   ? item.variant.map((item) => (
-                      <Col className="flex justify-content-start">
+                      <Col key={item.id} className="flex justify-content-start">
                         <img
                           width={50}
                           src={item.img}
