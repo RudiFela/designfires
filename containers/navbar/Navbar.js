@@ -76,14 +76,14 @@ const Navibar = () => {
             <Nav className="navbar-links fs-6 bolder fw-semibold align-items-center">
               <Nav.Link
                 className="text-white text-center fs-6 bolder"
-                href="#fuel"
+                href="/#fuel"
               >
                 Bio-Ehtanol Fuel
               </Nav.Link>
-              <Nav.Link className="text-white text-center" href="#bio">
+              <Nav.Link className="text-white text-center" href="/#bio">
                 Digital Bio-Ethanol Fireplace PRO (DFE)
               </Nav.Link>
-              <Nav.Link className="text-white text-center" href="#steamfire">
+              <Nav.Link className="text-white text-center" href="/#steamfire">
                 Mystic SteamFire Pro (DFM)
               </Nav.Link>
               <Nav.Link
