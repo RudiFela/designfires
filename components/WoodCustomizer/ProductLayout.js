@@ -80,10 +80,13 @@ const ProductLayout = (props) => {
             <div className="m-1 p-2 ">
               <h1 className="fw-bolder my-5">{item.name}</h1>
               <div>
-                <Row className="">
-                  <Col className="fs-4   d-flex justify-content-center my-auto ">
+                <Row className="justify-content-center">
+                  <Col
+                    className="fs-4   d-flex justify-content-center my-auto "
+                    md={4}
+                  >
                     {item.variant.length > 0 ? (
-                      <span>Select Variant</span>
+                      <span>Pick Variant to check price</span>
                     ) : (
                       <>
                         {Number(
@@ -100,7 +103,7 @@ const ProductLayout = (props) => {
                       </>
                     )}
                   </Col>
-                  <Col>
+                  <Col md={3}>
                     <LanguageSwitcher style={{ borderRadius: "15px" }} />
                   </Col>
                 </Row>
@@ -114,7 +117,7 @@ const ProductLayout = (props) => {
           </Col>
         </Row>
         <Row className="my-3 fs-5" xs={1} md={1} lg={2}>
-          <Col className="px-5">
+          <Col className="px-3">
             <Row className="my-3">
               <Badge className="fs-4 mb-2" bg="success">
                 General Information
@@ -214,7 +217,7 @@ const ProductLayout = (props) => {
             </Row>
           </Col>
 
-          <Col className="px-5 my-3">
+          <Col className="px-3 mt-3">
             <Row>
               <Badge className="fs-4 mb-2" bg="success">
                 Basic dimensions
@@ -250,7 +253,7 @@ const ProductLayout = (props) => {
               </span>
             </Dimensions>
           </Col>
-          <Col className="px-5">
+          <Col className="px-3">
             {" "}
             <Row>
               <Badge className="fs-4 mb-2" bg="success">
@@ -286,10 +289,10 @@ const ProductLayout = (props) => {
               </span>
             </Row>
           </Col>
-          <Col className="px-5">
+          <Col className="px-3">
             {" "}
             <Row>
-              <Badge className="fs-4 my-2" bg="success">
+              <Badge className="fs-4 mb-2" bg="success">
                 Certificates / Compliance
               </Badge>
               <span>
@@ -318,7 +321,7 @@ const ProductLayout = (props) => {
               </span>
             </Row>
           </Col>
-          <Col className="px-5">
+          <Col className="px-3">
             {" "}
             <Row>
               <Badge className="fs-4 my-2" bg="success">

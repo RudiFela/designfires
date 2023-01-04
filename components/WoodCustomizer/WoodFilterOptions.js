@@ -4,9 +4,11 @@ import RangeSlider from "react-bootstrap-range-slider";
 import LabelWraper from "../UI/LabelWraper";
 import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
+import OpeningSidesDropDown from "../Customizer/OpeningSidesDropDown";
 const WoodFilterOptions = (props) => {
   const [value1, setValue1] = useState(1);
   const [value2, setValue2] = useState(30);
+  const [danishDesign, setDanishDesign] = useState(false); //change for danish location variable later
   const onMinRangeChange = (value) => {
     props.rangeChange(value, value2);
     setValue1(value);
@@ -15,16 +17,21 @@ const WoodFilterOptions = (props) => {
     props.rangeChange(value1, value2);
     setValue2(value);
   };
+  const onDanishDesign = () => {
+    props.danishApproved(!danishDesign);
+    setDanishDesign(!danishDesign);
+    console.log("filer", !danishDesign);
+  };
   return (
     <LabelWraper>
-      <Row>
-        <Col className=" p-3">
-          <h2 className="text-white text-center">
+      <Row className="p-1">
+        <Col className="" md={2}>
+          <h3 className="text-white text-center">
             <Badge>Type</Badge>
-          </h2>
+          </h3>
           <Form.Check
             inline
-            className="text-white fw-bolder fs-5"
+            className="text-white fw-bolder fs-6"
             label="Build In"
             name="mountType"
             type="radio"
@@ -33,7 +40,7 @@ const WoodFilterOptions = (props) => {
           />
           <Form.Check
             inline
-            className="text-white fw-bolder fs-5"
+            className="text-white fw-bolder fs-6"
             label="Free Stand"
             name="mountType"
             type="radio"
@@ -42,10 +49,11 @@ const WoodFilterOptions = (props) => {
             //onChange={() => props.changeGlassColor("Bronze", 386)}
           />
         </Col>
-        <Col className="p-3 ">
-          <h2 className="text-white text-center">
+
+        <Col className=" " md={5}>
+          <h3 className="text-white text-center">
             <Badge>Average kW</Badge>
-          </h2>{" "}
+          </h3>{" "}
           <Row>
             <Form>
               <Form.Group as={Row}>
@@ -76,11 +84,11 @@ const WoodFilterOptions = (props) => {
             </Form>
           </Row>
         </Col>
-        <Col className="p-3 text-center">
+        <Col className=" text-center" xs={2}>
           {" "}
-          <h2 className="text-white text-center">
+          <h3 className="text-white text-center">
             <Badge>Currency</Badge>
-          </h2>
+          </h3>
           <LanguageSwitcher />
         </Col>
       </Row>

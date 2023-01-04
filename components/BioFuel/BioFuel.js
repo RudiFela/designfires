@@ -113,17 +113,21 @@ const BioFuel = (props) => {
                       />
                     </Col>
                     <Col>
-                      <p className="bolder mt-3">{pickedFuel.name}</p>
+                      <Badge className="mt-3 text-wrap">
+                        <h5 className="bolder"> {pickedFuel.name}</h5>
+                      </Badge>
                     </Col>
                     <Col md="auto">
-                      <p className="bolder mt-3">
-                        {lang.currencyPrice(
-                          pickedFuel.price,
-                          pickedFuel.priceSEK,
-                          pickedFuel.priceDKK
-                        )}
-                        {lang.currencySymbol()}
-                      </p>
+                      <Badge className="bolder mt-3">
+                        <h5 className="fw-bold m-0">
+                          {lang.currencyPrice(
+                            pickedFuel.price,
+                            pickedFuel.priceSEK,
+                            pickedFuel.priceDKK
+                          )}
+                          {lang.currencySymbol()}
+                        </h5>
+                      </Badge>
                     </Col>
                     <Col>
                       <Badge>x {pcsFuel}</Badge>
@@ -149,17 +153,20 @@ const BioFuel = (props) => {
                     </Col>{" "}
                   </Row>{" "}
                   <h5 className="float-end">
-                    Total:
-                    {lang.currencyPrice(
-                      pickedFuel.price,
-                      pickedFuel.priceSEK,
-                      pickedFuel.priceDKK
-                    ) * pcsFuel}{" "}
-                    {lang.currencySymbol()}
+                    <Badge>
+                      {" "}
+                      Total:
+                      {lang.currencyPrice(
+                        pickedFuel.price,
+                        pickedFuel.priceSEK,
+                        pickedFuel.priceDKK
+                      ) * pcsFuel}{" "}
+                      {lang.currencySymbol()}
+                    </Badge>
                   </h5>
-                  <Row>
-                    <p>30 pcs its max on 1 pallet</p>
-                  </Row>
+                  <h5>
+                    <Badge>30 pcs its max on 1 pallet</Badge>
+                  </h5>
                 </div>
                 <div className="my-3">
                   <Button variant="info" onClick={() => onConfirm()}>

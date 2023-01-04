@@ -625,7 +625,8 @@ const CustomizerFirePlaces = (props) => {
                   <DropdownButton
                     id="dropdown-basic-button"
                     className="glass-picker"
-                    title={<p className="fw-bold fs-5 m-0"> {mountTitle}</p>}
+                    //style={{ width: "200px" }}
+                    title={<div className="fw-bold fs-5 "> {mountTitle}</div>}
                     disabled={!selected}
                     variant="info"
                   >

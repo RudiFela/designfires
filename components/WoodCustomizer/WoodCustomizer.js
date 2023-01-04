@@ -37,6 +37,18 @@ const WoodCustomizer = (props) => {
     setFireplacesToList(filtered);
     return filtered;
   };
+  const filterDanishApproved = (x) => {
+    const filtered = props.fireplace.filter(
+      (item) => item.acf.danish_approved === x
+    );
+    const filteredKratkiFireplaces = props.fireplace.filter(
+      (item) => item.acf.producent === "K"
+    );
+    const filteredFireplaces = filtered.concat(filteredKratkiFireplaces);
+    setFireplacesToList(filteredFireplaces);
+    console.log("customizer", x);
+    return filteredFireplaces;
+  };
   const openModal = (item) => {
     setProductInfo(item);
     setShowModal(true);
@@ -59,6 +71,7 @@ const WoodCustomizer = (props) => {
         <WoodFilterOptions
           rangeChange={filterByRange}
           mountTypeChange={filterByMountType}
+          danishApproved={filterDanishApproved}
         />
         <Row>
           <WoodCard items={fireplacesToList} showModal={openModal} />

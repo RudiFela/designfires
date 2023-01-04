@@ -54,7 +54,7 @@ export async function getStaticProps(context) {
   const decoURL =
     "https://designfires.pl/wp-json/wc/v3/products?category=20&per_page=20&orderby=price&order=desc";
   const woodURL =
-    "https://designfires.pl/wp-json/wc/v3/products?category=31&per_page=50";
+    "https://designfires.pl/wp-json/wc/v3/products?category=31&per_page=100";
   const accessoriesURL =
     "https://designfires.pl/wp-json/wc/v3/products?category=21";
   const fireplacesURL =

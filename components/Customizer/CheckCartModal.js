@@ -91,6 +91,7 @@ const CheckCartModal = (props) => {
                         height={cart.addedFireplace.height}
                         width={cart.addedFireplace.width}
                         thickness="3mm"
+                        variant="primary"
                       />
 
                       <Row>
@@ -262,6 +263,8 @@ const CheckCartModal = (props) => {
                     thickness={
                       cart.addedCasing.name === "Furniture Box" ? "25mm" : "5mm"
                     }
+                    variant="primary"
+                    unity="mm"
                   />{" "}
                   {cart.addedCasing.name === "Furniture Box" ? (
                     <Row>
@@ -359,6 +362,8 @@ const CheckCartModal = (props) => {
                     length={cart.addedAccessories.glass.length.option}
                     height="200"
                     thickness="6mm"
+                    variant="primary"
+                    unity="mm"
                   />
                 </ListItem>
               )}
@@ -389,6 +394,8 @@ const CheckCartModal = (props) => {
                   length={cart.addedAccessories.glass.split_glass.length.option}
                   height="200"
                   thickness="6mm"
+                  variant="primary"
+                  unity="mm"
                 />
               </ListItem>
             )}
@@ -420,6 +427,8 @@ const CheckCartModal = (props) => {
                     length={cart.addedAccessories.glass.short.short_length}
                     height="500"
                     thickness="6mm"
+                    variant="primary"
+                    unity="mm"
                   />
                 </ListItem>
               )}

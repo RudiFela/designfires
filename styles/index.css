@@ -60232,7 +60232,6 @@ textarea.form-control-lg {
 
 .modallo {
   background-image: url("https://designfires.pl/wp-content/uploads/2022/07/CartBackground.png");
-  background-size: cover;
 }
 .modallo p {
   font-size: clamp(0.7rem, 2vw, 1.2rem);
