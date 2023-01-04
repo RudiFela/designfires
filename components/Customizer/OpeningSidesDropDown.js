@@ -164,6 +164,7 @@ const OpeningSidesDropDown = (props) => {
       >
         {GlassOptions.map((item) => (
           <Dropdown.Item
+            key={item.title}
             className="text-white customizer px-3 mx-3"
             style={{ width: "220px" }}
             onClick={() => onDropDownChange(item)}
