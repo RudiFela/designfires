@@ -3,17 +3,7 @@ import Image from "next/image";
 import HoverVideoPlayer from "react-hover-video-player";
 import { motion } from "framer-motion";
 import { LanguageContext } from "../context/language-context";
-import {
-  Button,
-  ListGroup,
-  Figure,
-  Stack,
-  Ratio,
-  Row,
-  Col,
-  Card,
-  CardImg,
-} from "react-bootstrap";
+import { Button, Ratio, Row, Col, Card } from "react-bootstrap";
 const CustomizerItemList = (props) => {
   const lang = useContext(LanguageContext);
 

@@ -216,3 +216,38 @@
 .customizer-card {
   height: 35rem;
 }
+.new-customizer-body {
+  background-image: url("https://designfires.pl/wp-content/uploads/2022/07/CartBackground.png");
+  background-size: cover;
+  border-radius: 15px 15px 0px 0px;
+}
+.casing-type {
+  background-image: url("https://designfires.pl/wp-content/uploads/2023/01/CasingMount.png");
+  background-size: cover;
+  background-position: center;
+  transition: 0.5s all ease-in-out;
+}
+.furniture-type {
+  background-image: url("https://designfires.pl/wp-content/uploads/2023/01/FurnitureType.png");
+  background-size: cover;
+  background-position: center;
+  transition: 0.5s all ease-in-out;
+}
+.selfbuild-type {
+  background-image: url("https://designfires.pl/wp-content/uploads/2023/01/SelfBuild-1.png");
+  background-size: cover;
+  background-position: center;
+  transition: 0.5s all ease-in-out;
+}
+.selfbuild-type:hover {
+  transform: scale(0.9);
+  border-radius: 25px;
+}
+.furniture-type:hover {
+  transform: scale(0.9);
+  border-radius: 25px;
+}
+.casing-type:hover {
+  transform: scale(0.9);
+  border-radius: 25px;
+}

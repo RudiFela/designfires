@@ -8,6 +8,8 @@ import {
   Col,
 } from "react-bootstrap";
 import { useState, useEffect, useContext, useCallback } from "react";
+import { useCart } from "react-use-cart";
+
 import FurnitureBox from "./FurnitureBox";
 import { LanguageContext } from "../context/language-context";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -19,6 +21,7 @@ import { motion } from "framer-motion";
 import CustomizerCard from "./CustomizerCard";
 import { GiDivert, GiTreasureMap } from "react-icons/gi";
 import DeleteButton from "../UI/DeleteButton";
+import NewCustomizer from "../NewCustomizer/NewCustomizer";
 
 const initialCartState = {
   addedCasing: {
@@ -171,7 +174,8 @@ const Customizer = (props) => {
   const [fireplaceItem, setFirePlaceItem] = useState(initialFireplaceState);
   useEffect(() => {
     countCart();
-    console.log(props.accessories);
+    //console.log(props.accessories);
+    //console.log(casingItem);
     props.cartHandler(cart);
   }, [
     cart.addedCasing.priceEUR,
@@ -329,8 +333,10 @@ const Customizer = (props) => {
       },
     }));
   };
-
+  // const { items, addItem, cartTotal } = useCart();
+  //console.log(items, "cart items", cartTotal);
   const addDecorationsToCart = (item, name, id, image) => {
+    //addItem(item, 1);
     let decoArray;
     decoArray = cart.addedDecorations;
     let findedItem = false;
@@ -403,7 +409,7 @@ const Customizer = (props) => {
       pcs: 1,
     }));
     const a = accessories.find((x) => x.name === `${glassColor} Glass 6mm`);
-    console.log(a);
+    //console.log(a);
     const glass = accessories
       .find((x) => x.name === `${glassColor} Glass 6mm`)
       .variant.find((x) => x.length.option === fireplaceItem.length);
@@ -1031,7 +1037,7 @@ const Customizer = (props) => {
           variant.length.option ===
           cart.addedAccessories.glass.split_glass.length.option
       );
-      console.log(longGlassVariant, shortGlassVariant, splitGlassVariant);
+      // console.log(longGlassVariant, shortGlassVariant, splitGlassVariant);
 
       setCart((prevCart) => ({
         ...prevCart,
@@ -1075,7 +1081,7 @@ const Customizer = (props) => {
       onAddFurnitureBox();
     }
     setBlockPickerColor({ color, ral: colorCode });
-    console.log(colorCode);
+    //console.log(colorCode);
   };
   const onFurnitureReset = () => {
     setFurnitureBox(initialFurnitureBoxState);
@@ -1233,7 +1239,14 @@ const Customizer = (props) => {
 
           <DeleteButton reset={clearCart} />
         </Stack>
-      </div>
+      </div>{" "}
+      <NewCustomizer
+        fireplace={fireplace}
+        glass={accessories}
+        furnitureBox={props.boxes}
+        casings={casings}
+        accessories={decorations}
+      />
     </div>
   );
 };

@@ -20,7 +20,7 @@ const WoodFilterOptions = (props) => {
   const onDanishDesign = () => {
     props.danishApproved(!danishDesign);
     setDanishDesign(!danishDesign);
-    console.log("filer", !danishDesign);
+    // console.log("filer", !danishDesign);
   };
   return (
     <LabelWraper>
@@ -48,9 +48,24 @@ const WoodFilterOptions = (props) => {
             onChange={() => props.mountTypeChange("free-stand")}
             //onChange={() => props.changeGlassColor("Bronze", 386)}
           />
+          <Form.Check
+            inline
+            className="text-white fw-bolder fs-6 my-3"
+            label="Danish Certificate"
+            name="mountType"
+            type="checkbox"
+            id={`inline-danish`}
+            onChange={() => onDanishDesign()}
+            //onChange={() => props.changeGlassColor("Bronze", 386)}///
+          />
         </Col>
-
-        <Col className=" " md={5}>
+        <Col className="text-center">
+          <h3 className="text-white text-center">
+            <Badge>Opening Sides</Badge>
+          </h3>{" "}
+          <OpeningSidesDropDown />
+        </Col>
+        <Col className=" ">
           <h3 className="text-white text-center">
             <Badge>Average kW</Badge>
           </h3>{" "}

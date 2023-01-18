@@ -30,6 +30,7 @@ function ProductPage(props) {
       <div className="my-5">
         <ProductLayout
           item={product}
+          ventilationGrids={props.ventilationGrids}
           gallery={
             props.fireplace.Image_Gallery.length > 0
               ? props.fireplace.Image_Gallery
@@ -55,20 +56,23 @@ export async function getStaticProps(context) {
   const decoURL =
     "https://designfires.pl/wp-json/wc/v3/products?category=20&per_page=20&orderby=price&order=desc";
   const fireplaceURL = `https://designfires.pl/wp-json/wc/v3/products/${productId}`;
-
+  const ventilationURL =
+    "https://designfires.pl/wp-json/wc/v3/products?category=51";
   const decorations = await axios.get(decoURL, crud);
-
+  const ventilationFetch = await axios.get(ventilationURL, crud);
   const fireplaceFetch = await axios.get(fireplaceURL, crud);
 
-  const [fire, deco] = await Promise.all([
+  const [fire, deco, vent] = await Promise.all([
     fireplaceFetch.data,
     decorations.data,
+    ventilationFetch.data,
   ]);
 
   return {
     props: {
       decorations: deco,
       fireplace: fire,
+      ventilationGrids: vent,
     },
     revalidate: 3600,
   };

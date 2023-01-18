@@ -61,9 +61,9 @@ const CheckCartModal = (props) => {
 
         id="print"
         ref={CheckCartRef}
-        className="modallo fw-bold"
+        className="modallo fw-bold m-2"
       >
-        <div>
+        <div className="">
           <Container>
             <Row className="border p-2" id="text">
               {cart.addedFireplace.length && (

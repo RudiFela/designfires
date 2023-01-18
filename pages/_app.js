@@ -1,8 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/index.css";
 import Script from "next/script";
+import { useCart } from "react-use-cart";
 import { useState, useEffect } from "react";
 import { LanguageContext } from "../components/context/language-context";
+import { CartProvider } from "react-use-cart";
 import axios from "axios";
 //import "../styles/index.scss";
 function MyApp({ Component, pageProps }) {
@@ -13,6 +15,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     LanguageChecker();
   }, []);
+
   const LanguageChecker = async () => {
     const langs = await axios.get("https://ipapi.co/json/"); //("https://api.hostip.info/country.php");
     //console.log(langs.data.country_code);
@@ -66,18 +69,20 @@ function MyApp({ Component, pageProps }) {
         `}
         </Script>
       </div>
-      <LanguageContext.Provider
-        value={{
-          language,
-          setLanguage,
-          isLoading,
-          setIsLoading,
-          currencyPrice,
-          currencySymbol,
-        }}
-      >
-        <Component {...pageProps} />
-      </LanguageContext.Provider>
+      <CartProvider>
+        <LanguageContext.Provider
+          value={{
+            language,
+            setLanguage,
+            isLoading,
+            setIsLoading,
+            currencyPrice,
+            currencySymbol,
+          }}
+        >
+          <Component {...pageProps} />
+        </LanguageContext.Provider>
+      </CartProvider>
     </>
   );
 }

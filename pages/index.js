@@ -5,6 +5,7 @@ import Footer from "../containers/footer/Footer";
 import Body from "../containers/body/Body";
 import Navibar from "../containers/navbar/Navbar";
 import axios from "axios";
+import { useCart } from "react-use-cart";
 import Script from "next/script";
 import SSRProvider from "react-bootstrap/SSRProvider";
 import { LanguageContext } from "../components/context/language-context";
@@ -12,9 +13,10 @@ export default function Home(props) {
   const [language, setLanguage] = useState();
   useEffect(() => {
     LanguageChecker();
+    emptyCart();
   }, []);
   const [cart, setCart] = useState();
-
+  const { emptyCart } = useCart();
   const [isLoading, setIsLoading] = useState(false);
   const cartHandler = (cart) => {
     setCart(cart);

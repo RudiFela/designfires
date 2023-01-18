@@ -46,7 +46,7 @@ const WoodCustomizer = (props) => {
     );
     const filteredFireplaces = filtered.concat(filteredKratkiFireplaces);
     setFireplacesToList(filteredFireplaces);
-    console.log("customizer", x);
+    //console.log("customizer", x);
     return filteredFireplaces;
   };
   const openModal = (item) => {

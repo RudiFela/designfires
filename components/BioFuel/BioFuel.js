@@ -18,7 +18,7 @@ const BioFuel = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
   const [pickedFuel, setPickedFuel] = useState();
-  const [pcsFuel, setPcsFuel] = useState(0);
+  const [pcsFuel, setPcsFuel] = useState(1);
   const lang = useContext(LanguageContext);
 
   const FuelProducts = props.fuel;

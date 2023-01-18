@@ -2,12 +2,15 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import { FaTruck } from "react-icons/fa";
-import { GiElectric, GiAutoRepair } from "react-icons/gi";
+
 import { IoWaterOutline } from "react-icons/io";
-import { ImFire } from "react-icons/im";
+
 import { MdWaterDrop } from "react-icons/md";
-import { BiTimer } from "react-icons/bi";
+
 import { motion, useAnimation } from "framer-motion";
+import { BiTimer } from "react-icons/bi";
+import { ImFire } from "react-icons/im";
+import { GiElectric, GiAutoRepair } from "react-icons/gi";
 import {
   CgArrowsMergeAltV,
   CgArrowsShrinkH,

@@ -9,6 +9,7 @@ import Dimensions from "../UI/Dimensions";
 
 import { motion } from "framer-motion";
 import { BsCheckSquare, BsXSquare } from "react-icons/bs";
+import VentilationGridsPicker from "./VentilationGridsPicker";
 const ProductLayout = (props) => {
   const language = useContext(LanguageContext);
   const { ...item } = props.item;
@@ -18,7 +19,7 @@ const ProductLayout = (props) => {
 
   const prepareGallery = (array) => {
     let imagesArray = [];
-    console.log(array);
+    //śconsole.log(array);
     array.map((image) =>
       imagesArray.push({
         original: image.shop_single,
@@ -116,6 +117,10 @@ const ProductLayout = (props) => {
             </div>
           </Col>
         </Row>
+        <VentilationGridsPicker
+          item={item}
+          ventilationGrids={props.ventilationGrids}
+        />
         <Row className="my-3 fs-5" xs={1} md={1} lg={2}>
           <Col className="px-3">
             <Row className="my-3">
