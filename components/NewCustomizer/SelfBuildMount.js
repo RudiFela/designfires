@@ -24,7 +24,7 @@ const SelfBuildMount = (props) => {
       <CustomizerHeader>Glass Mount Type</CustomizerHeader>
       <Row xs={2} md={3}>
         {GlassOptions.map((item) => (
-          <Col>
+          <Col key={item.id}>
             <motion.div
               whileTap={{ scale: 0.9 }}
               style={{ borderRadius: 15, opacity: 0.85 }}

@@ -100,7 +100,7 @@ const Casings = (props) => {
       </MyVerticallyCenteredModal>{" "}
       <Row md={4}>
         {pickedVariantCasings.map((item) => (
-          <Col>
+          <Col key={item.id}>
             <motion.div
               className=" fw-bold bg-primary p-3 borderr m-1"
               onClick={() => onPick(item)}

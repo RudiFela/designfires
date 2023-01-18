@@ -117,10 +117,7 @@ const ProductLayout = (props) => {
             </div>
           </Col>
         </Row>
-        <VentilationGridsPicker
-          item={item}
-          ventilationGrids={props.ventilationGrids}
-        />
+
         <Row className="my-3 fs-5" xs={1} md={1} lg={2}>
           <Col className="px-3">
             <Row className="my-3">
@@ -377,4 +374,10 @@ export default ProductLayout;
                               href={"[productId]"}
                               as={`${item.id}`}
                               passHref
+
+
+                                <VentilationGridsPicker
+          item={item}
+          ventilationGrids={props.ventilationGrids}
+        />
                             >*/
