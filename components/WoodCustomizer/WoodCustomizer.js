@@ -47,7 +47,7 @@ const WoodCustomizer = (props) => {
     fireplacesArray = filterDanishApproved(danishFilter, fireplacesArray);
     // fireplacesArray = filterBySides();
     setFireplacesToList(fireplacesArray);
-    console.log(fireplacesArray.map((item) => item.id));
+    // console.log(fireplacesArray.map((item) => item.id));
   };
   const filterByMountType = (value, array) => {
     //fireplacesToList
@@ -67,7 +67,7 @@ const WoodCustomizer = (props) => {
     const filtered = array.filter(
       (item) => Number(item.acf.kw) <= to && Number(item.acf.kw) > from
     );
-    console.log(filtered);
+    //  console.log(filtered);
 
     return filtered;
   };
