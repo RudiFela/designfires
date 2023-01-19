@@ -10,6 +10,7 @@ const MountPick = (props) => {
   const [mountPick, setMountPick] = useState(0);
   const [shortGlass, setShortGlass] = useState();
   const [longGlass, setLongGlass] = useState();
+  const [splitGlass, setSplitGlass] = useState();
   const [holdersPcs, setHoldersPcs] = useState();
   const [nextStep, setNextStep] = useState(false);
   const [mountProduct, setMountProduct] = useState();
@@ -41,16 +42,22 @@ const MountPick = (props) => {
       name: selectedGlass.shortName,
       img: selectedGlass.img,
     };
+    if (selectedGlass.split) {
+      let split = {
+        ...selectedGlass.split,
+        name: selectedGlass.splitName,
+        img: selectedGlass.img,
+      };
+      setSplitGlass({ split, pcs: selectedGlass.longPcs });
+    }
     setLongGlass({ long: longGlassCartProduct, pcs: selectedGlass.longPcs });
     setShortGlass({
       short: shortGlassCartProduct,
       pcs: selectedGlass.shortPcs,
     });
     setHoldersPcs(selectedGlass.holderPcs);
-    //on sumbit add glass!
-    // HOLDERS PCS!
+
     onFinishStep();
-    //console.log("long:", long, "pcs", longPcs, "short", short, "pcs", shortPcs);
   };
   const onFinishStep = () => {
     setNextStep(true);
@@ -98,6 +105,18 @@ const MountPick = (props) => {
     );
     addItem(glassHolders, holdersPcs);
     mountProduct && addItem(mountProduct);
+    splitGlass &&
+      addItem(
+        {
+          ...splitGlass.split,
+          prices: getPrices(
+            splitGlass.split.price,
+            splitGlass.split.SEK_price,
+            splitGlass.split.DKK_price
+          ),
+        },
+        splitGlass.pcs
+      );
   };
 
   const extendSection = () => {
