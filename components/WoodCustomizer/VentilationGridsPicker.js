@@ -1,16 +1,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "react-use-cart";
-import { useEffect, useState } from "react";
-import { Row, Col, Badge, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Row, Button } from "react-bootstrap";
 import Summary from "../NewCustomizer/Summary";
 import ListVentilationGridVariants from "./ListVentilationGridVariants";
 import CustomizerHeader from "../UI/CustomizerHeader";
 import ContactForm from "../NewCustomizer/Contact";
 const VentilationGridsPicker = (props) => {
   const [currentStep, setCurrentStep] = useState(0);
-  useEffect(() => {
-    console.log(props.ventilationGrids);
-  }, []);
   const { addItem } = useCart();
   const nextStep = () => {
     // onSubmit.current();
@@ -21,10 +18,7 @@ const VentilationGridsPicker = (props) => {
     }
     setCurrentStep(currentStep + 1);
   };
-  const backStep = () => {
-    //setNextStepAllow(false);
-    setCurrentStep(currentStep - 1);
-  };
+
   const displayStep = () => {
     switch (currentStep) {
       case 0:
@@ -40,6 +34,7 @@ const VentilationGridsPicker = (props) => {
               <Row>
                 {props.ventilationGrids.map((item) => (
                   <ListVentilationGridVariants
+                    key={item.id}
                     name={item.name}
                     itemToList={item.variant}
                     grid={props.item.acf.inlet_grids}
@@ -63,6 +58,7 @@ const VentilationGridsPicker = (props) => {
               <Row>
                 {props.ventilationGrids.map((item) => (
                   <ListVentilationGridVariants
+                    key={item.id}
                     name={item.name}
                     itemToList={item.variant}
                     grid={props.item.acf.outlet_grids}

@@ -87,7 +87,7 @@ const WoodCustomizer = (props) => {
     setProductInfo(item);
     setShowModal(true);
   };
-  const modalProductInfo = <div></div>;
+
   const minRangeChange = (value) => {
     setMinRangeFilterValue(value);
   };

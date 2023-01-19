@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { motion } from "framer-motion";
 import { useCart } from "react-use-cart";
 import { LanguageContext } from "../context/language-context";
+import Image from "next/image";
 const VentilationGridCard = (props) => {
   const { addItem } = useCart();
   const lang = useContext(LanguageContext);
@@ -27,7 +28,7 @@ const VentilationGridCard = (props) => {
         </Badge>
       </h3>
       <Ratio aspectRatio="4x3">
-        <img src={variant.img} alt="ventilation grid Photo" />
+        <Image src={variant.img} layout="fill" alt="ventilation grid Photo" />
       </Ratio>
       <Row className="p-4">
         <Col>
