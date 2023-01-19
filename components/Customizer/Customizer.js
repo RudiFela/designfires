@@ -1240,13 +1240,6 @@ const Customizer = (props) => {
           <DeleteButton reset={clearCart} />
         </Stack>
       </div>{" "}
-      <NewCustomizer
-        fireplace={fireplace}
-        glass={accessories}
-        furnitureBox={props.boxes}
-        casings={casings}
-        accessories={decorations}
-      />
     </div>
   );
 };

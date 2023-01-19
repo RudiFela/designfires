@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { useCart } from "react-use-cart";
 import ProductLayout from "../../components/WoodCustomizer/ProductLayout";
 import axios from "axios";
 import Navibar from "../../containers/navbar/Navbar";
@@ -7,8 +7,10 @@ import Footer from "../../containers/footer/Footer";
 function ProductPage(props) {
   const [product, setProduct] = useState(props.fireplace);
   const [productId, setProductId] = useState(props.fireplace.id);
+  const { emptyCart } = useCart();
   useEffect(() => {
     // refresh ? router.reload() : null;
+    emptyCart();
   }, [productId]);
   const [productGallery, setProductGallery] = useState(
     props.fireplace.Image_Gallery.length > 0

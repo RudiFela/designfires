@@ -114,58 +114,65 @@ const NewCustomizer = (props) => {
     }
   };
   return (
-    <Container className="">
-      <div
-        className="bg-success p-3 text-white new-customizer-body"
-        style={{
-          height: "600px",
-          overflowY: "scroll",
-        }}
-      >
-        {displayStep(currentStep)}
+    <>
+      <div className="w-100 bg-danger p-3 fst-italic">
+        <h1 id="customize" className="text-center text-white p-4 mt-3 ">
+          Check possibilities on Your own!
+        </h1>
       </div>
-      <div
-        className="p-3 bg-danger d-flex flex-row justify-content-end flex-wrap"
-        style={{
-          // height: "90px",
-          borderBottomLeftRadius: 15,
-          borderBottomRightRadius: 15,
-        }}
-      >
-        {currentStep > 1 && (
-          <span className="p-2 me-auto">
-            <Button variant="success" onClick={() => backStep()}>
-              Back
+      <Container className="mt-4">
+        <div
+          className="bg-success p-3 text-white new-customizer-body"
+          style={{
+            height: "600px",
+            overflowY: "scroll",
+          }}
+        >
+          {displayStep(currentStep)}
+        </div>
+        <div
+          className="p-3 bg-danger d-flex flex-row justify-content-end flex-wrap"
+          style={{
+            // height: "90px",
+            borderBottomLeftRadius: 15,
+            borderBottomRightRadius: 15,
+          }}
+        >
+          {currentStep > 1 && (
+            <span className="p-2 me-auto">
+              <Button variant="success" onClick={() => backStep()}>
+                Back
+              </Button>
+            </span>
+          )}{" "}
+          <span className="">
+            <LanguageSwitcher />
+          </span>{" "}
+          <span className="p-2">
+            <Button className="fw-bold" disabled={true}>
+              <FiShoppingCart className="mx-2 p-0" />
+              {lang.currencyPrice(
+                cartTotals.price,
+                cartTotals.SEK_price,
+                cartTotals.DKK_price
+              )}
+              <span> </span>
+              {lang.currencySymbol()}
             </Button>
           </span>
-        )}{" "}
-        <span className="">
-          <LanguageSwitcher />
-        </span>{" "}
-        <span className="p-2">
-          <Button className="fw-bold" disabled={true}>
-            <FiShoppingCart className="mx-2 p-0" />
-            {lang.currencyPrice(
-              cartTotals.price,
-              cartTotals.SEK_price,
-              cartTotals.DKK_price
-            )}
-            <span> </span>
-            {lang.currencySymbol()}
-          </Button>
-        </span>
-        <span className="p-2">
-          <Button
-            className=" "
-            variant={nextStepAllow ? "info" : "primary"}
-            disabled={!nextStepAllow}
-            onClick={() => nextStep()} //nextStep()
-          >
-            {currentStep === 5 ? "Finish" : "NEXT"}
-          </Button>
-        </span>
-      </div>
-    </Container>
+          <span className="p-2">
+            <Button
+              className=" "
+              variant={nextStepAllow ? "info" : "primary"}
+              disabled={!nextStepAllow}
+              onClick={() => nextStep()} //nextStep()
+            >
+              {currentStep === 5 ? "Finish" : "NEXT"}
+            </Button>
+          </span>
+        </div>
+      </Container>
+    </>
   );
 };
 export default NewCustomizer;

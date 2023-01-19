@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { Row, Col, Badge, Button, Ratio, Container } from "react-bootstrap";
 import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
@@ -11,6 +11,9 @@ import { motion } from "framer-motion";
 import { BsCheckSquare, BsXSquare } from "react-icons/bs";
 import VentilationGridsPicker from "./VentilationGridsPicker";
 const ProductLayout = (props) => {
+  useEffect(() => {
+    console.log(props.item);
+  }, []);
   const language = useContext(LanguageContext);
   const { ...item } = props.item;
   const openInNewTab = (url) => {
@@ -117,6 +120,12 @@ const ProductLayout = (props) => {
             </div>
           </Col>
         </Row>
+        {item.variant.length === 0 && item.pro === "H" && (
+          <VentilationGridsPicker
+            item={item}
+            ventilationGrids={props.ventilationGrids}
+          />
+        )}
 
         <Row className="my-3 fs-5" xs={1} md={1} lg={2}>
           <Col className="px-3">
@@ -376,8 +385,5 @@ export default ProductLayout;
                               passHref
 
 
-                                <VentilationGridsPicker
-          item={item}
-          ventilationGrids={props.ventilationGrids}
-        />
+                               
                             >*/

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Accessories from "../../components/Accessories/Accessories";
+import NewCustomizer from "../../components/NewCustomizer/NewCustomizer";
 import Decorations from "../../components/Decorations/Decorations";
 import Inspired from "../../components/Inspired/Inspired";
 import Ethanol from "../../components/Ethanol/Ethanol";
@@ -49,13 +50,13 @@ const Body = (props) => {
 
       <Inspired />
       <Decorations decorations={props.decorations} />
-      <Customizer
-        decorations={props.decorations}
-        accessories={props.accessories}
-        casings={props.casings}
+
+      <NewCustomizer
         fireplace={props.fireplaces}
-        cartHandler={props.cartHandler}
-        boxes={props.boxes}
+        glass={props.accessories}
+        furnitureBox={props.boxes}
+        casings={props.casings}
+        accessories={props.decorations}
       />
       <MotionSlider />
       <BioFuel
@@ -67,3 +68,13 @@ const Body = (props) => {
   );
 };
 export default Body;
+/*
+ <Customizer
+        decorations={props.decorations}
+        accessories={props.accessories}
+        casings={props.casings}
+        fireplace={props.fireplaces}
+        cartHandler={props.cartHandler}
+        boxes={props.boxes}
+      />
+*/

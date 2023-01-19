@@ -47,6 +47,7 @@ const Summary = (props) => {
           </Col>
         </Row>
       ))}
+      {props.children}
     </div>
   );
 };

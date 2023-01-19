@@ -6,17 +6,8 @@ import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import OpeningSidesDropDown from "../Customizer/OpeningSidesDropDown";
 const WoodFilterOptions = (props) => {
-  const [value1, setValue1] = useState(1);
-  const [value2, setValue2] = useState(30);
   const [danishDesign, setDanishDesign] = useState(false); //change for danish location variable later
-  const onMinRangeChange = (value) => {
-    props.rangeChange(value, value2);
-    setValue1(value);
-  };
-  const onMaxRangeChange = (value) => {
-    props.rangeChange(value1, value2);
-    setValue2(value);
-  };
+
   const onDanishDesign = () => {
     props.danishApproved(!danishDesign);
     setDanishDesign(!danishDesign);
@@ -74,8 +65,8 @@ const WoodFilterOptions = (props) => {
               <Form.Group as={Row}>
                 <Col xs="6">
                   <RangeSlider
-                    value={value1}
-                    onChange={(e) => onMinRangeChange(e.target.value)}
+                    value={props.minRange}
+                    onChange={(e) => props.minRangeChange(e.target.value)}
                     min={1}
                     max={20}
                     variant="danger"
@@ -85,8 +76,8 @@ const WoodFilterOptions = (props) => {
                 </Col>
                 <Col xs="6">
                   <RangeSlider
-                    value={value2}
-                    onChange={(e) => onMaxRangeChange(e.target.value)}
+                    value={props.maxRange}
+                    onChange={(e) => props.maxRangeChange(e.target.value)}
                     min={10}
                     max={30}
                     variant="danger"

@@ -13,48 +13,87 @@ import WoodFilterOptions from "./WoodFilterOptions";
 import WoodCard from "./WoodCard";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
 import ModalInfoLayout from "./ProductLayout";
+import WoodCartList from "./WoodCardList";
+import WoodCardList from "./WoodCardList";
 const WoodCustomizer = (props) => {
   const [fireplacesToList, setFireplacesToList] = useState(props.fireplace);
   const [showModal, setShowModal] = useState(false);
   const [productInfo, setProductInfo] = useState();
+  const [mountFilterValue, setMountFilterValue] = useState();
+  const [danishFilter, setDanishFilter] = useState(false);
+  const [openingSidesFilter, setOpeningSidesFilter] = useState(false);
+  const [rangeFilter, setRangeFilter] = useState(false);
+  const [minRangeFilterValue, setMinRangeFilterValue] = useState(1);
+  const [maxRangeFilterValue, setMaxRangeFilterValue] = useState(30);
   //const [expandCard, setExpandCard] = useState();
   useEffect(() => {
-    console.log(props.fireplace);
-  }, []);
-  const filterByMountType = (value) => {
+    mainArrayFilter();
+  }, [
+    mountFilterValue,
+    danishFilter,
+    openingSidesFilter,
+    minRangeFilterValue,
+    maxRangeFilterValue,
+  ]);
+  const mainArrayFilter = () => {
+    let fireplacesArray = props.fireplace;
+    fireplacesArray = filterByRange(
+      minRangeFilterValue,
+      maxRangeFilterValue,
+      fireplacesArray
+    );
+
+    fireplacesArray = filterByMountType(mountFilterValue, fireplacesArray);
+    fireplacesArray = filterDanishApproved(danishFilter, fireplacesArray);
+    // fireplacesArray = filterBySides();
+    setFireplacesToList(fireplacesArray);
+    console.log(fireplacesArray.map((item) => item.id));
+  };
+  const filterByMountType = (value, array) => {
     //fireplacesToList
-    const filtered = props.fireplace.filter((item) => item.acf.type === value);
+    let filtered;
+    if (value !== undefined) {
+      filtered = array.filter((item) => item.acf.type === value);
+    } else {
+      filtered = array;
+    }
     //console.log(filtered);
-    setFireplacesToList(filtered);
+
     return filtered;
   };
-  const filterByRange = (from, to) => {
+  const filterBySides = () => {};
+  const filterByRange = (from, to, array) => {
     //fireplacesToList
-    const filtered = props.fireplace.filter(
+    const filtered = array.filter(
       (item) => Number(item.acf.kw) <= to && Number(item.acf.kw) > from
     );
     console.log(filtered);
-    setFireplacesToList(filtered);
+
     return filtered;
   };
-  const filterDanishApproved = (x) => {
-    const filtered = props.fireplace.filter(
-      (item) => item.acf.danish_approved === x
-    );
-    const filteredKratkiFireplaces = props.fireplace.filter(
-      (item) => item.acf.producent === "K"
-    );
-    const filteredFireplaces = filtered.concat(filteredKratkiFireplaces);
-    setFireplacesToList(filteredFireplaces);
+  const filterDanishApproved = (x, array) => {
+    if (x) {
+      let filtered = array.filter((item) => item.acf.danish_approved === x);
+      let filteredKratkiFireplaces = array.filter(
+        (item) => item.acf.producent === "K"
+      );
+      let filteredFireplaces = filtered.concat(filteredKratkiFireplaces);
+      return filteredFireplaces;
+    }
+    return array;
     //console.log("customizer", x);
-    return filteredFireplaces;
   };
   const openModal = (item) => {
     setProductInfo(item);
     setShowModal(true);
   };
   const modalProductInfo = <div></div>;
-
+  const minRangeChange = (value) => {
+    setMinRangeFilterValue(value);
+  };
+  const maxRangeChange = (value) => {
+    setMaxRangeFilterValue(value);
+  };
   return (
     <div>
       <MyVerticallyCenteredModal
@@ -70,11 +109,15 @@ const WoodCustomizer = (props) => {
         <h2></h2>
         <WoodFilterOptions
           rangeChange={filterByRange}
-          mountTypeChange={filterByMountType}
-          danishApproved={filterDanishApproved}
+          mountTypeChange={setMountFilterValue}
+          danishApproved={setDanishFilter}
+          minRange={minRangeFilterValue}
+          maxRange={maxRangeFilterValue}
+          minRangeChange={minRangeChange}
+          maxRangeChange={maxRangeChange}
         />
         <Row>
-          <WoodCard items={fireplacesToList} showModal={openModal} />
+          <WoodCardList items={fireplacesToList} showModal={openModal} />
         </Row>
       </Container>
     </div>
