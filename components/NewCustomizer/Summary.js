@@ -45,7 +45,11 @@ const Summary = (props) => {
           </Col>
           <Col className="d-flex justify-content-center align-items-center fw-bold">
             {lang
-              .currencyPrice(item.price, item.SEK_price, item.DKK_price)
+              .currencyPrice(
+                item.prices.find((item) => item.currency === "EUR").amount,
+                item.prices.find((item) => item.currency === "SEK").amount,
+                item.prices.find((item) => item.currency === "DKK").amount
+              )
               .toLocaleString(undefined, {
                 maximumFractionDigits: 2,
               })}{" "}
@@ -63,9 +67,12 @@ const Summary = (props) => {
           <Col className="d-flex justify-content-center align-items-center fw-bold">
             {lang
               .currencyPrice(
-                item.price * item.quantity,
-                item.SEK_price * item.quantity,
-                item.DKK_price * item.quantity
+                item.prices.find((item) => item.currency === "EUR").amount *
+                  item.quantity,
+                item.prices.find((item) => item.currency === "SEK").amount *
+                  item.quantity,
+                item.prices.find((item) => item.currency === "DKK").amount *
+                  item.quantity
               )
               .toLocaleString(undefined, {
                 maximumFractionDigits: 2,

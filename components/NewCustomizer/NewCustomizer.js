@@ -136,8 +136,12 @@ const NewCustomizer = (props) => {
     <>
       <div className="w-100 bg-danger p-3 fst-italic">
         <h1 id="customize" className="text-center text-white p-4 mt-3 ">
-          Easly choose Fireplace of Your dreams with our Customizer Tool!
+          Easly build Fireplace of Your dreams with our Customizer Tool!
         </h1>
+        <h3 className="text-center text-white p-2 mt-3 ">
+          There You can find all prices,technical information,mount type,casing
+          or even furniture boxes!
+        </h3>
       </div>
       <Container className="mt-4">
         <div

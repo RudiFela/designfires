@@ -27,13 +27,19 @@ export const useFireplacePrice = () => {
     return price;
   };
   const priceCount = (items) => {
+    console.log(items);
     let total = 0;
     items.map((item) => (total = total + item));
+    console.log(total);
     return total;
   };
   const fireplacePrice = (fireplace) => {
     let product;
-    // console.log(fireplace.filling);
+    console.log(fireplace.filling);
+    let fillingPrice = fillingTypes.find(
+      (item) => item.name === fireplace.filling
+    );
+
     // console.log(fireplace.item);
     fireplace.product.name === "DFM"
       ? (product = {
@@ -124,6 +130,7 @@ export const useFireplacePrice = () => {
             ])
           ),
         });
+    console.log(product);
     return product;
   };
 

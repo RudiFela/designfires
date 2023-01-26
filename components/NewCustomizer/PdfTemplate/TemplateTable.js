@@ -120,7 +120,10 @@ const TemplateTable = (props) => {
       <Text style={styles.description}>{item.name}</Text>
 
       <Text style={styles.amount}>
-        {item.SEK_price} {props.currency}
+        {item.SEK_price.toLocaleString(undefined, {
+          maximumFractionDigits: 2,
+        })}
+        {props.currency}
       </Text>
 
       <Text style={styles.qty}>x {item.quantity}</Text>
