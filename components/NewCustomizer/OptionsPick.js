@@ -98,7 +98,7 @@ const OptionsPick = (props) => {
       <Row xs={1} md={2} lg={3}>
         <Col>
           <h3 className="text-center">
-            <Badge className="my-2" bg="danger">
+            <Badge className="my-1" bg="danger">
               Pick Length
             </Badge>
           </h3>
@@ -114,23 +114,23 @@ const OptionsPick = (props) => {
             {length}
           </div>
           <span>
-            <Badge className="mt-2 p-2 fs-6 text-wrap text-white" bg="info">
+            <Badge className="mt-2 fs-6 text-wrap text-white" bg="info">
               <ImFire />
               <span> </span>
               On Stock - Standard delivery time 5 days
             </Badge>
           </span>{" "}
           <span>
-            <Badge className="m-0 mt-2 p-2 fs-6 text-white text-wrap" bg="info">
+            <Badge className="m-0 mt-2 fs-6 text-white text-wrap" bg="info">
               <GiAutoRepair />
               <span> </span>Custom Variant - Longer delivery time 50-60 days,
               higher price
             </Badge>
           </span>
         </Col>
-        <Col>
+        <Col className="">
           <h3 className="text-center">
-            <Badge className="my-2" bg="danger">
+            <Badge className="my-1" bg="danger">
               Extra Options
             </Badge>
           </h3>
@@ -191,7 +191,7 @@ const OptionsPick = (props) => {
         </Col>
         <Col>
           <h3 className="text-center">
-            <Badge className="my-2" bg="danger">
+            <Badge className="my-1" bg="danger">
               Technical Info
             </Badge>
           </h3>

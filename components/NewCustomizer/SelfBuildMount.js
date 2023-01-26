@@ -9,8 +9,10 @@ const SelfBuildMount = (props) => {
   const [longPcs, setLongPcs] = useState();
   const [holdersPcs, setHoldersPcs] = useState();
   const [selected, setSelected] = useState(false);
+  const [selectedItem, setSelectedItem] = useState();
   const onPick = (item) => {
     //console.log(item);
+    setSelectedItem(item.title);
     setLongPcs(item.longGlass);
     setShortPcs(item.shortGlass);
     setHoldersPcs(item.pieces);
@@ -28,7 +30,11 @@ const SelfBuildMount = (props) => {
             <motion.div
               whileTap={{ scale: 0.9 }}
               style={{ borderRadius: 15, opacity: 0.85 }}
-              className="m-2 p-3 glass-picker bg-primary"
+              className={`m-2 p-3 glass-picker bg-primary ${
+                selectedItem === item.title
+                  ? "border border-3 border-warning"
+                  : ""
+              } `}
               onClick={() => onPick(item)}
             >
               <Ratio aspectRatio="16x9">{item.svg}</Ratio>{" "}

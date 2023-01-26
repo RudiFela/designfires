@@ -32,12 +32,23 @@ const FurnitureBox = (props) => {
     blockPickerColor.color !== "#FFFFFF"
       ? (furniture = {
           ...props.furnitureBox,
+          name: `${props.furnitureBox.name} / ${blockPickerColor.ral}`,
           color: blockPickerColor,
           price: Number(
             Math.round(props.furnitureBox.price * 1.1 + "e+2") + "e-2"
           ),
+          SEK_price: Number(
+            Math.round(props.furnitureBox.SEK_price * 1.1 + "e+2") + "e-2"
+          ),
+          DKK_price: Number(
+            Math.round(props.furnitureBox.DKK_price * 1.1 + "e+2") + "e-2"
+          ),
         })
-      : (furniture = { ...props.furnitureBox, color: blockPickerColor });
+      : (furniture = {
+          ...props.furnitureBox,
+          name: `${props.furnitureBox.name} / ${blockPickerColor.ral}`,
+          color: blockPickerColor,
+        });
 
     props.onCasingPick(furniture);
   }, [blockPickerColor]);
@@ -70,7 +81,7 @@ const FurnitureBox = (props) => {
   );
 
   const onChangeColor = (color, ral) => {
-    console.log(props.furnitureBox);
+    // console.log(props.furnitureBox);
     setBlockPickerColor({ color, ral });
   };
 
@@ -116,17 +127,47 @@ const FurnitureBox = (props) => {
           <NewColorPicker colors={colorPalete} onPick={onChangeColor} />{" "}
           <Stack className="mx-auto mt-2 " direction="horizontal" gap={1}>
             <Button variant="primary" className="fw-bold">
-              {Number(
-                lang.currencyPrice(
-                  props.furnitureBox.price,
-                  props.furnitureBox.SEK_price,
-                  props.furnitureBox.DKK_price
-                )
-              ).toLocaleString(undefined, {
-                maximumFractionDigits: 2,
-              })}
-              <span> </span>
-              {lang.currencySymbol()}
+              {blockPickerColor.color === "#FFFFFF" ? (
+                <>
+                  {" "}
+                  {new Intl.NumberFormat().format(
+                    Number(
+                      lang.currencyPrice(
+                        props.furnitureBox.price,
+                        props.furnitureBox.SEK_price,
+                        props.furnitureBox.DKK_price
+                      )
+                    )
+                  )}
+                  <span> </span>
+                  {lang.currencySymbol()}
+                </>
+              ) : (
+                <>
+                  {new Intl.NumberFormat().format(
+                    Number(
+                      lang.currencyPrice(
+                        Number(
+                          Math.round(props.furnitureBox.price * 1.1 + "e+2") +
+                            "e-2"
+                        ),
+                        Number(
+                          Math.round(
+                            props.furnitureBox.SEK_price * 1.1 + "e+2"
+                          ) + "e-2"
+                        ),
+                        Number(
+                          Math.round(
+                            props.furnitureBox.DKK_price * 1.1 + "e+2"
+                          ) + "e-2"
+                        )
+                      )
+                    )
+                  )}
+                  <span> </span>
+                  {lang.currencySymbol()}
+                </>
+              )}
             </Button>
             <OverlayTrigger
               trigger="click"

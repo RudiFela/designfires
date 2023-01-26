@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 const GlassColor = (props) => {
+  const [clicked, setClicked] = useState();
   const { pickedLength } = props;
   const glassProducts = props.glass.filter((item) => item.variant.length > 0);
   const onPick = (item) => {
+    setClicked(item.id);
     let selectedGlass;
     let findLongGlass;
     const findShortGlass = item.variant.find(
@@ -92,13 +95,16 @@ const GlassColor = (props) => {
       {glassProducts.map((item) => (
         <Col key={item.id}>
           <motion.div
+            onClick={() => onPick(item)}
             whileTap={{ scale: 0.9 }}
-            className=" p-2 d-flex justify-content-center"
+            className="p-2 d-flex justify-content-center"
           >
             <img
               style={{ borderRadius: 15, width: "100px" }}
               src={item.images[0].shop_catalog}
-              onClick={() => onPick(item)}
+              className={`${
+                clicked === item.id ? "border border-4 border-warning" : ""
+              } `}
             />
           </motion.div>
           <p className="text-center fw-bold m-0 pt-2">{item.name}</p>

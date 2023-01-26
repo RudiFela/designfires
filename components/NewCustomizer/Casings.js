@@ -27,6 +27,7 @@ const Casings = (props) => {
   const [longPcs, setLongPcs] = useState();
   const [holdersPcs, setHoldersPcs] = useState();
   const [selected, setSelected] = useState(false);
+  const [clicked, setClicked] = useState();
   useEffect(() => {
     // console.log(props.casings);
   }, []);
@@ -66,12 +67,13 @@ const Casings = (props) => {
 
   //console.log(pickedVariantCasings);
   const onPick = (item) => {
+    setClicked(item.id);
     setLongPcs(item.longGlass);
     setShortPcs(item.shortGlass);
     setHoldersPcs(item.glassPcs);
     props.onCasingPick(item);
     setSelected(true);
-    console.log(item);
+    //console.log(item);
   };
   const pickStyle = `${selected ? "p-3" : "p-3 not-allowed"}`;
   return (
@@ -102,7 +104,9 @@ const Casings = (props) => {
         {pickedVariantCasings.map((item) => (
           <Col key={item.id}>
             <motion.div
-              className=" fw-bold bg-primary p-3 borderr m-1"
+              className={`fw-bold bg-primary p-3 borderr m-1 ${
+                clicked === item.id ? "border border-3 border-warning" : ""
+              } `}
               onClick={() => onPick(item)}
               whileTap={{ scale: 0.9 }}
             >

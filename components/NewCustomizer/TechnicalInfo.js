@@ -1,6 +1,7 @@
 import { BiTimer } from "react-icons/bi";
-import { GiElectric } from "react-icons/gi";
+import { GiElectric, GiAutoRepair } from "react-icons/gi";
 import { MdWaterDrop } from "react-icons/md";
+import { ImFire } from "react-icons/im";
 import {
   CgArrowsMergeAltV,
   CgArrowsShrinkH,
@@ -114,7 +115,7 @@ const TechnicalInfo = (props) => {
       </Row>
       <div className="text-center">
         <Button
-          className="float-end fw-bold"
+          className=" fw-bold"
           variant="success"
           onClick={() => props.showModalHandler(item.technical_image[0])}
         >
@@ -122,6 +123,11 @@ const TechnicalInfo = (props) => {
           <MdOutlineLocalSee className="ms-2" />
         </Button>
       </div>
+      <h2 className="text-center mt-2">
+        <Badge bg="info">
+          {item.stock_status === "instock" ? <ImFire /> : <GiAutoRepair />}
+        </Badge>
+      </h2>
     </div>
   ) : (
     <h3 className="text-center">

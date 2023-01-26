@@ -13,7 +13,7 @@ const VentilationGridsPicker = (props) => {
     // onSubmit.current();
     // console.log(onSubmit.current);
     //setNextStepAllow(false);
-    if (currentStep === 1) {
+    if (currentStep === 0) {
       addItem({ ...props.item, img: props.item.images[0].shop_thumbnail });
     }
     setCurrentStep(currentStep + 1);
@@ -30,31 +30,7 @@ const VentilationGridsPicker = (props) => {
               // transition={{ duration: 0.5 }}
               exit={{ opacity: 0 }}
             >
-              <CustomizerHeader>Pick Inlet Grid</CustomizerHeader>
-              <Row>
-                {props.ventilationGrids.map((item) => (
-                  <ListVentilationGridVariants
-                    key={item.id}
-                    name={item.name}
-                    itemToList={item.variant}
-                    grid={props.item.acf.inlet_grids}
-                    onPick={nextStep}
-                  />
-                ))}
-              </Row>
-            </motion.div>
-          </AnimatePresence>
-        );
-      case 1:
-        return (
-          <AnimatePresence>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              // transition={{ duration: 0.5 }}
-              exit={{ opacity: 0 }}
-            >
-              <CustomizerHeader>Pick Outlet Grid</CustomizerHeader>
+              <CustomizerHeader>Pick Ventilation Grid Type</CustomizerHeader>
               <Row>
                 {props.ventilationGrids.map((item) => (
                   <ListVentilationGridVariants
@@ -69,7 +45,8 @@ const VentilationGridsPicker = (props) => {
             </motion.div>
           </AnimatePresence>
         );
-      case 2:
+
+      case 1:
         return (
           <AnimatePresence>
             <motion.div
@@ -94,11 +71,14 @@ const VentilationGridsPicker = (props) => {
             </motion.div>
           </AnimatePresence>
         );
-      case 3:
+      case 2:
         return (
           <div className="text-black">
             <CustomizerHeader>Send Your Choices To Us</CustomizerHeader>
             <ContactForm />
+            <span className="text-white">
+              <Summary allowNextStep={console.log} />
+            </span>
           </div>
         );
     }
@@ -108,7 +88,7 @@ const VentilationGridsPicker = (props) => {
     <div className="mt-3">
       <h2 className="text-center p-3">Recommended Ventilation Grids</h2>
       <div
-        className="text-white bg-success p-3 borderr"
+        className="text-white bg-success p-3 borderr new-customizer-body"
         style={{
           height: "600px",
           overflowY: "scroll",

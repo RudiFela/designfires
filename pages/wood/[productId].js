@@ -4,6 +4,7 @@ import ProductLayout from "../../components/WoodCustomizer/ProductLayout";
 import axios from "axios";
 import Navibar from "../../containers/navbar/Navbar";
 import Footer from "../../containers/footer/Footer";
+import { SSRProvider } from "react-bootstrap";
 function ProductPage(props) {
   const [product, setProduct] = useState(props.fireplace);
   const [productId, setProductId] = useState(props.fireplace.id);
@@ -18,7 +19,7 @@ function ProductPage(props) {
       : props.fireplace.images
   );
 
-  console.log(props.fireplace);
+  //console.log(props.fireplace);
   //console.log(router.pathname);
   //console.log(router.query);
   const { fireplace } = props;
@@ -27,21 +28,23 @@ function ProductPage(props) {
   }
 
   return (
-    <div className="main">
-      <Navibar />
-      <div className="my-5">
-        <ProductLayout
-          item={product}
-          ventilationGrids={props.ventilationGrids}
-          gallery={
-            props.fireplace.Image_Gallery.length > 0
-              ? props.fireplace.Image_Gallery
-              : props.fireplace.images
-          }
-        />
+    <SSRProvider>
+      <div className="main">
+        <Navibar />
+        <div className="my-5">
+          <ProductLayout
+            item={product}
+            ventilationGrids={props.ventilationGrids}
+            gallery={
+              props.fireplace.Image_Gallery.length > 0
+                ? props.fireplace.Image_Gallery
+                : props.fireplace.images
+            }
+          />
+        </div>
+        <Footer></Footer>
       </div>
-      <Footer></Footer>
-    </div>
+    </SSRProvider>
   );
 }
 export default ProductPage;

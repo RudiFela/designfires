@@ -41,32 +41,34 @@ export const useCartCurrency = () => {
 
   const countCartCurrency = (items) => {
     // items.map((item) => console.log(item.quantity));
+    if (items !== null) {
+      const price = items.reduce(
+        (total, currentValue) =>
+          total +
+          currentValue.prices.find((item) => item.currency === "EUR").amount *
+            currentValue.quantity,
+        0
+      );
 
-    const price = items.reduce(
-      (total, currentValue) =>
-        total +
-        currentValue.prices.find((item) => item.currency === "EUR").amount *
-          currentValue.quantity,
-      0
-    );
-
-    //console.log(items);
-    // console.log(price, "here");
-    const SEK_price = items.reduce(
-      (total, currentValue) =>
-        total +
-        currentValue.prices.find((item) => item.currency === "SEK").amount *
-          currentValue.quantity,
-      0
-    );
-    const DKK_price = items.reduce(
-      (total, currentValue) =>
-        total +
-        currentValue.prices.find((item) => item.currency === "DKK").amount *
-          currentValue.quantity,
-      0
-    );
-    return { price, SEK_price, DKK_price };
+      //console.log(items);
+      // console.log(price, "here");
+      const SEK_price = items.reduce(
+        (total, currentValue) =>
+          total +
+          currentValue.prices.find((item) => item.currency === "SEK").amount *
+            currentValue.quantity,
+        0
+      );
+      const DKK_price = items.reduce(
+        (total, currentValue) =>
+          total +
+          currentValue.prices.find((item) => item.currency === "DKK").amount *
+            currentValue.quantity,
+        0
+      );
+      return { price, SEK_price, DKK_price };
+    }
+    return;
   };
   const calculateItemTotals = (items) =>
     items.map((item) => ({

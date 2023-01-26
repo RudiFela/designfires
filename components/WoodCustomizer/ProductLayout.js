@@ -1,19 +1,37 @@
 import { useContext, useEffect } from "react";
 
-import { Row, Col, Badge, Button, Ratio, Container } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Badge,
+  Button,
+  Ratio,
+  Container,
+  Stack,
+} from "react-bootstrap";
 import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
 import ImageGallery from "react-image-gallery";
 import { LanguageContext } from "../context/language-context";
-
+import { motion, useAnimation } from "framer-motion";
 import Dimensions from "../UI/Dimensions";
-
-import { motion } from "framer-motion";
-import { BsCheckSquare, BsXSquare } from "react-icons/bs";
+import { BsInfoCircle, BsCheckSquare, BsXSquare } from "react-icons/bs";
 import VentilationGridsPicker from "./VentilationGridsPicker";
+import SelectFireplace from "./SelectFireplace";
 const ProductLayout = (props) => {
   useEffect(() => {
-    console.log(props.item);
+    const intervalId = setInterval(() => {
+      sequence();
+    }, 2000);
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
+  const animation = useAnimation();
+  async function sequence() {
+    await animation.start({ scale: 1.2 });
+
+    animation.start({ scale: 1 });
+  }
   const language = useContext(LanguageContext);
   const { ...item } = props.item;
   const openInNewTab = (url) => {
@@ -36,9 +54,9 @@ const ProductLayout = (props) => {
   return (
     <div className="text-white fw-bold">
       <Container>
-        <Row className="justify-content-around">
-          <Col md={6}>
-            {" "}
+        <h1 className="text-center fw-bold">{item.name}</h1>
+        <Stack gap={3}>
+          <div className="d-flex justify-content-center w-100">
             <ImageGallery
               style={{ borderRadius: "25px" }}
               items={prepareGallery(props.gallery)}
@@ -47,15 +65,68 @@ const ProductLayout = (props) => {
               showThumbnails={item.variant.length > 0 ? false : true}
               showBullets={true}
             />
+          </div>
+          <div md="auto" className="fs-4  d-flex justify-content-center">
+            <div className="m-1 p-2 ">
+              <div>
+                <Col className="fs-4   d-flex justify-content-center my-auto ">
+                  {item.variant.length > 0 ? (
+                    <h1 className="fw-bold">Pick Variant to check price!</h1>
+                  ) : (
+                    <Stack gap={3}>
+                      <Row className="text-center">
+                        <Col>
+                          <Badge bg="info" className="fs-4 m-2">
+                            {Number(
+                              language.currencyPrice(
+                                item.price,
+                                item.SEK_price,
+                                item.DKK_price
+                              )
+                            ).toLocaleString(undefined, {
+                              maximumFractionDigits: 2,
+                            })}
+                            {language.currencySymbol()}
+                          </Badge>
+                        </Col>
+                        <Col>
+                          <LanguageSwitcher style={{ borderRadius: "15px" }} />
+                        </Col>
+                      </Row>
+
+                      <span className="fs-5 m-2">
+                        Delivery time: {item.pro === "K" ? "90" : "30"} days
+                      </span>
+                      <Button
+                        variant="info"
+                        className="text-white fw-bold fs-5"
+                        onClick={() =>
+                          openInNewTab(item.acf.technical_drawing.url)
+                        }
+                      >
+                        <BsInfoCircle className="m-1" />{" "}
+                        <span>Technical Drawing</span>
+                      </Button>
+                    </Stack>
+                  )}
+                </Col>
+              </div>
+            </div>
+          </div>
+          <div>
             {item.variant.length > 0 ? (
-              <Row className="mt-4" xs={3}>
+              <Row xs={3} sm={4} md={6} lg={8}>
                 {item.variant.map((item) => (
                   <Col key={item.id} className="flex justify-content-start p-2">
                     <div
                       style={{ borderRadius: "15px" }}
                       className="bg-success"
                     >
-                      <motion.div whileHover={{ scale: 1.1 }}>
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        animate={animation}
+                        onTap={sequence}
+                      >
                         <div className="pt-3 text-center fs-5 text-uppercase">
                           {item.length.option}
                         </div>
@@ -79,52 +150,18 @@ const ProductLayout = (props) => {
                 ))}
               </Row>
             ) : null}
-          </Col>
-          <Col md="auto" className="fs-4  d-flex justify-content-center">
-            <div className="m-1 p-2 ">
-              <h1 className="fw-bolder my-5">{item.name}</h1>
-              <div>
-                <Row className="justify-content-center">
-                  <Col
-                    className="fs-4   d-flex justify-content-center my-auto "
-                    md={4}
-                  >
-                    {item.variant.length > 0 ? (
-                      <span>Pick Variant to check price</span>
-                    ) : (
-                      <>
-                        {Number(
-                          language.currencyPrice(
-                            item.price,
-                            item.priceSEK,
-                            item.priceDKK
-                          )
-                        ).toLocaleString(undefined, {
-                          maximumFractionDigits: 2,
-                        })}
-                        <span> </span>
-                        {language.currencySymbol()}
-                      </>
-                    )}
-                  </Col>
-                  <Col md={3}>
-                    <LanguageSwitcher style={{ borderRadius: "15px" }} />
-                  </Col>
-                </Row>
-              </div>
-              <Col className="m-5">
-                <span className="fs-5">
-                  Delivery time: {item.pro === "K" ? "90" : "30"} days
-                </span>
-              </Col>
-            </div>
-          </Col>
-        </Row>
-        {item.variant.length === 0 && item.pro === "H" && (
+          </div>
+        </Stack>
+
+        {item.variant.length === 0 &&
+        item.pro === "H" &&
+        item.acf.type === "build-in" ? (
           <VentilationGridsPicker
             item={item}
             ventilationGrids={props.ventilationGrids}
           />
+        ) : (
+          item.variant.length === 0 && <SelectFireplace item={item} />
         )}
 
         <Row className="my-3 fs-5" xs={1} md={1} lg={2}>
@@ -197,14 +234,20 @@ const ProductLayout = (props) => {
                 Min outlet grids active field (cm2)
                 <Badge bg="info" className="float-end">
                   {" "}
-                  <span> </span> ≥700
+                  <span> </span>{" "}
+                  {item.acf.outlet_grids !== ""
+                    ? `≥${item.acf.outlet_grids}`
+                    : "≥700"}
                 </Badge>
               </span>
               <span>
                 Min inlet grids active field (cm2)
                 <Badge bg="info" className="float-end">
                   {" "}
-                  <span> </span> ≥500
+                  <span> </span>{" "}
+                  {item.acf.inlet_grids !== ""
+                    ? `≥${item.acf.inlet_grids}`
+                    : "≥500"}
                 </Badge>
               </span>
               <span>
@@ -365,14 +408,6 @@ const ProductLayout = (props) => {
             </Row>
           </Col>
         </Row>
-
-        <Button
-          variant="info"
-          className="text-white"
-          onClick={() => openInNewTab(item.acf.technical_drawing.url)}
-        >
-          Technical Drawing
-        </Button>
       </Container>
     </div>
   );

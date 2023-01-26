@@ -21,12 +21,10 @@ const GeneratePdf = ({ html }) => {
     doc.setFillColor(204, 204, 204, 0);*/
 
   const generatePdf = () => {
-    document.getElementById("print").className =
-      "hide-background fw-bold modal-body";
+    // document.getElementById("print").className =
+    // "hide-background fw-bold modal-body";
     const printArea = document.getElementById("print");
-    //console.log(document.getElementById("print"));
 
-    // document.getElementById("print").className = "modallos fw-bold modal-body";
     html2canvas(printArea, {
       allowTaint: true,
       useCORS: true,
@@ -88,7 +86,7 @@ const GeneratePdf = ({ html }) => {
 
   return (
     <div className="button-container">
-      <Button variant="outline-danger" onClick={generatePdf}>
+      <Button variant="info" onClick={generatePdf}>
         Generate PDF
       </Button>
     </div>

@@ -5,7 +5,7 @@ const WoodCardList = (props) => {
       {props.items.length > 0 ? (
         props.items.map((item) =>
           item.stock_status == "instock" ? (
-            <WoodCard item={item} showModal={props.showModal} />
+            <WoodCard key={item.id} item={item} showModal={props.showModal} />
           ) : null
         )
       ) : (

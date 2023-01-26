@@ -1,14 +1,12 @@
-import { Badge, Col, Ratio, Row, Image } from "react-bootstrap";
-import { motion } from "framer-motion";
+import { Col, Ratio, Row, Image } from "react-bootstrap";
+import CustomizerHeader from "../UI/CustomizerHeader";
 const TypePick = (props) => {
   return (
-    <div>
-      <h1 className="text-center">
-        <Badge>FirePlace</Badge>
-      </h1>
-      <Row className="p-2" xs={1} md={2}>
-        {props.fireplaceItems.map((item) => (
-          <Col key={item.id} className=" d-flex justify-content-center p-4">
+    <Row className="p-2" xs={1} md={2}>
+      {props.fireplaceItems.map((item) => (
+        <div key={item.id}>
+          <CustomizerHeader>{item.name}</CustomizerHeader>{" "}
+          <Col className=" d-flex justify-content-center p-3">
             <Ratio aspectRatio="4x3">
               <Image
                 className="grow"
@@ -20,9 +18,9 @@ const TypePick = (props) => {
               />
             </Ratio>
           </Col>
-        ))}
-      </Row>
-    </div>
+        </div>
+      ))}
+    </Row>
   );
 };
 export default TypePick;

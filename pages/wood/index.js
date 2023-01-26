@@ -32,15 +32,17 @@ const Wood = (props) => {
   ];
 
   return (
-    <div className="main">
-      <Navibar />
+    <SSRProvider>
+      <div className="main">
+        <Navibar />
 
-      <WoodCustomizer
-        decorations={props.decorations}
-        fireplace={props.woodFireplaces}
-      />
-      <Footer />
-    </div>
+        <WoodCustomizer
+          decorations={props.decorations}
+          fireplace={props.woodFireplaces}
+        />
+        <Footer />
+      </div>
+    </SSRProvider>
   );
 };
 export default Wood;
