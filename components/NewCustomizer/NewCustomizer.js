@@ -46,8 +46,8 @@ const NewCustomizer = (props) => {
     // console.log(process.env);
     const crud = {
       auth: {
-        username: process.env.NEXT_PUBLIC_WORDPRESS_U,
-        password: process.env.NEXT_PUBLIC_WORDPRESS_P,
+        username: "ck_b143b31c7842e4a628279fe7b097980c311f08d5", //process.env.NEXT_PUBLIC_WORDPRESS_U,
+        password: "cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e", //process.env.NEXT_PUBLIC_WORDPRESS_P,
       },
     };
 
