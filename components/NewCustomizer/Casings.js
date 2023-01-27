@@ -120,7 +120,7 @@ const Casings = (props) => {
 
                     //  whileTap={{ scale: 0.9 }}
                   >
-                    <Ratio aspectRatio="4x3">
+                    <Ratio aspectRatio="4x3" onClick={() => onPick(item)}>
                       <img
                         src={item.img}
                         alt="casing photo"

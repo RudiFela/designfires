@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useCart } from "react-use-cart";
 import Image from "next/image";
-import { Row, Col, Button, Badge } from "react-bootstrap";
+import { Row, Col, Button, Stack, Badge } from "react-bootstrap";
 import CustomizerHeader from "../UI/CustomizerHeader";
 import { LanguageContext } from "../context/language-context";
 import AnimateWrapper from "./AnimateWrapper";
@@ -18,6 +18,7 @@ const Summary = (props) => {
     link.download = "data.json";
 
     link.click();*/
+    console.log(items);
   }, []);
   const { items } = useCart();
   const lang = useContext(LanguageContext);
@@ -41,8 +42,19 @@ const Summary = (props) => {
               src={item.img}
             />
           </Col>
-          <Col className="d-flex justify-content-center align-items-center fw-bold mx-3">
+          <Col
+            className="d-flex justify-content-center align-items-center fw-bold "
+            md={4}
+          >
             {item.name}
+
+            {item.dimensions.length !== "" && (
+              <Stack gap={1} className="p-2 mx-2">
+                <Badge bg="danger">Length: {item.dimensions.length}mm</Badge>
+                <Badge bg="danger">Height: {item.dimensions.height}mm</Badge>
+                <Badge bg="danger">Deep: {item.dimensions.width}mm</Badge>
+              </Stack>
+            )}
           </Col>
           <Col className="d-flex justify-content-center align-items-center fw-bold">
             {lang

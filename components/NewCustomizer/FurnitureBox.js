@@ -124,7 +124,11 @@ const FurnitureBox = (props) => {
           />
         </Col>
         <Col style={{ opacity: 0.85 }} className="mx-2" md={5}>
-          <NewColorPicker colors={colorPalete} onPick={onChangeColor} />{" "}
+          <NewColorPicker
+            colors={colorPalete}
+            onPick={onChangeColor}
+            selectedColor={blockPickerColor}
+          />{" "}
           <Stack className="mx-auto mt-2 " direction="horizontal" gap={1}>
             <Button variant="primary" className="fw-bold">
               {blockPickerColor.color === "#FFFFFF" ? (

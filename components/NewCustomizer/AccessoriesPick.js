@@ -42,7 +42,13 @@ const AccessoriesPick = (props) => {
                 style={{ maxWidth: "21rem", borderRadius: "25px" }}
                 className="m-1"
               >
-                <div className="m-1 p-3" style={{ height: "180px" }}>
+                <div
+                  className="m-1 p-3"
+                  style={{ height: "180px" }}
+                  onClick={() => {
+                    onAdd(item);
+                  }}
+                >
                   <HoverVideoPlayer
                     videoSrc={item.acf.movie_of_decoration_product}
                     videoStyle={{

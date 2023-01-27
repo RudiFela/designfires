@@ -23,7 +23,11 @@ const NewColorPicker = (props) => {
               <motion.div whileHover={{ scale: 1.1 }}>
                 <div
                   onClick={() => props.onPick(item.hex, item.ral)}
-                  className="text-center "
+                  className={`text-center ${
+                    props.selectedColor.color === item.hex
+                      ? "border border-4 border-warning"
+                      : ""
+                  }`}
                   style={{
                     width: "70px",
                     height: "80px",

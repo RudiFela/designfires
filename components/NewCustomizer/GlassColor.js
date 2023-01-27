@@ -80,8 +80,8 @@ const GlassColor = (props) => {
         short: findShortGlass,
         shortPcs: props.shortPcs,
         holderPcs: props.holdersPcs,
-        shortName: `${item.name}/ 300mm`,
-        longName: `${item.name}/ ${props.pickedLength}mm`,
+        shortName: `${item.name} 300`,
+        longName: `${item.name} ${props.pickedLength}`,
         img: item.images[0].shop_thumbnail,
       };
     }
