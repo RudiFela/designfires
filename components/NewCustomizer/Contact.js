@@ -220,9 +220,8 @@ const ContactForm = () => {
   const handleClick = () => setSending(true);
   return (
     <AnimatePresence>
-      {" "}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >

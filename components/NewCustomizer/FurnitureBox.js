@@ -89,7 +89,7 @@ const FurnitureBox = (props) => {
     <>
       <CustomizerHeader>Furnite Box</CustomizerHeader>
       <Row>
-        <Col className="my-2 mx-2">
+        <Col className="my-2 mx-2" md={5}>
           <div className="product mb-2">
             <Ratio aspectRatio="4x3" className="">
               <div className="">
@@ -123,7 +123,7 @@ const FurnitureBox = (props) => {
             allowNextStep={props.allowNextStep}
           />
         </Col>
-        <Col style={{ opacity: 0.85 }} className="mx-2">
+        <Col style={{ opacity: 0.85 }} className="mx-2" md={5}>
           <NewColorPicker colors={colorPalete} onPick={onChangeColor} />{" "}
           <Stack className="mx-auto mt-2 " direction="horizontal" gap={1}>
             <Button variant="primary" className="fw-bold">

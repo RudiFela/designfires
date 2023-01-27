@@ -9,6 +9,7 @@ import { LanguageContext } from "../context/language-context";
 import { useCart } from "react-use-cart";
 
 import CustomizerHeader from "../UI/CustomizerHeader";
+import AnimateWrapper from "./AnimateWrapper";
 const AccessoriesPick = (props) => {
   useEffect(() => {
     props.allowNextStep();
@@ -27,7 +28,7 @@ const AccessoriesPick = (props) => {
     addToCart(cartProduct);
   };
   return (
-    <div>
+    <AnimateWrapper>
       <CustomizerHeader>Accessories</CustomizerHeader>
       <Row xs="1" md="2" lg="3">
         {props.accessories.map((item) => (
@@ -119,7 +120,7 @@ const AccessoriesPick = (props) => {
           </Col>
         ))}{" "}
       </Row>
-    </div>
+    </AnimateWrapper>
   );
 };
 export default AccessoriesPick;

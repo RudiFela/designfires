@@ -1,13 +1,5 @@
 import React, { useContext } from "react";
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-  Image,
-  Font,
-} from "@react-pdf/renderer";
+import { Text, View, StyleSheet, Image } from "@react-pdf/renderer";
 import { LanguageContext } from "../../context/language-context";
 
 const TemplateTable = (props) => {
@@ -120,9 +112,7 @@ const TemplateTable = (props) => {
       <Text style={styles.description}>{item.name}</Text>
 
       <Text style={styles.amount}>
-        {item.SEK_price.toLocaleString(undefined, {
-          maximumFractionDigits: 2,
-        })}
+        {item.SEK_price.toString()}
         {props.currency}
       </Text>
 

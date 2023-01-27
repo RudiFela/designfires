@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Row, Col, Button, Badge } from "react-bootstrap";
 import CustomizerHeader from "../UI/CustomizerHeader";
 import { LanguageContext } from "../context/language-context";
+import AnimateWrapper from "./AnimateWrapper";
 const Summary = (props) => {
   useEffect(() => {
     props.allowNextStep ? props.allowNextStep(true) : "";

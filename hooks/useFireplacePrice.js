@@ -1,6 +1,6 @@
 import { useCartCurrency } from "./useCartCurrency";
 export const useFireplacePrice = () => {
-  const { getPrices, addToCart } = useCartCurrency();
+  const { getPrices } = useCartCurrency();
   const fillingTypes = [
     { name: "EW", price: 0, SEK_price: 0, DKK_price: 0 },
     { name: "T", price: 100, SEK_price: 995, DKK_price: 755 },
@@ -27,18 +27,14 @@ export const useFireplacePrice = () => {
     return price;
   };
   const priceCount = (items) => {
-    console.log(items);
+    // console.log(items);
     let total = 0;
     items.map((item) => (total = total + item));
-    console.log(total);
+    // console.log(total);
     return total;
   };
   const fireplacePrice = (fireplace) => {
     let product;
-    console.log(fireplace.filling);
-    let fillingPrice = fillingTypes.find(
-      (item) => item.name === fireplace.filling
-    );
 
     // console.log(fireplace.item);
     fireplace.product.name === "DFM"
@@ -130,7 +126,7 @@ export const useFireplacePrice = () => {
             ])
           ),
         });
-    console.log(product);
+    // console.log(product);
     return product;
   };
 

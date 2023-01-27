@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import Accessories from "../../components/Accessories/Accessories";
+import { Button, Container } from "react-bootstrap";
 import NewCustomizer from "../../components/NewCustomizer/NewCustomizer";
 import Decorations from "../../components/Decorations/Decorations";
 import Inspired from "../../components/Inspired/Inspired";
@@ -9,10 +9,14 @@ import { LanguageContext } from "../../components/context/language-context";
 import Customizer from "../../components/Customizer/Customizer";
 import BioFuel from "../../components/BioFuel/BioFuel";
 import MotionSlider from "../../components/UI/Slider/MotionSlider";
+import { ImArrowRight2 } from "react-icons/im";
+import { AnimatePresence, motion } from "framer-motion";
+import AnimateWrapper from "../../components/NewCustomizer/AnimateWrapper";
 
 const Body = (props) => {
   const [lowestPriceDFM, setLowestPriceDFM] = useState();
   const [lowestPriceDFE, setLowestPriceDFE] = useState();
+  const [customizer, setCustomizer] = useState(false);
   const { language } = useContext(LanguageContext);
   useEffect(() => {
     takePrice();
@@ -50,14 +54,47 @@ const Body = (props) => {
 
       <Inspired />
       <Decorations decorations={props.decorations} />
-
-      <NewCustomizer
-        fireplace={props.fireplaces}
-        glass={props.accessories}
-        furnitureBox={props.boxes}
-        casings={props.casings}
-        accessories={props.decorations}
-      />
+      <AnimateWrapper>
+        <div className="w-100 bg-danger p-3 fst-italic">
+          <h1
+            id="customize"
+            className="text-center text-white p-4 mt-3 fw-bold"
+          >
+            Fireplace of Your dreams with our Customizer Tool!
+          </h1>
+        </div>
+        {customizer ? (
+          <NewCustomizer
+            fireplace={props.fireplaces}
+            // glass={props.accessories}
+            //furnitureBox={props.boxes}
+            // casings={props.casings}
+            accessories={props.decorations}
+          />
+        ) : (
+          <AnimateWrapper>
+            {" "}
+            <Container className="mt-4">
+              <div
+                className="bg-success px-3 py-1 text-white newcustomizer-body position-relative"
+                style={{
+                  height: "600px",
+                  overflowY: "scroll",
+                }}
+              >
+                <Button
+                  variant="info"
+                  className="fw-bold position-absolute bottom-0 end-0 m-3"
+                  onClick={() => setCustomizer(true)}
+                >
+                  <span>START NOW </span>
+                  <ImArrowRight2 className="mb-1 fw-bold" />
+                </Button>
+              </div>{" "}
+            </Container>
+          </AnimateWrapper>
+        )}{" "}
+      </AnimateWrapper>
       <MotionSlider />
       <BioFuel
         fuel={props.fuel}

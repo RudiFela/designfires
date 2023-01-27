@@ -4,6 +4,7 @@ import { LanguageContext } from "../context/language-context";
 const DfmOptions = (props) => {
   useEffect(() => {
     // props.onFillingType("EW");
+    // console.log(document.querySelector("group1"));
   }, []);
   const lang = useContext(LanguageContext);
   const currencyPriceT = () => {
@@ -11,6 +12,10 @@ const DfmOptions = (props) => {
   };
   const currencyPricePW = () => {
     return lang.currencyPrice("995", "9995", "7555");
+  };
+  const onTypeChange = (func) => {
+    //console.log(document.getElementsByName("group1"));
+    func();
   };
   const popoverEW = (
     <Popover id="popover-basic">
@@ -70,7 +75,7 @@ const DfmOptions = (props) => {
         type="radio"
         defaultChecked={true}
         id={`inline--1EW`}
-        onChange={() => props.onFillingType("EW")}
+        onChange={() => onTypeChange(() => props.onFillingType("EW"))}
       />
       <Form.Check
         inline

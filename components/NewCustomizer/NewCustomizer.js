@@ -8,12 +8,13 @@ import TypePick from "./TypePick";
 import MountPick from "./MountPick";
 import Summary from "./Summary";
 import { FiShoppingCart } from "react-icons/fi";
-import { Button, Container, Badge } from "react-bootstrap";
+import { Button, Container, Badge, Spinner } from "react-bootstrap";
 import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
 import Contact from "./Contact";
 import CustomizerHeader from "../UI/CustomizerHeader";
 import dynamic from "next/dynamic";
-import test from "./DownloadPdf";
+import AnimateWrapper from "./AnimateWrapper";
+import axios from "axios";
 
 ///dimport PdfTemplate from "./PdfTemplate";
 //const MyDoc = <PdfTemplate />;
@@ -24,18 +25,58 @@ const NewCustomizer = (props) => {
   const [nextStepAllow, setNextStepAllow] = useState(false);
   const [customFireplace, setCustomFireplace] = useState();
   const [cartTotals, setCartTotals] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [furnitureBoxes, setFurnitureBoxes] = useState();
+  const [casings, setCasings] = useState();
+  const [glass, setGlass] = useState();
   // const [pdf, setPdf] = usePDF({ document: MyDoc });
   const OrderRef = useRef();
   useEffect(() => {
     // console.log(props.furnitureBox);
-    //setCartTotal(countCartCurrency(items));
-    //console.log("useEffect");
+
     //!isEmpty &&
+    //console.log(props.fireplace);
     setCartTotals(countCartCurrency(items));
   }, [currentStep, nextStepAllow]);
+  useEffect(() => {
+    isLoading && getProducts();
+    //console.log("useEffect");
+  }, []);
+  const getProducts = async () => {
+    // console.log(process.env);
+    const crud = {
+      auth: {
+        username: process.env.NEXT_PUBLIC_WORDPRESS_U,
+        password: process.env.NEXT_PUBLIC_WORDPRESS_P,
+      },
+    };
+
+    const casingsURL =
+      "https://designfires.pl/wp-json/wc/v3/products?category=23";
+    const accessoriesURL =
+      "https://designfires.pl/wp-json/wc/v3/products?category=21";
+    // const fireplacesURL =
+    //  "https://designfires.pl/wp-json/wc/v3/products?category=26";
+    const boxesUrl =
+      "https://designfires.pl/wp-json/wc/v3/products?category=30";
+
+    // ck ck_b143b31c7842e4a628279fe7b097980c311f08d5
+    // cs cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e
+    const casingFetch = await axios.get(casingsURL, crud);
+    //const fireplaceFetch = await axios.get(fireplacesURL, crud);
+    const accessoriesFetch = await axios.get(accessoriesURL, crud);
+
+    const boxesFetch = await axios.get(boxesUrl, crud);
+    setFurnitureBoxes(boxesFetch.data);
+    setCasings(casingFetch.data);
+    setGlass(accessoriesFetch.data);
+    setIsLoading(false);
+    // console.log(accessoriesFetch);
+    console.log(props.fuel);
+  };
   const lang = useContext(LanguageContext);
-  const { items, isEmpty } = useCart();
-  const { countCartCurrency, deleteCart } = useCartCurrency();
+  const { items } = useCart();
+  const { countCartCurrency } = useCartCurrency();
   const onSubmit = useRef(null);
   const onTypePick = (item) => {
     setFireplaceType(item);
@@ -43,12 +84,6 @@ const NewCustomizer = (props) => {
     //console.log(id);
   };
   const DownloadPdf = dynamic(() => import("./DownloadPdf"), {
-    ssr: false,
-  });
-  const PdfTemplate = dynamic(() => import("./PdfTemplate/PdfTemplate"), {
-    ssr: false,
-  });
-  const GeneratePDF = dynamic(() => import("./../GeneratePDF/GeneratePdf"), {
     ssr: false,
   });
   const onLengthPick = (length) => {
@@ -79,16 +114,18 @@ const NewCustomizer = (props) => {
 
       case 2:
         return (
-          <OptionsPick
-            fireplaceType={fireplaceType}
-            fireplaceItems={props.fireplace}
-            //  nextStep={nextStep}
-            //  backStep={backStep}
-            onLengthPick={onLengthPick}
-            allowNextStep={onNextStepAllow}
-            onSubmit={onSubmit}
-            customVariant={customVariant}
-          />
+          <AnimateWrapper>
+            <OptionsPick
+              fireplaceType={fireplaceType}
+              fireplaceItems={props.fireplace}
+              //  nextStep={nextStep}
+              //  backStep={backStep}
+              onLengthPick={onLengthPick}
+              allowNextStep={onNextStepAllow}
+              onSubmit={onSubmit}
+              customVariant={customVariant}
+            />
+          </AnimateWrapper>
         );
       case 3:
         return (
@@ -96,13 +133,13 @@ const NewCustomizer = (props) => {
             // nextStep={nextStep}
             //backStep={backStep}
             pickedLength={pickedLength}
-            glass={props.glass}
+            glass={glass}
             furnitureBox={
               fireplaceType.name === "DFM"
-                ? props.furnitureBox[0]
-                : props.furnitureBox[1]
+                ? furnitureBoxes[0]
+                : furnitureBoxes[1]
             }
-            casings={props.casings}
+            casings={casings}
             onSubmit={onSubmit}
             allowNextStep={onNextStepAllow}
             customFireplace={customFireplace}
@@ -134,15 +171,6 @@ const NewCustomizer = (props) => {
   };
   return (
     <>
-      <div className="w-100 bg-danger p-3 fst-italic">
-        <h1 id="customize" className="text-center text-white p-4 mt-3 ">
-          Easly build Fireplace of Your dreams with our Customizer Tool!
-        </h1>
-        <h3 className="text-center text-white p-2 mt-3 ">
-          There You can find all prices,technical information,mount type,casing
-          or even furniture boxes!
-        </h3>
-      </div>
       <Container className="mt-4">
         <div
           className="bg-success px-3 py-1 text-white new-customizer-body"
@@ -151,7 +179,16 @@ const NewCustomizer = (props) => {
             overflowY: "scroll",
           }}
         >
-          {displayStep(currentStep)}
+          {!isLoading ? (
+            displayStep(currentStep)
+          ) : (
+            <div className="position-relative w-100 h-100 ">
+              <div className="position-absolute top-50 start-50">
+                <Spinner className="p-3" animation="border" variant="info" />
+                <p className="text-center fw-bold">Loading...</p>
+              </div>
+            </div>
+          )}
         </div>
         <div
           className="p-3 bg-danger d-flex flex-row justify-content-end flex-wrap"
@@ -202,7 +239,7 @@ const NewCustomizer = (props) => {
           <span className="p-2">
             {currentStep > 1 && currentStep < 6 && (
               <Button
-                className=" "
+                className="fw-bold"
                 variant={nextStepAllow ? "info" : "primary"}
                 disabled={!nextStepAllow}
                 onClick={() => nextStep()} //nextStep()

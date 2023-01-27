@@ -13,11 +13,7 @@ export const useCartCurrency = () => {
   /*useEffect(() => {
     count && lol();
   }, [totalCart, count]);*/
-  const lol = () => {
-    setTotalCart(countCartCurrency(items));
-    setCount(false);
-    console.log("counted");
-  };
+
   const addToCart = (item) => {
     addItem(item);
     // setCount(true);

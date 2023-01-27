@@ -6,6 +6,7 @@ import Casings from "./Casings";
 import FurnitureBox from "./FurnitureBox";
 import SelfBuildMount from "./SelfBuildMount";
 import MountPickWrapper from "./MountPickWrapper";
+import AnimateWrapper from "./AnimateWrapper";
 const MountPick = (props) => {
   const [mountPick, setMountPick] = useState(0);
   const [shortGlass, setShortGlass] = useState();
@@ -123,78 +124,90 @@ const MountPick = (props) => {
     switch (mountPick) {
       case 0:
         return (
-          <Row md={3} className="h-100">
-            <Col
-              className={`p-0 ${props.customFireplace ? "not-allowed" : null}`}
-              onClick={() => setMountPick(1)}
-            >
-              <div className="bg-info h-100 casing-type">
-                <h3 className="text-center fw-bold pt-2">
-                  {" "}
-                  <Badge>Casings</Badge>
-                </h3>
-              </div>
-            </Col>
-            <Col
-              className={`p-0 ${props.customFireplace ? "not-allowed" : null}`}
-              onClick={() => setMountPick(2)}
-            >
-              <div className="bg-info h-100 furniture-type">
-                <h3 className="text-center fw-bold pt-2">
-                  {" "}
-                  <Badge>Furniture Box</Badge>
-                </h3>
-              </div>
-            </Col>
-            <Col className="p-0" onClick={() => setMountPick(3)}>
-              <div className="bg-info h-100 selfbuild-type">
-                <h3 className="text-center fw-bold pt-2">
-                  {" "}
-                  <Badge> Self-Build</Badge>
-                </h3>
-              </div>
-            </Col>
-          </Row>
+          <AnimateWrapper>
+            <Row md={3} className="h-100">
+              <Col
+                className={`p-0 ${
+                  props.customFireplace ? "not-allowed" : null
+                }`}
+                onClick={() => setMountPick(1)}
+              >
+                <div className="bg-info h-100 casing-type">
+                  <h3 className="text-center fw-bold pt-2">
+                    {" "}
+                    <Badge>Casings</Badge>
+                  </h3>
+                </div>
+              </Col>
+              <Col
+                className={`p-0 ${
+                  props.customFireplace ? "not-allowed" : null
+                }`}
+                onClick={() => setMountPick(2)}
+              >
+                <div className="bg-info h-100 furniture-type">
+                  <h3 className="text-center fw-bold pt-2">
+                    {" "}
+                    <Badge>Furniture Box</Badge>
+                  </h3>
+                </div>
+              </Col>
+              <Col className="p-0" onClick={() => setMountPick(3)}>
+                <div className="bg-info h-100 selfbuild-type">
+                  <h3 className="text-center fw-bold pt-2">
+                    {" "}
+                    <Badge> Self-Build</Badge>
+                  </h3>
+                </div>
+              </Col>
+            </Row>
+          </AnimateWrapper>
         );
       case 1:
         return (
-          <Casings
-            pickedLength={props.pickedLength}
-            glass={props.glass}
-            onGlassPick={onGlassPick}
-            casings={props.casings}
-            stepBack={() => setMountPick(0)}
-            onCasingPick={onCasingPick}
-            allowNextStep={props.allowNextStep}
-          />
+          <AnimateWrapper>
+            <Casings
+              pickedLength={props.pickedLength}
+              glass={props.glass}
+              onGlassPick={onGlassPick}
+              casings={props.casings}
+              stepBack={() => setMountPick(0)}
+              onCasingPick={onCasingPick}
+              allowNextStep={props.allowNextStep}
+            />
+          </AnimateWrapper>
         );
       case 2:
         return (
-          <FurnitureBox
-            pickedLength={props.pickedLength}
-            glass={props.glass}
-            onGlassPick={onGlassPick}
-            furnitureBox={furnitureBoxVariant}
-            stepBack={() => setMountPick(0)}
-            onCasingPick={onCasingPick}
-            allowNextStep={props.allowNextStep}
-          />
+          <AnimateWrapper>
+            <FurnitureBox
+              pickedLength={props.pickedLength}
+              glass={props.glass}
+              onGlassPick={onGlassPick}
+              furnitureBox={furnitureBoxVariant}
+              stepBack={() => setMountPick(0)}
+              onCasingPick={onCasingPick}
+              allowNextStep={props.allowNextStep}
+            />
+          </AnimateWrapper>
         );
       case 3:
         return (
-          <SelfBuildMount
-            pickedLength={props.pickedLength}
-            onGlassPick={onGlassPick}
-            glass={props.glass}
-            stepBack={() => setMountPick(0)}
-            allowNextStep={props.allowNextStep}
-          />
+          <AnimateWrapper>
+            <SelfBuildMount
+              pickedLength={props.pickedLength}
+              onGlassPick={onGlassPick}
+              glass={props.glass}
+              stepBack={() => setMountPick(0)}
+              allowNextStep={props.allowNextStep}
+            />
+          </AnimateWrapper>
         );
     }
   };
   return (
     <div
-      className={`h-100 ${mountPick > 0 ? `` : "overflow-hidden"}`}
+      className={`h-100 ${mountPick > 0 ? "" : "overflow-hidden"}`}
       style={{ borderRadius: 25 }}
     >
       {extendSection()}

@@ -10,6 +10,9 @@ import {
   Badge,
 } from "react-bootstrap";
 import ContactForm from "../../containers/footer/ContactForm";
+import { useCart } from "react-use-cart";
+import { useCartCurrency } from "../../hooks/useCartCurrency";
+import Contact from "../NewCustomizer/Contact";
 import Image from "next/image";
 import CheckCartModal from "../Customizer/CheckCartModal";
 import { LanguageContext } from "../context/language-context";
@@ -18,9 +21,10 @@ const BioFuel = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
   const [pickedFuel, setPickedFuel] = useState();
-  const [pcsFuel, setPcsFuel] = useState(1);
+  //const [pcsFuel, setPcsFuel] = useState(1);
   const lang = useContext(LanguageContext);
-
+  const { addItem, getItem, updateItemQuantity, items, inCart } = useCart();
+  const { getPrices } = useCartCurrency();
   const FuelProducts = props.fuel;
   const findCurrencyPrice = (itemArray, keyToSearch) => {
     let findedPriceObj = itemArray.find((item) => item.key === keyToSearch);
@@ -28,7 +32,7 @@ const BioFuel = (props) => {
     return findedPriceObj;
   };
   const onFuelSelect = (item) => {
-    const priceSEK = item.meta_data.find(
+    /*  const priceSEK = item.meta_data.find(
       (key) =>
         key.key === "_alg_currency_switcher_per_product_regular_price_SEK"
     );
@@ -40,26 +44,20 @@ const BioFuel = (props) => {
       ...item,
       priceSEK: priceSEK.value,
       priceDKK: priceDKK.value,
-    };
+    };*/
 
-    setPickedFuel(itemWithPrices);
+    //setPickedFuel(itemWithPrices);
+    setPickedFuel(item);
     setOpenModal(true);
   };
-  const onAdd = () => {
-    setPcsFuel((prevState) => prevState + 1);
-  };
-  const onRemove = () => {
-    if (pcsFuel === 0) {
-      return;
-    }
-    setPcsFuel((prevState) => prevState - 1);
-  };
+
   const onModalClose = () => {
     setShowContactForm(false);
     setOpenModal(false);
   };
   const onConfirm = () => {
-    const decoArray = [];
+    //  console.log(items);
+    /* const decoArray = [];
     const priceSEK = pickedFuel.meta_data.find(
       (key) =>
         key.key === "_alg_currency_switcher_per_product_regular_price_SEK"
@@ -81,7 +79,7 @@ const BioFuel = (props) => {
     props.cartHandler((prevCart) => ({
       ...prevCart,
       addedDecorations: decoArray,
-    }));
+    }));*/
 
     //console.log(decoArray);
     setShowContactForm(!showContactForm);
@@ -118,50 +116,88 @@ const BioFuel = (props) => {
                       </Badge>
                     </Col>
                     <Col md="auto">
-                      <Badge className="bolder mt-3">
-                        <h5 className="fw-bold m-0">
+                      <Badge className="bolder ">
+                        <span className="fw-bold fs-5">
                           {lang.currencyPrice(
                             pickedFuel.price,
                             pickedFuel.priceSEK,
                             pickedFuel.priceDKK
                           )}
                           {lang.currencySymbol()}
-                        </h5>
+                        </span>
                       </Badge>
                     </Col>
-                    <Col>
-                      <Badge>x {pcsFuel}</Badge>
+                    <Col className="">
+                      <Badge>
+                        <span className="fw-bold fs-5">
+                          x
+                          {inCart(pickedFuel.id)
+                            ? getItem(pickedFuel.id).quantity
+                            : 0}
+                        </span>
+                      </Badge>
 
                       <Button
                         variant="info"
                         className="m-1"
                         size="sm"
                         //as={Badge}
-                        onClick={onAdd}
+                        onClick={() =>
+                          addItem({
+                            ...pickedFuel,
+                            prices: getPrices(
+                              pickedFuel.price,
+                              pickedFuel.SEK_price,
+                              pickedFuel.DKK_price
+                            ),
+                            img: pickedFuel.images[0].shop_thumbnail,
+                          })
+                        }
                       >
                         +
                       </Button>
-                      <Button
-                        variant="info"
-                        className=""
-                        size="sm"
-                        //as={Badge}
-                        onClick={onRemove}
-                      >
-                        -
-                      </Button>
+                      {inCart(pickedFuel.id) && (
+                        <Button
+                          variant="info"
+                          className="m-1"
+                          size="sm"
+                          //as={Badge}
+                          //onClick={onRemove}
+                          onClick={() =>
+                            updateItemQuantity(
+                              pickedFuel.id,
+                              getItem(pickedFuel.id).quantity - 1
+                            )
+                          }
+                        >
+                          -
+                        </Button>
+                      )}
                     </Col>{" "}
                   </Row>{" "}
                   <h5 className="float-end">
                     <Badge>
-                      {" "}
-                      Total:
-                      {lang.currencyPrice(
-                        pickedFuel.price,
-                        pickedFuel.priceSEK,
-                        pickedFuel.priceDKK
-                      ) * pcsFuel}{" "}
-                      {lang.currencySymbol()}
+                      <span className="fs-5">
+                        Total:
+                        {inCart(pickedFuel.id)
+                          ? lang
+                              .currencyPrice(
+                                getItem(pickedFuel.id).prices.find(
+                                  (item) => item.currency === "EUR"
+                                ).amount * getItem(pickedFuel.id).quantity,
+                                getItem(pickedFuel.id).prices.find(
+                                  (item) => item.currency === "SEK"
+                                ).amount * getItem(pickedFuel.id).quantity,
+                                getItem(pickedFuel.id).prices.find(
+                                  (item) => item.currency === "DKK"
+                                ).amount * getItem(pickedFuel.id).quantity
+                              )
+                              .toLocaleString(undefined, {
+                                maximumFractionDigits: 2,
+                              })
+                          : 0}{" "}
+                        {lang.currencySymbol()}
+                      </span>
                     </Badge>
                   </h5>
                   <h5>
@@ -177,7 +213,7 @@ const BioFuel = (props) => {
                 </div>
               </>
             )}
-            {showContactForm && <ContactForm cartHandler={props.cart} />}
+            {showContactForm && <Contact />}
           </Container>
         </Modal.Body>
       </Modal>{" "}
