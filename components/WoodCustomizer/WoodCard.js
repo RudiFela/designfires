@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Link from "next/link";
 import { Row, Col, Badge, Card, Accordion } from "react-bootstrap";
-
+import Image from "next/image";
 import Dimensions from "../UI/Dimensions";
 import { LanguageContext } from "../context/language-context";
 const WoodCard = (props) => {
@@ -29,9 +29,11 @@ const WoodCard = (props) => {
               {item.variant.length > 0
                 ? item.variant.map((item) => (
                     <Col key={item.id} className="flex justify-content-start">
-                      <img
+                      <Image
                         width={50}
+                        height={50}
                         src={item.img}
+                        alt="fireplace image"
                         // onClick={() => console.log(item.length.option)}
                         //onMouseEnter={() => console.log(item.length.option)}
                       />

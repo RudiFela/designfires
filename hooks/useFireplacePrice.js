@@ -40,9 +40,7 @@ export const useFireplacePrice = () => {
     fireplace.product.name === "DFM"
       ? (product = {
           ...fireplace.item,
-          name: `${fireplace.product.name} ${
-            fireplace.item.dimensions.length
-          } ${fireplace.filling !== "EW" ? fireplace.filling : ""}`,
+          name: `${fireplace.product.name} ${fireplace.item.dimensions.length} ${fireplace.filling}`,
           price: customPriceCheck(
             fireplace.item.stock_status,
             fireplace.item.price,
@@ -85,7 +83,7 @@ export const useFireplacePrice = () => {
           ...fireplace.item,
           name: `${fireplace.product.name} ${
             fireplace.item.dimensions.length
-          } ${fireplace.top ? "Stainless Top" : ""} ${
+          } ${fireplace.top ? "Stainless Top" : "Black Top"} ${
             fireplace.smart ? "SHS" : ""
           }`,
           price: customPriceCheck(

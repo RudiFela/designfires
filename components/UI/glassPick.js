@@ -121,14 +121,14 @@ const GlassOptions = [
     shortGlass: 0,
     longGlass: 1,
     svg: oneSideSvg,
-    pieces: 3,
+    pieces: 1,
   },
   {
     title: "1 Long, 1 Short Glass",
     shortGlass: 1,
     longGlass: 1,
     svg: twoSideSvg,
-    pieces: 3,
+    pieces: 2,
   },
   {
     title: "1 Long, 2 Short Glass",
@@ -142,7 +142,7 @@ const GlassOptions = [
     shortGlass: 2,
     longGlass: 2,
     svg: allSideSvg,
-    pieces: 3,
+    pieces: 4,
   },
   {
     title: "2 Long, 1 Short Glass",

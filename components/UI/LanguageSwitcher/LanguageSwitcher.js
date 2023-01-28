@@ -54,7 +54,7 @@ const LanguageSwitcher = () => {
       align="end"
       flip="true"
       title={lang}
-      id="collasible-nav-dropdown"
+      id="collasible-nav-dropdowns"
     >
       <NavDropdown.Item
         onClick={() => {

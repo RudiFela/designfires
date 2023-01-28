@@ -99,6 +99,7 @@ const Slider = ({ slides, onPick }) => {
                           backgroundSize: "100%,100%",
                           backgroundImage: `url(${slides[currentIndex].acf.image.url})`,
                         }}
+                        alt="project-image"
                         key={`url(${slides[nextIndex].acf.image.url})`}
                         src={slides[currentIndex].acf.image.url}
                         initial={{ x: 200, opacity: 0 }}
@@ -136,6 +137,7 @@ const Slider = ({ slides, onPick }) => {
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: -200, opacity: 0 }}
                       transition={{ duration: 0.7 }}
+                      alt="project-image"
                       onClick={() => onPick(slides[nextIndex])}
                     />
                     <motion.div className="overlay text-center text-white">
