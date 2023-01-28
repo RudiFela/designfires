@@ -4,7 +4,7 @@ import RangeSlider from "react-bootstrap-range-slider";
 import LabelWraper from "../UI/LabelWraper";
 import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
-import OpeningSidesDropDown from "../Customizer/OpeningSidesDropDown";
+import OpeningSidesDropDown from "../UI/OpeningSidesDropDown";
 const WoodFilterOptions = (props) => {
   const [danishDesign, setDanishDesign] = useState(false); //change for danish location variable later
 

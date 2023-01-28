@@ -6,11 +6,11 @@ import Inspired from "../../components/Inspired/Inspired";
 import Ethanol from "../../components/Ethanol/Ethanol";
 import Mystic from "../../components/Mystic/Mystic";
 import { LanguageContext } from "../../components/context/language-context";
-import Customizer from "../../components/Customizer/Customizer";
+
 import BioFuel from "../../components/BioFuel/BioFuel";
 import MotionSlider from "../../components/UI/Slider/MotionSlider";
 import { ImArrowRight2 } from "react-icons/im";
-import { AnimatePresence, motion } from "framer-motion";
+
 import AnimateWrapper from "../../components/NewCustomizer/AnimateWrapper";
 
 const Body = (props) => {

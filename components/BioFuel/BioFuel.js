@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
 import {
   Row,
@@ -9,12 +9,11 @@ import {
   Modal,
   Badge,
 } from "react-bootstrap";
-import ContactForm from "../../containers/footer/ContactForm";
 import { useCart } from "react-use-cart";
 import { useCartCurrency } from "../../hooks/useCartCurrency";
 import Contact from "../NewCustomizer/Contact";
 import Image from "next/image";
-import CheckCartModal from "../Customizer/CheckCartModal";
+
 import { LanguageContext } from "../context/language-context";
 
 const BioFuel = (props) => {

@@ -59,6 +59,7 @@ const PdfTemplate = (props) => {
           src={
             "https://designfires.pl/wp-content/uploads/2022/08/designfiresn.png"
           }
+          alt="DesignFires logo"
         />
         <TemplateTable
           products={props.products}
@@ -68,6 +69,7 @@ const PdfTemplate = (props) => {
         <Image
           style={styles.pageBackground}
           src="https://designfires.pl/wp-content/uploads/2022/10/CartBackgroundA4.png"
+          alt="background Image"
         />
       </Page>
     </Document>

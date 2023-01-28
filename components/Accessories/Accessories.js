@@ -1,4 +1,5 @@
 import { BsPlus } from "react-icons/bs";
+import Image from "next/image";
 const Accesories = (props) => {
   const accessoriesImage = "/static/images/Rectangle12.png";
   //You can customize It with our many accessiories!
@@ -14,7 +15,7 @@ const Accesories = (props) => {
         </h2>
         <div className="cards">
           <div className="cards--image">
-            <img src={accessoriesImage} alt="info image" />
+            <Image src={accessoriesImage} alt="info image" />
           </div>
           <div className="cards--info info--1" href="#customize">
             <a href="#customize">
@@ -28,7 +29,7 @@ const Accesories = (props) => {
               <BsPlus color="white" />
             </div>
             <div className="info--image">
-              <img src={accessoriesImage} alt="info image" layout="fill" />
+              <Image src={accessoriesImage} alt="info image" layout="fill" />
             </div>
           </div>
           <div className="cards--info info--3" href="#customize">
@@ -44,7 +45,7 @@ const Accesories = (props) => {
               <BsPlus color="white" />
             </div>
             <div className="info--image">
-              <img src={accessoriesImage} alt="info image" layout="fill" />
+              <Image src={accessoriesImage} alt="info image" layout="fill" />
             </div>
           </div>
           <div className="cards--info info--4" href="#customize">
@@ -58,7 +59,7 @@ const Accesories = (props) => {
               <BsPlus color="white" />
             </div>
             <div className="info--image">
-              <img src={accessoriesImage} alt="info image" layout="fill" />
+              <Image src={accessoriesImage} alt="info image" layout="fill" />
             </div>
           </div>
           <div className="cards--info info--5">
@@ -71,7 +72,7 @@ const Accesories = (props) => {
               <BsPlus color="white" />
             </div>
             <div className="info--image">
-              <img src={accessoriesImage} alt="info image" layout="fill" />
+              <Image src={accessoriesImage} alt="info image" layout="fill" />
             </div>
           </div>
           <div className="cards--info info--2">
@@ -88,7 +89,7 @@ const Accesories = (props) => {
               <BsPlus color="white" />
             </div>
             <div className="info--image">
-              <img src={accessoriesImage} alt="info image" layout="fill" />
+              <Image src={accessoriesImage} alt="info image" layout="fill" />
             </div>
           </div>
         </div>

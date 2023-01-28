@@ -8,6 +8,7 @@ import {
   OverlayTrigger,
   Popover,
 } from "react-bootstrap";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CgArrowsExpandRight,
@@ -121,7 +122,7 @@ const Casings = (props) => {
                     //  whileTap={{ scale: 0.9 }}
                   >
                     <Ratio aspectRatio="4x3" onClick={() => onPick(item)}>
-                      <img
+                      <Image
                         src={item.img}
                         alt="casing photo"
                         //width={200}
@@ -265,7 +266,7 @@ const Casings = (props) => {
                         onClick={() => onPick(item)}
                       >
                         <Ratio aspectRatio="4x3">
-                          <img
+                          <Image
                             src={item.img}
                             alt="casing photo"
                             //width={200}

@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import { useCart } from "react-use-cart";
 import Image from "next/image";
-import { Row, Col, Button, Stack, Badge } from "react-bootstrap";
+import { Row, Col, Stack, Badge } from "react-bootstrap";
 import CustomizerHeader from "../UI/CustomizerHeader";
 import { LanguageContext } from "../context/language-context";
-import AnimateWrapper from "./AnimateWrapper";
+
 const Summary = (props) => {
   useEffect(() => {
     props.allowNextStep ? props.allowNextStep(true) : "";
@@ -18,7 +18,7 @@ const Summary = (props) => {
     link.download = "data.json";
 
     link.click();*/
-    console.log(items);
+    //console.log(items);
   }, []);
   const { items } = useCart();
   const lang = useContext(LanguageContext);
@@ -40,6 +40,7 @@ const Summary = (props) => {
               width="100px"
               height="100px"
               src={item.img}
+              alt="product image"
             />
           </Col>
           <Col
@@ -59,9 +60,15 @@ const Summary = (props) => {
           <Col className="d-flex justify-content-center align-items-center fw-bold">
             {lang
               .currencyPrice(
-                item.prices.find((item) => item.currency === "EUR").amount,
-                item.prices.find((item) => item.currency === "SEK").amount,
-                item.prices.find((item) => item.currency === "DKK").amount
+                item.prices
+                  ? item.prices.find((item) => item.currency === "EUR").amount
+                  : item.price,
+                item.prices
+                  ? item.prices.find((item) => item.currency === "SEK").amount
+                  : item.SEK_price,
+                item.prices
+                  ? item.prices.find((item) => item.currency === "DKK").amount
+                  : item.DKK_price
               )
               .toLocaleString(undefined, {
                 maximumFractionDigits: 2,
@@ -80,12 +87,15 @@ const Summary = (props) => {
           <Col className="d-flex justify-content-center align-items-center fw-bold">
             {lang
               .currencyPrice(
-                item.prices.find((item) => item.currency === "EUR").amount *
-                  item.quantity,
-                item.prices.find((item) => item.currency === "SEK").amount *
-                  item.quantity,
-                item.prices.find((item) => item.currency === "DKK").amount *
-                  item.quantity
+                item.prices
+                  ? item.prices.find((item) => item.currency === "EUR").amount
+                  : item.price * item.quantity,
+                item.prices
+                  ? item.prices.find((item) => item.currency === "SEK").amount
+                  : item.SEK_price * item.quantity,
+                item.prices
+                  ? item.prices.find((item) => item.currency === "DKK").amount
+                  : item.DKK_price * item.quantity
               )
               .toLocaleString(undefined, {
                 maximumFractionDigits: 2,

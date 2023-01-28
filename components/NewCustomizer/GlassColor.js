@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 const GlassColor = (props) => {
@@ -99,8 +100,12 @@ const GlassColor = (props) => {
             whileTap={{ scale: 0.9 }}
             className="p-2 d-flex justify-content-center"
           >
-            <img
-              style={{ borderRadius: 15, width: "100px" }}
+            <Image
+              width={100}
+              height={100}
+              //layout="fill"
+              alt="glass-picture"
+              style={{ borderRadius: 15 }}
               src={item.images[0].shop_catalog}
               className={`${
                 clicked === item.id ? "border border-4 border-warning" : ""

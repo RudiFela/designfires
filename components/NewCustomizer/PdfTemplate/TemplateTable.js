@@ -98,7 +98,7 @@ const TemplateTable = (props) => {
 
   const rowsEUR = props.products.map((item) => (
     <View style={styles.row} key={item.id.toString()}>
-      <Image style={styles.image} src={item.img} />
+      <Image style={styles.image} src={item.img} alt="product image" />
       <Text style={styles.description}>{item.name}</Text>
       <View style={styles.dim}>
         <Text>
@@ -131,7 +131,7 @@ const TemplateTable = (props) => {
   ));
   const rowsSEK = props.products.map((item) => (
     <View style={styles.row} key={item.id.toString()}>
-      <Image style={styles.image} src={item.img} />
+      <Image style={styles.image} src={item.img} alt="product image" />
       <Text style={styles.description}>{item.name}</Text>
       <View style={styles.dim}>
         <Text>
@@ -165,7 +165,7 @@ const TemplateTable = (props) => {
   ));
   const rowsDKK = props.products.map((item) => (
     <View style={styles.row} key={item.id.toString()}>
-      <Image style={styles.image} src={item.img} />
+      <Image style={styles.image} src={item.img} alt="product image" />
       <Text style={styles.description}>{item.name}</Text>
       <View style={styles.dim}>
         <Text>

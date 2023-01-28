@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-
+import Image from "next/image";
 import {
   Row,
   Col,
@@ -133,11 +133,12 @@ const ProductLayout = (props) => {
                         <Ratio aspectRatio="1x1">
                           <>
                             <a href={`${item.id}`}>
-                              <img
+                              <Image
                                 width="100%"
                                 height="100%"
                                 src={item.img}
                                 style={{ cursor: "pointer" }}
+                                alt="product image"
                                 //onClick={() => props.onVariantPick(item.id)}
                                 //onMouseEnter={() => console.log(item.length.option)}
                               />
