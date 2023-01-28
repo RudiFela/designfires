@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/index.css";
 import Script from "next/script";
-import { useCart } from "react-use-cart";
 import { useState, useEffect } from "react";
 import { LanguageContext } from "../components/context/language-context";
 import { CartProvider } from "react-use-cart";
@@ -9,7 +8,6 @@ import axios from "axios";
 //import "../styles/index.scss";
 function MyApp({ Component, pageProps }) {
   const [language, setLanguage] = useState();
-  const [cart, setCart] = useState();
 
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {

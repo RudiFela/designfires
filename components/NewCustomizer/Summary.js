@@ -28,8 +28,8 @@ const Summary = (props) => {
       <CustomizerHeader>Your Choices</CustomizerHeader>
       {items.map((item) => (
         <Row
-          xs={3}
-          sm={6}
+          xs={1}
+          sm={2}
           md={6}
           key={item.id}
           className="m-2 p-2 bg-primary borderr justify-content-between fs-5"

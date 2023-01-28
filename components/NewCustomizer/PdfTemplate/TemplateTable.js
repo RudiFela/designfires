@@ -44,20 +44,20 @@ const TemplateTable = (props) => {
       height: "80px",
     },
     description: {
-      width: "35%",
+      width: "20%",
       textAlign: "center",
 
       //borderRightWidth: 1,
       paddingLeft: 8,
     },
     amount: {
-      width: "20%",
+      width: "15%",
       textAlign: "center",
       paddingRight: 8,
       color: "white",
     },
     qty: {
-      width: "10%",
+      width: "6%",
 
       // borderRightWidth: 1,
       //textAlign: "right",
@@ -66,7 +66,7 @@ const TemplateTable = (props) => {
     },
 
     total: {
-      width: "20%",
+      width: "15%",
       //textAlign: "right",
       color: "white",
       textAlign: "center",
@@ -88,15 +88,38 @@ const TemplateTable = (props) => {
       borderRadius: 10,
       padding: 5,
     },
+    dim: {
+      width: "25%",
+      textAlign: "center",
+      paddingRight: 8,
+      color: "white",
+    },
   });
 
   const rowsEUR = props.products.map((item) => (
     <View style={styles.row} key={item.id.toString()}>
       <Image style={styles.image} src={item.img} />
       <Text style={styles.description}>{item.name}</Text>
-
+      <View style={styles.dim}>
+        <Text>
+          {item.dimensions.length !== ""
+            ? `Length: ${item.dimensions.length} mm`
+            : ""}
+        </Text>
+        <Text>
+          {" "}
+          {item.dimensions.height !== ""
+            ? `Height: ${item.dimensions.height} mm`
+            : ""}
+        </Text>
+        <Text>
+          {item.dimensions.width !== ""
+            ? `Deep: ${item.dimensions.width} mm`
+            : ""}
+        </Text>
+      </View>
       <Text style={styles.amount}>
-        {item.price} {props.currency}
+        {Number(item.price).toLocaleString()} {props.currency}
       </Text>
 
       <Text style={styles.qty}>x {item.quantity}</Text>
@@ -110,16 +133,33 @@ const TemplateTable = (props) => {
     <View style={styles.row} key={item.id.toString()}>
       <Image style={styles.image} src={item.img} />
       <Text style={styles.description}>{item.name}</Text>
-
+      <View style={styles.dim}>
+        <Text>
+          {item.dimensions.length !== ""
+            ? `Length: ${item.dimensions.length} mm`
+            : ""}
+        </Text>
+        <Text>
+          {" "}
+          {item.dimensions.height !== ""
+            ? `Height: ${item.dimensions.height} mm`
+            : ""}
+        </Text>
+        <Text>
+          {item.dimensions.width !== ""
+            ? `Deep: ${item.dimensions.width} mm`
+            : ""}
+        </Text>
+      </View>
       <Text style={styles.amount}>
-        {item.SEK_price.toString()}
-        {props.currency}
+        {Number(item.SEK_price).toLocaleString()} {props.currency}
       </Text>
 
       <Text style={styles.qty}>x {item.quantity}</Text>
 
       <Text style={styles.total}>
-        {item.SEK_price * item.quantity} {props.currency}
+        {Number(item.SEK_price * item.quantity).toLocaleString()}{" "}
+        {props.currency}
       </Text>
     </View>
   ));
@@ -127,15 +167,33 @@ const TemplateTable = (props) => {
     <View style={styles.row} key={item.id.toString()}>
       <Image style={styles.image} src={item.img} />
       <Text style={styles.description}>{item.name}</Text>
-
+      <View style={styles.dim}>
+        <Text>
+          {item.dimensions.length !== ""
+            ? `Length: ${item.dimensions.length} mm`
+            : ""}
+        </Text>
+        <Text>
+          {" "}
+          {item.dimensions.height !== ""
+            ? `Height: ${item.dimensions.height} mm`
+            : ""}
+        </Text>
+        <Text>
+          {item.dimensions.width !== ""
+            ? `Deep: ${item.dimensions.width} mm`
+            : ""}
+        </Text>
+      </View>
       <Text style={styles.amount}>
-        {item.DKK_price} {props.currency}
+        {Number(item.DKK_price).toLocaleString()} {props.currency}
       </Text>
 
       <Text style={styles.qty}>x {item.quantity}</Text>
 
       <Text style={styles.total}>
-        {item.DKK_price * item.quantity} {props.currency}
+        {Number(item.DKK_price * item.quantity).toLocaleString()}{" "}
+        {props.currency}
       </Text>
     </View>
   ));
@@ -143,21 +201,24 @@ const TemplateTable = (props) => {
   const rowEUR = (
     <View style={styles.titleContainer}>
       <Text style={styles.reportTitle}>
-        Total: {props.totalPrice.price} {props.currency}
+        Total: {Number(props.totalPrice.price).toLocaleString()}{" "}
+        {props.currency}
       </Text>
     </View>
   );
   const rowSEK = (
     <View style={styles.titleContainer}>
       <Text style={styles.reportTitle}>
-        Total: {props.totalPrice.SEK_price} {props.currency}
+        Total: {Number(props.totalPrice.SEK_price).toLocaleString()}{" "}
+        {props.currency}
       </Text>
     </View>
   );
   const rowDKK = (
     <View style={styles.titleContainer}>
       <Text style={styles.reportTitle}>
-        Total: {props.totalPrice.DKK_price} {props.currency}
+        Total: {Number(props.totalPrice.DKK_price).toLocaleString()}{" "}
+        {props.currency}
       </Text>
     </View>
   );

@@ -23,7 +23,6 @@ const Mystic = (props) => {
     "Since water does not cost as much money as Wood and Gas or Ethanol and is used to put out fires, it is completely safe and very economical and environmentally friendly. It is even good for the indoor climate with water vapors, which in modern houses is too dry in Scandinavia.",
     "All it needs is water and 220V electricity, no extra air or chimney is needed. Mystic SteamFire can provide coziness in a fire place that often looks very boring in public environments or in private houses.",
   ];
-  const price = 3006;
 
   const advantageItemsLeft = [
     "Cheap to use as it runs on water",

@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <div className="w-100">
-      <video className="w-100 video" autoPlay loop muted playsinline>
+      <video className="w-100 video" autoPlay loop muted playsInline>
         <source
           src="https://designfires.pl/wp-content/uploads/2022/07/NewDesignFiresCOMPRESSED.mp4"
           type="video/mp4"

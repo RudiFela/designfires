@@ -17,7 +17,7 @@ import {
 const styles = StyleSheet.create({
   page: {
     //fontFamily: "Montserrat",
-    fontSize: 16,
+    fontSize: 14,
     // paddingTop: 10,
     // paddingLeft: 30,
     // paddingRight: 30,

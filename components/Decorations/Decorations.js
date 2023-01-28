@@ -15,7 +15,7 @@ const Decorations = (props) => {
                   alt=""
                   style={{ borderRadius: "25px" }}
                   layout="fill"
-                  objectFit="cover"
+                  //objectFit="cover"
                 />
 
                 <div className="overlay text-white mb-1 pb-2">{item.name}</div>
@@ -40,9 +40,9 @@ const Decorations = (props) => {
                     alt=""
                     layout="fill"
                     style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
+                      // width: "100%",
+                      // height: "100%",
+                      // objectFit: "cover",
                       borderRadius: "25px",
                     }}
                   />
