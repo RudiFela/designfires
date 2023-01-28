@@ -133,7 +133,7 @@ const ProductLayout = (props) => {
                         <Ratio aspectRatio="1x1">
                           <>
                             <a href={`${item.id}`}>
-                              <Image
+                              <img
                                 width="100%"
                                 height="100%"
                                 src={item.img}
