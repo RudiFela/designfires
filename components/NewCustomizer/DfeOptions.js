@@ -61,7 +61,7 @@ const DfeOptions = (props) => {
           id="custom-switch"
           variant="secondary"
           //onChange={shsSwitcher}
-          //onChange={onShs}
+          onChange={() => props.shsPicked()}
           label="Smart Home System"
         />
         <Form.Check
@@ -73,6 +73,7 @@ const DfeOptions = (props) => {
           variant="secondary"
           // onChange={onTop}
           // onChange={topSwitcher}
+          onChange={() => props.topPicked()}
           label="Stainless Top"
         />
       </Form>

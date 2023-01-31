@@ -82,6 +82,7 @@ const MountPick = (props) => {
         findGlassHolders.DKK_price
       ),
     };
+    mountProduct && addItem(mountProduct);
     addItem(
       {
         ...longGlass.long,
@@ -104,8 +105,7 @@ const MountPick = (props) => {
       },
       shortGlass.pcs
     );
-    addItem(glassHolders, holdersPcs);
-    mountProduct && addItem(mountProduct);
+
     splitGlass &&
       addItem(
         {
@@ -118,6 +118,7 @@ const MountPick = (props) => {
         },
         splitGlass.pcs
       );
+    addItem(glassHolders, holdersPcs);
   };
 
   const extendSection = () => {

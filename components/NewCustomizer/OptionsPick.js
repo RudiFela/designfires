@@ -6,7 +6,7 @@ import MyVerticallyCenteredModal from "../Decorations/Modal";
 import fileDownload from "js-file-download";
 import { useCartCurrency } from "../../hooks/useCartCurrency";
 import axios from "axios";
-import { Col, Row, Badge, Button } from "react-bootstrap";
+import { Col, Row, Badge, Button, Stack } from "react-bootstrap";
 import { ImFire } from "react-icons/im";
 import { GiAutoRepair } from "react-icons/gi";
 import DfmOptions from "./DfmOptions";
@@ -18,6 +18,8 @@ const OptionsPick = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalPhoto, setModalPhoto] = useState();
   const [fillingType, setFillingType] = useState("EW");
+  const [shsPicked, setShsPicked] = useState(false);
+  const [stainlessTopPicked, setStainlessTopPicked] = useState(false);
   useEffect(() => {
     props.onSubmit.current = onSubmit;
   }, [selectedOption, fillingType]);
@@ -153,11 +155,58 @@ const OptionsPick = (props) => {
             onFillingType={onFillingType}
             topRef={topRef}
             shsRef={shsRef}
+            shsPicked={() => setShsPicked(!shsPicked)}
+            topPicked={() => setStainlessTopPicked(!stainlessTopPicked)}
             //onStainlessTop={onStainlessTop}
           />
         )}
-
-        <Button className="float-end m-2 fw-bold">
+        <AnimatePresence>
+          {pickedFireplace.name === "DFM" && fillingType !== "EW" && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Button className="d-flex flex-column float-end m-1 p-2 fw-bold align-items-center">
+                <Badge bg="info">Filling Type</Badge>+{" "}
+                {fillingType === "T"
+                  ? lang.currencyPrice(100, 995, 755)
+                  : lang.currencyPrice(995, 9995, 7555)}{" "}
+                {lang.currencySymbol()}
+              </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {pickedFireplace.name === "DFE" && shsPicked && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Button className="d-flex flex-column float-end m-1 p-2 fw-bold align-items-center">
+                <Badge bg="info">SHS System</Badge>+
+                {lang.currencyPrice(400, 3995, 2995)} {lang.currencySymbol()}
+              </Button>
+            </motion.div>
+          )}{" "}
+        </AnimatePresence>
+        <AnimatePresence>
+          {pickedFireplace.name === "DFE" && stainlessTopPicked && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Button className="d-flex flex-column float-end m-1 p-2 fw-bold align-items-center">
+                <Badge bg="info">Stainless Top</Badge>+{" "}
+                {lang.currencyPrice(300, 2995, 1995)} {lang.currencySymbol()}
+              </Button>
+            </motion.div>
+          )}{" "}
+        </AnimatePresence>
+        <Button className="d-flex flex-column float-end m-1 p-2 fw-bold align-items-center">
+          <Badge bg="info">Standard</Badge>
           {selectedOption ? (
             <>
               {Number(

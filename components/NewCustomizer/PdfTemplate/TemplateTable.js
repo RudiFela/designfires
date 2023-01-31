@@ -119,13 +119,13 @@ const TemplateTable = (props) => {
         </Text>
       </View>
       <Text style={styles.amount}>
-        {Number(item.price).toLocaleString()} {props.currency}
+        {Number(item.prices[0].amount).toLocaleString()} {props.currency}
       </Text>
 
       <Text style={styles.qty}>x {item.quantity}</Text>
 
       <Text style={styles.total}>
-        {item.price * item.quantity} {props.currency}
+        {item.prices[0].amount * item.quantity} {props.currency}
       </Text>
     </View>
   ));
@@ -152,13 +152,15 @@ const TemplateTable = (props) => {
         </Text>
       </View>
       <Text style={styles.amount}>
-        {Number(item.SEK_price).toLocaleString()} {props.currency}
+        {Number(item.prices[2].amount).toLocaleString()}
+
+        {props.currency}
       </Text>
 
       <Text style={styles.qty}>x {item.quantity}</Text>
 
       <Text style={styles.total}>
-        {Number(item.SEK_price * item.quantity).toLocaleString()}{" "}
+        {Number(item.prices[2].amount * item.quantity).toLocaleString()}{" "}
         {props.currency}
       </Text>
     </View>
@@ -186,13 +188,13 @@ const TemplateTable = (props) => {
         </Text>
       </View>
       <Text style={styles.amount}>
-        {Number(item.DKK_price).toLocaleString()} {props.currency}
+        {Number(item.prices[1].amount).toLocaleString()} {props.currency}
       </Text>
 
       <Text style={styles.qty}>x {item.quantity}</Text>
 
       <Text style={styles.total}>
-        {Number(item.DKK_price * item.quantity).toLocaleString()}{" "}
+        {Number(item.prices[1].amount * item.quantity).toLocaleString()}{" "}
         {props.currency}
       </Text>
     </View>

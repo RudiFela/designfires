@@ -88,13 +88,16 @@ const Summary = (props) => {
             {lang
               .currencyPrice(
                 item.prices
-                  ? item.prices.find((item) => item.currency === "EUR").amount
-                  : item.price * item.quantity,
+                  ? item.prices.find((item) => item.currency === "EUR").amount *
+                      item.quantity
+                  : Number(item.price * item.quantity),
                 item.prices
-                  ? item.prices.find((item) => item.currency === "SEK").amount
-                  : item.SEK_price * item.quantity,
+                  ? item.prices.find((item) => item.currency === "SEK").amount *
+                      item.quantity
+                  : Number(item.SEK_price * item.quantity),
                 item.prices
-                  ? item.prices.find((item) => item.currency === "DKK").amount
+                  ? item.prices.find((item) => item.currency === "DKK").amount *
+                      item.quantity
                   : item.DKK_price * item.quantity
               )
               .toLocaleString(undefined, {
