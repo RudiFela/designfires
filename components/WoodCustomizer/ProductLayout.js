@@ -26,6 +26,7 @@ const ProductLayout = (props) => {
       clearInterval(intervalId);
     };
   }, []);
+
   const animation = useAnimation();
   async function sequence() {
     await animation.start({ scale: 1.2 });
@@ -101,7 +102,12 @@ const ProductLayout = (props) => {
                         variant="info"
                         className="text-white fw-bold fs-5"
                         onClick={() =>
-                          openInNewTab(item.acf.technical_drawing.url)
+                          openInNewTab(
+                            item.acf.technicaldrawingpdf
+                              ? item.acf.technicaldrawingpdf
+                              : item.meta_data.find((data) => data.key === "3d")
+                                  .value
+                          )
                         }
                       >
                         <BsInfoCircle className="m-1" />{" "}
@@ -420,6 +426,11 @@ export default ProductLayout;
                               as={`${item.id}`}
                               passHref
 
-
+openInNewTab(
+                            item.acf.technicaldrawingpdf
+                              ? item.acf.technicaldrawingpdf
+                              : item.meta_data.find((data) => (data.key = "3d"))
+                                  .value
+                          )
                                
                             >*/

@@ -54,7 +54,7 @@ const WoodFilterOptions = (props) => {
           <h3 className="text-white text-center">
             <Badge>Opening Sides</Badge>
           </h3>{" "}
-          <OpeningSidesDropDown />
+          <OpeningSidesDropDown onSelect={props.onOpeningSidesChange} />
         </Col>
         <Col className=" ">
           <h3 className="text-white text-center">

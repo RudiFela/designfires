@@ -69,6 +69,7 @@ const Body = (props) => {
             // glass={props.accessories}
             //furnitureBox={props.boxes}
             // casings={props.casings}
+            fuelProducts={props.fuel}
             accessories={props.decorations}
           />
         ) : (

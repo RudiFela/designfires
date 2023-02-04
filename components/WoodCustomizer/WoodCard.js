@@ -14,18 +14,79 @@ const WoodCard = (props) => {
         className="bg-primary p-2"
         style={{ width: "20rem", borderRadius: "15px" }}
       >
-        {item.images[0] ? (
+        {item.img ? (
           <>
             <Link href={`wood/${item.id}`}>
               <Card.Img
                 className="p-4"
                 style={{ borderRadius: "15px", cursor: "pointer" }}
                 variant="top"
-                src={item.images[0].shop_catalog}
+                src={item.img.sourceUrl}
                 //onClick={() => props.showModal(item)}
               />
             </Link>
-            <Row>
+          </>
+        ) : null}{" "}
+        <Card.Body>
+          <Card.Title className="fw-bold fs-5">{item.name}</Card.Title>
+          <Card.Text className="fw-bold fs-5">
+            <Badge bg="success">
+              {Number(
+                currencyPrice(
+                  item.regularPrice.split(",")[0],
+                  item.SEK_price[0].value,
+                  item.DKK_price[0].value
+                )
+              ).toLocaleString()}
+              <span> </span>
+              {currencySymbol()}
+            </Badge>{" "}
+          </Card.Text>
+
+          <Accordion
+            className="bg-success rounded-45"
+            style={{ borderRadius: "45px" }}
+          >
+            <Accordion.Item eventKey="1" className="bg-success rounded-45">
+              <Accordion.Header>Details</Accordion.Header>
+              <Accordion.Body
+                className="bg-success rounded-45 "
+                style={{ borderRadius: "45px" }}
+              >
+                <Dimensions
+                  length={item.length}
+                  height={item.height}
+                  width={item.width}
+                  variant="primary"
+                  unity="cm"
+                >
+                  <span>
+                    kW:
+                    <Badge className="float-end">
+                      {" "}
+                      <span> </span> {item.woodFireplaces.kw}
+                    </Badge>
+                  </span>
+                  <span>
+                    Type:
+                    <Badge className="float-end">
+                      {" "}
+                      <span> </span> {item.woodFireplaces.type}
+                    </Badge>
+                  </span>
+                </Dimensions>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </Card.Body>
+      </div>
+    </Col>
+  );
+};
+export default WoodCard;
+/*
+variant imgages
+<Row>
               {item.variant.length > 0
                 ? item.variant.map((item) => (
                     <Col key={item.id} className="flex justify-content-start">
@@ -41,13 +102,9 @@ const WoodCard = (props) => {
                   ))
                 : null}
             </Row>
-          </>
-        ) : null}{" "}
-        <Card.Body>
-          <Card.Title className="fw-bold fs-5">{item.name}</Card.Title>
-          <Card.Text className="fw-bold fs-5">
-            <Badge bg="success">
-              {item.meta_data.find(
+PRICES
+
+ {item.meta_data.find(
                 (item) =>
                   item.key ===
                   "_alg_currency_switcher_per_product_regular_price_SEK" //
@@ -83,50 +140,4 @@ const WoodCard = (props) => {
                   maximumFractionDigits: 2,
                 })
               )}
-
-              <span> </span>
-              {currencySymbol()}
-            </Badge>{" "}
-          </Card.Text>
-
-          <Accordion
-            className="bg-success rounded-45"
-            style={{ borderRadius: "45px" }}
-          >
-            <Accordion.Item eventKey="1" className="bg-success rounded-45">
-              <Accordion.Header>Details</Accordion.Header>
-              <Accordion.Body
-                className="bg-success rounded-45 "
-                style={{ borderRadius: "45px" }}
-              >
-                <Dimensions
-                  length={item.dimensions.length}
-                  height={item.dimensions.height}
-                  width={item.dimensions.width}
-                  variant="primary"
-                  unity="cm"
-                >
-                  <span>
-                    kW:
-                    <Badge className="float-end">
-                      {" "}
-                      <span> </span> {item.acf.kw}
-                    </Badge>
-                  </span>
-                  <span>
-                    Type:
-                    <Badge className="float-end">
-                      {" "}
-                      <span> </span> {item.acf.type}
-                    </Badge>
-                  </span>
-                </Dimensions>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        </Card.Body>
-      </div>
-    </Col>
-  );
-};
-export default WoodCard;
+*/

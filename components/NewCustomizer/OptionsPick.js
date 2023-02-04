@@ -20,9 +20,11 @@ const OptionsPick = (props) => {
   const [fillingType, setFillingType] = useState("EW");
   const [shsPicked, setShsPicked] = useState(false);
   const [stainlessTopPicked, setStainlessTopPicked] = useState(false);
+  const { fireplacePcs } = props;
   useEffect(() => {
     props.onSubmit.current = onSubmit;
-  }, [selectedOption, fillingType]);
+    console.log(selectedOption);
+  }, [selectedOption, fillingType, fireplacePcs]);
   const lang = useContext(LanguageContext);
   const topRef = useRef();
   const shsRef = useRef();
@@ -87,7 +89,9 @@ const OptionsPick = (props) => {
       </Button>
     </p>
   ));
+
   const onSubmit = () => {
+    //console.log(fireplacePcs);
     // po wyborze dlugosci zastap caly koszyk bo i tak wszystko inne musi byc dodane na nowo
     setCart([
       fireplacePrice({
@@ -96,6 +100,7 @@ const OptionsPick = (props) => {
         smart: shsRef.current.checked,
         top: topRef.current ? topRef.current.checked : false,
         item: selectedOption,
+        quantity: fireplacePcs,
       }),
     ]);
     props.onLengthPick(selectedOption.dimensions.length);
@@ -264,7 +269,7 @@ const OptionsPick = (props) => {
               className="text-white"
               onClick={() =>
                 downloadFile(
-                  selectedOption.technical_image[0],
+                  selectedOption.drawing3d,
                   `${pickedFireplace.name} ${selectedOption.dimensions.length}.pdf`
                 )
               }
@@ -273,6 +278,32 @@ const OptionsPick = (props) => {
             </Button>
           }
         ></MyVerticallyCenteredModal>
+        {selectedOption && (
+          <div className="d-flex flex-column float-end m-1 p-2 fw-bold align-items-center">
+            <Badge>Do You need more than 1 fireplace?</Badge>
+            <span className="mt-2 bg-primary p-3 rounded">
+              <span className="fw-bold fs-5 px-2">{fireplacePcs}</span>
+              <Button
+                size="sm"
+                variant="info"
+                className="m-1 fw-bold"
+                onClick={() => props.onFireplacePcs(true)}
+              >
+                +
+              </Button>
+              {fireplacePcs > 1 && (
+                <Button
+                  size="sm"
+                  variant="success"
+                  className="m-1 fw-bold"
+                  onClick={() => props.onFireplacePcs(false)}
+                >
+                  -
+                </Button>
+              )}
+            </span>
+          </div>
+        )}
       </Col>
     </Row>
   );

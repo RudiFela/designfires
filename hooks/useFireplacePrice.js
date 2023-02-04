@@ -46,6 +46,7 @@ export const useFireplacePrice = () => {
             fireplace.item.price,
             fireplace.item.manufacture_cost_EUR
           ),
+          quantity: fireplace.quantity,
           filling: fireplace.filling,
           smart: fireplace.smart,
           top: fireplace.top,
@@ -124,7 +125,7 @@ export const useFireplacePrice = () => {
             ])
           ),
         });
-    // console.log(product);
+    //console.log(product);
     return product;
   };
 

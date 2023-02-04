@@ -27,9 +27,12 @@ const VentilationGridCard = (props) => {
           {props.name} / {variant.dimensions.length}
         </Badge>
       </h3>
-      <Ratio aspectRatio="4x3">
-        <Image src={variant.img} layout="fill" alt="ventilation grid Photo" />
-      </Ratio>
+      {variant.img && (
+        <Ratio aspectRatio="4x3">
+          <Image src={variant.img} layout="fill" alt="ventilation grid Photo" />
+        </Ratio>
+      )}
+
       <Row className="p-4 ">
         <Col className="text-center m-1">
           <Stack gap={1}>

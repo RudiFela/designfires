@@ -16,6 +16,7 @@ const MountPick = (props) => {
   const [nextStep, setNextStep] = useState(false);
   const [mountProduct, setMountProduct] = useState();
   const { getPrices } = useCartCurrency();
+  const { fireplacePcs } = props;
   useEffect(() => {
     props.onSubmit.current = onSubmit;
   }, [shortGlass, longGlass, holdersPcs]);
@@ -51,7 +52,10 @@ const MountPick = (props) => {
       };
       setSplitGlass({ split, pcs: selectedGlass.longPcs });
     }
-    setLongGlass({ long: longGlassCartProduct, pcs: selectedGlass.longPcs });
+    setLongGlass({
+      long: longGlassCartProduct,
+      pcs: selectedGlass.longPcs,
+    });
     setShortGlass({
       short: shortGlassCartProduct,
       pcs: selectedGlass.shortPcs,
@@ -82,7 +86,7 @@ const MountPick = (props) => {
         findGlassHolders.DKK_price
       ),
     };
-    mountProduct && addItem(mountProduct);
+    mountProduct && addItem(mountProduct, fireplacePcs);
     addItem(
       {
         ...longGlass.long,
@@ -92,7 +96,7 @@ const MountPick = (props) => {
           longGlass.long.DKK_price
         ),
       },
-      longGlass.pcs
+      longGlass.pcs * fireplacePcs
     );
     addItem(
       {
@@ -103,7 +107,7 @@ const MountPick = (props) => {
           shortGlass.short.DKK_price
         ),
       },
-      shortGlass.pcs
+      shortGlass.pcs * fireplacePcs
     );
 
     splitGlass &&
@@ -116,9 +120,9 @@ const MountPick = (props) => {
             splitGlass.split.DKK_price
           ),
         },
-        splitGlass.pcs
+        splitGlass.pcs * fireplacePcs
       );
-    addItem(glassHolders, holdersPcs);
+    addItem(glassHolders, holdersPcs * fireplacePcs);
   };
 
   const extendSection = () => {

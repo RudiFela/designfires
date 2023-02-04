@@ -23,15 +23,18 @@ const WoodCustomizer = (props) => {
   const [danishFilter, setDanishFilter] = useState(false);
   const [openingSidesFilter, setOpeningSidesFilter] = useState(false);
   const [rangeFilter, setRangeFilter] = useState(false);
+  const [openingSides, setOpeningSides] = useState();
   const [minRangeFilterValue, setMinRangeFilterValue] = useState(1);
   const [maxRangeFilterValue, setMaxRangeFilterValue] = useState(30);
   //const [expandCard, setExpandCard] = useState();
   useEffect(() => {
     mainArrayFilter();
+    // console.log(props.fireplace);
   }, [
     mountFilterValue,
     danishFilter,
     openingSidesFilter,
+    openingSides,
     minRangeFilterValue,
     maxRangeFilterValue,
   ]);
@@ -45,27 +48,51 @@ const WoodCustomizer = (props) => {
 
     fireplacesArray = filterByMountType(mountFilterValue, fireplacesArray);
     fireplacesArray = filterDanishApproved(danishFilter, fireplacesArray);
-    // fireplacesArray = filterBySides();
+    openingSidesFilter
+      ? (fireplacesArray = filterBySides(fireplacesArray))
+      : null;
     setFireplacesToList(fireplacesArray);
-    // console.log(fireplacesArray.map((item) => item.id));
   };
   const filterByMountType = (value, array) => {
     //fireplacesToList
     let filtered;
     if (value !== undefined) {
-      filtered = array.filter((item) => item.acf.type === value);
+      filtered = array.filter((item) => item.woodFireplaces.type === value);
     } else {
       filtered = array;
     }
-    //console.log(filtered);
 
     return filtered;
   };
-  const filterBySides = () => {};
+  const nullCheck = (value) => {
+    if (value === null) {
+      return 0;
+    } else {
+      return value;
+    }
+  };
+  const checkItem = (item) => {
+    if (
+      item.casingOptions.longOpeningSides === openingSides.long &&
+      nullCheck(item.casingOptions.shortOpeningSides) === openingSides.short
+    ) {
+      //console.log("good");
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const filterBySides = (array) => {
+    let filtered;
+    filtered = array.filter((item) => checkItem(item));
+
+    return filtered;
+  };
   const filterByRange = (from, to, array) => {
-    //fireplacesToList
     const filtered = array.filter(
-      (item) => Number(item.acf.kw) <= to && Number(item.acf.kw) > from
+      (item) =>
+        Number(item.woodFireplaces.kw) <= to &&
+        Number(item.woodFireplaces.kw) > from
     );
     //  console.log(filtered);
 
@@ -73,9 +100,11 @@ const WoodCustomizer = (props) => {
   };
   const filterDanishApproved = (x, array) => {
     if (x) {
-      let filtered = array.filter((item) => item.acf.danish_approved === x);
+      let filtered = array.filter(
+        (item) => item.woodFireplaces.danish_approved === x
+      );
       let filteredKratkiFireplaces = array.filter(
-        (item) => item.acf.producent === "K"
+        (item) => item.woodFireplaces.producent === "K"
       );
       let filteredFireplaces = filtered.concat(filteredKratkiFireplaces);
       return filteredFireplaces;
@@ -93,6 +122,10 @@ const WoodCustomizer = (props) => {
   };
   const maxRangeChange = (value) => {
     setMaxRangeFilterValue(value);
+  };
+  const onOpeningSidesChange = (item) => {
+    setOpeningSidesFilter(true);
+    setOpeningSides({ short: item.shortGlass, long: item.longGlass });
   };
   return (
     <div>
@@ -115,6 +148,7 @@ const WoodCustomizer = (props) => {
           maxRange={maxRangeFilterValue}
           minRangeChange={minRangeChange}
           maxRangeChange={maxRangeChange}
+          onOpeningSidesChange={onOpeningSidesChange}
         />
         <Row>
           <WoodCardList items={fireplacesToList} showModal={openModal} />

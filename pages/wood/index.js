@@ -1,36 +1,10 @@
-import { useEffect, useContext } from "react";
 import Navibar from "../../containers/navbar/Navbar";
-import PhotosGrid from "../../components/PhotosGrid.js/PhotosGrid";
-import AboutSection from "../../components/AboutSection/AboutSection";
 import SSRProvider from "react-bootstrap/SSRProvider";
 import axios from "axios";
 import Footer from "../../containers/footer/Footer";
-import { Col, Row, Figure, Button, Badge } from "react-bootstrap";
 import WoodCustomizer from "../../components/WoodCustomizer/WoodCustomizer";
-import { LanguageContext } from "../../components/context/language-context";
+import * as Const from "../../graphql/woodFireplaces/const";
 const Wood = (props) => {
-  const { language } = useContext(LanguageContext);
-
-  const title = "Wood Fireplace";
-  const listItems = [
-    "Most realistic flames on the market.",
-    "Highest flame on the market.",
-    "Longest flame width on the market(50mm longer line of fire on all our models).",
-    "20 hours burning time (largest standard Ethanol Fuel tank on the market).",
-    "Starts fastest of all automatic ethanol fireplaces on the market, starting as soon as you press the start button.",
-    "Remote Control is standard.",
-    "Is very operationally safe and simple to service, best on the market.",
-    "It can be built in anywhere and is safe and easy to use.",
-    "The best choice and most for your money if you want real fire and cosiness in your apartment or house.",
-  ];
-  const aboutParagraph =
-    "Install a DFE in your old open fireplace to create a cozy and warm feeling with no smoke.You can design and get the style and look you want, as standard. We make your fireplace, according to your tastes and dreams";
-  const paragraphs = [
-    "It can be made in length from DFE500mm, DFE700mm, DFE1000mm, DFE1200mm and not standart up to DFE2400mm",
-    " We can build fireplaces to meet 100% of your needs, in concrete or handmade steel casings in lengths from 560mm, 760mm, 1060mm, and 1260mm, with heights of 500mm, and depth of 350mm (only), with openings on all sides or 1-3 sides.",
-    "You decide for yourself the decoration from the large selection of luxury hand made Accessories",
-  ];
-
   return (
     <SSRProvider>
       <div className="main">
@@ -47,53 +21,14 @@ const Wood = (props) => {
 };
 export default Wood;
 export async function getStaticProps(context) {
-  const crud = {
-    auth: {
-      username: "ck_b143b31c7842e4a628279fe7b097980c311f08d5",
-      password: "cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e",
-    },
-  };
-  const decoURL =
-    "https://designfires.pl/wp-json/wc/v3/products?category=20&per_page=20&orderby=price&order=desc";
-  const woodURL =
-    "https://designfires.pl/wp-json/wc/v3/products?category=31&per_page=100";
-  const accessoriesURL =
-    "https://designfires.pl/wp-json/wc/v3/products?category=21";
-  const fireplacesURL =
-    "https://designfires.pl/wp-json/wc/v3/products?category=26";
-  const boxesUrl = "https://designfires.pl/wp-json/wc/v3/products?category=30";
-  const fuelUrl = "https://designfires.pl/wp-json/wc/v3/products?category=29";
-  // ck ck_b143b31c7842e4a628279fe7b097980c311f08d5
-  // cs cs_b2d20befae8f292ec5e96fd4052f85c40ee7480e
-
-  const decorations = await axios.get(decoURL, crud);
-  const woodFetch = await axios.get(woodURL, crud);
-
-  // console.log(fireplacess);
-  const [deco, wood] = await Promise.all([decorations.data, woodFetch.data]);
-  //let d;
-  //addVariants(cases, crud).then((res) => console.log(res));
-  // console.log(d);
-
-  // const casings = await addVariants(casingFetch.data, crud);
-  //const accessories = await addVariants(cases, crud);
-  //const test = JSON.parse(accessories);
-  //console.log(cases[0].variations);
-  /* const repos = await axios.get(
-    `https://designfires.pl/wp-json/wc/v3/products/${cases[0].id}/variations`,
-    crud
-  );
-  console.log(repos.data);*/
-  // console.log(addVariants(cases, crud));
-  //console.log(cases);
-  //const fireplacess = await addVariants(fireplaceFetch.data, crud);
+  const queryResult = await axios.post(Const.GRAPHQL, {
+    query: Const.GET_WOOD_FIREPLACES,
+  });
+  const result = queryResult.data.data.products.nodes;
 
   return {
     props: {
-      decorations: deco,
-      woodFireplaces: wood,
-      // language: LanguageChecker(),
-      //test: accessories,
+      woodFireplaces: result,
     },
     revalidate: 3600,
   };

@@ -15,11 +15,12 @@ import CustomizerHeader from "../UI/CustomizerHeader";
 import dynamic from "next/dynamic";
 import AnimateWrapper from "./AnimateWrapper";
 import axios from "axios";
+import EthanolFuel from "./EthanolFuel";
 
 ///dimport PdfTemplate from "./PdfTemplate";
 //const MyDoc = <PdfTemplate />;
 const NewCustomizer = (props) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
   const [fireplaceType, setFireplaceType] = useState();
   const [pickedLength, setPickedLength] = useState();
   const [nextStepAllow, setNextStepAllow] = useState(false);
@@ -29,6 +30,7 @@ const NewCustomizer = (props) => {
   const [furnitureBoxes, setFurnitureBoxes] = useState();
   const [casings, setCasings] = useState();
   const [glass, setGlass] = useState();
+  const [fireplacePcs, setFireplacePcs] = useState(1);
   // const [pdf, setPdf] = usePDF({ document: MyDoc });
   const OrderRef = useRef();
   useEffect(() => {
@@ -72,7 +74,7 @@ const NewCustomizer = (props) => {
     setGlass(accessoriesFetch.data);
     setIsLoading(false);
     // console.log(accessoriesFetch);
-    console.log(props.fuel);
+    // console.log(props.fuel);
   };
   const lang = useContext(LanguageContext);
   const { items } = useCart();
@@ -86,6 +88,11 @@ const NewCustomizer = (props) => {
   const DownloadPdf = dynamic(() => import("./DownloadPdf"), {
     ssr: false,
   });
+  const onFireplacePcs = (choice) => {
+    choice
+      ? setFireplacePcs(fireplacePcs + 1)
+      : setFireplacePcs(fireplacePcs - 1);
+  };
   const onLengthPick = (length) => {
     setPickedLength(length);
   };
@@ -95,24 +102,37 @@ const NewCustomizer = (props) => {
   const nextStep = () => {
     onSubmit.current();
     // console.log(onSubmit.current);
+    if (currentStep === 1) {
+      //jesli wybieramy opcje i wybierzemy DFE
+      fireplaceType.name === "DFE"
+        ? setCurrentStep(currentStep + 1)
+        : setCurrentStep(currentStep + 2);
+    } else {
+      setCurrentStep(currentStep + 1);
+    }
     setNextStepAllow(false);
-    setCurrentStep(currentStep + 1);
   };
   const backStep = () => {
+    if (currentStep === 3) {
+      fireplaceType.name === "DFE"
+        ? setCurrentStep(currentStep - 1)
+        : setCurrentStep(currentStep - 2);
+    } else {
+      setCurrentStep(currentStep - 1);
+    }
     setNextStepAllow(false);
-    setCurrentStep(currentStep - 1);
   };
   const onNextStepAllow = () => {
     setNextStepAllow(true);
   };
   const displayStep = (step) => {
     switch (step) {
-      case 1:
+      case 0:
         return (
           <TypePick onTypePick={onTypePick} fireplaceItems={props.fireplace} />
         );
 
-      case 2:
+      case 1:
         return (
           <AnimateWrapper>
             <OptionsPick
@@ -124,8 +144,18 @@ const NewCustomizer = (props) => {
               allowNextStep={onNextStepAllow}
               onSubmit={onSubmit}
               customVariant={customVariant}
+              onFireplacePcs={onFireplacePcs}
+              fireplacePcs={fireplacePcs}
             />
           </AnimateWrapper>
+        );
+      case 2:
+        return (
+          <EthanolFuel
+            fuelProducts={props.fuelProducts}
+            allowNextStep={onNextStepAllow}
+            onSubmit={onSubmit}
+          />
         );
       case 3:
         return (
@@ -143,6 +173,7 @@ const NewCustomizer = (props) => {
             onSubmit={onSubmit}
             allowNextStep={onNextStepAllow}
             customFireplace={customFireplace}
+            fireplacePcs={fireplacePcs}
           />
         );
       case 4:
@@ -198,7 +229,7 @@ const NewCustomizer = (props) => {
             borderBottomRightRadius: 15,
           }}
         >
-          {currentStep > 1 && (
+          {currentStep > 0 && (
             <span className="p-2 me-auto">
               <Button variant="success" onClick={() => backStep()}>
                 Back
@@ -219,7 +250,7 @@ const NewCustomizer = (props) => {
             <LanguageSwitcher />
           </span>{" "}
           <span className="p-2">
-            {currentStep > 1 && (
+            {currentStep > 0 && (
               <Button className="fw-bold" disabled={true}>
                 <FiShoppingCart className="mx-2 p-0" />
                 {lang
@@ -237,7 +268,7 @@ const NewCustomizer = (props) => {
             )}
           </span>
           <span className="p-2">
-            {currentStep > 1 && currentStep < 6 && (
+            {currentStep > 0 && currentStep < 6 && (
               <Button
                 className="fw-bold"
                 variant={nextStepAllow ? "info" : "primary"}
