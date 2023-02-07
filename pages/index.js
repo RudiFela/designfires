@@ -8,6 +8,7 @@ import axios from "axios";
 import { useCart } from "react-use-cart";
 import SSRProvider from "react-bootstrap/SSRProvider";
 import { LanguageContext } from "../components/context/language-context";
+import "../i18n";
 export default function Home(props) {
   const [language, setLanguage] = useState();
   useEffect(() => {

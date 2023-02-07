@@ -10,6 +10,7 @@ import CustomizerHeader from "../UI/CustomizerHeader";
 function EthanolFuel(props) {
   useEffect(() => {
     props.onSubmit.current = onSubmit;
+    props.allowNextStep();
   }, []);
   const lang = useContext(LanguageContext);
   const { inCart, addItem, getItem, updateItemQuantity } = useCart();
@@ -20,7 +21,6 @@ function EthanolFuel(props) {
       img: item.images[0].woocommerce_thumbnail,
       prices: getPrices(item.price, item.SEK_price, item.DKK_price),
     });
-    props.allowNextStep();
   };
   const onSubmit = () => {};
   return (
@@ -50,11 +50,23 @@ function EthanolFuel(props) {
                 />
               </Ratio>
               <p className="mt-3 fs-6 text-center wrap">{item.name}</p>
-              <Row className="p-3 ">
-                <Col>
+              <Row className="p-3 " xs={2}>
+                <Col md="auto">
+                  {" "}
+                  <Button
+                    className="m-1"
+                    onClick={() => {
+                      onAdd(item);
+                    }}
+                    variant="success"
+                  >
+                    ADD
+                  </Button>
+                </Col>
+                <Col md="auto" className="">
                   {" "}
                   <span>
-                    <Badge bg="info" className=" fs-5">
+                    <Badge bg="info" className="py-2 fw-bold fs-5 m-1">
                       {Number(
                         lang.currencyPrice(
                           item.price,
@@ -68,9 +80,7 @@ function EthanolFuel(props) {
                       {lang.currencySymbol()}
                     </Badge>
                   </span>
-                </Col>
-                <Col>
-                  <Badge bg="success" className="py-2 fw-bold fs-5 h-100">
+                  <Badge bg="success" className="py-2 fw-bold fs-5">
                     x {inCart(item.id) ? getItem(item.id).quantity : 0}
                   </Badge>{" "}
                   {inCart(item.id) && (

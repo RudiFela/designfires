@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, createRef } from "react";
 import Image from "next/image";
 import {
   Row,
@@ -38,7 +38,7 @@ const ProductLayout = (props) => {
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
-
+  const galleryRef = useRef();
   const prepareGallery = (array) => {
     let imagesArray = [];
     //śconsole.log(array);
@@ -59,12 +59,14 @@ const ProductLayout = (props) => {
         <Stack gap={3}>
           <div className="d-flex justify-content-center w-100">
             <ImageGallery
+              ref={galleryRef}
               style={{ borderRadius: "25px" }}
               items={prepareGallery(props.gallery)}
               showPlayButton={false}
               showFullscreenButton={true}
               showThumbnails={item.variant.length > 0 ? false : true}
               showBullets={true}
+              onClick={() => galleryRef.current.fullScreen()}
             />
           </div>
           <div md="auto" className="fs-4  d-flex justify-content-center">

@@ -23,7 +23,7 @@ const OptionsPick = (props) => {
   const { fireplacePcs } = props;
   useEffect(() => {
     props.onSubmit.current = onSubmit;
-    console.log(selectedOption);
+    // console.log(selectedOption);
   }, [selectedOption, fillingType, fireplacePcs]);
   const lang = useContext(LanguageContext);
   const topRef = useRef();
@@ -103,6 +103,7 @@ const OptionsPick = (props) => {
         quantity: fireplacePcs,
       }),
     ]);
+
     props.onLengthPick(selectedOption.dimensions.length);
   };
   return (

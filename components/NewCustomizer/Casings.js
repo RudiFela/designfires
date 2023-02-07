@@ -30,7 +30,7 @@ const Casings = (props) => {
   const [selected, setSelected] = useState(false);
   const [clicked, setClicked] = useState();
   useEffect(() => {
-    // console.log(props.casings);
+    console.log(props.casings);
   }, []);
   const showModalHandler = (image) => {
     setTechnicalDrawing(image);
@@ -46,6 +46,13 @@ const Casings = (props) => {
       (item) =>
         Number(item.length.option) === Number(Number(props.pickedLength) + 60)
     );
+    console.log({
+      ...findedVariant,
+      name,
+      longGlass: Number(long),
+      shortGlass: Number(short),
+      glassPcs: Number(holders),
+    });
     return {
       ...findedVariant,
       name,
@@ -131,7 +138,12 @@ const Casings = (props) => {
                         layout="fill"
                       />
                     </Ratio>
-                    <p className="mt-3 fs-6 text-center wrap">{item.name}</p>
+                    <p className="mt-3 mb-1 fs-6 text-center wrap">
+                      {item.name}
+                    </p>
+                    <p className="fs-7 text-center wrap">
+                      ( {item.shortGlass + item.longGlass} open sides )
+                    </p>
                     <Row>
                       <Col className="d-flex justify-content-center m-1">
                         <span>

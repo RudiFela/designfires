@@ -7,7 +7,7 @@ import { VscError } from "react-icons/vsc";
 import { Form, Row, Col, FloatingLabel, Button } from "react-bootstrap";
 import { LanguageContext } from "../../components/context/language-context";
 import CustomizerHeader from "../UI/CustomizerHeader";
-const ContactForm = () => {
+const ContactForm = (props) => {
   const [sending, setSending] = useState(false);
   const [emailResponse, setEmailResponse] = useState();
   const lang = useContext(LanguageContext);
@@ -16,8 +16,11 @@ const ContactForm = () => {
   const phoneInputRef = useRef();
   const subjectInputRef = useRef();
   const textAreaInputRef = useRef();
+  const adressInputRef = useRef();
+  const cityInputRef = useRef();
+  const zipInputRef = useRef();
   const formInputRef = useRef();
-
+  const { cartTotals } = props;
   const { items, cartTotal } = useCart();
   const cartPrepare = items.map(
     (item) =>
@@ -30,9 +33,23 @@ const ContactForm = () => {
     }</td>
     <td class="text-right" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="right" width="100%">${
       //lang.currencyPrice(item.priceEUR, item.priceSEK, item.priceDKK) +
-      item.quantity > 1
-        ? item.itemTotal + lang.currencySymbol()
-        : item.price + lang.currencySymbol()
+      lang
+        .currencyPrice(
+          item.prices
+            ? item.prices.find((item) => item.currency === "EUR").amount
+            : item.price,
+          item.prices
+            ? item.prices.find((item) => item.currency === "SEK").amount
+            : item.SEK_price,
+          item.prices
+            ? item.prices.find((item) => item.currency === "DKK").amount
+            : item.DKK_price
+        )
+        .toLocaleString(undefined, {
+          maximumFractionDigits: 2,
+        }) +
+      " " +
+      lang.currencySymbol()
     }</td>
   </tr>`
   );
@@ -104,7 +121,7 @@ const ContactForm = () => {
                               <tbody>
                                 <tr>
                                   <td style="line-height: 24px; font-size: 16px; width: 100%; border-radius: 24px; margin: 0; padding: 40px;" align="left" bgcolor="#ffffff">
-                                    <h3 class="text-center" style="padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 28px; line-height: 33.6px; margin: 0;" align="center">Your choices from Designfires.com</h3>
+                                    <h3 class="text-center" style="padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 28px; line-height: 33.6px; margin: 0;" align="center">Your choices from Designfires.com: </h3>
                                     <table class="s-2 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                       <tbody>
                                         <tr>
@@ -120,7 +137,15 @@ const ContactForm = () => {
                                         <tr>
                                           <td class="fw-700 border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="left" width="100%">Total Cost</td>
                                           <td class="fw-700 border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="left" width="100%"></td>
-                                          <td class="fw-700 text-right border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="right" width="100%">${cartTotal} ${lang.currencySymbol()}</td>
+                                          <td class="fw-700 text-right border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="right" width="100%">${lang
+                                            .currencyPrice(
+                                              cartTotals.price,
+                                              cartTotals.SEK_price,
+                                              cartTotals.DKK_price
+                                            )
+                                            .toLocaleString(undefined, {
+                                              maximumFractionDigits: 2,
+                                            })} ${lang.currencySymbol()}</td>
                                         </tr>
                                       </tbody>
                                     </table>
@@ -193,6 +218,9 @@ const ContactForm = () => {
       user_phone: phoneInputRef.current.value,
       user_subject: subjectInputRef.current.value,
       user_textarea: textAreaInputRef.current.value,
+      user_adress: adressInputRef.current.value,
+      user_city: cityInputRef.current.value,
+      user_zip: zipInputRef.current.value,
       user_decorations: tables,
       //user_totalprice: cartHandler.cartPrice + lang.currencySymbol(),
     };
@@ -261,6 +289,56 @@ const ContactForm = () => {
                 </FloatingLabel>
               </Form.Group>
             </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} controlId="formGridAdress">
+                <FloatingLabel
+                  controlId="floatingAdressInput"
+                  label="Adress"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Adress"
+                    ref={adressInputRef}
+                    name="user_adress"
+                    required
+                  />
+                </FloatingLabel>
+              </Form.Group>
+              <Form.Group as={Col} md={3} controlId="formGridCity">
+                <FloatingLabel
+                  controlId="floatingCityInput"
+                  label="City"
+                  className="mb-3 "
+                >
+                  {" "}
+                  <Form.Control
+                    type="zip"
+                    placeholder="Enter City"
+                    ref={cityInputRef}
+                    name="user_city"
+                    required
+                  />
+                </FloatingLabel>
+              </Form.Group>
+              <Form.Group as={Col} md={2} controlId="formGridZip">
+                <FloatingLabel
+                  controlId="floatingZipInput"
+                  label="Zip-Code"
+                  className="mb-3 "
+                >
+                  {" "}
+                  <Form.Control
+                    type="zip"
+                    placeholder="Enter Zip Code"
+                    ref={zipInputRef}
+                    name="user_zip"
+                    required
+                  />
+                </FloatingLabel>
+              </Form.Group>
+            </Row>
+
             <Row className="mb-3 ">
               <Form.Group as={Col} controlId="formGridTelephone">
                 <FloatingLabel
@@ -289,6 +367,7 @@ const ContactForm = () => {
                     <option>Select Subject</option>
                     <option>Bio-Ethanol</option>
                     <option>Mystic Steamfire</option>
+                    <option>Wood Fireplaces</option>
                     <option>Others</option>
                   </Form.Select>
                 </FloatingLabel>
@@ -302,11 +381,15 @@ const ContactForm = () => {
                 className="p-3 mb-2  "
                 as="textarea"
                 placeholder="Your questions..."
-                rows={5}
+                rows={2}
                 name="user_textarea"
                 ref={textAreaInputRef}
               />
             </Form.Group>
+            <p className="fw-bold text-white">
+              Your personal data are using only for faster calculate shipping
+              cost and faster contact with offer!
+            </p>
             <Button
               className="float-end"
               variant="info"

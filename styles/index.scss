@@ -11,6 +11,7 @@
 @use "../components/Decorations/decorations";
 @use "../components/Inspired/inspired";
 @use "../components/Customizer/customizer";
+@use "../components/UI/MultiRangeSlider/multiRangeSlider";
 @import "./variables";
 * {
   font-family: $font !important;

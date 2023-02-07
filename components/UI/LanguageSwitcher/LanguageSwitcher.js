@@ -3,6 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { LanguageContext } from "../../context/language-context";
+import { useTranslation } from "react-i18next";
 const english = "/static/images/greatbritain.png";
 const denmark = "/static/images/denmark.png";
 const sweden = "/static/images/sweden.png";
@@ -38,6 +39,10 @@ const LanguageSwitcher = () => {
     }
     setChanged(false);
   }, [language]);
+  const { t, i18n } = useTranslation();
+  const handleTrans = (code) => {
+    i18n.changeLanguage(code);
+  };
 
   const onLanguageChange = (langPhoto, langName) => {
     setChanged(true);
@@ -46,6 +51,7 @@ const LanguageSwitcher = () => {
     );
     //props.setLanguage(langName);
     language.setLanguage(langName);
+    i18n.changeLanguage(langName);
   };
   return (
     <NavDropdown

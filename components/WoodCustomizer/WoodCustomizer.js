@@ -25,11 +25,12 @@ const WoodCustomizer = (props) => {
   const [rangeFilter, setRangeFilter] = useState(false);
   const [openingSides, setOpeningSides] = useState();
   const [minRangeFilterValue, setMinRangeFilterValue] = useState(1);
-  const [maxRangeFilterValue, setMaxRangeFilterValue] = useState(30);
+  const [maxRangeFilterValue, setMaxRangeFilterValue] = useState(40);
+  const [nameFilter, setNameFilter] = useState("");
   //const [expandCard, setExpandCard] = useState();
   useEffect(() => {
     mainArrayFilter();
-    // console.log(props.fireplace);
+    console.log(props.fireplace);
   }, [
     mountFilterValue,
     danishFilter,
@@ -37,6 +38,7 @@ const WoodCustomizer = (props) => {
     openingSides,
     minRangeFilterValue,
     maxRangeFilterValue,
+    nameFilter,
   ]);
   const mainArrayFilter = () => {
     let fireplacesArray = props.fireplace;
@@ -51,7 +53,18 @@ const WoodCustomizer = (props) => {
     openingSidesFilter
       ? (fireplacesArray = filterBySides(fireplacesArray))
       : null;
+    fireplacesArray = filterByName(fireplacesArray);
     setFireplacesToList(fireplacesArray);
+  };
+  const filterByName = (array) => {
+    let filtered;
+    if (nameFilter !== "") {
+      filtered = array.filter((item) =>
+        item.name.toLowerCase().includes(nameFilter.toLowerCase())
+      );
+      return filtered;
+    }
+    return array;
   };
   const filterByMountType = (value, array) => {
     //fireplacesToList
@@ -123,9 +136,17 @@ const WoodCustomizer = (props) => {
   const maxRangeChange = (value) => {
     setMaxRangeFilterValue(value);
   };
+  const onRangeChange = (min, max) => {
+    setMaxRangeFilterValue(max);
+    setMinRangeFilterValue(min);
+  };
   const onOpeningSidesChange = (item) => {
     setOpeningSidesFilter(true);
     setOpeningSides({ short: item.shortGlass, long: item.longGlass });
+  };
+  const onNameChange = (e) => {
+    //console.log(e);
+    setNameFilter(e);
   };
   return (
     <div>
@@ -148,7 +169,10 @@ const WoodCustomizer = (props) => {
           maxRange={maxRangeFilterValue}
           minRangeChange={minRangeChange}
           maxRangeChange={maxRangeChange}
+          onRangeChange={onRangeChange}
           onOpeningSidesChange={onOpeningSidesChange}
+          onNameChange={onNameChange}
+          nameFilter={nameFilter}
         />
         <Row>
           <WoodCardList items={fireplacesToList} showModal={openModal} />

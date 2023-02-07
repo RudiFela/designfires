@@ -1,8 +1,9 @@
 //import { useContext, useState, useEffect } from "react";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import Image from "next/image";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 //import { LanguageContext } from "../../components/context/language-context";
 //const english = "/static/images/greatbritain.png";
 //const denmark = "/static/images/denmark.png";
@@ -39,6 +40,7 @@ const Navibar = () => {
     language.setLanguage(langName);
   };*/ //
   /**/
+  const { t, i18n } = useTranslation();
 
   return (
     <>
@@ -80,6 +82,7 @@ const Navibar = () => {
               >
                 Bio-Ehtanol Fuel
               </Nav.Link>
+
               <Nav.Link className="text-white text-center" href="/#bio">
                 Digital Bio-Ethanol Fireplace PRO (DFE)
               </Nav.Link>

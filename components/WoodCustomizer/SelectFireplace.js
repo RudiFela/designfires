@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "react-use-cart";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { Button } from "react-bootstrap";
 import CustomizerHeader from "../UI/CustomizerHeader";
 import ContactForm from "../NewCustomizer/Contact";
@@ -13,6 +13,21 @@ function SelectFireplace(props) {
     addItem({ ...props.item, img: props.item.images[0].shop_thumbnail });
     setShowOrder(true);
   };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      sequence();
+    }, 2000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  const animation = useAnimation();
+  async function sequence() {
+    await animation.start({ scale: 1.2 });
+
+    animation.start({ scale: 1 });
+  }
   return (
     <div>
       {showOrder ? (
@@ -41,9 +56,16 @@ function SelectFireplace(props) {
         </AnimatePresence>
       ) : (
         <div className="text-center">
-          <Button className="fs-4 fw-bold" onClick={() => onSelect()}>
-            Select
-          </Button>
+          {" "}
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            animate={animation}
+            onTap={sequence}
+          >
+            <Button className="fs-4 fw-bold" onClick={() => onSelect()}>
+              Select
+            </Button>
+          </motion.div>
         </div>
       )}
     </div>

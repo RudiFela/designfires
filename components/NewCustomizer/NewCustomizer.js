@@ -193,7 +193,7 @@ const NewCustomizer = (props) => {
           <>
             <div className="text-black">
               <CustomizerHeader>Send Your Choices To Us</CustomizerHeader>
-              <Contact />{" "}
+              <Contact cartTotals={cartTotals} />{" "}
             </div>
             <Summary />
           </>
