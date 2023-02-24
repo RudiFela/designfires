@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Dropdown, DropdownButton } from "react-bootstrap";
+import { ImCancelCircle } from "react-icons/im";
 import { motion, AnimatePresence } from "framer-motion";
 import GlassOptions from "./glassPick";
 
@@ -7,9 +8,10 @@ const OpeningSidesDropDown = (props) => {
   const [dropDownTitle, setDropDownTitle] = useState(
     <div style={{ width: "50px" }}>Glass</div>
   );
-
+  const [dropDownPicked, setDropDownPicked] = useState(false);
   const onDropDownChange = (item) => {
     //props.onChange();
+    setDropDownPicked(true);
     setDropDownTitle(<div style={{ width: "50px" }}>{item.svg}</div>);
     props.onSelect(item);
     /*
@@ -23,6 +25,11 @@ const OpeningSidesDropDown = (props) => {
                 item.svg
               )
               */
+  };
+  const onReset = () => {
+    setDropDownPicked(false);
+    props.onReset();
+    setDropDownTitle(<div style={{ width: "50px" }}>Glass</div>);
   };
   return (
     <>
@@ -60,6 +67,14 @@ const OpeningSidesDropDown = (props) => {
           </motion.div>
         </AnimatePresence>
       </DropdownButton>
+      {dropDownPicked && (
+        <ImCancelCircle
+          className="text-primary"
+          onClick={() => {
+            onReset();
+          }}
+        />
+      )}
     </>
   );
 };

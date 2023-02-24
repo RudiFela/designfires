@@ -144,6 +144,9 @@ const WoodCustomizer = (props) => {
     setOpeningSidesFilter(true);
     setOpeningSides({ short: item.shortGlass, long: item.longGlass });
   };
+  const onResetOpeningSides = () => {
+    setOpeningSidesFilter(false);
+  };
   const onNameChange = (e) => {
     //console.log(e);
     setNameFilter(e);
@@ -173,6 +176,7 @@ const WoodCustomizer = (props) => {
           onOpeningSidesChange={onOpeningSidesChange}
           onNameChange={onNameChange}
           nameFilter={nameFilter}
+          onResetOpeningSides={onResetOpeningSides}
         />
         <Row>
           <WoodCardList items={fireplacesToList} showModal={openModal} />

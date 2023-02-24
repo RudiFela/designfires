@@ -55,6 +55,15 @@ const WoodFilterOptions = (props) => {
             id={`inline-MountType`}
             onChange={() => props.mountTypeChange("free-stand")}
             //onChange={() => props.changeGlassColor("Bronze", 386)}
+          />{" "}
+          <Form.Check
+            inline
+            className="text-white fw-bolder fs-6"
+            label="Aquasystem"
+            name="mountType"
+            type="radio"
+            id={`inline-MountType`}
+            onChange={() => props.mountTypeChange("aquasystem")}
           />
           <Form.Check
             inline
@@ -95,7 +104,10 @@ const WoodFilterOptions = (props) => {
               </TooltipTrigger>
             </Badge>
           </h4>{" "}
-          <OpeningSidesDropDown onSelect={props.onOpeningSidesChange} />
+          <OpeningSidesDropDown
+            onSelect={props.onOpeningSidesChange}
+            onReset={props.onResetOpeningSides}
+          />
         </Col>
         <Col className=" m-2">
           <h4 className="text-white text-center">

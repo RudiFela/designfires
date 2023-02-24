@@ -12,7 +12,9 @@ const ListVentilationGridVariants = (props) => {
     filtereds = array.filter(
       (item) =>
         item.holesize >= Number(props.grid) &&
-        item.holesize <= Number(props.grid) + 100
+        item.holesize <= Number(props.grid) + 100 &&
+        parseFloat(props.fireplace.dimensions.length) >
+          parseFloat(item.dimensions.length)
     );
     setSplitedGrid(true);
     return filtereds;
@@ -21,18 +23,20 @@ const ListVentilationGridVariants = (props) => {
     const filtered = array.filter(
       (item) =>
         item.holesize >= Number(props.grid) / 2 &&
-        item.holesize <= (Number(props.grid) + 300) / 2
+        item.holesize <= (Number(props.grid) + 300) / 2 &&
+        parseFloat(props.fireplace.dimensions.length) >
+          parseFloat(item.dimensions.length)
     );
     //   console.log(item.holesize / 2);
     return filtered;
   };
   useEffect(() => {
-    // console.log(props.itemToList);
+    // console.log(parseFloat(props.fireplace.dimensions.length));
     let ventilationGrids = props.itemToList;
     const filtered = standartFilter(props.itemToList);
 
     // console.log(filtered, "after first");
-    // console.log(props.itemToList);
+    //console.log(parseFloat(props.itemToList[0].dimensions.length));
     // console.log(props.grid);
 
     /* if (filtered.length === 0 && !firstLoad) {

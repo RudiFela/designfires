@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 //const denmark = "/static/images/denmark.png";
 //const sweden = "/static/images/sweden.png";
 //const designImage = "/static/images/DanishDesign.png";
+const path = require(`path`);
 const Navibar = () => {
   // const language = useContext(LanguageContext);
   //const [lang, setLang] = useState();

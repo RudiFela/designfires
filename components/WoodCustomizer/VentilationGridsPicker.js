@@ -39,6 +39,7 @@ const VentilationGridsPicker = (props) => {
                     itemToList={item.variant}
                     grid={props.item.acf.outlet_grids}
                     onPick={nextStep}
+                    fireplace={props.item}
                   />
                 ))}
               </Row>

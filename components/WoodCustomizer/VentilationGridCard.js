@@ -38,6 +38,9 @@ const VentilationGridCard = (props) => {
           <Stack gap={1}>
             <Badge>Length: {variant.dimensions.length} cm</Badge>
             <Badge>Height: {variant.dimensions.height} cm</Badge>{" "}
+            {variant.dimensions.width && (
+              <Badge>Deep: {variant.dimensions.width} cm</Badge>
+            )}
             <Badge>Field: {variant.holesize} cm2</Badge>
           </Stack>
         </Col>
