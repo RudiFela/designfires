@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 //const denmark = "/static/images/denmark.png";
 //const sweden = "/static/images/sweden.png";
 //const designImage = "/static/images/DanishDesign.png";
-const path = require(`path`);
 const Navibar = () => {
   // const language = useContext(LanguageContext);
   //const [lang, setLang] = useState();
@@ -90,19 +89,13 @@ const Navibar = () => {
               <Nav.Link className="text-white text-center" href="/#steamfire">
                 Mystic SteamFire Pro (DFM)
               </Nav.Link>
-              <Nav.Link
-                className="text-white text-center"
-                href="https://old.designfires.com/gas-fireplace/"
-              >
+              <Nav.Link className="text-white text-center" href="/gas">
                 Gas Fireplace
               </Nav.Link>
               <Nav.Link className="text-white text-center" href="/wood">
                 Wood Fireplace
               </Nav.Link>
-              <Nav.Link
-                className="text-white text-center"
-                href="https://old.designfires.com/outdoorgarden/"
-              >
+              <Nav.Link className="text-white text-center" href="/outdoor">
                 Outdoor Fireplace
               </Nav.Link>
             </Nav>

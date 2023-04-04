@@ -40,9 +40,13 @@ function ProductPage(props) {
                 ? props.fireplace.Image_Gallery
                 : props.fireplace.images
             }
+            equipment={false}
+            energetic={false}
+            certificates={false}
+            ventGrids={false}
           />
         </div>
-        <Footer></Footer>
+        <Footer />
       </div>
     </SSRProvider>
   );

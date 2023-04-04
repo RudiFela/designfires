@@ -51,7 +51,7 @@ const LanguageSwitcher = () => {
     );
     //props.setLanguage(langName);
     language.setLanguage(langName);
-    i18n.changeLanguage(langName);
+    // i18n.changeLanguage(langName);
   };
   return (
     <NavDropdown

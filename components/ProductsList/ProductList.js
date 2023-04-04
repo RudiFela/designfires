@@ -1,21 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  Row,
-  Col,
-  Badge,
-  Button,
-  Card,
-  Form,
-  Container,
-} from "react-bootstrap";
+import { Row, Container } from "react-bootstrap";
 import { motion } from "framer-motion";
-import WoodFilterOptions from "./WoodFilterOptions";
-import WoodCard from "./WoodCard";
+import ProductFilterOptions from "./ProductFilterOptions";
 import MyVerticallyCenteredModal from "../Decorations/Modal";
 import ModalInfoLayout from "./ProductLayout";
-import WoodCartList from "./WoodCardList";
-import WoodCardList from "./WoodCardList";
-const WoodCustomizer = (props) => {
+import ProductCardList from "./ProductCardList";
+const ProductList = (props) => {
   const [fireplacesToList, setFireplacesToList] = useState(props.fireplace);
   const [showModal, setShowModal] = useState(false);
   const [productInfo, setProductInfo] = useState();
@@ -30,7 +20,7 @@ const WoodCustomizer = (props) => {
   //const [expandCard, setExpandCard] = useState();
   useEffect(() => {
     mainArrayFilter();
-    console.log(props.fireplace);
+    // console.log(props.fireplace);
   }, [
     mountFilterValue,
     danishFilter,
@@ -42,13 +32,23 @@ const WoodCustomizer = (props) => {
   ]);
   const mainArrayFilter = () => {
     let fireplacesArray = props.fireplace;
-    fireplacesArray = filterByRange(
+    //console.log(fireplacesArray);
+    props.kwFilter
+      ? (fireplacesArray = filterByRange(
+          minRangeFilterValue,
+          maxRangeFilterValue,
+          fireplacesArray
+        ))
+      : null;
+    /* fireplacesArray = filterByRange(
       minRangeFilterValue,
       maxRangeFilterValue,
       fireplacesArray
-    );
-
-    fireplacesArray = filterByMountType(mountFilterValue, fireplacesArray);
+    );*/
+    props.mountTypeFilter
+      ? (fireplacesArray = filterByMountType(mountFilterValue, fireplacesArray))
+      : null;
+    //fireplacesArray = filterByMountType(mountFilterValue, fireplacesArray);
     fireplacesArray = filterDanishApproved(danishFilter, fireplacesArray);
     openingSidesFilter
       ? (fireplacesArray = filterBySides(fireplacesArray))
@@ -164,7 +164,7 @@ const WoodCustomizer = (props) => {
           Find Wood Fireplace of Your Dreams!
         </h1>
         <h2></h2>
-        <WoodFilterOptions
+        <ProductFilterOptions
           rangeChange={filterByRange}
           mountTypeChange={setMountFilterValue}
           danishApproved={setDanishFilter}
@@ -177,15 +177,22 @@ const WoodCustomizer = (props) => {
           onNameChange={onNameChange}
           nameFilter={nameFilter}
           onResetOpeningSides={onResetOpeningSides}
+          mountTypeFilter={props.mountTypeFilter}
+          kwFilter={props.kwFilter}
+          openingSidesFilter={props.openingSidesFilter}
         />
         <Row>
-          <WoodCardList items={fireplacesToList} showModal={openModal} />
+          <ProductCardList
+            items={fireplacesToList}
+            showModal={openModal}
+            name={props.name}
+          />
         </Row>
       </Container>
     </div>
   );
 };
-export default WoodCustomizer;
+export default ProductList;
 
 /*
 <Row>

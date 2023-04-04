@@ -40,6 +40,7 @@ function ProductPage(props) {
                 ? props.fireplace.Image_Gallery
                 : props.fireplace.images
             }
+            equipment={false}
           />
         </div>
         <Footer></Footer>

@@ -38,6 +38,12 @@ html {
 ::-webkit-scrollbar-thumb {
   background: $secondary-color;
 }
+.card {
+  max-width: 100%;
+}
+.card-text {
+  word-wrap: break-word;
+}
 .carouselo-item {
   min-height: 40vw;
   min-width: 50vw;

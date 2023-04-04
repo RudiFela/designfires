@@ -1,10 +1,15 @@
-import WoodCard from "./WoodCard";
-const WoodCardList = (props) => {
+import ProductCard from "./ProductCard";
+const ProductCardList = (props) => {
   return (
     <>
       {props.items.length > 0 ? (
         props.items.map((item) => (
-          <WoodCard key={item.id} item={item} showModal={props.showModal} />
+          <ProductCard
+            key={item.id}
+            item={item}
+            showModal={props.showModal}
+            name={props.name}
+          />
         ))
       ) : (
         <div className="text-white text-center p-4 bg-primary borderr mt-3">
@@ -15,4 +20,4 @@ const WoodCardList = (props) => {
   );
 };
 
-export default WoodCardList;
+export default ProductCardList;

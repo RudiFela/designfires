@@ -3,8 +3,8 @@ import SSRProvider from "react-bootstrap/SSRProvider";
 import axios from "axios";
 import Footer from "../../containers/footer/Footer";
 import ProductList from "../../components/ProductsList/ProductList";
-import * as Const from "../../graphql/woodFireplaces/const";
-const Wood = (props) => {
+import * as Const from "../../graphql/gasFireplaces/const";
+const Gas = (props) => {
   return (
     <SSRProvider>
       <div className="main">
@@ -12,25 +12,24 @@ const Wood = (props) => {
 
         <ProductList
           decorations={props.decorations}
-          fireplace={props.woodFireplaces}
-          name="wood"
+          fireplace={props.gasFireplaces}
+          name="gas"
         />
         <Footer />
       </div>
     </SSRProvider>
   );
 };
-
-export default Wood;
+export default Gas;
 export async function getStaticProps(context) {
   const queryResult = await axios.post(Const.GRAPHQL, {
-    query: Const.GET_WOOD_FIREPLACES,
+    query: Const.GET_GAS_FIREPLACES,
   });
   const result = queryResult.data.data.products.nodes;
 
   return {
     props: {
-      woodFireplaces: result,
+      gasFireplaces: result,
     },
     revalidate: 3600,
   };

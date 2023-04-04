@@ -1,13 +1,18 @@
 import { useContext } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { Row, Col, Badge, Card, Accordion } from "react-bootstrap";
 import Image from "next/image";
 import Dimensions from "../UI/Dimensions";
 import { LanguageContext } from "../context/language-context";
-const WoodCard = (props) => {
+import InfoWrapper from "../ProductInfoSections/InfoWrapper";
+const ProductCard = (props) => {
   const { currencyPrice, currencySymbol } = useContext(LanguageContext);
   const { item } = props;
   //const { item } = props.items;
+  //const router = useRouter();
+  //const productId = router.query;
+  //console.log(router.query);
   return (
     <Col className="py-3 text-white" key={item.id}>
       <div
@@ -16,7 +21,7 @@ const WoodCard = (props) => {
       >
         {item.img ? (
           <>
-            <Link href={`wood/${item.id}`}>
+            <Link href={`${props.name}/${item.id}`}>
               <Card.Img
                 className="p-4"
                 style={{ borderRadius: "15px", cursor: "pointer" }}
@@ -28,7 +33,9 @@ const WoodCard = (props) => {
           </>
         ) : null}{" "}
         <Card.Body>
-          <Card.Title className="fw-bold fs-5">{item.name}</Card.Title>
+          <Card.Title className="fw-bold fs-5 text-wrap">
+            {item.name}
+          </Card.Title>
           <Card.Text className="fw-bold fs-5">
             <Badge bg="success">
               {Number(
@@ -60,13 +67,8 @@ const WoodCard = (props) => {
                   variant="primary"
                   unity="cm"
                 >
-                  <span>
-                    kW:
-                    <Badge className="float-end">
-                      {" "}
-                      <span> </span> {item.woodFireplaces.kw}
-                    </Badge>
-                  </span>
+                  <InfoWrapper text={"kW:"} value={item.woodFireplaces.kw} />
+
                   <span>
                     Type:
                     <Badge className="float-end">
@@ -83,7 +85,7 @@ const WoodCard = (props) => {
     </Col>
   );
 };
-export default WoodCard;
+export default ProductCard;
 /*
 variant imgages
 <Row>
