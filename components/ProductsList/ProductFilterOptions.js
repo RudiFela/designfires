@@ -48,15 +48,17 @@ const ProductFilterOptions = (props) => {
               onChange={() => props.mountTypeChange("free-stand")}
               //onChange={() => props.changeGlassColor("Bronze", 386)}
             />{" "}
-            <Form.Check
-              inline
-              className="text-white fw-bolder fs-6"
-              label="Aquasystem"
-              name="mountType"
-              type="radio"
-              id={`inline-MountType`}
-              onChange={() => props.mountTypeChange("aquasystem")}
-            />
+            {props.aquaFilter && (
+              <Form.Check
+                inline
+                className="text-white fw-bolder fs-6"
+                label="Aquasystem"
+                name="mountType"
+                type="radio"
+                id={`inline-MountType`}
+                onChange={() => props.mountTypeChange("aquasystem")}
+              />
+            )}
             <Form.Check
               inline
               className="text-white fw-bolder fs-6 my-3"
@@ -141,6 +143,7 @@ ProductFilterOptions.defaultProps = {
   kwFilter: true,
   mountTypeFilter: true,
   openingSidesFilter: true,
+  aquaFilter: true,
 };
 export default ProductFilterOptions;
 /*

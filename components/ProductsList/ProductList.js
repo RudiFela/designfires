@@ -161,7 +161,7 @@ const ProductList = (props) => {
       </MyVerticallyCenteredModal>
       <Container>
         <h1 className="text-white text-center mt-4">
-          Find Wood Fireplace of Your Dreams!
+          Find Fireplace of Your Dreams!
         </h1>
         <h2></h2>
         <ProductFilterOptions
@@ -180,6 +180,7 @@ const ProductList = (props) => {
           mountTypeFilter={props.mountTypeFilter}
           kwFilter={props.kwFilter}
           openingSidesFilter={props.openingSidesFilter}
+          aquaFilter={props.aquaFilter}
         />
         <Row>
           <ProductCardList
@@ -191,6 +192,12 @@ const ProductList = (props) => {
       </Container>
     </div>
   );
+};
+ProductList.defaultProps = {
+  kwFilter: true,
+  mountTypeFilter: true,
+  openingSidesFilter: true,
+  aquaFilter: true,
 };
 export default ProductList;
 
