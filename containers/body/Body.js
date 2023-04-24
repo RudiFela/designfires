@@ -56,45 +56,44 @@ const Body = (props) => {
       <Decorations decorations={props.decorations} />
       <AnimateWrapper>
         <div className="w-100 bg-danger p-3 fst-italic">
-          <h1
-            id="customize"
-            className="text-center text-white p-4 mt-3 fw-bold"
-          >
+          <h1 className="text-center text-white p-4 mt-3 fw-bold">
             Fireplace of Your dreams with our Customizer Tool!
           </h1>
         </div>
-        {customizer ? (
-          <NewCustomizer
-            fireplace={props.fireplaces}
-            // glass={props.accessories}
-            //furnitureBox={props.boxes}
-            // casings={props.casings}
-            fuelProducts={props.fuel}
-            accessories={props.decorations}
-          />
-        ) : (
-          <AnimateWrapper>
-            {" "}
-            <Container className="mt-4">
-              <div
-                className="bg-success px-3 py-1 text-white newcustomizer-body position-relative"
-                style={{
-                  height: "600px",
-                  overflowY: "scroll",
-                }}
-              >
-                <Button
-                  variant="info"
-                  className="fw-bold position-absolute bottom-0 end-0 m-3"
-                  onClick={() => setCustomizer(true)}
+        <div id="customizer">
+          {customizer ? (
+            <NewCustomizer
+              fireplace={props.fireplaces}
+              // glass={props.accessories}
+              //furnitureBox={props.boxes}
+              // casings={props.casings}
+              fuelProducts={props.fuel}
+              accessories={props.decorations}
+            />
+          ) : (
+            <AnimateWrapper>
+              {" "}
+              <Container className="mt-4">
+                <div
+                  className="bg-success px-3 py-1 text-white newcustomizer-body position-relative"
+                  style={{
+                    height: "600px",
+                    overflowY: "scroll",
+                  }}
                 >
-                  <span>START NOW </span>
-                  <ImArrowRight2 className="mb-1 fw-bold" />
-                </Button>
-              </div>{" "}
-            </Container>
-          </AnimateWrapper>
-        )}{" "}
+                  <Button
+                    variant="info"
+                    className="fw-bold position-absolute bottom-0 end-0 m-3"
+                    onClick={() => setCustomizer(true)}
+                  >
+                    <span>START NOW </span>
+                    <ImArrowRight2 className="mb-1 fw-bold" />
+                  </Button>
+                </div>{" "}
+              </Container>
+            </AnimateWrapper>
+          )}{" "}
+        </div>
       </AnimateWrapper>
       <MotionSlider />
       <BioFuel

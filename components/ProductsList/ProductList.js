@@ -181,6 +181,7 @@ const ProductList = (props) => {
           kwFilter={props.kwFilter}
           openingSidesFilter={props.openingSidesFilter}
           aquaFilter={props.aquaFilter}
+          danishFilter={props.danishFilter}
         />
         <Row>
           <ProductCardList
@@ -198,6 +199,7 @@ ProductList.defaultProps = {
   mountTypeFilter: true,
   openingSidesFilter: true,
   aquaFilter: true,
+  danishFilter: true,
 };
 export default ProductList;
 

@@ -15,6 +15,7 @@ const Gas = (props) => {
           fireplace={props.gasFireplaces}
           name="gas"
           aquaFilter={false}
+          danishFilter={false}
         />
         <Footer />
       </div>

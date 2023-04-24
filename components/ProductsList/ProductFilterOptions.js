@@ -59,16 +59,18 @@ const ProductFilterOptions = (props) => {
                 onChange={() => props.mountTypeChange("aquasystem")}
               />
             )}
-            <Form.Check
-              inline
-              className="text-white fw-bolder fs-6 my-3"
-              label="Danish Certificate"
-              name="mountType"
-              type="checkbox"
-              id={`inline-danish`}
-              onChange={() => onDanishDesign()}
-              //onChange={() => props.changeGlassColor("Bronze", 386)}///
-            />
+            {props.danishFilter && (
+              <Form.Check
+                inline
+                className="text-white fw-bolder fs-6 my-3"
+                label="Danish Certificate"
+                name="mountType"
+                type="checkbox"
+                id={`inline-danish`}
+                onChange={() => onDanishDesign()}
+                //onChange={() => props.changeGlassColor("Bronze", 386)}///
+              />
+            )}
           </Col>
         )}
 
@@ -144,6 +146,7 @@ ProductFilterOptions.defaultProps = {
   mountTypeFilter: true,
   openingSidesFilter: true,
   aquaFilter: true,
+  danishFilter: true,
 };
 export default ProductFilterOptions;
 /*

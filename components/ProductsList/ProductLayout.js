@@ -90,7 +90,7 @@ const ProductLayout = (props) => {
                             ).toLocaleString(undefined, {
                               maximumFractionDigits: 2,
                             })}
-                            {language.currencySymbol()}
+                            <span> </span> {language.currencySymbol()}
                           </Badge>
                         </Col>
                         <Col>
