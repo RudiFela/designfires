@@ -160,10 +160,6 @@ const ProductList = (props) => {
         <ModalInfoLayout item={productInfo} />
       </MyVerticallyCenteredModal>
       <Container>
-        <h1 className="text-white text-center mt-4">
-          Find Fireplace of Your Dreams!
-        </h1>
-        <h2></h2>
         <ProductFilterOptions
           rangeChange={filterByRange}
           mountTypeChange={setMountFilterValue}

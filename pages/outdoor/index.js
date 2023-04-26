@@ -9,7 +9,18 @@ const Outdoor = (props) => {
     <SSRProvider>
       <div className="main">
         <Navibar />
-
+        <video
+          className="w-100 video"
+          src="https://designfires.pl/wp-content/uploads/2023/04/Outdoor.mp4"
+          type="video/mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        <h1 className="text-center text-white m-4">
+          Outdoor Fireplaces of Your Dreams!
+        </h1>
         <ProductList
           decorations={props.decorations}
           fireplace={props.outdoorFireplaces}
