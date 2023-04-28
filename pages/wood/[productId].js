@@ -11,6 +11,7 @@ function ProductPage(props) {
   const { emptyCart } = useCart();
   useEffect(() => {
     // refresh ? router.reload() : null;
+    console.log(props.fireplace);
     emptyCart();
   }, [productId]);
   const [productGallery, setProductGallery] = useState(

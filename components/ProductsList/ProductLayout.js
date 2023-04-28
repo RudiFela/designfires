@@ -45,8 +45,8 @@ const ProductLayout = (props) => {
     //śconsole.log(array);
     array.map((image) =>
       imagesArray.push({
-        original: image.shop_single,
-        thumbnail: image.shop_thumbnail,
+        original: image.woocommerce_single,
+        thumbnail: image.woocommerce_thumbnail,
       })
     );
     //console.log(imagesArray);
