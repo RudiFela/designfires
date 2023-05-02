@@ -40,7 +40,7 @@ const GlassColor = (props) => {
               (Number(pickedLength) + 100) /
               2
             ).toString()} mm`,
-            img: item.images[0].shop_thumbnail,
+            img: item.images[0].woocommerce_thumbnail,
             split: splitGlass,
             splitPcs: props.longPcs,
             splitName: `${item.name}/ ${(
@@ -65,7 +65,7 @@ const GlassColor = (props) => {
             longName: `${item.name}/ ${(
               Number(pickedLength) / 2
             ).toString()} mm`,
-            img: item.images[0].shop_thumbnail,
+            img: item.images[0].woocommerce_thumbnail,
           };
 
           break;
@@ -83,7 +83,7 @@ const GlassColor = (props) => {
         holderPcs: props.holdersPcs,
         shortName: `${item.name} 300`,
         longName: `${item.name} ${props.pickedLength}`,
-        img: item.images[0].shop_thumbnail,
+        img: item.images[0].woocommerce_thumbnail,
       };
     }
 
@@ -106,7 +106,7 @@ const GlassColor = (props) => {
               //layout="fill"
               alt="glass-picture"
               style={{ borderRadius: 15 }}
-              src={item.images[0].shop_catalog}
+              src={item.images[0].woocommerce_thumbnail}
               className={`${
                 clicked === item.id ? "border border-4 border-warning" : ""
               } `}

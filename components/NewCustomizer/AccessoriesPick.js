@@ -22,7 +22,7 @@ const AccessoriesPick = (props) => {
   const onAdd = (item) => {
     const cartProduct = {
       ...item,
-      img: item.images[0].shop_thumbnail,
+      img: item.images[0].woocommerce_single,
       prices: getPrices(item.price, item.SEK_price, item.DKK_price),
     };
     addToCart(cartProduct);

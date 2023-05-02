@@ -48,7 +48,7 @@ const OptionsPick = (props) => {
       : props.customVariant(false);
     setSelectedOption({
       ...item,
-      img: pickedFireplace.images[0].shop_thumbnail,
+      img: pickedFireplace.images[0].woocommerce_thumbnail,
       name: `${pickedFireplace.name} ${item.length.option}`,
     });
   };

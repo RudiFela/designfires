@@ -22,7 +22,6 @@ const Summary = (props) => {
   }, []);
   const { items } = useCart();
   const lang = useContext(LanguageContext);
-
   return (
     <div id="print">
       <CustomizerHeader>Your Choices</CustomizerHeader>

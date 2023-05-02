@@ -29,7 +29,7 @@ const MountPick = (props) => {
       (variant) => variant.length.option === props.pickedLength
     ),
     name: props.furnitureBox.name,
-    img: props.furnitureBox.images[0].shop_thumbnail,
+    img: props.furnitureBox.images[0].woocommerce_thumbnail,
   };
 
   //console.log(furnitureBoxVariant);
@@ -79,7 +79,7 @@ const MountPick = (props) => {
     );
     const glassHolders = {
       ...findGlassHolders,
-      img: findGlassHolders.images[0].shop_thumbnail,
+      img: findGlassHolders.images[0].woocommerce_thumbnail,
       prices: getPrices(
         findGlassHolders.price,
         findGlassHolders.SEK_price,
