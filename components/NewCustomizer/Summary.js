@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useCart } from "react-use-cart";
 import Image from "next/image";
-import { Row, Col, Stack, Badge } from "react-bootstrap";
+import { Row, Col, Stack, Badge, Button } from "react-bootstrap";
 import CustomizerHeader from "../UI/CustomizerHeader";
 import { LanguageContext } from "../context/language-context";
 
@@ -20,7 +20,11 @@ const Summary = (props) => {
     link.click();*/
     //console.log(items);
   }, []);
-  const { items } = useCart();
+  const { items, updateItemQuantity, getItem, removeItem } = useCart();
+  const remove = (id) => {
+    removeItem(id);
+    props.refreshTotal();
+  };
   const lang = useContext(LanguageContext);
   return (
     <div id="print">
@@ -82,7 +86,6 @@ const Summary = (props) => {
               x{item.quantity}
             </Badge>
           </Col>
-
           <Col className="d-flex justify-content-center align-items-center fw-bold">
             {lang
               .currencyPrice(
@@ -103,7 +106,14 @@ const Summary = (props) => {
                 maximumFractionDigits: 2,
               })}{" "}
             {lang.currencySymbol()}
-          </Col>
+            <Button
+              variant="primary"
+              className=""
+              onClick={() => remove(item.id)}
+            >
+              X
+            </Button>
+          </Col>{" "}
         </Row>
       ))}
       {props.children}

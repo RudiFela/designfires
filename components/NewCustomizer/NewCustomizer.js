@@ -25,6 +25,7 @@ const NewCustomizer = (props) => {
   const [pickedLength, setPickedLength] = useState();
   const [nextStepAllow, setNextStepAllow] = useState(false);
   const [customFireplace, setCustomFireplace] = useState();
+  const [refreshTotal, setRefreshTotal] = useState(false);
   const [cartTotals, setCartTotals] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [furnitureBoxes, setFurnitureBoxes] = useState();
@@ -39,7 +40,7 @@ const NewCustomizer = (props) => {
     //!isEmpty &&
     //console.log(props.fireplace);
     setCartTotals(countCartCurrency(items));
-  }, [currentStep, nextStepAllow]);
+  }, [currentStep, nextStepAllow, refreshTotal]);
   useEffect(() => {
     isLoading && getProducts();
     //console.log("useEffect");
@@ -187,7 +188,13 @@ const NewCustomizer = (props) => {
           />
         );
       case 5:
-        return <Summary allowNextStep={onNextStepAllow} ref={OrderRef} />;
+        return (
+          <Summary
+            allowNextStep={onNextStepAllow}
+            ref={OrderRef}
+            refreshTotal={() => setRefreshTotal(!refreshTotal)}
+          />
+        );
       case 6:
         return (
           <>
@@ -236,6 +243,9 @@ const NewCustomizer = (props) => {
               </Button>
             </span>
           )}{" "}
+          <span className="p-3 text-white fw-bold">
+            Prices includes 25% VAT
+          </span>
           <span className="p-2">
             {" "}
             {currentStep >= 5 && (

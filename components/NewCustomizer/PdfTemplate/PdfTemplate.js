@@ -27,6 +27,15 @@ const styles = StyleSheet.create({
     fontWeight: "regular",
     color: "white",
   },
+  text: {
+    color: "black",
+  },
+  textContainer: {
+    flexDirection: "row",
+    marginTop: 12,
+    justifyContent: "flex-end",
+  },
+
   pageBackground: {
     position: "absolute",
     minWidth: "100%",
@@ -65,7 +74,10 @@ const PdfTemplate = (props) => {
           products={props.products}
           currency={props.currency}
           totalPrice={props.totalPrice}
-        />
+        />{" "}
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>Prices includes 25% VAT</Text>
+        </View>
         <Image
           style={styles.pageBackground}
           src="https://designfires.pl/wp-content/uploads/2022/10/CartBackgroundA4.png"
