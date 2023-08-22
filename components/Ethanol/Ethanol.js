@@ -19,7 +19,7 @@ const Ethanol = (props) => {
     "The best choice and most for your money if you want real fire and cosiness in your apartment or house.",
   ];
   const aboutParagraph =
-    "Install a DFE in your old open fireplace to create a cozy and warm feeling with no smoke.You can design and get the style and look you want, as standard. We make your fireplace, according to your tastes and dreams";
+    "Install a DFE in your old open fireplace to create a cozy and warm feeling with no smoke.You can design and get the style and look you want, as standard or custom solutions. We make your fireplace, according to your tastes and dreams";
   const paragraphs = [
     "It can be made in length from DFE500mm, DFE700mm, DFE1000mm, DFE1200mm and not standart up to DFE2400mm",
     " We can build fireplaces to meet 100% of your needs, in concrete or handmade steel casings in lengths from 560mm, 760mm, 1060mm, and 1260mm, with heights of 500mm, and depth of 350mm (only), with openings on all sides or 1-3 sides.",
@@ -35,7 +35,7 @@ const Ethanol = (props) => {
     "Child lock",
   ];
   const advantageItemsRight = [
-    "Fireplaces provade voice info about when to refual and messages about any service nejds",
+    "Fireplaces provide voice info about when to refual and messages about any service needs",
 
     "Cheap to install. Can be built anywhere you want a fireplace indoors. Requires only 220V",
     "You do not have to spend money on a chimney or gas system as bottles, pipes, and cabinet. It will save you more than DFE costs you in purchasing",
